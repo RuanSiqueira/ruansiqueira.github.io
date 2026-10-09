@@ -184,6 +184,11 @@
     foraTexto: P('Esta tela existe na versão completa do sistema. A demonstração pública mostra só a tela principal, com dados fictícios.', 'This screen exists in the full version of the system. The public demo shows only the main screen, with fictitious data.'),
     foraVideo: P('Veja o sistema completo em ação', 'See the full system in action'),
     foraContatoTitulo: P('Tem interesse na versão completa?', 'Interested in the full version?'),
+    completoBotao: P('Versão completa', 'Full version'),
+    completoTitulo: P(n => 'Versão completa: ' + n, n => 'Full version: ' + n),
+    completoTexto: P('Esta demonstração pública mostra a tela principal, com dados fictícios. Quer ver o sistema completo funcionando? Fale comigo e eu libero o acesso para a sua empresa.', 'This public demo shows the main screen, with fictitious data. Want to see the full system running? Get in touch and I will give your company access.'),
+    completoFaixaTitulo: P('Você está na versão pública da demonstração', 'You are in the public version of the demo'),
+    completoFaixaTexto: P('O hub é completo; cada sistema mostra a tela principal. Quer ver algum sistema inteiro? Fale comigo e eu libero o acesso à versão completa.', 'The hub is complete; each system shows its main screen. Want to see a whole system? Get in touch and I will give you access to the full version.'),
     foraContatoTexto: P('Fale comigo e eu apresento o sistema completo funcionando.', 'Get in touch and I will walk you through the full system.'),
     foraLinkedin: P('Falar no LinkedIn', 'Message me on LinkedIn'),
     foraEmail: P('Enviar e-mail', 'Send an email'),
@@ -2249,6 +2254,8 @@
         lado: [chipVivo(P('4 robôs em execução', '4 robots running')), h('span', { class: 'ph-chip-vivo' }, icone('clock'), h('span', null, dataHoje))],
         rodape: h('p', { class: 'ph-cab-meta' }, h('span', { class: 'ph-hero-ponto', 'aria-hidden': 'true' }), h('span', null, tx('heroContagem', prontos, lista.length)), h('span', { 'aria-hidden': 'true' }, ' · '), h('span', null, TX.heroAutoria)),
       }),
+      publico() && h('section', { class: 'ph-faixa-completo ph-card dy-card', 'aria-labelledby': 'ph-completo-t' },
+        h('div', null, h('h2', { class: 'ph-h3', id: 'ph-completo-t' }, icone('lock'), h('span', null, TX.completoFaixaTitulo)), h('p', { class: 'ph-texto-mudo' }, TX.completoFaixaTexto)), linksContato()),
       h('section', { 'aria-labelledby': 'ph-kpi-t' }, h('h2', { id: 'ph-kpi-t', class: 'vh' }, P('Indicadores do dia', 'Today\'s indicators')), tilesEl),
       h('div', { class: 'ph-colunas' },
         h('div', { class: 'ph-coluna-principal' }, grafico, meusEl),
@@ -2304,7 +2311,8 @@
           h('div', { class: 'ph-sysbar-acoes' },
             sub === 'manual'
               ? h('a', { class: 'ph-btn ph-btn--primario dy-btn dy-btn-primary dy-btn-sm', href: '#/' + item.id }, h('span', null, TX.entrar), icone('arrow-right'))
-              : h('a', { class: 'ph-btn ph-btn--secundario dy-btn dy-btn-sm ph-btn-neutro', href: '#/' + item.id + '/manual' }, icone('livro'), h('span', null, TX.manual)))),
+              : h('a', { class: 'ph-btn ph-btn--secundario dy-btn dy-btn-sm ph-btn-neutro', href: '#/' + item.id + '/manual' }, icone('livro'), h('span', null, TX.manual)),
+            publico() && botao({ texto: TX.completoBotao, icone: 'lock', tom: 'primario', tamanho: 'p', classe: 'ph-btn-completo', aoClicar: () => modal({ titulo: tx('completoTitulo', t(item.nome)), icone: 'lock', largura: 'm', corpo: [h('p', null, TX.completoTexto), linksContato()] }) }))),
         corpo));
   }
 

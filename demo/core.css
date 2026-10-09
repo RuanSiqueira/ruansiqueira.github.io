@@ -1520,3 +1520,7 @@ textarea.ph-input { min-height: 76px; resize: vertical; line-height: 1.45; }
   /* a folha sobe quando o alvo (o botão no rodapé de uma janela) ficaria atrás dela */
   :root[data-visual] .ph-tour-balao[data-lado="folha-topo"], .ph-tour-balao[data-lado="folha-topo"] { top: 0; bottom: auto; padding-bottom: 0; border-radius: 0 0 var(--ph-raio-lg) var(--ph-raio-lg); }
 }
+
+.ph-faixa-completo { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; padding: 16px 20px; margin-bottom: 16px; border-left: 4px solid var(--ph-accent); }
+.ph-faixa-completo .ph-h3 { display: flex; align-items: center; gap: 8px; margin: 0 0 4px; }
+.ph-faixa-completo .ph-texto-mudo { margin: 0; max-width: 70ch; }
