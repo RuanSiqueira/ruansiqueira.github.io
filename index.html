@@ -1,0 +1,1869 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ruan Siqueira · TI de ponta a ponta</title>
+<meta name="description" content="Ruan Siqueira, engenheiro de software em Marau-RS. Da infraestrutura à integração com ERP e IA: um hub de 14 sistemas sobre o ERP, projetado e construído por ele sozinho, com seis projetos em detalhe, do robô de notas fiscais ao CRM.">
+<meta name="theme-color" content="#111214">
+<link rel="canonical" href="https://ruansiqueira.dev.br/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Ruan Siqueira">
+<meta property="og:title" content="Ruan Siqueira · TI de ponta a ponta">
+<meta property="og:description" content="Da infraestrutura à integração com ERP e IA: um hub de 14 sistemas sobre o ERP e seis projetos em detalhe (NF Autônoma, Nota de Débito, AUTO CRM, Motor de clientes, Pesquisa de Clima e RH e Carrossel TV), com demonstração navegável.">
+<meta property="og:url" content="https://ruansiqueira.dev.br/">
+<meta property="og:image" content="https://ruansiqueira.dev.br/assets/foto.jpg">
+<meta property="og:image:width" content="888">
+<meta property="og:image:height" content="888">
+<meta property="og:image:alt" content="Foto de Ruan Siqueira">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23111214'/%3E%3Crect x='3' y='9' width='26' height='14' fill='%23F2C500'/%3E%3Cpath d='M6 11h2v10H6zm4 0h1v10h-1zm3 0h3v10h-3zm5 0h1v10h-1zm3 0h2v10h-2zm4 0h1v10h-1z' fill='%23111214'/%3E%3C/svg%3E">
+<script>try{if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('motion')}catch(e){}</script>
+<link rel="preload" href="assets/fonts/big-shoulders-display-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+/* Archivo e Big Shoulders Display (SIL Open Font License), servidas pelo próprio site. Só as duas que esta página usa; as da demonstração ficam em assets/fonts/fonts.css. */
+@font-face{font-family:'Archivo';font-style:normal;font-weight:400 800;font-stretch:62% 125%;font-display:swap;src:url(assets/fonts/archivo-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Archivo';font-style:normal;font-weight:400 800;font-stretch:62% 125%;font-display:swap;src:url(assets/fonts/archivo-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Big Shoulders Display';font-style:normal;font-weight:700 900;font-display:swap;src:url(assets/fonts/big-shoulders-display-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Big Shoulders Display';font-style:normal;font-weight:700 900;font-display:swap;src:url(assets/fonts/big-shoulders-display-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+/* Mundo: plaqueta de patrimônio. Paleta fechada; vermelho só no laser, âmbar só para estado pendente. */
+:root{
+  --ink:#111214;
+  --ink-3:#2A2D31;
+  --line:#2E3136;
+  --tape:#F2C500;
+  --tape-ink-2:#4A3D00;
+  --alu:#BFC4C9;
+  --alu-ink:#1A1C1F;
+  --alu-ink-2:#232528;
+  --paper:#F7F7F2;
+  --text:#E4E6E8;
+  --muted:#A3A9AF;
+  --laser:#E5231B;
+  --amber:#F39200;
+  --g:clamp(16px,3.4vw,48px);
+  --maxw:1344px;
+  --bar-h:72px;
+  --nav-h:0px;
+  --f-d:"Big Shoulders Display","Archivo",system-ui,sans-serif;
+  --f-b:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --out:cubic-bezier(.16,1,.3,1);
+  --vis:220px;
+  --hide:84px;
+  --ph:200px;
+  --tape-fs:clamp(2.5rem,5.25vw,5.25rem);
+  --settle:translate(-12px,2px) rotate(-.35deg);
+  --brushed:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='240'%3E%3Cfilter id='a' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.0032 .92' numOctaves='3' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 1.3 0 0 0 -.6'/%3E%3C/filter%3E%3Cfilter id='b' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.0022 .55' numOctaves='2' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1.1 0 0 0 -.58'/%3E%3C/filter%3E%3Crect width='640' height='240' filter='url(%23a)'/%3E%3Crect width='640' height='240' filter='url(%23b)'/%3E%3C/svg%3E");
+  --anod:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='240'%3E%3Cfilter id='a' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.0028 .8' numOctaves='3' seed='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 .4 0 0 0 -.2'/%3E%3C/filter%3E%3Crect width='640' height='240' filter='url(%23a)'/%3E%3C/svg%3E");
+  /* marca de giz: traço com falhas, para o valor antigo */
+  --chalk:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 24' preserveAspectRatio='none'%3E%3Cfilter id='c' x='-2%25' y='-40%25' width='104%25' height='180%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9 .35' numOctaves='2' seed='7' result='n'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='n' scale='5' xChannelSelector='R' yChannelSelector='G' result='d'/%3E%3CfeColorMatrix in='n' type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3.2 0 0 0 -1.15' result='m'/%3E%3CfeComposite in='d' in2='m' operator='in'/%3E%3C/filter%3E%3Cpath d='M4 15C60 10 150 13 236 8' fill='none' stroke='%23F7F7F2' stroke-width='7' stroke-linecap='round' filter='url(%23c)'/%3E%3C/svg%3E");
+  --arrow-r:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='12'%3E%3Cpath d='M0 6h41M35 1.5 41 6l-6 4.5' stroke='%23BFC4C9' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+  --arrow-d:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='28'%3E%3Cpath d='M6 0v25M1.5 19 6 25l4.5-6' stroke='%23BFC4C9' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scrollbar-color:#3A3E43 var(--ink);scrollbar-width:thin;scroll-padding-top:calc(var(--bar-h) + var(--nav-h) + 8px)}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:var(--ink)}
+::-webkit-scrollbar-thumb{background:#3A3E43;border:2px solid var(--ink);border-radius:6px}
+::-webkit-scrollbar-thumb:hover{background:var(--alu)}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{
+  margin:0;min-width:320px;overflow-x:clip;
+  background:var(--anod) 0 0/640px 240px,var(--ink);
+  color:var(--paper);
+  font:400 1.0625rem/1.55 var(--f-b);
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  caret-color:var(--tape);
+}
+::selection{background:var(--tape);color:var(--ink)}
+:focus-visible{outline:2px solid var(--tape);outline-offset:3px}
+main:focus{outline:none}
+a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.3em}
+img,svg{display:block}
+h1,h2,h3,h4,p{margin:0}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.defs{position:absolute;width:0;height:0;overflow:hidden}
+.wrap{width:100%;max-width:calc(var(--maxw) + 2 * var(--g));margin-inline:auto;padding-inline:var(--g)}
+.skip{position:absolute;left:var(--g);top:0;transform:translateY(-100%);z-index:60;background:var(--tape);color:var(--ink);padding:10px 14px;font-weight:700;text-decoration:none}
+.skip:focus{transform:translateY(12px)}
+.pend{outline:1px dashed var(--amber)!important;outline-offset:3px}
+.field .pend{background-color:rgba(243,146,0,.3)}
+.ico{width:16px;height:16px;flex:none}
+
+/* Barra superior fixa */
+.top{position:sticky;top:0;z-index:40;background:var(--anod) 0 0/640px 240px,var(--ink);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;gap:28px;height:var(--bar-h)}
+.mark{margin-right:auto;font:800 1.375rem/1 var(--f-d);letter-spacing:.03em;text-transform:uppercase;text-decoration:none;color:var(--paper);white-space:nowrap}
+.nav{display:flex;gap:24px}
+.nav a{padding:8px 0;font:600 .9375rem/1 var(--f-b);color:var(--alu);text-decoration:none;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+.nav a:hover{color:var(--paper);border-bottom-color:var(--tape)}
+.demo-link{display:inline-flex;align-items:center;gap:8px;padding:10px 12px 9px 14px;background:var(--tape);color:var(--ink);font:700 .8125rem/1 var(--f-b);font-stretch:75%;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;white-space:nowrap;box-shadow:0 2px 3px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.4);transition:transform .2s var(--out),box-shadow .2s var(--out)}
+.demo-link:hover{transform:translateY(-1px);box-shadow:0 6px 10px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.4)}
+.demo-link .ico{width:14px;height:14px}
+.dl-short{display:none}
+.lang{display:flex;align-items:center;gap:4px}
+.lang button{appearance:none;border:0;border-radius:0;margin:0;background:transparent;color:var(--alu);cursor:pointer;padding:9px 10px 8px;font:700 .8125rem/1 var(--f-b);font-stretch:75%;letter-spacing:.14em;transition:background-color .3s var(--out),color .3s var(--out)}
+.lang button:hover{color:var(--paper)}
+.lang button[aria-pressed="true"]{background:var(--tape);color:var(--ink);cursor:default}
+.lang button.is-pending{background:transparent;color:var(--amber);outline:1px dashed var(--amber);outline-offset:2px}
+.lang-sep{color:#5A5F65;font-size:.8125rem}
+
+/* Primeira tela */
+.hero{position:relative;display:flex;flex-direction:column;min-height:calc(100vh - var(--bar-h) - var(--nav-h));min-height:calc(100svh - var(--bar-h) - var(--nav-h));padding-bottom:clamp(24px,4vh,40px)}
+.press{position:relative;display:flex;align-items:center;min-height:var(--ph);margin-top:clamp(10px,2.5vh,32px);overflow:hidden;overflow:clip visible}
+.feedline{position:relative;flex:1;min-width:0}
+.track{position:relative;z-index:2;margin-right:var(--vis);overflow:hidden;padding:6px 0 12px}
+.tape{
+  display:block;
+  padding:.2em 1.2em .19em calc(var(--g) + 12px);
+  background:var(--tape);color:var(--ink);
+  font-family:var(--f-d);font-weight:800;font-size:calc(var(--tape-fs) * var(--fit,1));line-height:1;
+  letter-spacing:.01em;text-transform:uppercase;white-space:nowrap;
+  transform:var(--settle);
+  box-shadow:0 3px 5px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.4),inset 0 -1px 0 rgba(90,70,0,.25);
+}
+.tape ::selection{background:var(--ink);color:var(--tape)}
+.tape-text{display:inline-block;width:max-content}
+.t-sep{padding-inline:.28em}
+.mouth{position:absolute;z-index:1;right:calc(var(--vis) - 12px);width:20px;top:0;bottom:6px;background:#060607;border-radius:5px 0 0 5px}
+.stub{position:absolute;z-index:2;right:var(--vis);width:7px;top:6px;bottom:12px;background:var(--tape);box-shadow:inset -2px 0 2px rgba(0,0,0,.28)}
+.blade{position:absolute;z-index:4;right:calc(var(--vis) + 1px);width:3px;top:-2px;bottom:4px;background:#D9DDE1;border-radius:1px;opacity:0;transform-origin:50% 0;box-shadow:1px 0 0 rgba(0,0,0,.4)}
+.printer{
+  position:absolute;z-index:3;top:50%;right:calc(-1 * var(--hide));
+  width:calc(var(--vis) + var(--hide));height:var(--ph);margin-top:calc(var(--ph) / -2);
+  background:var(--alu);
+  border-radius:30px 0 0 30px;
+  box-shadow:-10px 14px 24px rgba(0,0,0,.5);
+}
+.lcd{position:absolute;left:30px;top:26px;width:154px;height:44px;padding-left:14px;background:#15171A;border-radius:4px;color:var(--alu);font:700 .75rem/44px var(--f-b);font-stretch:75%;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;overflow:hidden}
+.lcd[data-s="print"],.lcd[data-s="cut"]{color:var(--amber)}
+.cassette{position:absolute;left:30px;bottom:26px;width:96px;height:36px;border-radius:4px;background:#15171A;overflow:hidden}
+.cassette::before{content:"";position:absolute;left:0;right:30px;top:13px;height:10px;background:var(--tape)}
+.cassette::after{content:"";position:absolute;right:8px;top:7px;width:22px;height:22px;border-radius:50%;background:#15171A;border:6px solid var(--tape)}
+.keys{position:absolute;left:144px;bottom:36px;display:flex;gap:10px}
+.keys span{width:16px;height:16px;border-radius:50%;background:var(--ink-3)}
+
+.rest{position:relative;flex:1;display:flex;flex-direction:column}
+.lede{margin-top:clamp(12px,2.5vh,28px)}
+.phrase{max-width:28ch;font:400 clamp(1.5rem,2.5vw,2.25rem)/1.18 var(--f-b);font-stretch:92%;letter-spacing:-.012em;color:var(--paper);text-wrap:balance}
+.apoio{max-width:60ch;margin-top:14px;font-size:clamp(1rem,1.2vw,1.125rem);line-height:1.55;color:var(--alu);text-wrap:pretty}
+.actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px;margin-top:20px}
+.btn{display:inline-flex;align-items:center;gap:12px;padding:15px 20px 14px 22px;background:var(--tape);color:var(--ink);font:800 1.1875rem/1 var(--f-d);letter-spacing:.05em;text-transform:uppercase;text-decoration:none;box-shadow:0 2px 3px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.4);transition:transform .25s var(--out),box-shadow .25s var(--out)}
+.btn .ico{width:18px;height:18px;transition:transform .25s var(--out)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 14px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.4)}
+.btn:hover .ico--down{transform:translateY(2px)}
+.btn:hover .ico--right{transform:translateX(3px)}
+.btn:hover .ico--out{transform:translate(2px,-2px)}
+.btn:active{transform:none;box-shadow:0 1px 2px rgba(0,0,0,.5)}
+.btn--sm{padding:12px 16px 11px 18px;font-size:1.0625rem}
+.btn--ink{background:var(--ink);color:var(--tape);box-shadow:0 2px 3px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.12)}
+.btn--ink:hover{box-shadow:0 8px 14px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.12)}
+.ext{display:inline-flex;align-items:center;gap:8px;padding:10px 0;font:600 1rem/1 var(--f-b);color:var(--alu);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.32em;text-decoration-color:rgba(191,196,201,.45);transition:color .2s,text-decoration-color .2s}
+.ext:hover{color:var(--paper);text-decoration-color:var(--tape)}
+.ext .ico{width:14px;height:14px}
+
+/* Fileira de plaquetas */
+.row{margin-top:auto;padding-top:clamp(16px,3vh,36px)}
+.tags-wrap{position:relative}
+.tags{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px}
+.tag,.pl{
+  position:relative;display:flex;flex-direction:column;min-width:0;overflow:hidden;
+  padding:12px 14px 0;border-radius:6px;
+  background:var(--brushed) 0 0/640px 240px,var(--alu);
+  color:var(--alu-ink);text-shadow:0 1px 0 rgba(255,255,255,.35);
+  box-shadow:0 10px 20px -4px rgba(0,0,0,.6),0 2px 3px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.6),inset 0 -1px 0 rgba(0,0,0,.25);
+}
+.tag{transition:transform .3s var(--out),box-shadow .3s var(--out)}
+.tag:hover{transform:translateY(-3px);box-shadow:0 16px 26px -6px rgba(0,0,0,.65),0 2px 3px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.6),inset 0 -1px 0 rgba(0,0,0,.25)}
+.tag:focus-within{outline:2px solid var(--tape);outline-offset:3px}
+.tag:nth-child(2){background-position:-180px -40px,0 0}
+.tag:nth-child(3){background-position:-360px -120px,0 0}
+.tag:nth-child(4){background-position:-90px -170px,0 0}
+.tag:nth-child(5){background-position:-270px -10px,0 0}
+.tag:nth-child(6){background-position:-450px -90px,0 0}
+.tag-top{display:flex;align-items:center;justify-content:space-between;gap:8px;font:700 .6875rem/1 var(--f-b);font-stretch:75%;letter-spacing:.18em;text-transform:uppercase;color:var(--alu-ink-2)}
+.rivet{flex:none;width:9px;height:9px;border-radius:50%;background:#A2A8AE;box-shadow:inset 0 1px 1.5px rgba(0,0,0,.5),0 1px 0 rgba(255,255,255,.7)}
+.bc{height:40px;margin-top:10px;color:var(--ink)}
+.bc svg{width:100%;height:100%}
+.bc path{fill:currentColor}
+.bc-num{margin-top:5px;text-align:center;font:700 .8125rem/1 var(--f-b);font-stretch:75%;letter-spacing:.14em;font-variant-numeric:tabular-nums lining-nums}
+.tag-name{margin-top:12px;padding-top:11px;border-top:1px solid rgba(17,18,20,.22);font:700 .9375rem/1.3 var(--f-b);font-stretch:92%;text-wrap:balance}
+.tag-name a{text-decoration:none}
+.tag-name a::after{content:"";position:absolute;inset:0;z-index:1}
+.tag-name a:focus-visible{outline:none}
+.tag:hover .tag-name a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.22em}
+.tag-measure{margin:6px 0 14px;font-size:.8125rem;line-height:1.38;color:var(--alu-ink-2)}
+.tag-state{display:flex;align-items:center;gap:8px;margin:auto -14px 0;padding:9px 14px 10px;background:rgba(17,18,20,.1);color:var(--alu-ink-2);text-shadow:none;font:700 .6875rem/1 var(--f-b);font-stretch:75%;letter-spacing:.16em;text-transform:uppercase;transition:background-color .45s var(--out),color .45s var(--out)}
+.tag-state::before{content:"";flex:none;width:8px;height:8px;border:1.5px solid currentColor;transition:background-color .45s var(--out),border-color .45s var(--out)}
+.st{display:none}
+.tag[data-state="idle"] .st-idle,.tag[data-state="read"] .st-read,.tag[data-state="prod"] .st-prod{display:inline}
+.tag[data-state="read"]{outline:2px dashed var(--amber);outline-offset:3px}
+.tag[data-state]:focus-within{outline:2px solid var(--tape);outline-offset:3px}
+.tag[data-state="read"] .tag-state{background:var(--amber);color:var(--ink)}
+.tag[data-state="read"] .tag-state::before{background:var(--ink);border-color:var(--ink)}
+.tag[data-state="prod"] .tag-state,.pl .tag-state{background:var(--ink);color:var(--tape)}
+.tag[data-state="prod"] .tag-state::before,.pl .tag-state::before{background:var(--tape);border-color:var(--tape)}
+.tag[data-state="idle"] .tag-state{background:#adb1b6}
+.readout{margin-top:16px;font:700 .75rem/1 var(--f-b);font-stretch:75%;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-variant-numeric:tabular-nums}
+/* Notebook de tela baixa: a plaqueta fica só com número, título e estado para a leitura caber na primeira tela */
+@media (min-width:1000px) and (max-height:860px){
+  .tag-measure{display:none}
+  .tag-name{margin:10px 0 12px;padding-top:9px}
+  .bc{height:30px;margin-top:8px}
+  .apoio{margin-top:10px}
+  .actions{margin-top:16px}
+}
+
+/* Laser do leitor: o único vermelho da página */
+.laser{position:absolute;z-index:4;left:0;top:0;width:var(--w,0px);height:2px;margin-top:-1px;transform:translate(var(--x,0px),var(--y,0px));opacity:0;pointer-events:none;transition:opacity .2s linear}
+.laser.on{opacity:1;transition:opacity .2s linear,transform .3s var(--out),width .3s var(--out)}
+.laser::before{content:"";position:absolute;inset:0;border-radius:2px;background:linear-gradient(90deg,rgba(229,35,27,0),var(--laser) 10%,#FF6B5E 50%,var(--laser) 90%,rgba(229,35,27,0))}
+.laser.on::before{animation:jit 90ms steps(2,end) infinite}
+.laser::after{content:"";position:absolute;left:6%;right:6%;top:-3px;height:8px;background:rgba(229,35,27,.16);filter:blur(2px)}
+@keyframes jit{0%{transform:translateY(-.5px)}100%{transform:translateY(.5px)}}
+
+/* Etiquetas de título: fita impressa que quebra em pedaços */
+.label{position:relative;display:block;width:fit-content;max-width:100%;transform:rotate(-.8deg);transform-origin:0 50%;font:800 clamp(2.25rem,4.2vw,3.5rem)/1.14 var(--f-d);letter-spacing:.01em;text-transform:uppercase}
+/* Texto ampliado a 200%: palavra longa quebra em vez de estourar a largura */
+.label,.thesis,.groups dt,.flow li{overflow-wrap:anywhere}
+.label>span{padding:.1em .42em .05em;-webkit-box-decoration-break:clone;box-decoration-break:clone;box-shadow:0 3px 5px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.18)}
+.label--ink>span{background:var(--ink);color:var(--paper)}
+.label--paper>span{background:var(--paper);color:var(--ink)}
+.label--paper ::selection{background:var(--ink);color:var(--paper)}
+.mini-h{font:700 .75rem/1.3 var(--f-b);font-stretch:75%;letter-spacing:.16em;text-transform:uppercase;color:var(--tape)}
+.field .mini-h{color:var(--tape-ink-2)}
+.sub-h{font:800 1.625rem/1 var(--f-d);letter-spacing:.02em;text-transform:uppercase}
+
+/* Campos amarelos */
+.field{position:relative;background:var(--tape);color:var(--ink)}
+.field ::selection{background:var(--ink);color:var(--tape)}
+.field :focus-visible{outline-color:var(--ink)}
+
+/* Quem sou */
+.about{overflow:hidden;padding-block:clamp(88px,11vw,144px)}
+.about-grid{display:grid;grid-template-columns:minmax(260px,330px) minmax(0,1fr);gap:clamp(48px,7vw,112px);align-items:start}
+.badge-col{position:relative;display:flex;justify-content:center}
+.strap{position:absolute;z-index:0;left:50%;top:-400px;width:26px;height:434px;margin-left:-13px;background:var(--ink);box-shadow:inset 3px 0 0 rgba(255,255,255,.07),inset -3px 0 0 rgba(0,0,0,.35)}
+.badge{position:relative;z-index:1;width:100%;max-width:320px;margin-top:60px;background:var(--paper);border-radius:14px;transform:rotate(-2.5deg);transform-origin:50% 26px;box-shadow:0 22px 34px -6px rgba(0,0,0,.34),0 3px 6px rgba(0,0,0,.2)}
+.badge-band{position:relative;display:block;height:56px;background:var(--ink);border-radius:14px 14px 0 0}
+.badge-hole{position:absolute;left:50%;top:18px;width:64px;height:12px;margin-left:-32px;border-radius:6px;background:var(--tape);box-shadow:inset 0 2px 3px rgba(0,0,0,.45)}
+.clip{position:absolute;z-index:2;left:50%;top:-30px;width:30px;height:56px;margin-left:-15px;border-radius:8px 8px 5px 5px;background:var(--brushed) 0 0/640px 240px,var(--alu);box-shadow:0 3px 5px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.6),inset 0 -2px 0 rgba(0,0,0,.2)}
+.badge-photo{position:relative;margin:18px 18px 0;aspect-ratio:1/1.06;overflow:hidden;border-radius:3px;background:var(--ink)}
+.badge-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 34%;filter:url(#print)}
+.badge-photo::after{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(rgba(17,18,20,.9) .55px,transparent 1.15px);background-size:3px 3px;mix-blend-mode:multiply;opacity:.35}
+.badge-cap{display:grid;gap:4px;padding:16px 20px 0}
+.badge-name{font:800 1.875rem/.95 var(--f-d);letter-spacing:.01em;text-transform:uppercase}
+.badge-role{font:650 .9375rem/1.3 var(--f-b)}
+.badge-loc{font:500 .875rem/1.3 var(--f-b);color:#4D5156}
+.bc--badge{height:34px;margin:14px 20px 0;padding-bottom:20px;box-sizing:content-box}
+.about-text{min-width:0;padding-top:12px}
+.about-copy{display:grid;gap:18px;max-width:62ch;margin:32px 0 56px}
+.about-copy p{font-size:clamp(1.0625rem,1.3vw,1.1875rem);line-height:1.55;text-wrap:pretty}
+.about-copy p:first-child{font-size:clamp(1.125rem,1.45vw,1.3125rem);line-height:1.5}
+.trail{list-style:none;margin:18px 0 0;padding:0;border-top:2px solid var(--ink)}
+.trail li{display:grid;grid-template-columns:10rem minmax(0,1fr);gap:6px 28px;padding:18px 0 20px;border-bottom:1px solid rgba(17,18,20,.3)}
+.yr{padding-top:3px;font:700 1rem/1.35 var(--f-b);font-stretch:75%;letter-spacing:.06em;text-transform:uppercase;font-variant-numeric:tabular-nums lining-nums}
+.trail h4{font:700 1.125rem/1.3 var(--f-b)}
+.trail .org{font-weight:500}
+.trail p{max-width:62ch;margin-top:4px;color:var(--tape-ink-2);line-height:1.5}
+.edu{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:32px 48px;margin-top:48px}
+.edu-list{list-style:none;margin:18px 0 0;padding:0;border-top:2px solid var(--ink)}
+.edu-list li{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:2px 16px;padding:14px 0 15px;border-bottom:1px solid rgba(17,18,20,.3)}
+.edu-list strong{font-weight:700}
+.edu-list span{color:var(--tape-ink-2);font-variant-numeric:tabular-nums}
+
+/* Hub: a plaqueta mestra */
+.hub{position:relative;padding-block:clamp(88px,11vw,136px) clamp(72px,9vw,120px)}
+.hub-copy{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 56px;margin-top:36px}
+.hub-copy p{max-width:62ch;color:var(--text);line-height:1.6}
+.hub-copy p:first-child{grid-column:1 / -1;max-width:66ch;font-size:clamp(1.1875rem,1.45vw,1.3125rem);line-height:1.5;color:var(--paper)}
+.plate{position:relative;margin-top:clamp(40px,5vw,64px);padding:30px 40px 34px;border-radius:10px;background:var(--brushed) 0 0/640px 240px,var(--alu);color:var(--alu-ink);text-shadow:0 1px 0 rgba(255,255,255,.4);box-shadow:0 24px 44px -8px rgba(0,0,0,.6),0 2px 4px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.65),inset 0 -2px 0 rgba(0,0,0,.18)}
+.plate>.rivet{position:absolute}
+.r-tl{left:14px;top:14px}.r-tr{right:14px;top:14px}.r-bl{left:14px;bottom:14px}.r-br{right:14px;bottom:14px}
+.plate-head{display:grid;grid-template-columns:auto minmax(0,1fr) minmax(160px,280px);gap:16px 40px;align-items:center;padding-bottom:22px;border-bottom:1px solid rgba(17,18,20,.28);box-shadow:0 1px 0 rgba(255,255,255,.45)}
+.plate-id{display:grid;gap:6px}
+.plate-k{font:700 .6875rem/1 var(--f-b);font-stretch:75%;letter-spacing:.18em;text-transform:uppercase;color:var(--alu-ink-2)}
+.plate-num{font:700 2rem/1 var(--f-b);font-stretch:75%;letter-spacing:.04em;font-variant-numeric:tabular-nums lining-nums}
+.plate-title strong{display:block;font:800 1.75rem/1 var(--f-d);letter-spacing:.02em;text-transform:uppercase}
+.plate-title span{display:block;margin-top:6px;font:500 .9375rem/1.3 var(--f-b);color:var(--alu-ink-2)}
+.bc--plate{height:46px;margin-top:0}
+.register{list-style:none;margin:8px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:36px}
+.register li{min-width:0;border-bottom:1px solid rgba(17,18,20,.2);box-shadow:0 1px 0 rgba(255,255,255,.4)}
+.register a{display:flex;align-items:baseline;gap:12px;padding:14px 0 13px;text-decoration:none}
+.reg-n{flex:none;min-width:2ch;font:700 .8125rem/1 var(--f-b);font-stretch:75%;letter-spacing:.08em;color:var(--alu-ink-2);font-variant-numeric:tabular-nums lining-nums}
+.reg-name{min-width:0;font:600 1rem/1.3 var(--f-b);text-decoration:underline;text-decoration-color:transparent;text-decoration-thickness:1px;text-underline-offset:.24em;transition:text-decoration-color .2s}
+.register a .ico{width:12px;height:12px;margin-left:auto;align-self:center;color:var(--alu-ink-2);opacity:.6;transition:opacity .2s,transform .2s var(--out)}
+.register a:hover .reg-name{text-decoration-color:var(--alu-ink)}
+.register a:hover .ico{opacity:1;transform:translate(2px,-2px)}
+.register a:focus-visible{outline-color:var(--ink)}
+
+.demo-cta{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px 48px;align-items:center;margin-top:clamp(40px,5vw,56px);padding:clamp(28px,3.4vw,40px) clamp(24px,3.4vw,48px);transform:rotate(-.25deg);box-shadow:0 4px 8px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.4),inset 0 -1px 0 rgba(90,70,0,.25)}
+.demo-cta h3{font:800 clamp(1.75rem,2.6vw,2.25rem)/1 var(--f-d);letter-spacing:.02em;text-transform:uppercase}
+.demo-cta p{max-width:58ch;margin-top:10px;line-height:1.5}
+.demo-cta .demo-note{margin-top:8px;font:700 .8125rem/1.3 var(--f-b);font-stretch:75%;letter-spacing:.14em;text-transform:uppercase;color:var(--tape-ink-2)}
+.btn--xl{padding:18px 22px 17px 26px;font-size:1.375rem}
+
+.hub-lower{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(48px,6vw,72px);margin-top:clamp(64px,8vw,104px)}
+.arch{margin:0}
+.arch-grid{list-style:none;margin:20px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-areas:"nav portal api db" ". . jobs erp";gap:28px 44px}
+.node{position:relative;padding:14px 16px 16px;background:var(--paper);color:var(--ink);border-radius:3px;box-shadow:0 3px 6px rgba(0,0,0,.45),inset 0 -1px 0 rgba(0,0,0,.1)}
+.node strong{display:block;font:800 1.3125rem/1.05 var(--f-d);letter-spacing:.02em;text-transform:uppercase}
+.node span{display:block;margin-top:6px;font-size:.875rem;line-height:1.4;color:var(--alu-ink-2)}
+.node--nav{grid-area:nav}.node--portal{grid-area:portal}.node--api{grid-area:api}.node--db{grid-area:db}
+.node--jobs{grid-area:jobs}
+.node--erp{grid-area:erp;background:var(--tape)}
+.node--erp span{color:var(--tape-ink-2)}
+.to-r::after{content:"";position:absolute;left:100%;top:50%;width:44px;height:12px;margin-top:-6px;background:var(--arrow-r) 0 0/44px 12px no-repeat}
+.node--jobs::before{content:"";position:absolute;left:50%;bottom:100%;width:12px;height:28px;margin-left:-6px;background:var(--arrow-d) 0 0/12px 28px no-repeat}
+.arch figcaption,.conv figcaption{margin-top:18px;max-width:72ch;color:var(--muted);font-size:.9375rem;line-height:1.5}
+/* Conversas entre os sistemas: de cada sistema do hub sai um cabo com a etiqueta do que trafega */
+.conv{margin:0}
+.conv-list{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:16px}
+.sys{display:grid;grid-template-columns:minmax(0,15rem) minmax(0,1fr)}
+.sys-node{z-index:1;display:flex;flex-direction:column;justify-content:center;padding-right:36px}
+.sys-node,a.link-to{text-decoration:none;transition:transform .25s var(--out),box-shadow .25s var(--out)}
+.sys-node:hover,a.link-to:hover{transform:translateY(-2px);box-shadow:0 8px 14px rgba(0,0,0,.5),inset 0 -1px 0 rgba(0,0,0,.1)}
+.sys-node span{font-weight:700;font-stretch:75%;letter-spacing:.1em;font-variant-numeric:tabular-nums lining-nums}
+.conv .node .ico{position:absolute;right:12px;top:50%;width:14px;height:14px;margin-top:-7px;color:var(--alu-ink-2);transition:transform .25s var(--out)}
+.conv a.node:hover .ico{transform:translateY(2px)}
+.sys-links{list-style:none;margin:0;padding:0;display:grid;align-content:center;gap:10px}
+.link{position:relative;isolation:isolate;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,12.5rem);align-items:center;gap:8px 24px;padding-left:24px}
+.link::before{content:"";position:absolute;z-index:-1;left:-6px;right:10px;top:50%;height:6px;margin-top:-3px;border-radius:3px;background:linear-gradient(#41454B,#1B1D20);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 1px 2px rgba(0,0,0,.5)}
+.link-tag{grid-area:1 / 1;justify-self:start;padding:6px 10px 5px;background:var(--paper);color:var(--ink);border-radius:2px;font:600 .8125rem/1.3 var(--f-b);font-stretch:88%;box-shadow:0 2px 3px rgba(0,0,0,.45),inset 0 -1px 0 rgba(0,0,0,.12)}
+.link-tag.pend{outline-offset:1px}
+.link-to{grid-area:1 / 2;display:block;padding:10px 14px 11px}
+a.link-to{padding-right:36px}
+.link-to strong{font-size:1.125rem}
+.link-to--erp{background:var(--tape)}
+.link-to--erp ::selection{background:var(--ink);color:var(--tape)}
+
+/* Etiquetas de cabo */
+.cables{list-style:none;margin:16px 0 0;padding:0 14px;display:flex;flex-wrap:wrap;gap:14px 20px;isolation:isolate}
+.cables li{position:relative;padding:6px 10px 5px;background:var(--paper);color:var(--ink);border-radius:2px;font:600 .8125rem/1.25 var(--f-b);font-stretch:88%;box-shadow:0 2px 3px rgba(0,0,0,.45),inset 0 -1px 0 rgba(0,0,0,.12)}
+.cables li::before{content:"";position:absolute;z-index:-1;left:-14px;right:-14px;top:50%;height:6px;margin-top:-3px;border-radius:3px;background:linear-gradient(#41454B,#1B1D20);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 1px 2px rgba(0,0,0,.5)}
+
+/* Projetos: uma ficha por linha */
+.projects{position:relative;padding-block:clamp(72px,9vw,120px) clamp(48px,6vw,80px);border-top:1px solid var(--line)}
+.sec-p{max-width:60ch;margin-top:28px;font-size:1.125rem;line-height:1.55;color:var(--text)}
+.fichas{margin-top:clamp(40px,5vw,64px)}
+.ficha{display:grid;grid-template-columns:232px minmax(0,1fr);gap:clamp(32px,4.5vw,64px);padding-block:clamp(48px,6vw,80px);border-top:1px solid var(--line)}
+.ficha--r{grid-template-columns:minmax(0,1fr) 232px}
+.ficha--r .ficha-plate{order:2}
+.ficha-plate{position:sticky;top:calc(var(--bar-h) + var(--nav-h) + 28px);align-self:start}
+.pl{padding:14px 16px 0;border-radius:8px}
+.pl .bc{height:58px;margin-top:12px}
+.pl .bc-num{margin-top:8px;font-size:1.125rem;letter-spacing:.1em}
+.pl .tag-state{margin:16px -16px 0;padding:11px 16px 12px}
+.ficha-body{min-width:0;display:grid;gap:clamp(32px,3.4vw,44px);align-content:start}
+.ficha-title{max-width:22ch;font:800 clamp(2rem,3.4vw,3.125rem)/.98 var(--f-d);letter-spacing:.005em;text-transform:uppercase;text-wrap:balance}
+.ficha-line{max-width:56ch;margin-top:14px;font:400 clamp(1.125rem,1.5vw,1.3125rem)/1.45 var(--f-b);color:var(--alu);text-wrap:pretty}
+.spec{margin:0}
+.spec>div{display:grid;grid-template-columns:9.5rem minmax(0,1fr);gap:8px 32px;padding:20px 0 22px;border-top:1px solid var(--line)}
+.spec:not(.spec--num)>div{grid-template-columns:minmax(0,1fr);gap:10px}
+.spec dt{padding-top:4px;font:700 .75rem/1.3 var(--f-b);font-stretch:75%;letter-spacing:.16em;text-transform:uppercase;color:var(--tape)}
+.spec dd{margin:0;max-width:68ch;color:var(--text);line-height:1.6;text-wrap:pretty}
+.spec .res{font-size:1.125rem;line-height:1.55;color:var(--paper)}
+.spec--split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(28px,3.6vw,56px)}
+.spec--split>div{grid-template-columns:minmax(0,1fr);align-content:start;gap:10px}
+.spec--split>.sp-sit{grid-column:1 / -1}
+.spec--split>.sp-did{grid-column:1;grid-row:2 / span 2}
+.spec--split>.sp-how{grid-column:2;grid-row:2}
+.spec--split>.sp-res{grid-column:2;grid-row:3}
+.did{list-style:none;margin:0;padding:0;display:grid;gap:12px;counter-reset:d}
+.did li{position:relative;padding-left:2.25rem;counter-increment:d}
+.did li::before{content:counter(d,decimal-leading-zero);position:absolute;left:0;top:.22em;font:700 .8125rem/1.3 var(--f-b);font-stretch:75%;letter-spacing:.06em;color:var(--muted);font-variant-numeric:tabular-nums}
+.did strong{font-weight:700;color:var(--paper)}
+.dd-p{margin-top:12px}
+/* Lista do que o sistema tem: o quadrado cheio vale, o vazado ainda está em implantação */
+.feat{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.feat li{position:relative;padding-left:1.375rem}
+.feat li::before{content:"";position:absolute;left:0;top:.56em;width:8px;height:8px;background:var(--tape)}
+.feat .is-next::before{background:none;border:1.5px solid var(--alu)}
+.stamp{display:inline-block;margin-left:.5em;padding:3px 7px 2px;border:1px solid rgba(191,196,201,.55);color:var(--alu);font:700 .6875rem/1.2 var(--f-b);font-stretch:75%;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;vertical-align:.14em}
+/* Medições: o valor ocupa a coluna do rótulo da ficha */
+.mini-h+.spec{margin-top:14px}
+.spec--num>div{align-items:baseline}
+.spec--num dt{padding-top:0;font:800 clamp(1.5rem,2.2vw,1.875rem)/1.05 var(--f-b);font-stretch:72%;letter-spacing:-.005em;text-transform:none;color:var(--paper);font-variant-numeric:tabular-nums lining-nums;white-space:nowrap}
+
+.ba{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));gap:24px 44px;margin-top:16px}
+.ba-item{padding-top:14px;border-top:1px solid var(--line)}
+.ba-k{font:700 .75rem/1.35 var(--f-b);font-stretch:75%;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.ba-v{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 22px;margin-top:14px;font-variant-numeric:tabular-nums lining-nums}
+.ba del{position:relative;text-decoration:none;color:var(--muted);font:600 1.375rem/1.1 var(--f-b);font-stretch:80%;white-space:nowrap}
+.ba del::after{content:"";position:absolute;left:-3%;right:-3%;top:50%;height:.4em;margin-top:-.2em;background:var(--chalk) 0 0/100% 100% no-repeat;opacity:.6;transform:rotate(-3deg);pointer-events:none}
+.ba ins{text-decoration:none;color:var(--paper);font:800 clamp(2rem,3.2vw,2.75rem)/1 var(--f-b);font-stretch:72%;letter-spacing:-.005em}
+.ba--lead ins{font-size:clamp(2.5rem,4.4vw,3.75rem)}
+
+.flow{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));background:var(--tape);color:var(--ink);transform:rotate(-.25deg);box-shadow:0 3px 6px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.4),inset 0 -1px 0 rgba(90,70,0,.25)}
+.flow ::selection{background:var(--ink);color:var(--tape)}
+.flow li{position:relative;padding:12px 14px 16px;font:600 .9375rem/1.3 var(--f-b);font-stretch:92%}
+.flow li+li{border-left:2px dashed rgba(17,18,20,.4)}
+.flow li+li::before,.flow li+li::after{content:"";position:absolute;left:-7px;width:12px;height:12px;border-radius:50%;background:var(--ink)}
+.flow li+li::before{top:-6px}
+.flow li+li::after{bottom:-6px}
+.flow-n{display:block;margin-bottom:6px;font:700 .75rem/1 var(--f-b);font-stretch:75%;letter-spacing:.12em;color:var(--tape-ink-2);font-variant-numeric:tabular-nums}
+.flow--lg li{padding:16px 16px 20px;font-size:1.0625rem}
+
+.ficha-links{display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px}
+/* Vídeo da versão completa: tela escura presa por uma tira de fita. Sem pôster, o quadro 16:9 segura o espaço. */
+.reel{margin:0;max-width:52rem}
+.reel figcaption{position:relative;z-index:1;display:inline-block;margin:0 0 -10px 14px;padding:6px 10px 5px;background:var(--tape);color:var(--ink);font:700 .75rem/1.3 var(--f-b);font-stretch:75%;letter-spacing:.14em;text-transform:uppercase;transform:rotate(-.8deg);box-shadow:0 2px 4px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.4)}
+.reel video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:var(--ink-3);border:1px solid var(--line);border-radius:6px;box-shadow:0 6px 14px rgba(0,0,0,.45)}
+
+/* Ecossistema */
+.eco{padding-block:clamp(88px,11vw,144px)}
+.eco-head{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:32px 64px;align-items:end}
+.eco-lede{max-width:56ch;font-size:clamp(1.125rem,1.45vw,1.3125rem);line-height:1.5;text-wrap:pretty}
+.thesis-block{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:28px 64px;align-items:end;margin-top:clamp(48px,6vw,80px)}
+.thesis{transform:rotate(-.6deg);transform-origin:0 50%;font:800 clamp(2rem,4.4vw,4rem)/1.12 var(--f-d);letter-spacing:.005em;text-transform:uppercase;text-wrap:balance}
+.thesis span{padding:.06em .3em .02em;background:var(--ink);color:var(--tape);-webkit-box-decoration-break:clone;box-decoration-break:clone;box-shadow:0 3px 6px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.14)}
+.thesis ::selection{background:var(--tape);color:var(--ink)}
+.thesis-p{max-width:52ch;font-size:1.125rem;line-height:1.55}
+.eco-map{margin:clamp(56px,7vw,96px) 0 0}
+.chain{position:relative;list-style:none;margin:18px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:48px}
+.chain::before{content:"";position:absolute;left:4%;right:4%;top:50%;height:10px;margin-top:-5px;border-radius:5px;background:var(--ink);box-shadow:inset 0 2px 0 rgba(255,255,255,.12),0 3px 4px rgba(90,70,0,.35)}
+.enode{position:relative;z-index:1;display:flex;flex-direction:column;gap:8px;padding:16px 18px 18px;border-radius:8px;background:var(--brushed) 0 0/640px 240px,var(--alu);color:var(--alu-ink);text-shadow:0 1px 0 rgba(255,255,255,.35);box-shadow:0 14px 24px -8px rgba(60,45,0,.55),0 2px 3px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.6),inset 0 -1px 0 rgba(0,0,0,.25)}
+.enode:nth-child(2){background-position:-220px -60px,0 0}
+.enode:nth-child(3){background-position:-410px -150px,0 0}
+.enode+.enode::before{content:"";position:absolute;left:-32px;top:50%;margin-top:-9px;border-left:14px solid var(--ink);border-block:9px solid transparent}
+.enode-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.enode h4{font:800 1.375rem/1 var(--f-d);letter-spacing:.02em;text-transform:uppercase}
+.e-num{font-weight:800;font-variant-numeric:tabular-nums lining-nums}
+.e-date{margin-top:14px;font-size:.875rem;color:var(--alu-ink-2)}
+.e-d{font-size:.9375rem;line-height:1.42;color:var(--alu-ink-2)}
+.enode--end{background:var(--ink);color:var(--paper);text-shadow:none}
+.enode--end .e-d{color:var(--alu)}
+.enode--end .rivet{background:#3A3E43;box-shadow:inset 0 1px 1.5px rgba(0,0,0,.6),0 1px 0 rgba(255,255,255,.12)}
+.enode--end ::selection{background:var(--tape);color:var(--ink)}
+.eco-base{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:48px 64px;align-items:start;margin-top:clamp(56px,7vw,96px)}
+.plate--eco{margin-top:0;padding:26px 32px 28px;box-shadow:0 22px 36px -10px rgba(60,45,0,.55),0 2px 4px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.65),inset 0 -2px 0 rgba(0,0,0,.18)}
+.plate--eco .plate-head{grid-template-columns:auto minmax(0,1fr)}
+.plate--eco .bc--plate{grid-column:1 / -1;max-width:280px;height:38px}
+.reg2{list-style:none;margin:6px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:32px}
+.reg2 li{display:grid;gap:3px;padding:14px 0 13px;border-bottom:1px solid rgba(17,18,20,.2);box-shadow:0 1px 0 rgba(255,255,255,.4)}
+.reg2 strong{font:700 1rem/1.3 var(--f-b)}
+.reg2 span{font-size:.875rem;line-height:1.4;color:var(--alu-ink-2)}
+.rules{list-style:none;margin:18px 0 0;padding:0;border-top:2px solid var(--ink)}
+.rules li{padding:18px 0 20px;border-bottom:1px solid rgba(17,18,20,.3)}
+.rules h4{font:700 1.125rem/1.3 var(--f-b)}
+.rules p{max-width:60ch;margin-top:6px;color:var(--tape-ink-2);line-height:1.5}
+
+/* Competências */
+.skills{position:relative;padding-block:clamp(88px,11vw,136px)}
+.groups{margin:clamp(40px,5vw,64px) 0 0;border-top:1px solid var(--line)}
+.groups>div{display:grid;grid-template-columns:17rem minmax(0,1fr);gap:16px 40px;align-items:center;padding:24px 0 26px;border-bottom:1px solid var(--line)}
+.groups dt{justify-self:start;padding:.12em .4em .06em;background:var(--tape);color:var(--ink);font:800 1.5rem/1.05 var(--f-d);letter-spacing:.02em;text-transform:uppercase;transform:rotate(-.6deg);box-shadow:0 2px 4px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.4)}
+.groups dt ::selection,.groups dt::selection{background:var(--ink);color:var(--tape)}
+.groups dd{margin:0}
+.chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px 12px}
+.chips li{padding:8px 12px 7px;background:var(--paper);color:var(--ink);font:700 .9375rem/1.1 var(--f-b);font-stretch:85%;transform:rotate(-.4deg);box-shadow:0 2px 3px rgba(0,0,0,.45),inset 0 -1px 0 rgba(0,0,0,.12)}
+.chips li:nth-child(even){transform:rotate(.35deg)}
+.chips li:nth-child(3n){transform:rotate(-.15deg)}
+.chips ::selection{background:var(--ink);color:var(--paper)}
+
+/* Contato */
+.contact{padding-block:clamp(88px,11vw,144px)}
+.contact-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px 64px;align-items:end}
+.contact-p{max-width:46ch;font-size:clamp(1.125rem,1.6vw,1.375rem);line-height:1.5}
+.contact-actions{grid-column:1 / -1;display:flex;flex-wrap:wrap;gap:14px}
+.foot{padding-block:28px 40px}
+.foot .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 32px}
+.foot p{color:var(--muted);font-size:.875rem}
+.foot a{color:var(--alu);font-size:.875rem;text-decoration-color:rgba(191,196,201,.45)}
+.foot a:hover{color:var(--paper);text-decoration-color:var(--tape)}
+.bc--foot{width:200px;height:26px;margin:0;color:#3A3E43}
+
+/* O efeito: a etiquetadora imprime, corta, e o leitor confere */
+@keyframes feed{
+  0%{transform:translate(calc(100% + 24px),0) rotate(0deg);animation-timing-function:linear}
+  74%{transform:translate(0,0) rotate(0deg)}
+  82%{transform:translate(0,0) rotate(0deg);animation-timing-function:cubic-bezier(.16,1,.3,1)}
+  100%{transform:var(--settle)}
+}
+@keyframes cut{
+  0%{opacity:0;transform:scaleY(0)}
+  35%,65%{opacity:1;transform:scaleY(1)}
+  100%{opacity:0;transform:scaleY(0)}
+}
+@keyframes jolt{0%,100%{transform:none}30%{transform:translateX(2px)}60%{transform:translateX(-1px)}}
+@keyframes seam{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+.motion .tape{animation:feed 3s linear .35s both}
+.motion .blade{animation:cut .36s cubic-bezier(.6,0,.4,1) 2.62s both}
+.motion .printer{animation:jolt .22s ease-out 2.7s both}
+
+@media (max-width:1180px){
+  .tags{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+/* Até 1080 px o menu desce para uma segunda linha da barra: plaquetas de alumínio presas num cabo, que rola de lado quando não cabe */
+@media (max-width:1080px){
+  :root{--nav-h:2.75rem}
+  .bar{flex-wrap:wrap;height:auto;row-gap:0}
+  .mark{display:flex;align-items:center;height:var(--bar-h)}
+  .nav{order:9;flex:0 0 calc(100% + 2 * var(--g));align-items:center;gap:10px;height:var(--nav-h);margin-inline:calc(-1 * var(--g));padding-inline:var(--g);scroll-padding-inline:var(--g);overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;border-top:1px solid var(--line);background:linear-gradient(#41454B,#1B1D20) 0 50%/100% 6px no-repeat local}
+  .nav::-webkit-scrollbar{display:none}
+  .nav a{flex:none;padding:7px 10px 6px;border:0;border-radius:3px;background:var(--brushed) 0 0/640px 240px,var(--alu);color:var(--alu-ink);text-shadow:0 1px 0 rgba(255,255,255,.35);font:700 .75rem/1 var(--f-b);font-stretch:75%;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap;box-shadow:0 2px 3px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.6),inset 0 -1px 0 rgba(0,0,0,.25);transition:transform .2s var(--out),box-shadow .2s var(--out)}
+  .nav a:nth-child(2){background-position:-180px -40px,0 0}
+  .nav a:nth-child(3){background-position:-360px -120px,0 0}
+  .nav a:nth-child(4){background-position:-90px -170px,0 0}
+  .nav a:nth-child(5){background-position:-270px -10px,0 0}
+  .nav a:hover{color:var(--alu-ink);transform:translateY(-1px);box-shadow:0 5px 8px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.6),inset 0 -1px 0 rgba(0,0,0,.25)}
+}
+@media (max-width:1000px){
+  :root{--vis:150px;--hide:110px}
+  .lcd,.keys{display:none}
+  .register{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ficha,.ficha--r{grid-template-columns:minmax(0,1fr)}
+  .ficha--r .ficha-plate{order:0}
+  .ficha-plate{position:static;width:100%;max-width:300px}
+  .flow{grid-template-columns:minmax(0,1fr);max-width:560px}
+  .flow li{display:flex;gap:14px}
+  .flow li+li{border-left:0;border-top:2px dashed rgba(17,18,20,.4)}
+  .flow li+li::before{left:-6px;top:-7px}
+  .flow li+li::after{left:auto;right:-6px;top:-7px;bottom:auto}
+  .flow-n{flex:none;min-width:2ch;margin:3px 0 0}
+  .arch-grid{grid-template-columns:minmax(0,1fr);grid-template-areas:"nav" "portal" "api" "db" "jobs" "erp";gap:30px;max-width:520px}
+  .node--jobs::before{display:none}
+  /* mesmo ::after da seta lateral, agora apontando para baixo */
+  .to-d::after{content:"";position:absolute;left:50%;top:100%;width:12px;height:30px;margin:0 0 0 -6px;background:var(--arrow-d) 0 2px/12px 28px no-repeat}
+  .node--jobs{margin-top:14px}
+  .chain{grid-template-columns:minmax(0,1fr);gap:40px;max-width:560px}
+  .chain::before{left:50%;right:auto;top:0;bottom:0;width:10px;height:auto;margin:0 0 0 -5px}
+  .enode+.enode::before{left:50%;top:-28px;margin:0 0 0 -9px;border-left:9px solid transparent;border-right:9px solid transparent;border-top:14px solid var(--ink);border-bottom:0}
+  .eco-base{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:900px){
+  .about-grid{grid-template-columns:minmax(0,1fr);gap:56px}
+  .badge-col{width:min(100%,320px)}
+  .hub-copy,.eco-head,.thesis-block,.contact-grid,.edu{grid-template-columns:minmax(0,1fr)}
+  .plate-head{grid-template-columns:auto minmax(0,1fr)}
+  .bc--plate{grid-column:1 / -1;max-width:320px}
+  .spec--split{grid-template-columns:minmax(0,1fr)}
+  .spec--split>.sp-did,.spec--split>.sp-how,.spec--split>.sp-res{grid-column:1;grid-row:auto}
+  .groups>div{grid-template-columns:minmax(0,1fr)}
+  .demo-cta{grid-template-columns:minmax(0,1fr)}
+  .demo-cta .btn{justify-self:start}
+  /* conversas: o cabo desce do sistema e solta um ramal para cada destino */
+  .conv-list{gap:28px}
+  .sys{grid-template-columns:minmax(0,1fr);row-gap:12px}
+  .sys-node{justify-self:start;min-width:min(100%,14rem)}
+  .sys-links{padding-left:28px;gap:22px}
+  .link{grid-template-columns:minmax(0,1fr);row-gap:8px;padding-left:0}
+  .link-to,.link-tag{grid-area:auto}
+  .link-to{justify-self:start;min-width:min(100%,10rem)}
+  .link::before{left:-20px;right:auto;top:17px;width:22px;margin-top:0}
+  .link::after{content:"";position:absolute;z-index:-1;left:-20px;top:-24px;bottom:-2px;width:6px;border-radius:3px;background:linear-gradient(90deg,#41454B,#1B1D20);box-shadow:inset 1px 0 0 rgba(255,255,255,.14)}
+  .link:last-child::after{bottom:auto;height:47px}
+}
+/* Celular: a fita imprime em duas linhas e vira uma linha fina que costura a página */
+@media (max-width:720px){
+  :root{--vis:56px;--hide:44px;--ph:132px;--settle:translate(-8px,1px) rotate(-.6deg);--bar-h:60px}
+  .bar{column-gap:12px}
+  .mark{font-size:1.1875rem}
+  .dl-long{display:none}
+  .dl-short{display:inline}
+  .demo-link{padding:9px 10px 8px 12px}
+  .lang button{padding:9px 8px 8px}
+  .tape{--tape-fs:22px;white-space:normal;padding:.42em .9em .5em calc(var(--g) + 8px)}
+  .t-name{display:block;width:max-content;font-size:1.95em;line-height:.92}
+  .t-sep{display:none}
+  .t-tag{display:block;width:max-content;margin-top:.32em;letter-spacing:.03em}
+  .cassette{display:none}
+  .printer{border-radius:22px 0 0 22px}
+  .phrase{font-size:1.5rem}
+  .tags{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .tag{padding:10px 12px 0}
+  .tag .tag-state{margin-inline:-12px;padding-inline:12px;letter-spacing:.12em}
+  .bc{height:34px}
+  .badge-col{margin-inline:auto}
+  .badge{max-width:264px}
+  .trail li{grid-template-columns:minmax(0,1fr);gap:2px}
+  .plate{padding:24px 18px 26px}
+  .plate-head,.plate--eco .plate-head{grid-template-columns:minmax(0,1fr)}
+  .register{column-gap:16px}
+  .reg-name{font-size:.9375rem}
+  .reg2{grid-template-columns:minmax(0,1fr)}
+  .spec>div{grid-template-columns:minmax(0,1fr);gap:8px}
+  .ba-v{gap:4px 16px}
+  .ficha{gap:20px}
+  .ficha-plate{max-width:196px}
+  .pl{padding:10px 12px 0}
+  .pl .bc{height:30px;margin-top:8px}
+  .pl .bc-num{font-size:.875rem;margin-top:5px}
+  .pl .tag-state{margin:10px -12px 0;padding:8px 12px 9px}
+  .btn--xl{padding:15px 18px 14px 20px;font-size:1.1875rem}
+  .cables{padding-inline:10px;gap:12px 18px}
+  .cables li::before{left:-12px;right:-12px}
+  .rest::before,.about::before,.hub::before,.projects::before,.eco::before,.skills::before,.contact::before{content:"";position:absolute;z-index:0;left:6px;top:0;bottom:0;width:3px;background:var(--tape)}
+  .field::before{background:var(--ink)!important}
+  .rest::before{transform-origin:50% 0}
+  .motion .rest::before{animation:seam 1.2s cubic-bezier(.16,1,.3,1) 2.9s both}
+  .label::before{content:"";position:absolute;right:100%;top:50%;width:calc(var(--g) - 9px);height:3px;margin-top:-1.5px;background:var(--tape)}
+  .field .label::before{background:var(--ink)}
+}
+@media (max-width:380px){
+  .demo-link .ico{display:none}
+  .register{grid-template-columns:minmax(0,1fr)}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .laser{display:none}
+}
+</style>
+</head>
+<body id="top">
+<a class="skip" href="#conteudo" data-i18n="skip">Pular para o conteúdo</a>
+
+<svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
+  <filter id="print" color-interpolation-filters="sRGB" x="0" y="0" width="100%" height="100%">
+    <feColorMatrix type="saturate" values="0"/>
+    <feComponentTransfer>
+      <feFuncR type="table" tableValues="0.067 0.12 0.34 0.63 0.87 0.969"/>
+      <feFuncG type="table" tableValues="0.071 0.125 0.345 0.635 0.87 0.969"/>
+      <feFuncB type="table" tableValues="0.078 0.13 0.35 0.63 0.86 0.949"/>
+    </feComponentTransfer>
+  </filter>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v15M5.5 12.5 12 19l6.5-6.5" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="square"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24"><path d="M4 12h15M12.5 5.5 19 12l-6.5 6.5" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="square"/></symbol>
+  <symbol id="i-out" viewBox="0 0 24 24"><path d="M8 16 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="square"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><path d="M3.5 6h17v12h-17zM3.5 7l8.5 6 8.5-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="miter"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6zM14 3v4h4M9 12h6M9 16h6" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+</svg>
+
+<header class="top">
+  <div class="bar wrap">
+    <a class="mark" href="#top">Ruan Siqueira</a>
+    <nav class="nav" aria-label="Seções" data-i18n-attr="aria-label:nav_label">
+      <a href="#quem-sou" data-i18n="nav_about">Quem sou</a>
+      <a href="#hub">Hub</a>
+      <a href="#projetos" data-i18n="nav_projects">Projetos</a>
+      <a href="#ecossistema" data-i18n="nav_eco">Ecossistema</a>
+      <a href="#contato" data-i18n="nav_contact">Contato</a>
+    </nav>
+    <a class="demo-link" href="demo/index.html#/entrar"><span class="dl-long" data-i18n="demo_long">Hub de demonstração</span><span class="dl-short">Demo</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-right"/></svg></a>
+    <div class="lang" role="group" aria-label="Idioma" data-i18n-attr="aria-label:lang_label">
+      <button type="button" data-lang="pt" aria-pressed="true">PT</button>
+      <span class="lang-sep" aria-hidden="true">|</span>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</header>
+
+<main id="conteudo" tabindex="-1">
+  <section class="hero" aria-labelledby="titulo">
+    <div class="press">
+      <div class="feedline">
+        <span class="mouth" aria-hidden="true"></span>
+        <div class="track">
+          <h1 class="tape" id="titulo"><span class="tape-text"><span class="t-name">Ruan Siqueira</span><span class="vh">, </span><span class="t-sep" aria-hidden="true">·</span><span class="t-tag" data-i18n="t_tag">TI de ponta a ponta</span></span></h1>
+        </div>
+        <span class="stub" aria-hidden="true"></span>
+        <span class="blade" aria-hidden="true"></span>
+      </div>
+      <div class="printer" aria-hidden="true">
+        <span class="lcd" data-s="ready">Pronto</span>
+        <span class="cassette"></span>
+        <span class="keys"><span></span><span></span></span>
+      </div>
+    </div>
+
+    <div class="rest">
+      <div class="lede wrap">
+        <p class="phrase" data-i18n="phrase">Da infraestrutura à integração com ERP e IA.</p>
+        <p class="apoio" data-i18n="apoio">Sou engenheiro de software e trabalho na TI da Robustec, onde projetei e construí sozinho um portal interno com 14 sistemas, vários deles integrados ao ERP.</p>
+        <div class="actions">
+          <a class="btn" href="#projetos"><span data-i18n="cta">Ver projetos</span><svg class="ico ico--down" aria-hidden="true" focusable="false"><use href="#i-down"/></svg></a>
+          <a class="ext" href="demo/index.html#/entrar"><span data-i18n="cta2">Entrar no hub de demonstração</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-right"/></svg></a>
+        </div>
+      </div>
+
+      <div class="row wrap">
+        <h2 class="vh" data-i18n="projects_h2">Projetos em produção</h2>
+        <div class="tags-wrap">
+          <ol class="tags">
+            <li class="tag" data-state="prod">
+              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Patrimônio</span><span class="rivet"></span></div>
+              <div class="bc" data-code="PAT-0001"></div>
+              <div class="bc-num" aria-hidden="true">PAT-0001</div>
+              <h3 class="tag-name"><a href="#p-nf-autonoma" data-i18n="p1n">NF Autônoma</a></h3>
+              <p class="tag-measure" data-i18n="p1m">Lê o XML, decide e lança sozinha no ERP as notas fiscais de entrada e os CT-es da empresa. Ligou o automático, a digitação acabou.</p>
+              <p class="tag-state"><span class="st st-idle" data-i18n="st_idle">Aguardando leitura</span><span class="st st-read" data-i18n="st_read">Conferindo</span><span class="st st-prod" data-i18n="st_prod">Em produção</span></p>
+            </li>
+            <li class="tag" data-state="prod">
+              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Patrimônio</span><span class="rivet"></span></div>
+              <div class="bc" data-code="PAT-0002"></div>
+              <div class="bc-num" aria-hidden="true">PAT-0002</div>
+              <h3 class="tag-name"><a href="#p-notas-debito" data-i18n="p2n">Nota de Débito</a></h3>
+              <p class="tag-measure" data-i18n="p2m">Cria e emite a nota a partir do pedido, vincula tudo sozinha e, na venda, acha o gatilho para levá-la ao cliente, como a Reforma Tributária pede.</p>
+              <p class="tag-state"><span class="st st-idle" data-i18n="st_idle">Aguardando leitura</span><span class="st st-read" data-i18n="st_read">Conferindo</span><span class="st st-prod" data-i18n="st_prod">Em produção</span></p>
+            </li>
+            <li class="tag" data-state="prod">
+              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Patrimônio</span><span class="rivet"></span></div>
+              <div class="bc" data-code="PAT-0003"></div>
+              <div class="bc-num" aria-hidden="true">PAT-0003</div>
+              <h3 class="tag-name"><a href="#p-auto-crm" data-i18n="p3n">AUTO CRM</a></h3>
+              <p class="tag-measure" data-i18n="p3m">O CRM que a própria gestão monta: funil, metas e cadências na tela, carteira e prospecção num lugar só, pronto para qualquer setor.</p>
+              <p class="tag-state"><span class="st st-idle" data-i18n="st_idle">Aguardando leitura</span><span class="st st-read" data-i18n="st_read">Conferindo</span><span class="st st-prod" data-i18n="st_prod">Em produção</span></p>
+            </li>
+            <li class="tag" data-state="prod">
+              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Patrimônio</span><span class="rivet"></span></div>
+              <div class="bc" data-code="PAT-0004"></div>
+              <div class="bc-num" aria-hidden="true">PAT-0004</div>
+              <h3 class="tag-name"><a href="#p-motor-clientes" data-i18n="p4n">Motor de clientes</a></h3>
+              <p class="tag-measure" data-i18n="p4m">Descobre quem parou de comprar, chama de volta pelo WhatsApp e ainda encontra clientes novos na base pública de CNPJ.</p>
+              <p class="tag-state"><span class="st st-idle" data-i18n="st_idle">Aguardando leitura</span><span class="st st-read" data-i18n="st_read">Conferindo</span><span class="st st-prod" data-i18n="st_prod">Em produção</span></p>
+            </li>
+            <li class="tag" data-state="prod">
+              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Patrimônio</span><span class="rivet"></span></div>
+              <div class="bc" data-code="PAT-0005"></div>
+              <div class="bc-num" aria-hidden="true">PAT-0005</div>
+              <h3 class="tag-name"><a href="#p-pesquisa-clima" data-i18n="p5n">Pesquisa de Clima e RH</a></h3>
+              <p class="tag-measure" data-i18n="p5m">Escuta a equipe de verdade: pesquisas anônimas e feedbacks com relatório pronto na hora, e a área do RH para as entrevistas de desligamento.</p>
+              <p class="tag-state"><span class="st st-idle" data-i18n="st_idle">Aguardando leitura</span><span class="st st-read" data-i18n="st_read">Conferindo</span><span class="st st-prod" data-i18n="st_prod">Em produção</span></p>
+            </li>
+            <li class="tag" data-state="prod">
+              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Patrimônio</span><span class="rivet"></span></div>
+              <div class="bc" data-code="PAT-0006"></div>
+              <div class="bc-num" aria-hidden="true">PAT-0006</div>
+              <h3 class="tag-name"><a href="#p-carrossel-tv" data-i18n="p6n">Carrossel TV</a></h3>
+              <p class="tag-measure" data-i18n="p6m">Cada TV da empresa com o recado certo para o seu setor, trocado em um clique de dentro do hub.</p>
+              <p class="tag-state"><span class="st st-idle" data-i18n="st_idle">Aguardando leitura</span><span class="st st-read" data-i18n="st_read">Conferindo</span><span class="st st-prod" data-i18n="st_prod">Em produção</span></p>
+            </li>
+          </ol>
+          <div class="laser" aria-hidden="true"></div>
+        </div>
+        <p class="readout" data-readout>6 de 6 lidas · em produção</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="about field" id="quem-sou" aria-labelledby="quem-sou-h">
+    <div class="wrap about-grid">
+      <div class="badge-col">
+        <span class="strap" aria-hidden="true"></span>
+        <div class="badge">
+          <span class="badge-band" aria-hidden="true"><span class="badge-hole"></span></span>
+          <span class="clip" aria-hidden="true"></span>
+          <div class="badge-photo"><img src="assets/foto.jpg" srcset="assets/foto-320.webp 320w, assets/foto-640.webp 640w, assets/foto.jpg 888w" sizes="(max-width:720px) 264px, 320px" width="888" height="888" alt="Foto de Ruan Siqueira" data-i18n-attr="alt:photo_alt" loading="lazy" decoding="async"></div>
+          <div class="badge-cap">
+            <span class="badge-name">Ruan Siqueira</span>
+            <span class="badge-role" data-i18n="role">Engenheiro de Software</span>
+            <span class="badge-loc" data-i18n="loc">Marau-RS</span>
+          </div>
+          <div class="bc bc--badge" data-code="RUAN-SIQUEIRA"></div>
+        </div>
+      </div>
+
+      <div class="about-text">
+        <h2 class="label label--ink" id="quem-sou-h"><span data-i18n="about_h">Quem sou</span></h2>
+        <div class="about-copy">
+          <p data-i18n="about_p1">Comecei em 2021 num provedor de internet, configurando roteadores e MikroTik. Na controladoria da BRF aprendi que todo número tem um processo por trás. Na Transportadora Sana fui o único da TI num grupo de cerca de 500 colaboradores: cuidei de servidores, firewall, antivírus e e-mail, das compras, dos patrimônios e dos comodatos, e depois passei a coordenar mais uma pessoa na TI.</p>
+          <p data-i18n="about_p2">Na Robustec, onde estou desde janeiro de 2026, projetei e construí sozinho o ProjectHub e os sistemas integrados ao ERP que vivem nele. Levanto os requisitos com as áreas de Fiscal, Compras, Comercial, Controladoria e RH, que também conferem os resultados comigo. Ter passado por rede, controladoria e código me ajuda a acompanhar um problema do servidor até a regra de negócio e a tela que a equipe usa.</p>
+          <p data-i18n="about_p3">Ao longo dos projetos, organizei também o meu jeito de trabalhar: memória compartilhada, assistentes, agentes e um método versionado. É isso que permite a outro profissional de TI implantar e manter tudo o que construí.</p>
+        </div>
+
+        <h3 class="sub-h" data-i18n="trail_h">Trajetória</h3>
+        <ol class="trail">
+          <li>
+            <span class="yr" data-i18n="tr1_y">jan. 2026 até hoje</span>
+            <div><h4><span data-i18n="tr1_r">Analista de TI</span> · <span class="org">Robustec</span></h4><p data-i18n="tr1_d">Projetei e construí sozinho o hub interno que reúne 14 sistemas, com 3 níveis de acesso, 26 rotinas automáticas registradas e integração com o ERP.</p></div>
+          </li>
+          <li>
+            <span class="yr" data-i18n="tr2_y">2024 a 2025</span>
+            <div><h4><span data-i18n="tr2_r">Analista de TI</span> · <span class="org">Transportadora Sana</span></h4><p data-i18n="tr2_d">Único da TI no grupo Sana, com cerca de 500 colaboradores: troquei servidor, firewall e antivírus, migrei mais de 500 contas de e-mail, e as compras, os patrimônios e os comodatos de todos os colaboradores passavam por mim. Depois passei a coordenar mais uma pessoa na TI.</p></div>
+          </li>
+          <li>
+            <span class="yr" data-i18n="tr3_y">2023 a 2024</span>
+            <div><h4><span data-i18n="tr3_r">Assistente de controladoria</span> · <span class="org">BRF</span></h4><p data-i18n="tr3_d">Inventário e análise de dados na controladoria, a base de negócio que hoje levo para os sistemas ligados ao ERP.</p></div>
+          </li>
+          <li>
+            <span class="yr" data-i18n="tr4_y">2021 a 2023</span>
+            <div><h4><span data-i18n="tr4_r">Analista de redes</span> · <span class="org" data-i18n="tr4_o">Provedor de internet</span></h4><p data-i18n="tr4_d">Instalei e configurei roteadores e MikroTik e aprendi que rede bem feita é a que ninguém percebe.</p></div>
+          </li>
+        </ol>
+
+        <div class="edu">
+          <div>
+            <h3 class="sub-h" data-i18n="edu_h">Formação</h3>
+            <ul class="edu-list">
+              <li><strong data-i18n="edu_course">Engenharia de Software</strong><span>UNIASSELVI · <span data-i18n="edu_end">Concluído em 2026</span></span></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="sub-h" data-i18n="cert_h">Certificações</h3>
+            <ul class="edu-list">
+              <li><strong>Scrum Foundation (SFPC)</strong><span>Certiprof · 2026</span></li>
+              <li><strong>Cybersecurity Awareness</strong><span>IBSEC · 2025</span></li>
+              <li><strong>Cloud Security</strong><span>IBSEC · 2025</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hub" id="hub" aria-labelledby="hub-h">
+    <div class="wrap">
+      <h2 class="label label--paper" id="hub-h"><span data-i18n="hub_h">ProjectHub: o cérebro sobre o ERP</span></h2>
+      <div class="hub-copy">
+        <p data-i18n="hub_p1">Uma camada inteligente sobre o ERP: o cérebro que conecta fiscal, financeiro, comercial e RH, e automatiza o que o ERP sozinho não faz. Projetei e construí sozinho este portal interno na Robustec, onde antes os controles de cada área ficavam em planilhas e ferramentas separadas.</p>
+        <p data-i18n="hub_p1b">Ele se integra ao ERP que a empresa já usa, mas não depende dele para existir: cadastros, regras, permissões, auditoria e rotinas moram no próprio hub. Se a empresa precisar, ele cresce para fazer o papel do ERP.</p>
+        <p data-i18n="hub_p2">Quase tudo conversa por ele. Cada sistema entra como um módulo, com um login só, 3 níveis de acesso, permissão por projeto e registro das ações críticas. Os seis projetos desta página vivem aqui dentro, e cada um dos 14 sistemas abre na demonstração.</p>
+        <p data-i18n="hub_p3">Por trás, há 26 rotinas automáticas registradas em segundo plano, e parte delas integra o hub ao ERP. Como o banco do ERP é compartilhado com a empresa inteira, a primeira consulta que otimizo é a minha, e toda automação nasce com regras de consumo para não pesar no trabalho de ninguém.</p>
+        <p data-i18n="hub_p4">O hub de demonstração tem um motor de temas no próprio código: três visuais únicos, cada um com um conceito, que trocam a interface inteira na hora. A Plaqueta, de etiqueta de patrimônio, o Rack de servidores e o Crachá de acesso, além de um modo de alto contraste para acessibilidade. Os sistemas seguem o mesmo visual do hub, dentro de uma moldura própria.</p>
+      </div>
+
+      <div class="plate">
+        <span class="rivet r-tl"></span><span class="rivet r-tr"></span><span class="rivet r-bl"></span><span class="rivet r-br"></span>
+        <div class="plate-head">
+          <div class="plate-id"><span class="plate-k" data-i18n="asset">Patrimônio</span><span class="plate-num">PAT-0000</span></div>
+          <div class="plate-title"><strong data-i18n="plate_title">Sistemas do portal</strong><span data-i18n="plate_sub">14 módulos com login único. Toque em qualquer um para abrir na demonstração.</span></div>
+          <div class="bc bc--plate" data-code="PAT-0000"></div>
+        </div>
+        <ol class="register">
+          <li><a href="demo/index.html#/nf_autonoma"><span class="reg-n">01</span><span class="reg-name" data-i18n="s01">Notas fiscais de entrada</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
+          <li><a href="demo/index.html#/nota_debito"><span class="reg-n">02</span><span class="reg-name" data-i18n="s02">Notas de débito</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
+          <li><a href="demo/index.html#/disparos"><span class="reg-n">03</span><span class="reg-name" data-i18n="s03">Reativação de clientes</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
+          <li><a href="demo/index.html#/base"><span class="reg-n">04</span><span class="reg-name" data-i18n="s04">Funis do CRM</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
+          <li><a href="demo/index.html#/leads"><span class="reg-n">05</span><span class="reg-name" data-i18n="s05">Leads e campanhas</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
+          <li><a href="demo/index.html#/exportacao"><span class="reg-n">06</span><span class="reg-name" data-i18n="s06">AUTO CRM</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
+          <li><a href="demo/index.html#/raio_x"><span class="reg-n">07</span><span class="reg-name" data-i18n="s07">Raio-X do cliente</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
+          <li><a href="demo/index.html#/dash_ia"><span class="reg-n">08</span><span class="reg-name" data-i18n="s08">Atendimento com IA</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
+          <li><a href="demo/index.html#/controle_verba"><span class="reg-n">09</span><span class="reg-name" data-i18n="s09">Controle de verba</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
+          <li><a href="demo/index.html#/estoque_epi"><span class="reg-n">10</span><span class="reg-name" data-i18n="s10">Almoxarifado</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
+          <li><a href="demo/index.html#/controle_veiculos"><span class="reg-n">11</span><span class="reg-name" data-i18n="s11">Controle de veículos</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
+          <li><a href="demo/index.html#/pesquisa_clima"><span class="reg-n">12</span><span class="reg-name" data-i18n="s12">Pesquisa de clima</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
+          <li><a href="demo/index.html#/base_conhecimento"><span class="reg-n">13</span><span class="reg-name" data-i18n="s13">Base de conhecimento</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
+          <li><a href="demo/index.html#/carrossel_tv"><span class="reg-n">14</span><span class="reg-name" data-i18n="s14">Comunicação nas TVs</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
+        </ol>
+      </div>
+
+      <div class="demo-cta field">
+        <div>
+          <h3 data-i18n="demo_h">Hub de demonstração</h3>
+          <p data-i18n="demo_p">Uma réplica do portal, recriada do zero: a demonstração pública mostra o hub e a tela principal de cada sistema, e os vídeos mostram a versão completa.</p>
+          <p><span data-i18n="demo_tour">Primeira vez no hub?</span> <a href="demo/index.html#/tour" data-i18n="demo_tour_link">Faça o tour guiado de 1 minuto</a></p>
+          <p><span data-i18n="demo_full">Tem interesse na versão completa?</span> <a href="#contato" data-i18n="demo_full_link">Fale comigo</a></p>
+          <p class="demo-note" data-i18n="demo_note">Dados fictícios, navegue à vontade.</p>
+        </div>
+        <a class="btn btn--ink btn--xl" href="demo/index.html#/entrar"><span data-i18n="demo_btn">Entrar no hub de demonstração</span><svg class="ico ico--right" aria-hidden="true" focusable="false"><use href="#i-right"/></svg></a>
+      </div>
+
+      <div class="hub-lower">
+        <figure class="conv" aria-labelledby="conv-h">
+          <h3 class="mini-h" id="conv-h" data-i18n="conv_h">Como os sistemas conversam</h3>
+          <ol class="conv-list">
+            <li class="sys">
+              <a class="node sys-node" href="#p-nf-autonoma"><strong data-i18n="p1n">NF Autônoma</strong><span>PAT-0001</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-down"/></svg></a>
+              <ul class="sys-links">
+                <li class="link"><span class="node link-to link-to--erp"><strong>ERP</strong></span><span class="vh">: </span><span class="link-tag" data-i18n="c1a">Lê a nota e a ordem de compra e lança a nota completa no ERP</span></li>
+                <li class="link"><span class="node link-to"><strong data-i18n="s10">Controle de verba</strong></span><span class="vh">: </span><span class="link-tag" data-i18n="c1b">Confere a verba antes do lançamento</span></li>
+              </ul>
+            </li>
+            <li class="sys">
+              <a class="node sys-node" href="#p-notas-debito"><strong data-i18n="p2n">Nota de Débito</strong><span>PAT-0002</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-down"/></svg></a>
+              <ul class="sys-links">
+                <li class="link"><span class="node link-to link-to--erp"><strong>ERP</strong></span><span class="vh">: </span><span class="link-tag" data-i18n="c2a">Lê o pedido e o adiantamento; emite a nota e grava o vínculo com a nota de venda</span></li>
+              </ul>
+            </li>
+            <li class="sys">
+              <a class="node sys-node" href="#p-auto-crm"><strong data-i18n="p3n">AUTO CRM</strong><span>PAT-0003</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-down"/></svg></a>
+              <ul class="sys-links">
+                <li class="link"><span class="node link-to link-to--erp"><strong>ERP</strong></span><span class="vh">: </span><span class="link-tag" data-i18n="c3a">Espelha vendas e metas; somente leitura</span></li>
+              </ul>
+            </li>
+            <li class="sys">
+              <a class="node sys-node" href="#p-motor-clientes"><strong data-i18n="p4n">Motor de clientes</strong><span>PAT-0004</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-down"/></svg></a>
+              <ul class="sys-links">
+                <li class="link"><span class="node link-to link-to--erp"><strong>ERP</strong></span><span class="vh">: </span><span class="link-tag" data-i18n="c4a">Lê a base de clientes, registra o contato e mede orçamento, compra e perda</span></li>
+                <li class="link"><a class="node link-to" href="#p-auto-crm"><strong data-i18n="p3n">AUTO CRM</strong><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-down"/></svg></a><span class="vh">: </span><span class="link-tag" data-i18n="c4b">Entrega o lead de campanha na caixa de leads novos</span></li>
+              </ul>
+            </li>
+            <li class="sys">
+              <a class="node sys-node" href="#p-pesquisa-clima"><strong data-i18n="p5n">Pesquisa de Clima e RH</strong><span>PAT-0005</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-down"/></svg></a>
+              <ul class="sys-links">
+                <li class="link"><span class="node link-to link-to--erp"><strong>ERP</strong></span><span class="vh">: </span><span class="link-tag" data-i18n="c5a">Consulta a folha de pagamento para a área de RH; somente leitura</span></li>
+              </ul>
+            </li>
+            <li class="sys">
+              <a class="node sys-node" href="#p-carrossel-tv"><strong data-i18n="p6n">Carrossel TV</strong><span>PAT-0006</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-down"/></svg></a>
+              <ul class="sys-links">
+                <li class="link"><span class="node link-to"><strong data-i18n="conv_tvs">TVs da empresa</strong></span><span class="vh">: </span><span class="link-tag" data-i18n="c6a">Entrega o carrossel de cada TV e recebe o sinal de vida; não fala com o ERP</span></li>
+              </ul>
+            </li>
+          </ol>
+          <figcaption data-i18n="conv_cap">Cada cabo é uma conversa que passa pelo hub. Login, permissões, envio de WhatsApp, e-mail e IA generativa são serviços comuns, usados por mais de um sistema, e tudo o que grava no ERP passa por travas de segurança.</figcaption>
+        </figure>
+
+        <figure class="arch" aria-labelledby="arch-h">
+          <h3 class="mini-h" id="arch-h" data-i18n="arch_h">Arquitetura</h3>
+          <ol class="arch-grid">
+            <li class="node node--nav to-r to-d"><strong data-i18n="a_nav">Navegador</strong><span data-i18n="a_nav_d">Computador ou celular, com tema escuro</span></li>
+            <li class="node node--portal to-r to-d"><strong>Portal (Next.js)</strong><span data-i18n="a_portal_d">React e TypeScript; um login só e 3 níveis de acesso</span></li>
+            <li class="node node--api to-r to-d"><strong>API (.NET)</strong><span data-i18n="a_api_d">REST em ASP.NET Core; permissão por projeto e registro das ações críticas</span></li>
+            <li class="node node--db"><strong>SQL Server</strong><span data-i18n="a_db_d">Dados do portal e de cada módulo</span></li>
+            <li class="node node--jobs to-r to-d"><strong data-i18n="a_jobs">Rotinas automáticas</strong><span data-i18n="a_jobs_d">Rodam em segundo plano, dentro da API</span></li>
+            <li class="node node--erp"><strong>ERP</strong><span data-i18n="a_erp_d">Integração com travas de segurança</span></li>
+          </ol>
+          <figcaption data-i18n="arch_cap">O navegador fala com o portal, o portal com a API e a API com o banco. As rotinas automáticas rodam dentro da API, e é por ela que o portal conversa com o ERP.</figcaption>
+        </figure>
+
+        <div>
+          <h3 class="mini-h" data-i18n="tech_h">Tecnologias</h3>
+          <ul class="cables">
+            <li>C#</li><li>.NET</li><li>ASP.NET Core</li><li>Entity Framework Core</li><li>SQL Server</li><li data-i18n="ht_jwt">JWT com cookie HttpOnly</li><li>BCrypt</li><li>Next.js</li><li>React</li><li>TypeScript</li><li>Tailwind CSS</li><li>IIS</li><li>PowerShell</li><li>Git / GitHub</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="projects" id="projetos" aria-labelledby="projetos-h">
+    <div class="wrap">
+      <h2 class="label label--paper" id="projetos-h"><span data-i18n="projects_h">Projetos</span></h2>
+      <p class="sec-p" data-i18n="projects_p">Seis sistemas do hub, do mais difícil para o mais simples. Cada ficha traz o problema, como o sistema funciona, como medi, o resultado e um vídeo do sistema completo, e abre a tela principal e o manual na demonstração.</p>
+
+      <div class="fichas">
+        <!-- PAT-0001 · o ciclo abre a ficha; medições em tabela -->
+        <article class="ficha" id="p-nf-autonoma" aria-labelledby="p1-h">
+          <div class="ficha-plate">
+            <div class="pl">
+              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Patrimônio</span><span class="rivet"></span></div>
+              <div class="bc" data-code="PAT-0001"></div>
+              <p class="bc-num">PAT-0001</p>
+              <p class="tag-state"><span data-i18n="st_prod">Em produção</span></p>
+            </div>
+          </div>
+          <div class="ficha-body">
+            <header>
+              <h3 class="ficha-title" id="p1-h" data-i18n="p1n">NF Autônoma</h3>
+              <p class="ficha-line" data-i18n="p1l">A inteligência que lança no ERP as notas fiscais de entrada e os CT-es da empresa, do XML às contas a pagar. Ela decide em camadas, simula antes de gravar, mede o próprio acerto e, com o modo automático ligado, faz tudo sozinha.</p>
+            </header>
+            <div>
+              <h4 class="mini-h" data-i18n="lbl_cycle">Ciclo completo</h4>
+              <ol class="flow flow--lg">
+                <li><span class="flow-n" aria-hidden="true">01</span><span data-i18n="n1_f1">XML da nota e do frete</span></li>
+                <li><span class="flow-n" aria-hidden="true">02</span><span data-i18n="n1_f2">Decisão em camadas</span></li>
+                <li><span class="flow-n" aria-hidden="true">03</span><span data-i18n="n1_f3">Simulação, sem gravar</span></li>
+                <li><span class="flow-n" aria-hidden="true">04</span><span data-i18n="n1_f4">Verba e ordem de compra</span></li>
+                <li><span class="flow-n" aria-hidden="true">05</span><span data-i18n="n1_f5">Lançamento no ERP</span></li>
+                <li><span class="flow-n" aria-hidden="true">06</span><span data-i18n="n1_f6">Placar de acerto</span></li>
+              </ol>
+            </div>
+            <dl class="spec">
+              <div><dt data-i18n="lbl_sit">Situação</dt><dd data-i18n="n1_sit">Lançar uma nota de entrada mexe ao mesmo tempo em estoque, impostos, livro fiscal, contas a pagar, ordem de compra e orçamento, e cada fornecedor tem o seu padrão de classificação e de prazo. Esse conhecimento ficava com quem digitava, não em regra de sistema. É o projeto mais difícil que já conduzi: automatizar sem tirar o controle da equipe.</dd></div>
+              <div><dt data-i18n="lbl_did">O que fiz</dt><dd><ol class="did">
+                <li data-i18n="n1_d1">Levantei os requisitos com as áreas Fiscal e de Compras e transformei as respostas da área fiscal em regras escritas. Cada regra foi medida contra o lançamento da equipe antes de ir para o código.</li>
+                <li data-i18n="n1_d2">Fiz o robô ler o XML da nota e do frete junto com a ordem de compra e montar o caso inteiro antes de decidir.</li>
+                <li data-i18n="n1_d3">Criei a simulação: o plano completo do lançamento, com cada bloqueio explicado, sem gravar nada.</li>
+                <li data-i18n="n1_d4">Desenvolvi a gravação no ERP no modelo tudo ou nada: o lançamento completo entra de uma vez e, se um passo falha, nada é gravado.</li>
+                <li data-i18n="n1_d5">Criei o acompanhamento depois do lançamento: o que a equipe corrige volta para o sistema, e as regras melhoram com o uso.</li>
+                <li data-i18n="n1_d6">Implantei de forma gradual, validando cada etapa contra o trabalho da equipe antes de liberar a gravação.</li>
+              </ol></dd></div>
+              <div><dt data-i18n="lbl_layers">Decisão em camadas</dt><dd data-i18n="n1_layers">Primeiro valem as regras definidas pela área fiscal, decididas por código. A IA generativa só entra onde a regra não alcança, e sempre é conferida antes de valer. Na dúvida, o robô não lança: a nota vai para a fila da equipe com o motivo escrito.</dd></div>
+              <div><dt data-i18n="lbl_engine">Motor de regras</dt><dd data-i18n="n1_engine">O motor de regras é reaproveitável e aprende com as correções da equipe. São centenas de regras testadas em campo, e a demonstração mostra algumas genéricas.</dd></div>
+              <div><dt data-i18n="lbl_modes">Modos de operação</dt><dd><ol class="did">
+                <li><strong data-i18n="n1_o1k">Assistido.</strong> <span data-i18n="n1_o1">O robô decide, simula e prepara o lançamento, e uma pessoa confirma.</span></li>
+                <li><strong data-i18n="n1_o2k">Automático com limites.</strong> <span data-i18n="n1_o2">O robô lança sozinho o que passa em todas as travas, dentro dos limites que a empresa define. O interruptor do modo é auditado.</span></li>
+              </ol><p class="dd-p" data-i18n="n1_o3">Uma implantação começa no modo assistido e passa ao automático conforme a confiança medida cresce.</p></dd></div>
+              <div><dt data-i18n="lbl_how">Como medi</dt><dd data-i18n="n1_how">Medi cada percentual comparando a decisão do robô com o lançamento feito por uma pessoa, em notas que ele não tinha visto.</dd></div>
+              <div><dt data-i18n="lbl_res">Resultado</dt><dd class="res" data-i18n="n1_res">Em produção: com o automático ligado, ela lança sozinha o que passa limpo, e só o que não passa nas travas vai para a fila da equipe, com a explicação em linguagem simples. Nas decisões tomadas por regra, que são a maior parte do volume, o acerto medido ficou acima de 97%.</dd></div>
+            </dl>
+            <div>
+              <h4 class="mini-h" data-i18n="lbl_meas">Medições</h4>
+              <dl class="spec spec--num">
+                <div><dt data-i18n="n1_m1v">97,9%</dt><dd data-i18n="n1_m1">de acerto nas decisões tomadas por regra, que são a maior parte do volume. Medição de 30 dias.</dd></div>
+                <div><dt data-i18n="n1_m2v">99,3%</dt><dd data-i18n="n1_m2">de acerto nos fornecedores com histórico consolidado.</dd></div>
+                <div><dt data-i18n="n1_m3v">98,1%</dt><dd data-i18n="n1_m3">de acerto em validação com notas que o robô não tinha visto.</dd></div>
+                <div><dt data-i18n="n1_m4v">97 a 98%</dt><dd data-i18n="n1_m4">de acerto nos fretes em que o sistema decide, medido antes da entrada em produção.</dd></div>
+                <div><dt data-i18n="n1_m5v">38 dias</dt><dd data-i18n="n1_m5">do início do projeto ao primeiro lançamento em produção.</dd></div>
+              </dl>
+            </div>
+            <div>
+              <h4 class="mini-h" data-i18n="lbl_tech">Tecnologias</h4>
+              <ul class="cables">
+                <li>C# / .NET</li><li data-i18n="n1_t2">ASP.NET Core (serviços em segundo plano)</li><li data-i18n="n1_t3">SQL Server / T-SQL (transações)</li><li data-i18n="n1_t4">API de IA generativa</li><li>Next.js / React / TypeScript</li><li data-i18n="n1_t6">XML de NF-e e CT-e</li>
+              </ul>
+            </div>
+            <figure class="reel">
+              <figcaption data-i18n="vid_cap">O sistema completo em 20 segundos</figcaption>
+              <video controls muted loop playsinline preload="none" width="1280" height="720" poster="assets/videos/nf_autonoma.jpg"><source src="assets/videos/nf_autonoma.mp4" type="video/mp4"><source src="assets/videos/nf_autonoma.webm" type="video/webm"></video>
+            </figure>
+            <div class="ficha-links">
+              <a class="btn btn--sm" href="demo/index.html#/nf_autonoma"><span data-i18n="open_sys">Abrir o sistema</span><svg class="ico ico--right" aria-hidden="true" focusable="false"><use href="#i-right"/></svg></a>
+              <a class="ext" href="demo/index.html#/nf_autonoma/manual"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-doc"/></svg><span data-i18n="read_manual">Ler o manual</span></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- PAT-0002 · plaqueta à direita, ficha em duas colunas, antes e depois no fim -->
+        <article class="ficha ficha--r" id="p-notas-debito" aria-labelledby="p2-h">
+          <div class="ficha-plate">
+            <div class="pl">
+              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Patrimônio</span><span class="rivet"></span></div>
+              <div class="bc" data-code="PAT-0002"></div>
+              <p class="bc-num">PAT-0002</p>
+              <p class="tag-state"><span data-i18n="st_prod">Em produção</span></p>
+            </div>
+          </div>
+          <div class="ficha-body">
+            <header>
+              <h3 class="ficha-title" id="p2-h" data-i18n="p2n">Nota de Débito</h3>
+              <p class="ficha-line" data-i18n="p2l">O ERP não emitia a Nota de Débito a partir do pedido nem a vinculava à nota de venda: cada nota era digitada à mão. Em 9 dias entreguei a automação, e desde agosto de 2026 a empresa emite e vincula sem digitação, logo no início da exigência da Reforma Tributária.</p>
+            </header>
+            <dl class="spec spec--split">
+              <div class="sp-sit"><dt data-i18n="lbl_sit">Situação</dt><dd data-i18n="n2_sit">Com a Reforma Tributária, cada pagamento antecipado de cliente passou a exigir uma Nota de Débito com os itens do pedido, citada pela nota de venda antes da transmissão à SEFAZ. A nota era digitada item a item e o vínculo com a venda era informado à mão. A automação envolvia Fiscal, Financeiro e Expedição e precisava rodar dentro do ERP em produção, sem atrapalhar o faturamento.</dd></div>
+              <div class="sp-did"><dt data-i18n="lbl_did">O que fiz</dt><dd><ol class="did">
+                <li data-i18n="n2_d1">Levantei os requisitos com Fiscal, Financeiro e Expedição e construí sozinho a automação.</li>
+                <li data-i18n="n2_d2">Fiz o fluxo montar a Nota de Débito a partir do pedido e do adiantamento do cliente, já com a numeração oficial do ERP.</li>
+                <li data-i18n="n2_d3">Automatizei o envio à SEFAZ pelo próprio ERP, que continua assinando e transmitindo. O pedido só avança depois da autorização.</li>
+                <li data-i18n="n2_d4">Fiz o vínculo com a nota de venda ser gravado sozinho, a tempo da transmissão.</li>
+                <li data-i18n="n2_d5">Validei tudo antes de ligar e deixei uma chave para desligar a automação sem precisar de versão nova.</li>
+                <li data-i18n="n2_d6">Montei a conferência nota a nota e os avisos por e-mail, e reescrevi as consultas: a tela de conferência foi de 25 s para 165 ms, e a rotina do vínculo passou a fazer cerca de 18 vezes menos leituras no banco.</li>
+              </ol></dd></div>
+              <div class="sp-how"><dt data-i18n="lbl_how">Como medi</dt><dd data-i18n="n2_how">A tela de conferência mostra, nota por nota, o que está vinculado, o que aguarda a venda e o que atrasou. Medi o tempo dessa tela e as leituras da rotina do vínculo antes e depois da reescrita. Antes de aplicar a consulta nova, provei em modo só leitura que ela devolvia exatamente as mesmas linhas da antiga.</dd></div>
+              <div class="sp-res"><dt data-i18n="lbl_res">Resultado</dt><dd class="res" data-i18n="n2_res">Foram 9 dias do pedido da área fiscal à primeira nota autorizada pela SEFAZ. Desde agosto de 2026 a empresa emite e vincula sem digitação: a equipe confere em vez de digitar, e as exceções continuam com as pessoas.</dd></div>
+            </dl>
+            <div>
+              <h4 class="mini-h" data-i18n="lbl_ba">Antes e depois</h4>
+              <div class="ba">
+                <div class="ba-item"><p class="ba-k" data-i18n="n2_b1k">Abertura da tela de conferência</p><p class="ba-v"><del><span class="vh" data-i18n="ba_before">Antes:</span> 25 s</del> <ins><span class="vh" data-i18n="ba_after">Depois:</span> 165 ms</ins></p></div>
+              </div>
+            </div>
+            <div>
+              <h4 class="mini-h" data-i18n="lbl_flow">Fluxo</h4>
+              <ol class="flow">
+                <li><span class="flow-n" aria-hidden="true">01</span><span data-i18n="n2_f1">Pagamento antecipado do pedido</span></li>
+                <li><span class="flow-n" aria-hidden="true">02</span><span data-i18n="n2_f2">Nota de Débito criada no ERP</span></li>
+                <li><span class="flow-n" aria-hidden="true">03</span><span data-i18n="n2_f3">Envio e autorização da SEFAZ</span></li>
+                <li><span class="flow-n" aria-hidden="true">04</span><span data-i18n="n2_f4">Pedido avança</span></li>
+                <li><span class="flow-n" aria-hidden="true">05</span><span data-i18n="n2_f5">Vínculo com a nota de venda</span></li>
+                <li><span class="flow-n" aria-hidden="true">06</span><span data-i18n="n2_f6">Conferência nota a nota</span></li>
+              </ol>
+            </div>
+            <div>
+              <h4 class="mini-h" data-i18n="lbl_tech">Tecnologias</h4>
+              <ul class="cables">
+                <li data-i18n="n2_t1">C# / .NET (serviços em segundo plano)</li><li data-i18n="n2_t2">SQL Server (T-SQL, procedures, SQL Agent)</li><li data-i18n="n2_t3">Integração com ERP</li><li>NF-e / SEFAZ (XML)</li><li data-i18n="n2_t5">Automação de rotinas no ERP</li><li>Next.js / React / TypeScript</li><li data-i18n="n2_t6">E-mail HTML</li>
+              </ul>
+            </div>
+            <figure class="reel">
+              <figcaption data-i18n="vid_cap">O sistema completo em 20 segundos</figcaption>
+              <video controls muted loop playsinline preload="none" width="1280" height="720" poster="assets/videos/nota_debito.jpg"><source src="assets/videos/nota_debito.mp4" type="video/mp4"><source src="assets/videos/nota_debito.webm" type="video/webm"></video>
+            </figure>
+            <div class="ficha-links">
+              <a class="btn btn--sm" href="demo/index.html#/nota_debito"><span data-i18n="open_sys">Abrir o sistema</span><svg class="ico ico--right" aria-hidden="true" focusable="false"><use href="#i-right"/></svg></a>
+              <a class="ext" href="demo/index.html#/nota_debito/manual"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-doc"/></svg><span data-i18n="read_manual">Ler o manual</span></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- PAT-0003 · o que o sistema tem abre a ficha, em duas colunas; sem antes e depois -->
+        <article class="ficha" id="p-auto-crm" aria-labelledby="p3-h">
+          <div class="ficha-plate">
+            <div class="pl">
+              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Patrimônio</span><span class="rivet"></span></div>
+              <div class="bc" data-code="PAT-0003"></div>
+              <p class="bc-num">PAT-0003</p>
+              <p class="tag-state"><span data-i18n="st_prod">Em produção</span></p>
+            </div>
+          </div>
+          <div class="ficha-body">
+            <header>
+              <h3 class="ficha-title" id="p3-h" data-i18n="p3n">AUTO CRM</h3>
+              <p class="ficha-line" data-i18n="p3l">Um CRM completo para empresas, gerenciável e preparado para vários setores: a gestão configura funil, cadências e metas na tela, sem programar. Carteira, prospecção e disparo em massa ficam num só sistema, ligado ao ERP, ao e-mail e ao WhatsApp.</p>
+            </header>
+            <div>
+              <h4 class="mini-h" data-i18n="lbl_has">O que tem</h4>
+              <dl class="spec spec--split">
+                <div><dt data-i18n="n3_k1">Kanban</dt><dd data-i18n="n3_v1">Cada vendedor tem o seu funil, com colunas e metas que a gestão configura.</dd></div>
+                <div><dt data-i18n="n3_k2">Cadências</dt><dd data-i18n="n3_v2">Réguas editáveis de prospecção e de recompra; as tarefas do dia aparecem prontas para cada vendedor.</dd></div>
+                <div><dt data-i18n="n3_k3">Prospects e nutrição</dt><dd data-i18n="n3_v3">O lead novo entra na régua de prospecção, e quem ainda não está pronto para comprar segue em nutrição.</dd></div>
+                <div><dt data-i18n="n3_k4">Disparo em massa</dt><dd data-i18n="n3_v4">E-mail e WhatsApp para vários contatos de uma vez, com modelos de mensagem e histórico registrado.</dd></div>
+                <div><dt data-i18n="n3_k5">Metas</dt><dd data-i18n="n3_v5">Metas por pessoa medidas no próprio sistema, ao lado do espelho dos números do ERP, com a origem de cada indicador à vista.</dd></div>
+                <div><dt data-i18n="n3_k6">IA generativa</dt><dd data-i18n="n3_v6">Escreve resumos do cliente e mensagens de acompanhamento em três idiomas.</dd></div>
+                <div><dt data-i18n="n3_k7">Mapa por país</dt><dd data-i18n="n3_v7">Um globo navegável mostra cada mercado, com as linhas de produto, os clientes e os prospects do país.</dd></div>
+              </dl>
+            </div>
+            <dl class="spec">
+              <div><dt data-i18n="lbl_sit">Situação</dt><dd data-i18n="n3_sit">A carteira, o histórico de contatos e as observações dos clientes viviam em planilhas, uma por vendedor. Não havia relógio de retorno, e o disparo de e-mail e de WhatsApp era feito um a um. O sistema nasceu na equipe de exportação, por isso fala português, espanhol e inglês.</dd></div>
+              <div><dt data-i18n="lbl_did">O que fiz</dt><dd><ol class="did">
+                <li data-i18n="n3_d1">Levantei com a equipe comercial como a carteira e a prospecção funcionavam e projetei e construí sozinho o sistema, do banco de dados à tela.</li>
+                <li data-i18n="n3_d2">Deixei a gestão no controle: colunas, metas, cadências, etiquetas e modelos de mensagem são configurados na tela, sem programar.</li>
+                <li data-i18n="n3_d3">Troquei a memória por regra: o sistema lembra o próximo contato de cada cliente e não deixa ninguém esquecido.</li>
+                <li data-i18n="n3_d4">Liguei o sistema ao ERP por um espelho local: ele lê vendas e metas por sincronização e nunca grava no ERP.</li>
+                <li data-i18n="n3_d5">Integrei o envio pelo e-mail de cada vendedor e pela plataforma de WhatsApp, e a IA generativa com roteiros editáveis na própria tela.</li>
+              </ol></dd></div>
+              <div><dt data-i18n="p4n">Motor de clientes</dt><dd data-i18n="n3_talk">São sistemas separados que conversam: o lead de campanha captado pelo motor cai na caixa de leads novos do AUTO CRM, e o cliente reativado volta para o vendedor da carteira.</dd></div>
+              <div><dt data-i18n="lbl_size">Tamanho</dt><dd data-i18n="n3_size">137 rotas de API e 30 tabelas próprias.</dd></div>
+              <div><dt data-i18n="lbl_res">Resultado</dt><dd class="res" data-i18n="n3_res">Em produção: a carteira, o histórico e as tarefas do dia de cada vendedor ficam num só lugar, e a contagem de contatos e orçamentos da equipe passou a ser feita pelo próprio sistema.</dd></div>
+            </dl>
+            <div>
+              <h4 class="mini-h" data-i18n="lbl_flow">Fluxo</h4>
+              <ol class="flow">
+                <li><span class="flow-n" aria-hidden="true">01</span><span data-i18n="n3_f1">Lead novo na caixa do dia</span></li>
+                <li><span class="flow-n" aria-hidden="true">02</span><span data-i18n="n3_f2">Prospecção com cadência</span></li>
+                <li><span class="flow-n" aria-hidden="true">03</span><span data-i18n="n3_f3">Nutrição ou conversão</span></li>
+                <li><span class="flow-n" aria-hidden="true">04</span><span data-i18n="n3_f4">Carteira e funil</span></li>
+                <li><span class="flow-n" aria-hidden="true">05</span><span data-i18n="n3_f5">Pedido fechado</span></li>
+                <li><span class="flow-n" aria-hidden="true">06</span><span data-i18n="n3_f6">Novo ciclo de recompra</span></li>
+              </ol>
+            </div>
+            <div>
+              <h4 class="mini-h" data-i18n="lbl_tech">Tecnologias</h4>
+              <ul class="cables">
+                <li>C# / .NET</li><li>ASP.NET Core</li><li>Entity Framework Core</li><li>SQL Server</li><li>Next.js / React / TypeScript</li><li>Tailwind CSS</li><li data-i18n="n3_t7">API da plataforma de WhatsApp</li><li data-i18n="n3_t8">E-mail por vendedor (SMTP)</li><li data-i18n="n3_t9">API de IA generativa</li>
+              </ul>
+            </div>
+            <figure class="reel">
+              <figcaption data-i18n="vid_cap">O sistema completo em 20 segundos</figcaption>
+              <video controls muted loop playsinline preload="none" width="1280" height="720" poster="assets/videos/exportacao.jpg"><source src="assets/videos/exportacao.mp4" type="video/mp4"><source src="assets/videos/exportacao.webm" type="video/webm"></video>
+            </figure>
+            <div class="ficha-links">
+              <a class="btn btn--sm" href="demo/index.html#/exportacao"><span data-i18n="open_sys">Abrir o sistema</span><svg class="ico ico--right" aria-hidden="true" focusable="false"><use href="#i-right"/></svg></a>
+              <a class="ext" href="demo/index.html#/exportacao/manual"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-doc"/></svg><span data-i18n="read_manual">Ler o manual</span></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- PAT-0004 · plaqueta à direita, a medição abre a ficha -->
+        <article class="ficha ficha--r" id="p-motor-clientes" aria-labelledby="p4-h">
+          <div class="ficha-plate">
+            <div class="pl">
+              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Patrimônio</span><span class="rivet"></span></div>
+              <div class="bc" data-code="PAT-0004"></div>
+              <p class="bc-num">PAT-0004</p>
+              <p class="tag-state"><span data-i18n="st_prod">Em produção</span></p>
+            </div>
+          </div>
+          <div class="ficha-body">
+            <header>
+              <h3 class="ficha-title" id="p4-h" data-i18n="p4n">Motor de clientes</h3>
+              <p class="ficha-line" data-i18n="p4l">O motor que lê a base de clientes no ERP, decide quem chamar de volta, envia a mensagem pela plataforma de WhatsApp e mede resposta, orçamento e compra. Para quem ainda não é cliente, seleciona prospects na base pública de CNPJ.</p>
+            </header>
+            <div>
+              <h4 class="mini-h" data-i18n="lbl_ba">Antes e depois</h4>
+              <div class="ba ba--lead">
+                <div class="ba-item"><p class="ba-k" data-i18n="n4_b1k">Etapa mais pesada do painel de resultados</p><p class="ba-v"><del><span class="vh" data-i18n="ba_before">Antes:</span> <span data-i18n="n4_b1a">mais de 900 s</span></del> <ins><span class="vh" data-i18n="ba_after">Depois:</span> <span data-i18n="n4_b1n">cerca de 18 s</span></ins></p></div>
+                <div class="ba-item"><p class="ba-k" data-i18n="n4_b2k">Chamadas à IA na reexecução de um incidente</p><p class="ba-v"><del><span class="vh" data-i18n="ba_before">Antes:</span> 460</del> <ins><span class="vh" data-i18n="ba_after">Depois:</span> 31</ins></p></div>
+              </div>
+            </div>
+            <dl class="spec">
+              <div><dt data-i18n="lbl_sit">Situação</dt><dd data-i18n="n4_sit">A reativação de clientes pelo WhatsApp dependia de uma ferramenta terceirizada, com a regra de quem recebia a mensagem fechada dentro dela e sem medir o retorno: quem respondeu, quem orçou, quem comprou. Projetei e construí sozinho um motor próprio dentro do hub, com a regra sob controle da empresa.</dd></div>
+              <div><dt data-i18n="n4_k1">Análise da base</dt><dd data-i18n="n4_v1">Todo dia, o motor analisa a base de clientes do ERP e monta a fila de quem chamar de volta, por ordem de prioridade. O critério é da empresa, fica documentado e pode ser ajustado na tela, sem IA nessa etapa.</dd></div>
+              <div><dt data-i18n="n4_k2">Disparo e retorno</dt><dd data-i18n="n4_v2">A mensagem sai pelo WhatsApp oficial e a resposta volta para o hub. Orçamento, compra e perda são medidos contra o ERP, e a negociação segue com o vendedor da carteira.</dd></div>
+              <div><dt data-i18n="n4_k3">Prospecção</dt><dd><span data-i18n="n4_v3">Para quem ainda não é cliente, o motor busca prospects nos dados abertos de CNPJ da Receita Federal, com mais de 28 milhões de empresas ativas, filtrados pelo perfil de cliente que a empresa procura.</span> <span class="stamp" data-i18n="st_impl">Em implantação</span></dd></div>
+              <div><dt data-i18n="n4_k4">Atendimento com IA</dt><dd data-i18n="n4_v4">Na integração de atendimento com IA, que já existia e passei a manter, criei uma trava que percebe quando a IA entra em loop e passa a conversa para uma pessoa. Na reexecução de um incidente real, as chamadas à IA caíram de 460 para 31. Também levei para uma tela do hub a lista que liga cada vendedor ao seu atendente.</dd></div>
+              <div><dt data-i18n="p3n">AUTO CRM</dt><dd data-i18n="n4_talk">São sistemas separados que conversam: o lead de campanha captado pelo motor cai na caixa de leads novos do AUTO CRM, e o cliente reativado volta para o vendedor da carteira.</dd></div>
+              <div><dt data-i18n="lbl_how">Como medi</dt><dd data-i18n="n4_how">Antes de desligar a ferramenta antiga, rodei o motor ao lado dela e comparei os clientes escolhidos, um a um. No painel, medi a etapa mais pesada antes e depois da reescrita e conferi que o resultado era idêntico. A trava anti-loop foi calibrada reexecutando o histórico real de conversas.</dd></div>
+              <div><dt data-i18n="lbl_res">Resultado</dt><dd class="res" data-i18n="n4_res">A ferramenta terceirizada foi desligada e a reativação passou a rodar dentro do hub, e a negociação continua com o vendedor da carteira. O retorno deixou de ser estimado e passou a ser medido contra o ERP, e a etapa mais pesada do painel caiu de mais de 900 s para cerca de 18 s, com resultado idêntico.</dd></div>
+            </dl>
+            <div>
+              <h4 class="mini-h" data-i18n="lbl_flow">Fluxo</h4>
+              <ol class="flow">
+                <li><span class="flow-n" aria-hidden="true">01</span><span data-i18n="n4_f1">Base de clientes no ERP</span></li>
+                <li><span class="flow-n" aria-hidden="true">02</span><span data-i18n="n4_f2">Qualificação por prioridade</span></li>
+                <li><span class="flow-n" aria-hidden="true">03</span><span data-i18n="n4_f3">Fila do dia</span></li>
+                <li><span class="flow-n" aria-hidden="true">04</span><span data-i18n="n4_f4">Envio pela plataforma de WhatsApp</span></li>
+                <li><span class="flow-n" aria-hidden="true">05</span><span data-i18n="n4_f5">Resposta por webhook</span></li>
+                <li><span class="flow-n" aria-hidden="true">06</span><span data-i18n="n4_f6">Orçamento, compra ou perda lidos do ERP</span></li>
+              </ol>
+            </div>
+            <div>
+              <h4 class="mini-h" data-i18n="lbl_tech">Tecnologias</h4>
+              <ul class="cables">
+                <li data-i18n="n4_t1">C# / .NET (serviços em segundo plano)</li><li>SQL Server / T-SQL</li><li data-i18n="n4_t3">Integração com ERP</li><li data-i18n="n4_t4">API da plataforma de WhatsApp</li><li>Webhook</li><li>DuckDB</li><li>Parquet (ZSTD)</li><li data-i18n="n4_t8">Dados abertos da Receita Federal</li><li data-i18n="n4_t9">Python (trava anti-loop)</li><li>Next.js / React / TypeScript</li>
+              </ul>
+            </div>
+            <figure class="reel">
+              <figcaption data-i18n="vid_cap">O sistema completo em 20 segundos</figcaption>
+              <video controls muted loop playsinline preload="none" width="1280" height="720" poster="assets/videos/disparos.jpg"><source src="assets/videos/disparos.mp4" type="video/mp4"><source src="assets/videos/disparos.webm" type="video/webm"></video>
+            </figure>
+            <div class="ficha-links">
+              <a class="btn btn--sm" href="demo/index.html#/disparos"><span data-i18n="open_sys">Abrir o sistema</span><svg class="ico ico--right" aria-hidden="true" focusable="false"><use href="#i-right"/></svg></a>
+              <a class="ext" href="demo/index.html#/disparos/manual"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-doc"/></svg><span data-i18n="read_manual">Ler o manual</span></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- PAT-0005 · a situação abre a ficha, o ciclo fecha; duas metades lado a lado: pesquisa anônima e RH identificado -->
+        <article class="ficha" id="p-pesquisa-clima" aria-labelledby="p5-h">
+          <div class="ficha-plate">
+            <div class="pl">
+              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Patrimônio</span><span class="rivet"></span></div>
+              <div class="bc" data-code="PAT-0005"></div>
+              <p class="bc-num">PAT-0005</p>
+              <p class="tag-state"><span data-i18n="st_prod">Em produção</span></p>
+            </div>
+          </div>
+          <div class="ficha-body">
+            <header>
+              <h3 class="ficha-title" id="p5-h" data-i18n="p5n">Pesquisa de Clima e RH</h3>
+              <p class="ficha-line" data-i18n="p5l">Pesquisas internas em que o setor monta o questionário, distribui por disparo ou link público e lê o resultado pronto, com respostas anônimas. Ao lado, a área de RH para as entrevistas de desligamento, com registro por pessoa.</p>
+            </header>
+            <dl class="spec spec--split">
+              <div class="sp-sit"><dt data-i18n="lbl_sit">Situação</dt><dd data-i18n="n5_sit">A pesquisa de clima vivia em formulário externo e planilha, e a apresentação à diretoria era montada à mão. No RH, a entrevista de desligamento era feita em papel e digitada depois. Projetei e construí sozinho um módulo com duas metades de regras opostas: a pesquisa é anônima, o RH é identificado.</dd></div>
+              <div><dt data-i18n="n5_k1">Pesquisas, com respostas anônimas</dt><dd><ul class="feat">
+                <li data-i18n="n5_a1">Questionário montado pelo próprio setor, com seções, escala, matriz, múltipla escolha e texto livre.</li>
+                <li data-i18n="n5_a2">Distribuição por disparo pela plataforma de WhatsApp ou por link público. A resposta não fica ligada ao nome de quem respondeu.</li>
+                <li data-i18n="n5_a3">Relatório pronto, com favorabilidade por dimensão, eNPS e comparação com pesquisas anteriores.</li>
+                <li data-i18n="n5_a4">Apresentação montada a partir do resultado e exibida no próprio portal, ocultando perguntas e escolhendo os comentários que entram.</li>
+                <li data-i18n="n5_a5">Análise do texto livre com IA generativa, sem identificar quem respondeu.</li>
+              </ul></dd></div>
+              <div><dt data-i18n="n5_k2">Área de RH, com registro identificado</dt><dd><ul class="feat">
+                <li data-i18n="n5_r1">Entrevista de desligamento registrada por pessoa, com os dados lidos da folha de pagamento, somente leitura.</li>
+                <li data-i18n="n5_r2">Registro de ciência assinado na tela, com selo de integridade e trilha de auditoria.</li>
+                <li data-i18n="n5_r3">Dashboard com tipo e motivo do desligamento, setor e tempo de casa, cruzado com a folha.</li>
+                <li class="is-next"><span data-i18n="n5_r4">Acompanhamento de 30 e 90 dias.</span> <span class="stamp" data-i18n="st_impl">Em implantação</span></li>
+                <li class="is-next"><span data-i18n="n5_r5">Análise por IA das entrevistas.</span> <span class="stamp" data-i18n="st_impl">Em implantação</span></li>
+              </ul></dd></div>
+              <div><dt data-i18n="lbl_how">Como medi</dt><dd data-i18n="n5_how">Medi o tempo da chamada de análise por IA antes e depois de enxugá-la. Depois passei a análise para segundo plano e gravei o resultado, para não repetir a chamada a cada abertura do relatório.</dd></div>
+              <div><dt data-i18n="lbl_res">Resultado</dt><dd class="res" data-i18n="n5_res">Em produção: o setor monta a pesquisa, distribui e apresenta o resultado sem sair do portal, e o RH registra cada entrevista de desligamento com histórico e indicadores. O conteúdo das perguntas e o modelo da entrevista vieram do RH.</dd></div>
+            </dl>
+            <div>
+              <h4 class="mini-h" data-i18n="lbl_ba">Antes e depois</h4>
+              <div class="ba">
+                <div class="ba-item"><p class="ba-k" data-i18n="n5_b1k">Chamada de análise por IA</p><p class="ba-v"><del><span class="vh" data-i18n="ba_before">Antes:</span> <span data-i18n="n5_b1a">25 a 37 s</span></del> <ins><span class="vh" data-i18n="ba_after">Depois:</span> <span data-i18n="n5_b1n">menos de 15 s</span></ins></p></div>
+              </div>
+            </div>
+            <div>
+              <h4 class="mini-h" data-i18n="lbl_flow">Fluxo</h4>
+              <ol class="flow">
+                <li><span class="flow-n" aria-hidden="true">01</span><span data-i18n="n5_f1">Questionário em seções</span></li>
+                <li><span class="flow-n" aria-hidden="true">02</span><span data-i18n="n5_f2">Disparo ou link público</span></li>
+                <li><span class="flow-n" aria-hidden="true">03</span><span data-i18n="n5_f3">Respostas anônimas</span></li>
+                <li><span class="flow-n" aria-hidden="true">04</span><span data-i18n="n5_f4">Relatório com eNPS</span></li>
+                <li><span class="flow-n" aria-hidden="true">05</span><span data-i18n="n5_f5">Análise por IA</span></li>
+                <li><span class="flow-n" aria-hidden="true">06</span><span data-i18n="n5_f6">Apresentação no portal</span></li>
+              </ol>
+            </div>
+            <div>
+              <h4 class="mini-h" data-i18n="lbl_tech">Tecnologias</h4>
+              <ul class="cables">
+                <li>C# / .NET</li><li>ASP.NET Core</li><li>SQL Server</li><li>Next.js / React / TypeScript</li><li>ECharts</li><li data-i18n="n5_t6">API de IA generativa</li><li data-i18n="n5_t7">API da plataforma de WhatsApp</li><li data-i18n="n5_t8">SHA-256 (selo de integridade)</li><li data-i18n="n5_t9">Exportação para PowerPoint e Excel</li>
+              </ul>
+            </div>
+            <figure class="reel">
+              <figcaption data-i18n="vid_cap">O sistema completo em 20 segundos</figcaption>
+              <video controls muted loop playsinline preload="none" width="1280" height="720" poster="assets/videos/pesquisa_clima.jpg"><source src="assets/videos/pesquisa_clima.mp4" type="video/mp4"><source src="assets/videos/pesquisa_clima.webm" type="video/webm"></video>
+            </figure>
+            <div class="ficha-links">
+              <a class="btn btn--sm" href="demo/index.html#/pesquisa_clima"><span data-i18n="open_sys">Abrir o sistema</span><svg class="ico ico--right" aria-hidden="true" focusable="false"><use href="#i-right"/></svg></a>
+              <a class="ext" href="demo/index.html#/pesquisa_clima/manual"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-doc"/></svg><span data-i18n="read_manual">Ler o manual</span></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- PAT-0006 · plaqueta à direita, as medições abrem a ficha -->
+        <article class="ficha ficha--r" id="p-carrossel-tv" aria-labelledby="p6-h">
+          <div class="ficha-plate">
+            <div class="pl">
+              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Patrimônio</span><span class="rivet"></span></div>
+              <div class="bc" data-code="PAT-0006"></div>
+              <p class="bc-num">PAT-0006</p>
+              <p class="tag-state"><span data-i18n="st_prod">Em produção</span></p>
+            </div>
+          </div>
+          <div class="ficha-body">
+            <header>
+              <h3 class="ficha-title" id="p6-h" data-i18n="p6n">Carrossel TV</h3>
+              <p class="ficha-line" data-i18n="p6l">A comunicação interna nas TVs da empresa, administrada de dentro do hub. Cada TV toca sozinha o carrossel do seu setor e avisa quando sai do ar.</p>
+            </header>
+            <div>
+              <h4 class="mini-h" data-i18n="lbl_meas">Medições</h4>
+              <dl class="spec spec--num">
+                <div><dt data-i18n="n6_m1v">40 s</dt><dd data-i18n="n6_m1">de erros seguidos na alimentação da TV, em bancada, e o carrossel seguiu girando.</dd></div>
+                <div><dt data-i18n="n6_m2v">18 s</dt><dd data-i18n="n6_m2">para a TV aplicar sozinha uma lista nova, no mesmo teste.</dd></div>
+                <div><dt data-i18n="n6_m3v">6 versões</dt><dd data-i18n="n6_m3">em seis dias, da primeira versão no hub à versão com som nos vídeos.</dd></div>
+              </dl>
+            </div>
+            <dl class="spec spec--split">
+              <div class="sp-sit"><dt data-i18n="lbl_sit">Situação</dt><dd data-i18n="n6_sit">As TVs da empresa exibem a comunicação interna. Criei o aplicativo das TVs e depois o levei para dentro do hub, preparando as TVs para rodarem sem ninguém por perto.</dd></div>
+              <div class="sp-did"><dt data-i18n="lbl_did">O que fiz</dt><dd><ol class="did">
+                <li data-i18n="n6_d1">Reescrevi a solução dentro do hub, com o login e as permissões do portal.</li>
+                <li data-i18n="n6_d2">Criei a biblioteca de mídias: imagens e vídeos entram uma vez e servem a vários carrosséis, cada um com a sua ordem.</li>
+                <li data-i18n="n6_d3">Criei as mídias temporárias: o comunicado com prazo sai de todas as TVs e é apagado sozinho na data.</li>
+                <li data-i18n="n6_d4">Adicionei a rádio on-line por carrossel, que pausa durante os vídeos e fora do horário.</li>
+                <li data-i18n="n6_d5">Criei o vigia: ele acompanha o sinal de vida de cada TV, confirma a falta de sinal antes de avisar por e-mail e avisa de novo quando a TV volta.</li>
+                <li data-i18n="n6_d6">Dei ao player um cão de guarda: se a alimentação falha ou um slide trava, o carrossel segue girando com o que já tem.</li>
+                <li data-i18n="n6_d7">Criei os players: um PC em modo quiosque e um aplicativo Android único, feito para abrir sozinho quando o aparelho liga.</li>
+              </ol></dd></div>
+              <div class="sp-how"><dt data-i18n="lbl_how">Como medi</dt><dd data-i18n="n6_how">Montei uma bancada de teste: fiz a alimentação da TV responder com erro e acompanhei se o carrossel seguia girando com o que já tinha e quanto tempo levava para aplicar uma lista nova.</dd></div>
+              <div class="sp-res"><dt data-i18n="lbl_res">Resultado</dt><dd class="res" data-i18n="n6_res">O conteúdo de todas as TVs é administrado pelo portal, com período por item e desligamento fora do expediente. A TV aplica a mudança na virada da volta, sem cortar o que está na tela, e o responsável fica sabendo quando uma tela perde o sinal e quando ela volta.</dd></div>
+            </dl>
+            <div>
+              <h4 class="mini-h" data-i18n="lbl_flow">Fluxo</h4>
+              <ol class="flow">
+                <li><span class="flow-n" aria-hidden="true">01</span><span data-i18n="n6_f1">Biblioteca de mídias</span></li>
+                <li><span class="flow-n" aria-hidden="true">02</span><span data-i18n="n6_f2">Carrossel de cada TV</span></li>
+                <li><span class="flow-n" aria-hidden="true">03</span><span data-i18n="n6_f3">Agenda e horários</span></li>
+                <li><span class="flow-n" aria-hidden="true">04</span><span data-i18n="n6_f4">TV toca sozinha</span></li>
+                <li><span class="flow-n" aria-hidden="true">05</span><span data-i18n="n6_f5">Sinal de vida</span></li>
+                <li><span class="flow-n" aria-hidden="true">06</span><span data-i18n="n6_f6">Vigia avisa por e-mail</span></li>
+              </ol>
+            </div>
+            <div>
+              <h4 class="mini-h" data-i18n="lbl_tech">Tecnologias</h4>
+              <ul class="cables">
+                <li>C# / .NET</li><li data-i18n="n6_t2">ASP.NET Core (serviço em segundo plano)</li><li>SQL Server</li><li>Next.js / React / TypeScript</li><li data-i18n="n6_t5">JavaScript ES5 (página da TV)</li><li>Android (Capacitor, Java)</li><li data-i18n="n6_t7">Windows em modo quiosque</li>
+              </ul>
+            </div>
+            <figure class="reel">
+              <figcaption data-i18n="vid_cap">O sistema completo em 20 segundos</figcaption>
+              <video controls muted loop playsinline preload="none" width="1280" height="720" poster="assets/videos/carrossel_tv.jpg"><source src="assets/videos/carrossel_tv.mp4" type="video/mp4"><source src="assets/videos/carrossel_tv.webm" type="video/webm"></video>
+            </figure>
+            <div class="ficha-links">
+              <a class="btn btn--sm" href="demo/index.html#/carrossel_tv"><span data-i18n="open_sys">Abrir o sistema</span><svg class="ico ico--right" aria-hidden="true" focusable="false"><use href="#i-right"/></svg></a>
+              <a class="ext" href="demo/index.html#/carrossel_tv/manual"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-doc"/></svg><span data-i18n="read_manual">Ler o manual</span></a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="eco field" id="ecossistema" aria-labelledby="eco-h">
+    <div class="wrap">
+      <div class="eco-head">
+        <h2 class="label label--ink" id="eco-h"><span data-i18n="eco_h">Meu ecossistema de trabalho</span></h2>
+        <p class="eco-lede" data-i18n="eco_lede">Cada projeto deixou alguma coisa para o próximo: uma memória, uma regra, um assistente, uma ferramenta. Fui organizando isso como organizo um sistema, e foi assim que cada projeto virou parte do ecossistema que sustenta o hub hoje.</p>
+      </div>
+
+      <div class="thesis-block">
+        <p class="thesis"><span data-i18n="eco_thesis">O conhecimento não fica preso numa pessoa.</span></p>
+        <p class="thesis-p" data-i18n="eco_thesis_p">O que aprendi em cada sistema está escrito na memória que a IA lê, com as regras, as decisões e os cuidados de cada um. Qualquer profissional de TI consegue implantar e manter estes sistemas seguindo essa memória.</p>
+      </div>
+
+      <figure class="eco-map" aria-labelledby="eco-map-h">
+        <h3 class="mini-h" id="eco-map-h" data-i18n="eco_map_h">Da memória aos sistemas</h3>
+        <ol class="chain">
+          <li class="enode">
+            <div class="enode-top"><h4 data-i18n="e1_k">Memória</h4><span class="rivet"></span></div>
+            <p class="e-d"><span class="e-num">119</span> <span data-i18n="e1_d">memórias compartilhadas que a IA lê no início de cada sessão</span></p>
+          </li>
+          <li class="enode">
+            <div class="enode-top"><h4 data-i18n="e2_k">Assistentes</h4><span class="rivet"></span></div>
+            <p class="e-d"><span class="e-num">9</span> <span data-i18n="e2_d">assistentes especializados por assunto (notas, fretes, conferência, regras, inovação, hub e outros), que seguem 12 regras comuns</span></p>
+          </li>
+          <li class="enode">
+            <div class="enode-top"><h4 data-i18n="e3_k">Agentes</h4><span class="rivet"></span></div>
+            <p class="e-d"><span class="e-num">4</span> <span data-i18n="e3_d">agentes especializados: conferir, resolver casos, cuidar das regras e propor o próximo passo</span></p>
+          </li>
+          <li class="enode enode--end">
+            <div class="enode-top"><h4 data-i18n="e4_k">Sistemas</h4><span class="rivet"></span></div>
+            <p class="e-d"><span class="e-num">16</span> <span data-i18n="e4_d">sistemas no hub, implantados e mantidos seguindo essa memória</span></p>
+          </li>
+        </ol>
+        <p class="e-date" data-i18n="eco_date">Contagem de 01/10/2026.</p>
+      </figure>
+
+      <div class="eco-base">
+        <div class="plate plate--eco">
+          <span class="rivet r-tl"></span><span class="rivet r-tr"></span><span class="rivet r-bl"></span><span class="rivet r-br"></span>
+          <div class="plate-head">
+            <div class="plate-id"><span class="plate-k" data-i18n="asset">Patrimônio</span><span class="plate-num">PAT-0007</span></div>
+            <div class="plate-title"><strong data-i18n="eco_plate_title">Base do ecossistema</strong><span data-i18n="eco_plate_sub">O que mantém a memória organizada, segura e ao alcance de quem vier depois</span></div>
+            <div class="bc bc--plate" data-code="PAT-0007"></div>
+          </div>
+          <ul class="reg2">
+            <li><strong data-i18n="b1_k">Skills próprias</strong><span data-i18n="b1_d">para começar projeto novo e para orientar qual ferramenta usar</span></li>
+            <li><strong data-i18n="b2_k">Acervo de conhecimento</strong><span data-i18n="b2_d">pesquisável e organizado por assunto</span></li>
+            <li><strong data-i18n="b3_k">Método de trabalho</strong><span data-i18n="b3_d">versionado no GitHub</span></li>
+            <li><strong data-i18n="b4_k">Backup automático</strong><span data-i18n="b4_d">das memórias, três vezes ao dia</span></li>
+            <li><strong data-i18n="b5_k">Grafo de conhecimento</strong><span data-i18n="b5_d">do código dos sistemas</span></li>
+            <li><strong data-i18n="b6_k">Passagem de contexto</strong><span data-i18n="b6_d">protocolo para uma sessão retomar de onde a anterior parou</span></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="sub-h" data-i18n="rules_h">Regras do método</h3>
+          <ol class="rules">
+            <li><h4 data-i18n="r1_t">Perguntas antes do código</h4><p data-i18n="r1_p">Todo projeto começa com perguntas de negócio e de segurança respondidas com a área. Decisões e fluxograma são aprovados antes da primeira linha de código.</p></li>
+            <li><h4 data-i18n="r2_t">Modo sombra e envio desligado</h4><p data-i18n="r2_p">Tudo que escreve no ERP começa em modo sombra: calcula e registra o que faria, sem gravar, e tem uma chave para desligar. Todo envio automático nasce desligado até uma pessoa ligar.</p></li>
+            <li><h4 data-i18n="r3_t">Revisão por agentes céticos</h4><p data-i18n="r3_p">Na revisão de um sistema que grava no ERP, 22 agentes de IA investigaram e os céticos separaram 9 problemas reais de 5 alarmes falsos.</p></li>
+            <li><h4 data-i18n="r4_t">Cada erro vira regra</h4><p data-i18n="r4_p">Um build que falhou com 8 erros de compilação, todos pelo mesmo nome de campo, virou um checklist que confiro antes de cada entrega.</p></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="skills" id="competencias" aria-labelledby="skills-h">
+    <div class="wrap">
+      <h2 class="label label--paper" id="skills-h"><span data-i18n="skills_h">Competências</span></h2>
+      <dl class="groups">
+        <div><dt data-i18n="g1">Infraestrutura</dt><dd><ul class="chips"><li data-i18n="g1_1">Redes</li><li>MikroTik</li><li>Cisco</li><li>Meraki</li><li>UniFi</li><li data-i18n="g1_3">Servidores</li><li>VMware</li><li>Active Directory</li><li>Microsoft 365</li><li>Synology</li><li>Backup</li><li>Veeam</li></ul></dd></div>
+        <div><dt data-i18n="g6">Segurança, monitoramento e suporte</dt><dd><ul class="chips"><li>Firewall</li><li>Fortinet (FortiGate)</li><li>CrowdStrike</li><li>Zabbix</li><li>GLPI</li></ul></dd></div>
+        <div><dt data-i18n="g2">ERPs e integração</dt><dd><ul class="chips"><li>SAP</li><li>CIGAM</li><li>Atua</li><li>SQL Server</li><li>T-SQL</li><li data-i18n="g2_3">NF-e</li><li data-i18n="g2_4">SEFAZ</li></ul></dd></div>
+        <div><dt data-i18n="g3">Desenvolvimento</dt><dd><ul class="chips"><li>C#/.NET</li><li>ASP.NET Core</li><li>Next.js</li><li>React</li><li>TypeScript</li><li>Java</li><li>Git</li><li>GitHub</li></ul></dd></div>
+        <div><dt data-i18n="g4">IA aplicada</dt><dd><ul class="chips"><li>Claude Code</li><li>NotebookLM</li><li data-i18n="g4_2">API de IA</li><li data-i18n="g4_3">Agentes</li><li data-i18n="g4_4">Modo sombra</li></ul></dd></div>
+        <div><dt data-i18n="g7">Canais digitais</dt><dd><ul class="chips"><li>Suri</li><li data-i18n="g7_2">Meta (WhatsApp Business)</li><li>Tray</li></ul></dd></div>
+        <div><dt data-i18n="g5">Dados</dt><dd><ul class="chips"><li>Parquet</li><li>DuckDB</li><li data-i18n="g5_3">Otimização de consultas</li><li data-i18n="g5_4">Carga de bases públicas</li></ul></dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="contact field" id="contato" aria-labelledby="contato-h">
+    <div class="wrap contact-grid">
+      <h2 class="label label--ink" id="contato-h"><span data-i18n="contact_h">Contato</span></h2>
+      <p class="contact-p" data-i18n="contact_p">Gosto de trocar ideias sobre infraestrutura, integração com ERP e desenvolvimento com IA. Se quiser comentar algum projeto daqui, estou no LinkedIn e no e-mail.</p>
+      <div class="contact-actions">
+        <a class="btn btn--ink" href="https://www.linkedin.com/in/ruan-siqueira-1898b7252" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn de Ruan Siqueira (abre em nova aba)" data-i18n-attr="aria-label:li_label">LinkedIn<svg class="ico ico--out" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a>
+        <a class="btn btn--ink" href="mailto:ruandoaqw@gmail.com"><span data-i18n="mail_btn">E-mail</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p data-i18n="foot">Ruan Siqueira · Marau, RS · As telas e os dados exibidos são fictícios.</p>
+    <div class="bc bc--foot" data-code="RUANSIQUEIRA.DEV.BR"></div>
+    <a href="#top" data-i18n="top_link">Voltar ao topo</a>
+  </div>
+</footer>
+
+<script>
+(() => {
+  'use strict';
+  const root = document.documentElement;
+  const motion = root.classList.contains('motion');
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+
+  /* Code 128, conjunto B. Larguras barra/espaço de cada símbolo, valores 0 a 106. */
+  const C128 = ('212222 222122 222221 121223 121322 131222 122213 122312 132212 221213 ' +
+    '221312 231212 112232 122132 122231 113222 123122 123221 223211 221132 ' +
+    '221231 213212 223112 312131 311222 321122 321221 312212 322112 322211 ' +
+    '212123 212321 232121 111323 131123 131321 112313 132113 132311 211313 ' +
+    '231113 231311 112133 112331 132131 113123 113321 133121 313121 211331 ' +
+    '231131 213113 213311 213131 311123 311321 331121 312113 312311 332111 ' +
+    '314111 221411 431111 111224 111422 121124 121421 141122 141221 112214 ' +
+    '112412 122114 122411 142112 142211 241211 221114 413111 241112 134111 ' +
+    '111242 121142 121241 114212 124112 124211 411212 421112 421211 212141 ' +
+    '214121 412121 111143 111341 131141 114113 114311 411113 411311 113141 ' +
+    '114131 311141 411131 211412 211214 211232 2331112').split(' ');
+
+  function code128B(text) {
+    const vals = [104];
+    for (const ch of text) {
+      const c = ch.charCodeAt(0);
+      if (c < 32 || c > 126) throw new RangeError('Code 128B: caractere fora do conjunto');
+      vals.push(c - 32);
+    }
+    const check = vals.reduce((sum, v, i) => sum + v * (i || 1), 0) % 103;
+    vals.push(check, 106);
+    return vals.map(v => C128[v]).join('');
+  }
+
+  function barcodeSVG(text) {
+    const widths = code128B(text);
+    let x = 10, d = '';
+    for (let i = 0; i < widths.length; i++) {
+      const w = +widths[i];
+      if (i % 2 === 0) d += 'M' + x + ' 0h' + w + 'v1h-' + w + 'z';
+      x += w;
+    }
+    return '<svg viewBox="0 0 ' + (x + 10) + ' 1" preserveAspectRatio="none" shape-rendering="crispEdges" aria-hidden="true" focusable="false"><path d="' + d + '"/></svg>';
+  }
+  $$('.bc[data-code]').forEach(el => { el.innerHTML = barcodeSVG(el.dataset.code); });
+
+  /* Idioma: o português vem do próprio HTML (lido uma vez); o inglês fica aqui. */
+  const EN = {
+    title: 'Ruan Siqueira · End-to-end IT',
+    desc: 'Ruan Siqueira, software engineer in Marau, Brazil. From infrastructure to ERP integration and AI: a 14-system hub on top of the ERP, designed and built on his own, with six projects in detail, from the invoice-posting robot to the CRM.',
+    skip: 'Skip to content', nav_label: 'Sections', nav_about: 'About', nav_projects: 'Projects', nav_eco: 'Ecosystem', nav_contact: 'Contact',
+    demo_long: 'Demo hub', lang_label: 'Language',
+    t_tag: 'End-to-end IT',
+    phrase: 'From infrastructure to ERP integration and AI.',
+    apoio: 'I’m a software engineer working in IT at Robustec, where I designed and built, on my own, an internal portal with 14 systems, many of them integrated with the ERP.',
+    cta: 'See projects', cta2: 'Enter the demo hub',
+    projects_h2: 'Projects in production', asset: 'Asset tag',
+    p1n: 'Autonomous Invoice Posting', p1m: 'Reads the XML, decides and posts the company’s inbound invoices and freight documents into the ERP on its own. Switch on automatic mode and the typing is over.',
+    p2n: 'Debit Note', p2m: 'Creates and issues the note from the order, links everything on its own and, at the sale, finds the trigger to deliver it to the customer, as Brazil’s tax reform requires.',
+    p3n: 'AUTO CRM', p3m: 'The CRM managers build themselves: funnel, goals and cadences on screen, accounts and prospecting in one place, ready for any team.',
+    p4n: 'Customer Engine', p4m: 'Finds who stopped buying, brings them back over WhatsApp and even finds new customers in the public company registry.',
+    p5n: 'Workplace Climate Survey and HR', p5m: 'Truly listens to the team: anonymous surveys and feedback with an instant report, plus the HR area for exit interviews.',
+    p6n: 'TV Carousel', p6m: 'Every TV in the company with the right message for its department, changed in one click from inside the hub.',
+    st_idle: 'Awaiting scan', st_read: 'Checking', st_prod: 'In production',
+
+    about_h: 'About',
+    about_p1: 'I started in 2021 at an internet service provider, configuring routers and MikroTik devices. Working in controllership at BRF, I learned that every number has a process behind it. At Transportadora Sana I was the only IT person for a group of about 500 employees: I handled servers, firewall, antivirus and email, plus purchasing, asset records and equipment loans, and later coordinated one more person on the IT team.',
+    about_p2: 'At Robustec, where I’ve worked since January 2026, I designed and built, on my own, the ProjectHub and the ERP-integrated systems that live in it. I gather requirements with the Tax, Purchasing, Sales, Controllership and HR teams, who also check the results with me. Having worked across networks, controllership and code helps me follow a problem from the server to the business rule and the screen the team uses.',
+    about_p3: 'Along the way I also organized how I work: shared memory, assistants, agents and a versioned method. That is what lets another IT professional deploy and maintain everything I built.',
+    role: 'Software Engineer', loc: 'Marau, Brazil', photo_alt: 'Photo of Ruan Siqueira',
+    trail_h: 'Career',
+    tr1_y: 'Jan 2026 to present', tr1_r: 'IT Analyst', tr1_d: 'Designed and built, on my own, the internal hub that brings together 14 systems, with 3 access levels, 26 registered automated routines and ERP integration.',
+    tr2_y: '2024 to 2025', tr2_r: 'IT Analyst', tr2_d: 'Sole IT person for the Sana group, about 500 employees: replaced the server, firewall and antivirus, migrated more than 500 email accounts, and handled purchasing, asset records and equipment loans for every employee. Later I coordinated one more person on the IT team.',
+    tr3_y: '2023 to 2024', tr3_r: 'Controllership Assistant', tr3_d: 'Inventory and data analysis in controllership, the business grounding I now bring to ERP-integrated systems.',
+    tr4_y: '2021 to 2023', tr4_r: 'Network Analyst', tr4_o: 'Internet service provider', tr4_d: 'Installed and configured routers and MikroTik devices, and learned that a well-built network is one nobody notices.',
+    edu_h: 'Education', edu_course: 'Software Engineering', edu_end: 'Graduated in 2026', cert_h: 'Certifications',
+
+    hub_h: 'ProjectHub: the brain on top of the ERP',
+    hub_p1: 'A smart layer on top of the ERP: the brain that connects tax, finance, sales and HR, and automates what the ERP alone does not do. I designed and built this internal portal on my own at Robustec, where each department used to keep its controls in spreadsheets and separate tools.',
+    hub_p1b: 'It integrates with the ERP the company already uses, but does not depend on it to exist: master data, rules, permissions, audit trail and routines live in the hub itself. If the company needs it, it can grow to take on the role of the ERP.',
+    hub_p2: 'Almost everything talks through it. Every system plugs in as a module, with a single login, 3 access levels, per-project permissions and an audit trail of critical actions. The six projects on this page live inside it, and each of the 14 systems opens in the demo.',
+    hub_p3: 'Behind it are 26 registered background jobs, and some of them integrate the hub with the ERP. Since the ERP database is shared with the whole company, the first query I tune is my own, and every automation starts with usage rules so it never weighs on anyone’s work.',
+    hub_p4: 'The demo hub has a theme engine built into its own code: three unique visuals, each with a concept, that switch the whole interface instantly. Asset tag, Server rack and Access badge, plus a high-contrast mode for accessibility. The systems follow the same visual as the hub, inside a frame of their own.',
+    conv_h: 'How the systems talk to each other',
+    c1a: 'Reads the invoice and the purchase order and posts the complete invoice into the ERP',
+    c1b: 'Checks the budget before posting',
+    c2a: 'Reads the order and the prepayment; issues the note and writes the link to the sales invoice',
+    c3a: 'Mirrors sales and goals; read-only',
+    c4a: 'Reads the customer base, logs the contact and measures quotes, purchases and losses',
+    c4b: 'Delivers the campaign lead to the new-leads inbox',
+    c5a: 'Looks up payroll for the HR area; read-only',
+    c6a: 'Delivers each TV’s carousel and receives its heartbeat; does not talk to the ERP',
+    conv_tvs: 'Company TVs',
+    conv_cap: 'Each cable is a conversation that runs through the hub. Login, permissions, WhatsApp sending, email and generative AI are shared services, used by more than one system, and anything that writes to the ERP goes through safety guardrails.',
+    plate_title: 'Portal systems', plate_sub: '14 modules, single sign-on. Tap any of them to open it in the demo.',
+    s01: 'Inbound invoices', s02: 'Debit notes', s03: 'Customer reactivation', s04: 'CRM funnels',
+    s05: 'Leads and campaigns', s06: 'AUTO CRM', s07: 'Customer X-ray', s08: 'AI customer service',
+    s09: 'Budget control', s10: 'Stockroom', s11: 'Fleet control', s12: 'Workplace climate survey',
+    s13: 'Knowledge base', s14: 'Factory TV signage',
+    demo_h: 'Demo hub',
+    demo_p: 'A replica of the portal, rebuilt from scratch: the public demo shows the hub and each system’s main screen, and the videos show the full version.',
+    demo_note: 'Fictitious data, feel free to explore.',
+    demo_tour: 'First time in the hub?', demo_tour_link: 'Take the 1-minute guided tour',
+    demo_full: 'Interested in the full version?', demo_full_link: 'Get in touch',
+    demo_btn: 'Enter the demo hub',
+    arch_h: 'Architecture',
+    a_nav: 'Browser', a_nav_d: 'Desktop or phone, with dark mode',
+    a_portal_d: 'React and TypeScript; a single login and 3 access levels',
+    a_api_d: 'REST on ASP.NET Core; per-project permissions and an audit trail of critical actions',
+    a_db_d: 'Data for the portal and every module',
+    a_jobs: 'Background jobs', a_jobs_d: 'Run in the background, inside the API',
+    a_erp_d: 'Integration with safety guardrails',
+    arch_cap: 'The browser talks to the portal, the portal to the API and the API to the database. The background jobs run inside the API, and the API is how the portal talks to the ERP.',
+    tech_h: 'Technologies', ht_jwt: 'JWT with HttpOnly cookie',
+
+    projects_h: 'Projects',
+    projects_p: 'Six systems from the hub, hardest first. Each sheet covers the problem, how the system works, how I measured it, the result and a video of the full system, and opens the main screen and the manual in the demo.',
+    lbl_sit: 'Context', lbl_did: 'What I did', lbl_how: 'How I measured', lbl_res: 'Result',
+    lbl_ba: 'Before and after', lbl_flow: 'Flow', lbl_tech: 'Technologies',
+    lbl_cycle: 'Full cycle', lbl_layers: 'Layered decision', lbl_modes: 'Operating modes', lbl_engine: 'Rules engine',
+    n1_engine: 'The rules engine is reusable and learns from the team’s corrections. There are hundreds of field-tested rules, and the demo shows a few generic ones.', lbl_meas: 'Measurements',
+    lbl_has: 'What it includes', lbl_size: 'Size', st_impl: 'Rolling out',
+    ba_before: 'Before:', ba_after: 'After:',
+    open_sys: 'Open the system', read_manual: 'Read the manual', vid_cap: 'The full system in 20 seconds',
+
+    p1l: 'The intelligence that posts the company’s inbound invoices and freight documents into the ERP, from the XML to accounts payable. It decides in layers, simulates before writing, measures its own accuracy and, with automatic mode on, does it all by itself.',
+    n1_f1: 'Invoice and freight XML', n1_f2: 'Layered decision', n1_f3: 'Simulation, nothing written', n1_f4: 'Budget and purchase order', n1_f5: 'Posting into the ERP', n1_f6: 'Accuracy scorecard',
+    n1_sit: 'Posting an inbound invoice touches inventory, taxes, the tax ledger, accounts payable, the purchase order and the budget all at once, and every supplier has its own classification and payment-term pattern. That knowledge lived with whoever keyed the invoice in, not in a system rule. It is the hardest project I have led: automating this without taking control away from the team.',
+    n1_d1: 'Gathered requirements with the Tax and Purchasing teams and turned the Tax team’s answers into written rules. Each rule was measured against the team’s own postings before it went into code.',
+    n1_d2: 'Had the robot read the invoice and freight XML together with the purchase order and assemble the whole case before deciding.',
+    n1_d3: 'Built the simulation: the full posting plan, with every blocker explained and nothing written.',
+    n1_d4: 'Built the ERP posting as all or nothing: the complete posting goes in at once and, if any step fails, nothing is written.',
+    n1_d5: 'Built the follow-up after posting: whatever the team corrects flows back into the system, and the rules improve with use.',
+    n1_d6: 'Rolled it out gradually, validating each stage against the team’s work before allowing it to write.',
+    n1_layers: 'The rules set by the Tax team come first, decided in code. Generative AI steps in only where the rules don’t reach, and it is always checked before it counts. When in doubt, the robot doesn’t post: the invoice goes to the team’s queue with the reason written out.',
+    n1_o1k: 'Assisted.', n1_o1: 'The robot decides, simulates and prepares the posting, and a person confirms it.',
+    n1_o2k: 'Automatic, within limits.', n1_o2: 'The robot posts on its own whatever passes every safeguard, within the limits the company sets. The mode switch is audited.',
+    n1_o3: 'A rollout starts in assisted mode and moves to automatic as measured confidence grows.',
+    n1_how: 'I measured every percentage by comparing the robot’s decision with the posting made by a person, on invoices it had not seen.',
+    n1_res: 'In production: with automatic mode on, it posts on its own whatever comes out clean, and only what fails the guardrails lands in the team’s queue, with a plain-language explanation. On rule-based decisions, which are most of the volume, measured accuracy came in above 97%.',
+    n1_m1v: '97.9%', n1_m1: 'accuracy on rule-based decisions, which are most of the volume. Measured over 30 days.',
+    n1_m2v: '99.3%', n1_m2: 'accuracy for suppliers with an established history.',
+    n1_m3v: '98.1%', n1_m3: 'accuracy in validation on invoices the robot had not seen.',
+    n1_m4v: '97 to 98%', n1_m4: 'accuracy on freight when the system decides, measured before go-live.',
+    n1_m5v: '38 days', n1_m5: 'from the start of the project to the first posting in production.',
+    n1_t2: 'ASP.NET Core (background services)', n1_t3: 'SQL Server / T-SQL (transactions)', n1_t4: 'Generative AI API', n1_t6: 'NF-e and CT-e XML (Brazilian e-invoice and freight bill)',
+
+    p2l: 'The ERP did not issue the Debit Note from the sales order, nor did it link it to the sales invoice: every note was typed by hand. I delivered the automation in 9 days, and since August 2026 the company has issued and linked its notes with no typing, right at the start of Brazil’s tax reform requirement.',
+    n2_sit: 'Under Brazil’s tax reform, every customer prepayment now requires a debit note listing the order items, and the sales invoice has to reference it before it is transmitted to SEFAZ, the state tax authority. The note was typed item by item and the link to the sale was entered by hand. The automation spanned the Tax, Finance and Shipping teams and had to run inside the production ERP without disrupting invoicing.',
+    n2_d1: 'Gathered requirements with the Tax, Finance and Shipping teams and built the automation on my own.',
+    n2_d2: 'Made the flow build the Debit Note from the order and the customer’s prepayment, already carrying the ERP’s official numbering.',
+    n2_d3: 'Automated the submission to SEFAZ through the ERP itself, which still signs and transmits. The order only moves forward after authorization.',
+    n2_d4: 'Had the link to the sales invoice written automatically, in time for transmission.',
+    n2_d5: 'Validated everything before switching it on and left a switch to turn the automation off without a new release.',
+    n2_d6: 'Built the note-by-note check and the email alerts, and rewrote the queries: the review screen went from 25 s to 165 ms, and the linking routine now does about 18 times fewer database reads.',
+    n2_how: 'The review screen shows, note by note, what is linked, what is waiting for the sale and what is overdue. I measured that screen’s load time and the linking routine’s reads before and after the rewrite. Before applying the new query, I proved in read-only mode that it returned exactly the same rows as the old one.',
+    n2_res: 'It took 9 days from the Tax team’s request to the first note authorized by SEFAZ. Since August 2026 the company has issued and linked its notes with no typing: the team reviews instead of keying in, and exceptions stay with people.',
+    n2_b1k: 'Review screen load time',
+    n2_f1: 'Customer prepays the order', n2_f2: 'Debit note created in the ERP', n2_f3: 'Submission and SEFAZ authorization', n2_f4: 'Order moves forward', n2_f5: 'Link to the sales invoice', n2_f6: 'Note-by-note check',
+    n2_t1: 'C# / .NET (background services)', n2_t2: 'SQL Server (T-SQL, stored procedures, SQL Agent)', n2_t3: 'ERP integration', n2_t5: 'ERP routine automation', n2_t6: 'HTML email',
+
+    p3l: 'A complete CRM for companies, ready for multiple sales teams, that managers configure themselves: pipeline, cadences and goals are set up on screen, with no coding. Accounts, prospecting and bulk messaging live in one system, connected to the ERP, email and WhatsApp.',
+    n3_k1: 'Kanban', n3_v1: 'Each sales rep has their own pipeline, with columns and goals configured by management.',
+    n3_k2: 'Cadences', n3_v2: 'Editable prospecting and repurchase cadences; the day’s tasks appear ready for each sales rep.',
+    n3_k3: 'Prospects and nurturing', n3_v3: 'A new lead enters the prospecting cadence, and anyone not ready to buy yet stays in nurturing.',
+    n3_k4: 'Bulk messaging', n3_v4: 'Email and WhatsApp to many contacts at once, with message templates and a recorded history.',
+    n3_k5: 'Goals', n3_v5: 'Per-person goals measured in the system itself, next to a mirror of the ERP’s numbers, with the source of every indicator in plain sight.',
+    n3_k6: 'Generative AI', n3_v6: 'Writes customer summaries and follow-up messages in three languages.',
+    n3_k7: 'Map by country', n3_v7: 'A navigable globe shows each market, with the country’s product lines, customers and prospects.',
+    n3_sit: 'The account list, the contact history and the notes on each customer lived in spreadsheets, one per rep. There was no follow-up clock, and email and WhatsApp messages went out one at a time. The system started with the export team, which is why it speaks Portuguese, Spanish and English.',
+    n3_d1: 'Worked with the sales team to map how accounts and prospecting ran, then designed and built the system on my own, from the database to the screen.',
+    n3_d2: 'Left management in control: columns, goals, cadences, tags and message templates are all set up on screen, with no coding.',
+    n3_d3: 'Traded memory for rules: the system remembers each customer’s next contact and lets no one fall through the cracks.',
+    n3_d4: 'Connected it to the ERP through a local mirror: it reads sales and goals by sync and never writes to the ERP.',
+    n3_d5: 'Integrated sending through each rep’s own email and through the WhatsApp platform, plus generative AI with prompts that can be edited on screen.',
+    n3_talk: 'Separate systems that talk to each other: a campaign lead captured by the engine lands in AUTO CRM’s new-leads inbox, and a reactivated customer goes back to the account’s sales rep.',
+    n3_size: '137 API routes and 30 tables of its own.',
+    n3_res: 'In production: each rep’s accounts, history and daily tasks live in one place, and the team’s contact and quote counts now come from the system itself.',
+    n3_f1: 'New lead in the daily inbox', n3_f2: 'Prospecting with a cadence', n3_f3: 'Nurturing or conversion', n3_f4: 'Accounts and pipeline', n3_f5: 'Order closed', n3_f6: 'New repurchase cycle',
+    n3_t7: 'WhatsApp platform API', n3_t8: 'Per-rep email (SMTP)', n3_t9: 'Generative AI API',
+
+    p4l: 'The engine that reads the customer base in the ERP, decides who to re-engage, sends the message through the WhatsApp platform and measures replies, quotes and purchases. For companies that are not customers yet, it selects prospects from the public company registry.',
+    n4_b1k: 'Heaviest step of the results dashboard', n4_b1a: 'over 900 s', n4_b1n: 'about 18 s',
+    n4_b2k: 'AI calls when replaying an incident',
+    n4_sit: 'Re-engaging past customers over WhatsApp depended on a third-party tool, with the rule for who got a message locked inside it and no way to measure the return: who replied, who asked for a quote, who bought. I designed and built, on my own, an in-house engine inside the hub, with the rule under the company’s control.',
+    n4_k1: 'Base analysis', n4_v1: 'Every day, the engine analyzes the ERP’s customer base and builds the queue of who to call back, in priority order. The criteria belong to the company, are documented and can be adjusted on screen, with no AI at this stage.',
+    n4_k2: 'Sending and tracking', n4_v2: 'The message goes out through official WhatsApp and the reply comes back to the hub. Quotes, purchases and losses are measured against the ERP, and the negotiation stays with the account’s sales rep.',
+    n4_k3: 'Prospecting', n4_v3: 'For companies that are not customers yet, the engine looks for prospects in the Federal Revenue Service’s open company registry (CNPJ), with more than 28 million active companies, filtered by the customer profile the company is looking for.',
+    n4_k4: 'AI customer service', n4_v4: 'In the AI customer service integration, which already existed and which I took over, I built a guard that notices when the AI gets stuck in a loop and hands the conversation to a person. When I replayed a real incident, AI calls dropped from 460 to 31. I also moved the list that maps each sales rep to their agent into a screen in the hub.',
+    n4_talk: 'Separate systems that talk to each other: a campaign lead captured by the engine lands in AUTO CRM’s new-leads inbox, and a reactivated customer goes back to the account’s sales rep.',
+    n4_how: 'Before switching the old tool off, I ran the engine alongside it and compared the selected customers one by one. On the dashboard, I timed the heaviest step before and after the rewrite and checked that the result was identical. The loop guard was tuned by replaying the real conversation history.',
+    n4_res: 'The third-party tool was switched off and reactivation now runs inside the hub, and the negotiation stays with the account’s sales rep. The return went from estimated to measured against the ERP, and the dashboard’s heaviest step dropped from over 900 s to about 18 s, with an identical result.',
+    n4_f1: 'Customer base in the ERP', n4_f2: 'Qualification by priority', n4_f3: 'Daily queue', n4_f4: 'Sent through the WhatsApp platform', n4_f5: 'Reply by webhook', n4_f6: 'Quote, purchase or loss read from the ERP',
+    n4_t1: 'C# / .NET (background services)', n4_t3: 'ERP integration', n4_t4: 'WhatsApp platform API', n4_t8: 'Brazilian Federal Revenue open data', n4_t9: 'Python (loop guard)',
+
+    p5l: 'Internal surveys where the department builds the questionnaire, distributes it by bulk message or public link and reads a ready-made result, with anonymous answers. Alongside it, the HR area for exit interviews, recorded per person.',
+    n5_sit: 'The climate survey lived in an external form and a spreadsheet, and the presentation to senior management was assembled by hand. In HR, exit interviews were done on paper and typed up later. I designed and built, on my own, a module with two halves that follow opposite rules: the survey is anonymous, HR is identified.',
+    n5_k1: 'Surveys, with anonymous answers',
+    n5_a1: 'A questionnaire built by the department itself, with sections, scales, matrices, multiple choice and free text.',
+    n5_a2: 'Distribution by bulk message through the WhatsApp platform or by public link. The answer is not tied to the name of the person who gave it.',
+    n5_a3: 'A ready-made report, with favorability by dimension, eNPS and comparison with past surveys.',
+    n5_a4: 'A presentation built from the results and shown right in the portal, hiding questions and choosing which comments go in.',
+    n5_a5: 'Free-text analysis with generative AI, without identifying who answered.',
+    n5_k2: 'HR area, with identified records',
+    n5_r1: 'Exit interviews recorded per person, with data read from payroll, read-only.',
+    n5_r2: 'Acknowledgment signed on screen, with an integrity seal and an audit trail.',
+    n5_r3: 'A dashboard with the type and reason for leaving, department and length of service, cross-checked against payroll.',
+    n5_r4: '30- and 90-day follow-up.',
+    n5_r5: 'AI analysis of the interviews.',
+    n5_how: 'I timed the AI analysis call before and after trimming the request. I then moved the analysis to the background and stored the result, so the call is not repeated every time the report is opened.',
+    n5_res: 'In production: the department builds the survey, distributes it and presents the results without leaving the portal, and HR records every exit interview with history and indicators. The questions and the interview template came from HR.',
+    n5_b1k: 'AI analysis call', n5_b1a: '25 to 37 s', n5_b1n: 'under 15 s',
+    n5_f1: 'Questionnaire in sections', n5_f2: 'Bulk message or public link', n5_f3: 'Anonymous answers', n5_f4: 'Report with eNPS', n5_f5: 'AI analysis', n5_f6: 'Presentation in the portal',
+    n5_t6: 'Generative AI API', n5_t7: 'WhatsApp platform API', n5_t8: 'SHA-256 (integrity seal)', n5_t9: 'PowerPoint and Excel export',
+
+    p6l: 'Internal communication on the company’s TVs, run from inside the hub. Each TV plays its department’s carousel on its own and reports when it goes off the air.',
+    n6_f1: 'Media library', n6_f2: 'A carousel for each TV', n6_f3: 'Schedules and hours', n6_f4: 'TV plays on its own', n6_f5: 'Heartbeat', n6_f6: 'Watcher alerts by email',
+    n6_sit: 'The company’s TVs show its internal communication. I built the TV app and then brought it into the hub, getting the TVs ready to run with nobody around.',
+    n6_d1: 'Rewrote the solution inside the hub, using the portal’s login and permissions.',
+    n6_d2: 'Built the media library: images and videos are uploaded once and serve several carousels, each with its own order.',
+    n6_d3: 'Built temporary media: a notice with an end date leaves every TV and is deleted on its own that day.',
+    n6_d4: 'Added an online radio per carousel, which pauses during videos and outside working hours.',
+    n6_d5: 'Built the watcher: it tracks each TV’s heartbeat, confirms the signal is really gone before alerting by email, and alerts again when the TV comes back.',
+    n6_d6: 'Gave the player a watchdog: if the feed fails or a slide hangs, the carousel keeps turning with what it already has.',
+    n6_d7: 'Built the players: a PC in kiosk mode and a single Android app made to open by itself when the device boots.',
+    n6_how: 'I set up a test bench: I made the feed that supplies the TV respond with errors and watched whether the carousel kept turning with what it already had, and how long it took to apply a new list.',
+    n6_res: 'Content for every TV is managed in the portal, with a date range per item and shutdown outside working hours. The TV applies changes at the end of the loop without cutting off what is on screen, and whoever is responsible knows when a screen loses signal and when it comes back.',
+    n6_m1v: '40 s', n6_m1: 'of consecutive errors in the TV’s feed, on the bench, and the carousel kept turning.',
+    n6_m2v: '18 s', n6_m2: 'for the TV to apply a new list on its own, in the same test.',
+    n6_m3v: '6 versions', n6_m3: 'in six days, from the first version in the hub to the one with sound in videos.',
+    n6_t2: 'ASP.NET Core (background service)', n6_t5: 'JavaScript ES5 (TV page)', n6_t7: 'Windows in kiosk mode',
+
+    eco_h: 'My working ecosystem',
+    eco_lede: 'Every project left something behind for the next one: a memory, a rule, an assistant, a tool. I organized it the way I organize a system, and that is how each project became part of the ecosystem that supports the hub today.',
+    eco_thesis: 'Knowledge doesn’t stay locked in one person.',
+    eco_thesis_p: 'What I learned on each system is written into the memory the AI reads, with each one’s rules, decisions and precautions. Any IT professional can deploy and maintain these systems by following that memory.',
+    eco_map_h: 'From memory to systems',
+    e1_k: 'Memory', e1_d: 'shared memories the AI reads at the start of every session',
+    e2_k: 'Assistants', e2_d: 'assistants specialized by subject (invoices, freight, checking, rules, innovation, hub and more), following 12 shared rules',
+    e3_k: 'Agents', e3_d: 'specialized agents: checking, solving cases, maintaining the rules and proposing the next step',
+    e4_k: 'Systems', e4_d: 'systems in the hub, deployed and maintained by following that memory', eco_date: 'Count as of Oct 1, 2026.',
+    eco_plate_title: 'Ecosystem foundation', eco_plate_sub: 'What keeps the memory organized, safe and within reach of whoever comes next',
+    b1_k: 'Custom skills', b1_d: 'to start a new project and to point to the right tool',
+    b2_k: 'Knowledge library', b2_d: 'searchable and organised by topic',
+    b3_k: 'Working method', b3_d: 'versioned on GitHub',
+    b4_k: 'Automatic backup', b4_d: 'of the memories, three times a day',
+    b5_k: 'Knowledge graph', b5_d: 'of the systems’ code',
+    b6_k: 'Context handoff', b6_d: 'a protocol so one session picks up where the last one stopped',
+    rules_h: 'Method rules',
+    r1_t: 'Questions before code', r1_p: 'Every project starts with business and security questions answered with the business area. Decisions and a flowchart are approved before the first line of code.',
+    r2_t: 'Shadow mode, sends off by default', r2_p: 'Anything that writes to the ERP starts in shadow mode: it calculates and logs what it would do, without writing, and has a kill switch. Every automated message ships turned off until a person turns it on.',
+    r3_t: 'Skeptical agent review', r3_p: 'In a review of a system that writes to the ERP, 22 AI agents dug in and the skeptics separated 9 real issues from 5 false alarms.',
+    r4_t: 'Every mistake becomes a rule', r4_p: 'A build that failed with 8 compile errors, all caused by the same field name, became a checklist I run before every delivery.',
+
+    skills_h: 'Skills',
+    g1: 'Infrastructure', g1_1: 'Networking', g1_3: 'Servers',
+    g2: 'ERPs and integration', g2_3: 'NF-e (Brazilian e-invoicing)', g2_4: 'SEFAZ (state tax authority)',
+    g3: 'Development',
+    g4: 'Applied AI', g4_2: 'AI APIs', g4_3: 'Agents', g4_4: 'Shadow mode',
+    g6: 'Security, monitoring and support', g7: 'Digital channels', g7_2: 'Meta (WhatsApp Business)',
+    g5: 'Data', g5_3: 'Query optimization', g5_4: 'Public dataset ingestion',
+
+    contact_h: 'Contact',
+    contact_p: 'I enjoy swapping ideas about infrastructure, ERP integration and building with AI. If you’d like to discuss any of these projects, you can find me on LinkedIn or by email.',
+    li_label: 'Ruan Siqueira on LinkedIn (opens in a new tab)', mail_btn: 'Email',
+    foot: 'Ruan Siqueira · Marau, RS, Brazil · All screens and data shown are fictitious.',
+    top_link: 'Back to top'
+  };
+
+  const LIVE = {
+    pt: { lang: 'pt-BR', readout: (n, t) => n + ' de ' + t + ' lidas' + (n === t ? ' · em produção' : ''), lcd_print: 'Imprimindo', lcd_cut: 'Corte', lcd_ready: 'Pronto' },
+    en: { lang: 'en', readout: (n, t) => n + ' of ' + t + ' scanned' + (n === t ? ' · in production' : ''), lcd_print: 'Printing', lcd_cut: 'Cut', lcd_ready: 'Ready' }
+  };
+
+  const textEls = $$('[data-i18n]');
+  const attrEls = $$('[data-i18n-attr]').map(el => ({ el, pairs: el.getAttribute('data-i18n-attr').split(';').map(p => p.split(':')) }));
+  const metaDesc = $('meta[name="description"]');
+  const PT = { title: document.title, desc: metaDesc ? metaDesc.content : '' };
+  textEls.forEach(el => { if (!(el.getAttribute('data-i18n') in PT)) PT[el.getAttribute('data-i18n')] = el.textContent; });
+  attrEls.forEach(({ el, pairs }) => pairs.forEach(([a, k]) => { if (!(k in PT)) PT[k] = el.getAttribute(a) || ''; }));
+  const DICT = { pt: PT, en: EN };
+
+  let lang = 'pt';
+  const tape = $('.tape');
+  const tapeText = $('.tape-text');
+  const lcd = $('.lcd');
+  const readout = $('[data-readout]');
+  const tags = $$('.tag');
+  const langBtns = $$('.lang button');
+  let scanned = tags.length;
+
+  const renderReadout = () => { if (readout) readout.textContent = LIVE[lang].readout(scanned, tags.length); };
+  const setLcd = s => { if (!lcd) return; lcd.dataset.s = s; lcd.textContent = LIVE[lang]['lcd_' + s]; };
+
+  function setLang(next, animate) {
+    const d = DICT[next];
+    if (!d) return;
+    lang = next;
+    const changed = [];
+    textEls.forEach(el => {
+      const v = d[el.getAttribute('data-i18n')];
+      if (typeof v === 'string' && el.textContent !== v) { el.textContent = v; changed.push(el); }
+    });
+    attrEls.forEach(({ el, pairs }) => pairs.forEach(([a, k]) => { if (typeof d[k] === 'string') el.setAttribute(a, d[k]); }));
+    root.lang = LIVE[next].lang;
+    document.title = d.title;
+    if (metaDesc) metaDesc.setAttribute('content', d.desc);
+    langBtns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === next)));
+    renderReadout();
+    setLcd(lcd && lcd.dataset.s ? lcd.dataset.s : 'ready');
+    if (animate) {
+      /* Modo sombra: o que mudou aparece em âmbar e só depois vale. */
+      const marked = changed.filter(el => !el.closest('.tape') && !el.closest('.vh') && !el.classList.contains('vh'));
+      marked.forEach(el => el.classList.add('pend'));
+      setTimeout(() => marked.forEach(el => el.classList.remove('pend')), 700);
+    }
+    try { localStorage.setItem('plaqueta-lang', next); } catch (e) { /* sem armazenamento: vale só nesta visita */ }
+  }
+
+  function fitTape() {
+    if (!tape || !tapeText) return;
+    tape.style.removeProperty('--fit');
+    const cs = getComputedStyle(tape);
+    const avail = tape.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+    const w = tapeText.offsetWidth;
+    if (avail > 0 && w > avail) tape.style.setProperty('--fit', (avail / w).toFixed(3));
+  }
+
+  let lcdTimers = [];
+  function runLcd() {
+    lcdTimers.forEach(clearTimeout);
+    setLcd('print');
+    lcdTimers = [setTimeout(() => setLcd('cut'), 2600), setTimeout(() => setLcd('ready'), 3000)];
+  }
+  function reprint() {
+    ['.tape', '.blade', '.printer'].forEach(s => {
+      const el = $(s);
+      if (!el) return;
+      el.style.animation = 'none';
+      void el.offsetWidth;
+      el.style.animation = '';
+    });
+    runLcd();
+  }
+
+  let busy = false;
+  langBtns.forEach(btn => btn.addEventListener('click', () => {
+    const next = btn.dataset.lang;
+    if (next === lang || busy) return;
+    busy = true;
+    btn.classList.add('is-pending');
+    const commit = () => { btn.classList.remove('is-pending'); setLang(next, true); fitTape(); busy = false; };
+    const heroVisible = tape && tape.getBoundingClientRect().bottom > 0;
+    if (!motion || !heroVisible || typeof tape.animate !== 'function') { setTimeout(commit, 260); return; }
+    /* A etiqueta antiga cai, a nova sai da etiquetadora já no outro idioma. */
+    const drop = tape.animate([
+      { transform: getComputedStyle(tape).transform, opacity: 1 },
+      { transform: 'translate(-12px, 140%) rotate(-1.5deg)', opacity: 0 }
+    ], { duration: 320, easing: 'cubic-bezier(.55,0,.8,.2)', fill: 'forwards' });
+    drop.finished.then(() => { commit(); reprint(); drop.cancel(); }, commit);
+  }));
+
+  let stored = null;
+  try { stored = localStorage.getItem('plaqueta-lang'); } catch (e) { stored = null; }
+  if (stored === 'en') setLang('en', false); else renderReadout();
+  if (motion) runLcd(); else setLcd('ready');
+
+  requestAnimationFrame(fitTape);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitTape);
+  let raf = 0;
+  addEventListener('resize', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(fitTape); });
+  /* Menu em linha que rola de lado (até 1080 px): o Chrome não rola um item só parcialmente visível ao receber foco.
+     Só a rolagem lateral do menu; scrollIntoView mexeria na página por causa do scroll-padding-top. */
+  const nav = $('.nav');
+  if (nav) nav.addEventListener('focusin', e => {
+    const a = e.target.getBoundingClientRect(), n = nav.getBoundingClientRect(), m = 16;
+    if (a.left < n.left + m) nav.scrollLeft -= n.left + m - a.left;
+    else if (a.right > n.right - m) nav.scrollLeft += a.right - n.right + m;
+  });
+
+  /* Leitor: o laser passa por cada código de barras; a plaqueta fica âmbar (conferindo) e depois vale (em produção). */
+  const wrapEl = $('.tags-wrap');
+  const laser = $('.laser');
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+  function aim(tag) {
+    const bc = $('.bc', tag);
+    if (!bc) return;
+    const a = bc.getBoundingClientRect();
+    const b = wrapEl.getBoundingClientRect();
+    const over = Math.round(a.width * 0.1);
+    laser.style.setProperty('--x', (a.left - b.left - over) + 'px');
+    laser.style.setProperty('--y', (a.top - b.top + a.height / 2) + 'px');
+    laser.style.setProperty('--w', (a.width + over * 2) + 'px');
+  }
+  async function scan() {
+    aim(tags[0]);
+    void laser.offsetWidth;
+    laser.classList.add('on');
+    for (let i = 0; i < tags.length; i++) {
+      if (i) aim(tags[i]);
+      await sleep(220);
+      tags[i].dataset.state = 'read';
+      await sleep(380);
+      tags[i].dataset.state = 'prod';
+      scanned = i + 1;
+      renderReadout();
+      await sleep(120);
+    }
+    await sleep(260);
+    laser.classList.remove('on');
+  }
+  /* Vídeos das fichas: tocam só enquanto estão na tela e nunca sozinhos com movimento reduzido (sem a classe motion).
+     Se a pessoa pausar com o vídeo à vista, ele deixa de ser tocado automaticamente. */
+  const reels = $$('.reel video');
+  if (motion && reels.length && 'IntersectionObserver' in window) {
+    const vio = new IntersectionObserver(entries => entries.forEach(e => {
+      const v = e.target;
+      v.dataset.vis = e.isIntersecting ? '1' : '';
+      if (e.isIntersecting) v.play().catch(() => {}); else v.pause();
+    }), { threshold: 0.5 });
+    reels.forEach(v => { vio.observe(v); v.addEventListener('pause', () => { if (v.dataset.vis) vio.unobserve(v); }); });
+  }
+
+  if (motion && wrapEl && laser && tags.length) {
+    tags.forEach(t => { t.dataset.state = 'idle'; });
+    scanned = 0;
+    renderReadout();
+    const t0 = performance.now();
+    const start = () => setTimeout(scan, Math.max(0, 3400 - (performance.now() - t0)));
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(entries => {
+        if (entries.some(e => e.isIntersecting)) { io.disconnect(); start(); }
+      }, { threshold: 0.2 });
+      io.observe(wrapEl);
+    } else {
+      start();
+    }
+  }
+})();
+</script>
+</body>
+</html>

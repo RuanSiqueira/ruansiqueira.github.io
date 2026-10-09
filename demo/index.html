@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="pt-BR" data-visual="portfolio" data-publico>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ProjectHub (demonstração)</title>
+<meta name="description" content="Réplica navegável do ProjectHub, portal interno projetado e construído por Ruan Siqueira: login, painel, administração e 14 sistemas. Todos os dados são fictícios.">
+<meta name="theme-color" content="#0c0e11">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='44' fill='none' stroke='%2338bdf8' stroke-width='8'/%3E%3Crect x='38' y='38' width='24' height='24' rx='3' transform='rotate(45 50 50)' fill='%23818cf8'/%3E%3C/svg%3E">
+<script>
+  /* Tema, alto contraste, idioma e modo login antes do primeiro desenho, para não piscar.
+     Temas: portfolio (Plaqueta, padrão), escuro (Rack), claro (Crachá). O alto contraste é uma opção à parte que vale sobre o tema. */
+  (function () {
+    var r = document.documentElement, v = null, c = null, sem = true;
+    try {
+      v = localStorage.getItem('ph-demo-visual');
+      c = localStorage.getItem('ph-demo-contraste');
+      if (localStorage.getItem('plaqueta-lang') === 'en') r.lang = 'en';
+      sem = !localStorage.getItem('ph-demo-perfil');
+    } catch (e) { v = null; }
+    var mais = !!(window.matchMedia && window.matchMedia('(prefers-contrast: more)').matches);
+    var hc = c != null ? c === '1' : (v === 'contraste' || v === 'alto-contraste' || mais);
+    v = { rack: 'escuro', corporativo: 'escuro', cracha: 'claro', plaqueta: 'portfolio' }[v] || v;
+    if (!/^(escuro|claro|portfolio)$/.test(v || '')) v = 'portfolio';
+    r.setAttribute('data-visual', hc ? 'contraste' : v);
+    if (/^#\/(entrar|tour)/.test(location.hash) || (sem && !/^#\/[^\/]/.test(location.hash))) r.classList.add('ph-modo-entrar');
+  })();
+</script>
+<link rel="stylesheet" href="../assets/fonts/fonts.css?v=2026100812">
+<link rel="stylesheet" href="../assets/vendor/daisyui/daisyui.css?v=2026100812">
+<link rel="stylesheet" href="core.css?v=2026100812">
+</head>
+<body>
+<button class="ph-pular dy-btn dy-btn-primary dy-btn-sm" type="button" data-i18n="pular">Pular para o conteúdo</button>
+
+<div class="ph-app dy-drawer lg:dy-drawer-open" id="ph-app">
+  <input id="ph-drawer" type="checkbox" class="dy-drawer-toggle" tabindex="-1" aria-hidden="true">
+
+  <div class="dy-drawer-content ph-coluna">
+    <header class="ph-topo dy-navbar">
+      <div class="ph-topo-esq">
+        <button class="ph-btn dy-btn dy-btn-ghost dy-btn-square ph-so-movel" type="button" data-acao="abrir-menu" aria-controls="ph-lateral" aria-expanded="false" aria-label="Abrir menu" data-i18n-attr="aria-label:abrirMenu"><span data-icone="menu"></span></button>
+        <a class="ph-marca-link ph-so-movel" href="#/"><span data-marca></span><span class="ph-marca-nome">ProjectHub</span></a>
+        <nav class="ph-migalhas" id="ph-migalhas" aria-label="Você está em"></nav>
+      </div>
+      <div class="ph-topo-dir">
+        <button class="ph-btn dy-btn dy-btn-ghost ph-tour-btn" type="button" data-acao="tour" aria-label="Tour guiado pelo hub" data-i18n-attr="aria-label:tourBotaoRotulo"><span data-icone="map"></span><span class="ph-tour-btn-txt" data-i18n="tourBotao">Tour</span></button>
+        <span class="ph-chip-vivo ph-motor"><span class="ph-pulso tom-ok" aria-hidden="true"></span><span data-i18n="motorOnline">Motor central · online</span><span class="ph-relogio" data-relogio></span></span>
+        <div class="ph-suspenso">
+          <button id="ph-busca-btn" class="ph-btn dy-btn dy-btn-ghost dy-btn-square" type="button" aria-expanded="false" aria-controls="ph-busca-painel" aria-label="Buscar no hub" data-i18n-attr="aria-label:buscarNoHub"><span data-icone="search"></span></button>
+          <div id="ph-busca-painel" class="ph-painel ph-painel-busca" role="dialog" aria-label="Buscar no hub" data-i18n-attr="aria-label:buscarNoHub" hidden>
+            <label class="ph-busca dy-input ph-busca-grande"><span data-icone="search"></span><span class="vh" data-i18n="buscarHub">Buscar sistemas e páginas</span><input id="ph-busca-q" class="ph-busca-campo" type="search" autocomplete="off" spellcheck="false" placeholder="Buscar sistemas e páginas" data-i18n-attr="placeholder:buscarHub" aria-describedby="ph-busca-status"></label>
+            <p class="vh" id="ph-busca-status" aria-live="polite"></p>
+            <div id="ph-busca-lista" class="ph-busca-lista"></div>
+          </div>
+        </div>
+        <div class="ph-suspenso">
+          <button id="ph-tema-btn" class="ph-btn dy-btn dy-btn-ghost dy-btn-square" type="button" aria-expanded="false" aria-controls="ph-tema-painel" aria-label="Tema da interface" data-i18n-attr="aria-label:temaInterface"><span data-icone="contrast"></span></button>
+          <div id="ph-tema-painel" class="ph-painel" role="dialog" aria-labelledby="ph-tema-t" hidden>
+            <p class="ph-painel-titulo" id="ph-tema-t" data-i18n="temaInterface">Tema da interface</p>
+            <div class="ph-tema-opcoes" id="ph-tema-opcoes" role="group" aria-labelledby="ph-tema-t"></div>
+            <p class="ph-somente" data-contraste-nota data-i18n="contrasteNota" hidden>O alto contraste para acessibilidade está ligado e vale sobre o tema escolhido.</p>
+            <p class="ph-painel-titulo" id="ph-idioma-t" data-i18n="idioma">Idioma</p>
+            <div class="ph-seg dy-join" role="group" aria-labelledby="ph-idioma-t">
+              <button type="button" class="dy-join-item dy-btn dy-btn-sm" data-lang="pt" aria-pressed="true">Português</button>
+              <button type="button" class="dy-join-item dy-btn dy-btn-sm" data-lang="en" aria-pressed="false">English</button>
+            </div>
+            <p class="ph-somente" data-i18n="temaSalvo">A escolha fica salva neste navegador.</p>
+          </div>
+        </div>
+        <div class="ph-seg dy-join ph-lang-topo" role="group" aria-label="Idioma" data-i18n-attr="aria-label:idioma">
+          <button type="button" class="dy-join-item dy-btn dy-btn-sm" data-lang="pt" aria-pressed="true">PT</button>
+          <button type="button" class="dy-join-item dy-btn dy-btn-sm" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <a class="ph-btn dy-btn dy-btn-ghost ph-voltar" href="../index.html" aria-label="Voltar ao portfólio" data-i18n-attr="aria-label:voltarPortfolio"><span data-icone="voltar"></span><span class="ph-voltar-txt" data-i18n="voltarPortfolio">Voltar ao portfólio</span></a>
+        <div class="ph-suspenso">
+          <button id="ph-usuario-btn" class="ph-btn dy-btn dy-btn-ghost dy-btn-circle ph-usuario-btn" type="button" aria-expanded="false" aria-controls="ph-usuario-painel" aria-label="Usuário"><span class="ph-av" id="ph-usuario-av" aria-hidden="true"></span></button>
+          <div id="ph-usuario-painel" class="ph-painel ph-painel-usuario" role="dialog" aria-label="Usuário" data-i18n-attr="aria-label:configConta" hidden></div>
+        </div>
+      </div>
+    </header>
+    <div id="ph-aviso-perfil" class="ph-aviso-perfil" hidden></div>
+    <main class="ph-main" id="ph-main" tabindex="-1">
+      <noscript><p class="ph-noscript">Esta demonstração precisa de JavaScript ligado. This demo needs JavaScript enabled.</p></noscript>
+    </main>
+  </div>
+
+  <div class="dy-drawer-side ph-lado">
+    <label class="dy-drawer-overlay ph-veu-menu" data-acao="fechar-menu" aria-hidden="true"></label>
+    <aside class="ph-lateral" id="ph-lateral" aria-label="Menu" data-i18n-attr="aria-label:menu">
+      <div class="ph-lado-marca">
+        <a class="ph-marca-link" href="#/"><span data-marca></span><span class="ph-marca-nome">ProjectHub</span></a>
+        <span class="ph-empresa">EMPRESA DEMO</span>
+        <button class="ph-btn dy-btn dy-btn-ghost dy-btn-sm dy-btn-square ph-recolher" type="button" data-acao="recolher-menu" aria-controls="ph-lateral" aria-expanded="true" aria-label="Recolher menu"><span data-icone="panel-left-close"></span></button>
+        <button class="ph-btn dy-btn dy-btn-ghost dy-btn-sm dy-btn-square ph-so-movel ph-nav-fechar" type="button" data-acao="fechar-menu" aria-label="Fechar menu" data-i18n-attr="aria-label:fecharMenu"><span data-icone="fechar"></span></button>
+      </div>
+      <nav class="ph-nav" id="ph-nav" aria-label="Sistemas" data-i18n-attr="aria-label:sistemas"></nav>
+      <div class="ph-lateral-rodape">
+        <p class="ph-nav-estado"><span class="ph-pulso tom-ok" aria-hidden="true"></span><span data-i18n="motorOnline">Motor central · online</span><span class="ph-relogio" data-relogio></span></p>
+        <p class="ph-nav-estado" id="ph-lado-usuario"></p>
+        <p data-i18n="autoria">Projetado e construído por Ruan Siqueira</p>
+        <a class="ph-lado-voltar" href="../index.html"><span data-icone="voltar"></span><span data-i18n="voltarPortfolio">Voltar ao portfólio</span></a>
+      </div>
+    </aside>
+  </div>
+</div>
+<div class="ph-toasts dy-toast dy-toast-end dy-toast-bottom" id="ph-toasts" role="region" aria-live="polite" aria-label="Avisos" data-i18n-attr="aria-label:avisos"></div>
+
+<!-- Os módulos (modulos/<id>.js) são baixados só quando a rota de cada um abre. -->
+<script defer src="core.js?v=2026100812" data-modulos="modulos/"></script>
+</body>
+</html>
