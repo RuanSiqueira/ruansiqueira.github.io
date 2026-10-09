@@ -411,6 +411,7 @@ a.link-to{padding-right:36px}
 .ficha-links{display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px}
 /* Vídeo da versão completa: tela escura presa por uma tira de fita. Sem pôster, o quadro 16:9 segura o espaço. */
 .reel{margin:0;max-width:52rem}
+.contact-copiado{margin-top:12px;min-height:1.4em;font-size:.9375rem}
 .reel-cta{margin:10px 0 0;font-size:.9375rem}.reel-cta a{font-weight:700}
 .reel figcaption{position:relative;z-index:1;display:inline-block;margin:0 0 -10px 14px;padding:6px 10px 5px;background:var(--tape);color:var(--ink);font:700 .75rem/1.3 var(--f-b);font-stretch:75%;letter-spacing:.14em;text-transform:uppercase;transform:rotate(-.8deg);box-shadow:0 2px 4px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.4)}
 .reel video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:var(--ink-3);border:1px solid var(--line);border-radius:6px;box-shadow:0 6px 14px rgba(0,0,0,.45)}
@@ -1418,9 +1419,10 @@ a.link-to{padding-right:36px}
       <h2 class="label label--ink" id="contato-h"><span data-i18n="contact_h">Contato</span></h2>
       <p class="contact-p" data-i18n="contact_p">Gosto de trocar ideias sobre infraestrutura, integração com ERP e desenvolvimento com IA. Se quiser comentar algum projeto daqui, estou no LinkedIn e no e-mail.</p>
       <div class="contact-actions">
-        <a class="btn btn--ink" href="https://www.linkedin.com/in/ruan-siqueira-1898b7252" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn de Ruan Siqueira (abre em nova aba)" data-i18n-attr="aria-label:li_label">LinkedIn<svg class="ico ico--out" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a>
-        <a class="btn btn--ink" href="mailto:ruandoaqw@gmail.com"><span data-i18n="mail_btn">E-mail</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></a>
+        <a class="btn btn--ink" data-contato="linkedin" href="https://www.linkedin.com/in/ruan-siqueira-1898b7252" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn de Ruan Siqueira (abre em nova aba)" data-i18n-attr="aria-label:li_label">LinkedIn<svg class="ico ico--out" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a>
+        <a class="btn btn--ink" data-contato="email" href="mailto:ruandoaqw@gmail.com"><span data-i18n="mail_btn">E-mail</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></a>
       </div>
+      <p class="contact-copiado" data-contato-aviso role="status" aria-live="polite"></p>
     </div>
   </section>
 </main>
@@ -1871,6 +1873,24 @@ a.link-to{padding-right:36px}
       start();
     }
   }
+})();
+</script>
+<script>
+/* Mensagem pronta para quem chega pelo site: o e-mail abre com assunto e texto; o LinkedIn não aceita texto pelo link, então a mensagem vai para a área de transferência. */
+(() => {
+  const en = () => document.documentElement.lang === 'en';
+  const msg = () => en()
+    ? { a: 'Contact via ruansiqueira.dev.br', t: 'Hi Ruan! I came from your website (ruansiqueira.dev.br) and would like to talk about your projects and the full version of the hub.\n\nMy name:\nCompany:\nBest way to reach me:' }
+    : { a: 'Contato pelo site ruansiqueira.dev.br', t: 'Olá, Ruan! Vim do seu site (ruansiqueira.dev.br) e gostaria de conversar sobre os seus projetos e a versão completa do hub.\n\nMeu nome:\nEmpresa:\nMelhor contato:' };
+  const mail = document.querySelector('[data-contato="email"]');
+  const li = document.querySelector('[data-contato="linkedin"]');
+  const aviso = document.querySelector('[data-contato-aviso]');
+  if (mail) mail.addEventListener('click', () => { const m = msg(); mail.href = 'mailto:ruandoaqw@gmail.com?subject=' + encodeURIComponent(m.a) + '&body=' + encodeURIComponent(m.t); });
+  if (li) li.addEventListener('click', () => {
+    try {
+      navigator.clipboard.writeText(msg().t).then(() => { if (aviso) aviso.textContent = en() ? 'Message copied: just paste it into the LinkedIn chat.' : 'Mensagem copiada: é só colar na conversa do LinkedIn.'; }, () => {});
+    } catch (e) { /* sem área de transferência: o LinkedIn abre do mesmo jeito */ }
+  });
 })();
 </script>
 </body>
