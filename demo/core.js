@@ -195,7 +195,6 @@
     foraContatoTexto: P('Fale comigo e eu apresento o sistema completo funcionando.', 'Get in touch and I will walk you through the full system.'),
     foraLinkedin: P('Falar no LinkedIn', 'Message me on LinkedIn'),
     foraEmail: P('Enviar e-mail', 'Send an email'),
-    msgCopiada: P('Mensagem copiada: é só colar na conversa do LinkedIn.', 'Message copied: just paste it into the LinkedIn chat.'),
     foraVideoRotulo: P(n => 'Vídeo sem som: ' + n + ', versão completa', n => 'Silent video: ' + n + ', full version'),
     beTipos: P('Tipos:', 'Types:'),
     bePreparando: P('Preparando', 'Preparing'),
@@ -1608,7 +1607,7 @@
   function foraDaDemo(o, id) {
     const midia = videoDoCatalogo(id);
     const contato = h('div', { class: 'ph-fora-contato' },
-      h('p', { class: 'ph-fora-contato-titulo' }, TX.foraContatoTitulo), h('p', { class: 'ph-texto-mudo' }, TX.foraContatoTexto), linksContato(itemPorId(id) ? t(itemPorId(id).nome) : ''));
+      h('p', { class: 'ph-fora-contato-titulo' }, TX.foraContatoTitulo), h('p', { class: 'ph-texto-mudo' }, TX.foraContatoTexto), linksContato());
     return cartao({ classe: 'ph-fora', icone: 'lock', titulo: tx('foraTitulo', o.titulo ? t(o.titulo) : ''), conteudo: [h('p', { class: 'ph-texto-mudo' }, TX.foraTexto), midia, contato] });
   }
   /* o vídeo da versão completa (catálogo): no cartão "fora da demonstração" e no fim do tour de um sistema que não tem esse cartão */
@@ -1625,22 +1624,9 @@
     return h('figure', { class: 'ph-fora-midia' }, v, h('figcaption', null, TX.foraVideo));
   }
   /* LinkedIn e e-mail da versão completa: os mesmos no cartão "fora da demonstração" e no fim do tour */
-  /* Mensagem pronta para quem chega pelo site: o e-mail abre com assunto e texto; no LinkedIn (que não aceita texto pelo link) a mensagem vai para a área de transferência. */
-  function mensagemContato(nome) {
-    const en = lang === 'en';
-    const assunto = en ? 'Full version' + (nome ? ': ' + nome : ' of the hub') + ' (via ruansiqueira.dev.br)' : 'Versão completa' + (nome ? ': ' + nome : ' do hub') + ' (via ruansiqueira.dev.br)';
-    const texto = en
-      ? 'Hi Ruan! I came from your website (ruansiqueira.dev.br) and would like to see the full version of ' + (nome || 'the hub') + '.\n\nMy name:\nCompany:\nBest way to reach me:'
-      : 'Olá, Ruan! Vim do seu site (ruansiqueira.dev.br) e gostaria de ver a versão completa ' + (nome ? 'do sistema ' + nome : 'do hub') + '.\n\nMeu nome:\nEmpresa:\nMelhor contato:';
-    return { assunto, texto };
-  }
-  function linksContato(nome) {
-    const m = mensagemContato(nome);
-    const link = (href, ic, texto, tom, aoClicar) => h('a', { class: cls('ph-btn', 'ph-btn--' + tom, 'dy-btn', BTN_TOM[tom], 'ph-btn--p dy-btn-sm'), href, target: '_blank', rel: 'noopener', onclick: aoClicar }, icone(ic), h('span', null, texto));
-    const copiar = () => { try { navigator.clipboard.writeText(m.texto).then(() => toast(TX.msgCopiada, 'info'), () => {}); } catch (e) { /* sem área de transferência: o LinkedIn abre do mesmo jeito */ } };
-    return h('div', { class: 'ph-linha' },
-      link(CONTATO.linkedin, 'externo', TX.foraLinkedin, 'primario', copiar),
-      link('mailto:' + CONTATO.email + '?subject=' + encodeURIComponent(m.assunto) + '&body=' + encodeURIComponent(m.texto), 'email', TX.foraEmail, 'secundario'));
+  function linksContato() {
+    const link = (href, ic, texto, tom) => h('a', { class: cls('ph-btn', 'ph-btn--' + tom, 'dy-btn', BTN_TOM[tom], 'ph-btn--p dy-btn-sm'), href, target: '_blank', rel: 'noopener' }, icone(ic), h('span', null, texto));
+    return h('div', { class: 'ph-linha' }, link(CONTATO.linkedin, 'externo', TX.foraLinkedin, 'primario'), link('mailto:' + CONTATO.email, 'email', TX.foraEmail, 'secundario'));
   }
 
   function criarApi(id) {
@@ -2329,7 +2315,7 @@
             sub === 'manual'
               ? h('a', { class: 'ph-btn ph-btn--primario dy-btn dy-btn-primary dy-btn-sm', href: '#/' + item.id }, h('span', null, TX.entrar), icone('arrow-right'))
               : h('a', { class: 'ph-btn ph-btn--secundario dy-btn dy-btn-sm ph-btn-neutro', href: '#/' + item.id + '/manual' }, icone('livro'), h('span', null, TX.manual)),
-            publico() && botao({ texto: TX.completoBotao, icone: 'lock', tom: 'primario', tamanho: 'p', classe: 'ph-btn-completo', aoClicar: () => modal({ titulo: tx('completoTitulo', t(item.nome)), icone: 'lock', largura: 'm', corpo: [h('p', null, TX.completoTexto), linksContato(t(item.nome))] }) }))),
+            publico() && botao({ texto: TX.completoBotao, icone: 'lock', tom: 'primario', tamanho: 'p', classe: 'ph-btn-completo', aoClicar: () => modal({ titulo: tx('completoTitulo', t(item.nome)), icone: 'lock', largura: 'm', corpo: [h('p', null, TX.completoTexto), linksContato()] }) }))),
         corpo));
   }
 
@@ -2356,7 +2342,7 @@
         onkeydown: e => { if (e.key === 'Escape') fecharPop(); } },
         h('div', { class: 'ph-pop-topo' }, h('p', { class: 'ph-h3', id: tid }, icone('lock'), h('span', null, tx('popTitulo', t(item.nome)))), fechar),
         h('p', { class: 'ph-texto-mudo' }, TX.popTexto),
-        linksContato(t(item.nome)),
+        linksContato(),
         botao({ texto: TX.popContinuar, tom: 'fantasma', tamanho: 'p', classe: 'ph-pop-continuar', aoClicar: fecharPop }));
       document.body.append(popEl);
     }, 6000);
@@ -3233,7 +3219,7 @@
             btn('proximo', { texto: TX.tourProximo, icone: 'seta-dir', tom: 'primario', aoClicar: tourProximo }, !tour.rodando)];
       const passo = tx('tourPasso', String(i + 1).padStart(2, '0'), String(n).padStart(2, '0'));
       b.replaceChildren(...[cab(tour.def.nome), titulo(p.titulo), h('p', { class: 'ph-tour-texto', id: 'ph-tour-x' }, p.texto),
-        chamada && h('div', { class: 'ph-tour-contato' }, !p.fim && h('p', { class: 'ph-fora-contato-titulo' }, TX.foraContatoTitulo), linksContato(tour.def.sistema && itemPorId(tour.def.sistema) ? t(itemPorId(tour.def.sistema).nome) : ''), !p.fim && videoDoCatalogo(tour.def.sistema)), // o contato primeiro: na folha do celular ele fica à vista
+        chamada && h('div', { class: 'ph-tour-contato' }, !p.fim && h('p', { class: 'ph-fora-contato-titulo' }, TX.foraContatoTitulo), linksContato(), !p.fim && videoDoCatalogo(tour.def.sistema)), // o contato primeiro: na folha do celular ele fica à vista
         h('ol', { class: 'ph-tour-caps', 'aria-label': t(TX.tourCapitulos) }, caps.map((c, j) => h('li', { class: cls(j < k && 'is-visto', j === k && 'is-atual'), 'aria-current': j === k ? 'step' : null },
           c.nome, j < k && h('span', { class: 'vh' }, ' ', TX.tourVisto)))),
         dica, rodape(passo, acoes)].filter(Boolean));
