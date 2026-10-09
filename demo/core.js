@@ -57,7 +57,7 @@
   const T3 = (pt, en) => ({ pt, en: en || pt });
   /* Os 6 sistemas com vídeo de ~20 s da versão completa (caminho a partir da raiz do site): o cartão "fora da demonstração" mostra o vídeo.
      O testes/ferramenta_publicar.js lê esta lista para conferir os arquivos. */
-  const CONTATO = { linkedin: 'https://www.linkedin.com/in/ruan-siqueira-1898b7252', email: 'ruandoaqw@gmail.com' }; // os mesmos da seção Contato do portfólio
+  const CONTATO = { linkedin: 'https://www.linkedin.com/in/ruan-siqueira-1898b7252', email: 'ruandoaqw@gmail.com', completo: 'https://ruan-hub-completo.pages.dev/' }; // os mesmos da seção Contato do portfólio
   const VIDEOS = ['nf_autonoma', 'nota_debito', 'controle_verba', 'disparos', 'base', 'leads', 'exportacao', 'raio_x', 'dash_ia', 'pesquisa_clima', 'estoque_epi', 'controle_veiculos', 'carrossel_tv', 'base_conhecimento'];
   const CATALOGO = [
     ['nf_autonoma', 'fiscal', 'receipt', P('Notas fiscais de entrada', 'Inbound invoices'), P('Lança no ERP as notas fiscais de entrada e os CT-es (fretes) da empresa, conferindo cada uma antes de gravar; no modo automático, lança tudo sozinha.', 'Posts the company\'s inbound invoices and CT-es (freight bills) to the ERP, checking each one before writing; in automatic mode, it posts everything on its own.'), T3(['C# / .NET', 'SQL Server', 'API de IA generativa'], ['C# / .NET', 'SQL Server', 'Generative AI API'])],
@@ -186,13 +186,14 @@
     foraContatoTitulo: P('Tem interesse na versão completa?', 'Interested in the full version?'),
     completoBotao: P('Versão completa', 'Full version'),
     popTitulo: P(n => 'Gostou do sistema ' + n + '?', n => 'Like ' + n + '?'),
-    popTexto: P('Você está na versão pública: a tela principal, com dados fictícios. Fale comigo e eu libero a versão completa para a sua empresa.', 'You are in the public version: the main screen, with fictitious data. Get in touch and I will give your company access to the full version.'),
+    popTexto: P('Você está na versão pública: a tela principal, com dados fictícios. Solicite o acesso à versão completa com o seu e-mail, ou fale comigo.', 'You are in the public version: the main screen, with fictitious data. Request access to the full version with your email, or get in touch.'),
     popContinuar: P('Continuar explorando', 'Keep exploring'),
     completoTitulo: P(n => 'Versão completa: ' + n, n => 'Full version: ' + n),
-    completoTexto: P('Esta demonstração pública mostra a tela principal, com dados fictícios. Quer ver o sistema completo funcionando? Fale comigo e eu libero o acesso para a sua empresa.', 'This public demo shows the main screen, with fictitious data. Want to see the full system running? Get in touch and I will give your company access.'),
+    completoTexto: P('Esta demonstração pública mostra a tela principal, com dados fictícios. Quer ver o sistema completo funcionando? Solicite o acesso: você entra com o seu e-mail, deixa uma mensagem e eu libero.', 'This public demo shows the main screen, with fictitious data. Want to see the full system running? Request access: sign in with your email, leave a message and I will grant it.'),
     completoFaixaTitulo: P('Você está na versão pública da demonstração', 'You are in the public version of the demo'),
-    completoFaixaTexto: P('O hub é completo; cada sistema mostra a tela principal. Quer ver algum sistema inteiro? Fale comigo e eu libero o acesso à versão completa.', 'The hub is complete; each system shows its main screen. Want to see a whole system? Get in touch and I will give you access to the full version.'),
-    foraContatoTexto: P('Fale comigo e eu apresento o sistema completo funcionando.', 'Get in touch and I will walk you through the full system.'),
+    completoFaixaTexto: P('O hub é completo; cada sistema mostra a tela principal. Quer ver algum sistema inteiro? Solicite o acesso à versão completa com o seu e-mail.', 'The hub is complete; each system shows its main screen. Want to see a whole system? Request access to the full version with your email.'),
+    foraContatoTexto: P('Solicite o acesso com o seu e-mail e veja o sistema completo funcionando.', 'Request access with your email and see the full system running.'),
+    solicitarAcesso: P('Solicitar acesso', 'Request access'),
     foraLinkedin: P('Falar no LinkedIn', 'Message me on LinkedIn'),
     foraEmail: P('Enviar e-mail', 'Send an email'),
     foraVideoRotulo: P(n => 'Vídeo sem som: ' + n + ', versão completa', n => 'Silent video: ' + n + ', full version'),
@@ -1607,7 +1608,7 @@
   function foraDaDemo(o, id) {
     const midia = videoDoCatalogo(id);
     const contato = h('div', { class: 'ph-fora-contato' },
-      h('p', { class: 'ph-fora-contato-titulo' }, TX.foraContatoTitulo), h('p', { class: 'ph-texto-mudo' }, TX.foraContatoTexto), linksContato());
+      h('p', { class: 'ph-fora-contato-titulo' }, TX.foraContatoTitulo), h('p', { class: 'ph-texto-mudo' }, TX.foraContatoTexto), linksContato(id));
     return cartao({ classe: 'ph-fora', icone: 'lock', titulo: tx('foraTitulo', o.titulo ? t(o.titulo) : ''), conteudo: [h('p', { class: 'ph-texto-mudo' }, TX.foraTexto), midia, contato] });
   }
   /* o vídeo da versão completa (catálogo): no cartão "fora da demonstração" e no fim do tour de um sistema que não tem esse cartão */
@@ -1624,9 +1625,10 @@
     return h('figure', { class: 'ph-fora-midia' }, v, h('figcaption', null, TX.foraVideo));
   }
   /* LinkedIn e e-mail da versão completa: os mesmos no cartão "fora da demonstração" e no fim do tour */
-  function linksContato() {
+  function linksContato(id) {
     const link = (href, ic, texto, tom) => h('a', { class: cls('ph-btn', 'ph-btn--' + tom, 'dy-btn', BTN_TOM[tom], 'ph-btn--p dy-btn-sm'), href, target: '_blank', rel: 'noopener' }, icone(ic), h('span', null, texto));
-    return h('div', { class: 'ph-linha' }, link(CONTATO.linkedin, 'externo', TX.foraLinkedin, 'primario'), link('mailto:' + CONTATO.email, 'email', TX.foraEmail, 'secundario'));
+    const completo = CONTATO.completo + (id ? 'demo/index.html?sistema=' + encodeURIComponent(id) : '');
+    return h('div', { class: 'ph-linha' }, link(completo, 'lock', TX.solicitarAcesso, 'primario'), link(CONTATO.linkedin, 'externo', TX.foraLinkedin, 'secundario'), link('mailto:' + CONTATO.email, 'email', TX.foraEmail, 'secundario'));
   }
 
   function criarApi(id) {
@@ -2315,7 +2317,7 @@
             sub === 'manual'
               ? h('a', { class: 'ph-btn ph-btn--primario dy-btn dy-btn-primary dy-btn-sm', href: '#/' + item.id }, h('span', null, TX.entrar), icone('arrow-right'))
               : h('a', { class: 'ph-btn ph-btn--secundario dy-btn dy-btn-sm ph-btn-neutro', href: '#/' + item.id + '/manual' }, icone('livro'), h('span', null, TX.manual)),
-            publico() && botao({ texto: TX.completoBotao, icone: 'lock', tom: 'primario', tamanho: 'p', classe: 'ph-btn-completo', aoClicar: () => modal({ titulo: tx('completoTitulo', t(item.nome)), icone: 'lock', largura: 'm', corpo: [h('p', null, TX.completoTexto), linksContato()] }) }))),
+            publico() && botao({ texto: TX.completoBotao, icone: 'lock', tom: 'primario', tamanho: 'p', classe: 'ph-btn-completo', aoClicar: () => modal({ titulo: tx('completoTitulo', t(item.nome)), icone: 'lock', largura: 'm', corpo: [h('p', null, TX.completoTexto), linksContato(item.id)] }) }))),
         corpo));
   }
 
@@ -2342,7 +2344,7 @@
         onkeydown: e => { if (e.key === 'Escape') fecharPop(); } },
         h('div', { class: 'ph-pop-topo' }, h('p', { class: 'ph-h3', id: tid }, icone('lock'), h('span', null, tx('popTitulo', t(item.nome)))), fechar),
         h('p', { class: 'ph-texto-mudo' }, TX.popTexto),
-        linksContato(),
+        linksContato(item.id),
         botao({ texto: TX.popContinuar, tom: 'fantasma', tamanho: 'p', classe: 'ph-pop-continuar', aoClicar: fecharPop }));
       document.body.append(popEl);
     }, 6000);
@@ -3219,7 +3221,7 @@
             btn('proximo', { texto: TX.tourProximo, icone: 'seta-dir', tom: 'primario', aoClicar: tourProximo }, !tour.rodando)];
       const passo = tx('tourPasso', String(i + 1).padStart(2, '0'), String(n).padStart(2, '0'));
       b.replaceChildren(...[cab(tour.def.nome), titulo(p.titulo), h('p', { class: 'ph-tour-texto', id: 'ph-tour-x' }, p.texto),
-        chamada && h('div', { class: 'ph-tour-contato' }, !p.fim && h('p', { class: 'ph-fora-contato-titulo' }, TX.foraContatoTitulo), linksContato(), !p.fim && videoDoCatalogo(tour.def.sistema)), // o contato primeiro: na folha do celular ele fica à vista
+        chamada && h('div', { class: 'ph-tour-contato' }, !p.fim && h('p', { class: 'ph-fora-contato-titulo' }, TX.foraContatoTitulo), linksContato(tour.def.sistema), !p.fim && videoDoCatalogo(tour.def.sistema)), // o contato primeiro: na folha do celular ele fica à vista
         h('ol', { class: 'ph-tour-caps', 'aria-label': t(TX.tourCapitulos) }, caps.map((c, j) => h('li', { class: cls(j < k && 'is-visto', j === k && 'is-atual'), 'aria-current': j === k ? 'step' : null },
           c.nome, j < k && h('span', { class: 'vh' }, ' ', TX.tourVisto)))),
         dica, rodape(passo, acoes)].filter(Boolean));
@@ -3398,6 +3400,7 @@
 
   function iniciar() {
     if (iniciado) return;
+    try { const q = new URLSearchParams(location.search).get('sistema'); if (q && /^[a-z0-9_]+$/.test(q) && (!location.hash || location.hash === '#/')) location.hash = '#/' + q; } catch (e) { /* sem URLSearchParams: abre no painel */ }
     app = $('#ph-app');
     main = $('#ph-main');
     if (!app || !main) return;

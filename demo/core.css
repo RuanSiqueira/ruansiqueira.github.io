@@ -542,12 +542,16 @@ body {
 
 /* sistemas por departamento */
 .ph-inicio-filtros { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin: 0 0 16px; }
-.ph-deptos { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(min(22rem, 100%), 1fr)); align-items: start; }
+/* um departamento por faixa, de ponta a ponta; dentro dela, os sistemas em grade de cartões do mesmo tamanho (sem buracos entre departamentos de tamanhos diferentes) */
+.ph-deptos { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
 .ph-depto.dy-card { --cor: var(--ph-accent); padding: 16px 16px 10px; gap: 10px; border-color: color-mix(in srgb, var(--cor) 30%, var(--ph-neon)); }
 .ph-depto-cab h3 { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 650; }
 .ph-depto-cab h3 > .ph-ico { color: var(--cor); }
 .ph-depto-cab p { font-size: 12.5px; color: var(--ph-text-muted); margin-top: 4px; }
-.ph-depto-lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.ph-depto-lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; grid-template-columns: repeat(auto-fill, minmax(min(17rem, 100%), 1fr)); }
+.ph-depto-lista > li { display: flex; min-width: 0; }
+.ph-depto-lista > li > .ph-sis { flex: 1; }
+@media (min-width: 900px) { .ph-depto-cab { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; } .ph-depto-cab p { margin-top: 0; text-align: right; } }
 .ph-sis {
   position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 12px; min-width: 0;
   padding: 10px 10px 10px 12px; border-radius: var(--ph-raio); border: 1px solid transparent;
