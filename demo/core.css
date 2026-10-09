@@ -1524,3 +1524,13 @@ textarea.ph-input { min-height: 76px; resize: vertical; line-height: 1.45; }
 .ph-faixa-completo { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; padding: 16px 20px; margin-bottom: 16px; border-left: 4px solid var(--ph-accent); }
 .ph-faixa-completo .ph-h3 { display: flex; align-items: center; gap: 8px; margin: 0 0 4px; }
 .ph-faixa-completo .ph-texto-mudo { margin: 0; max-width: 70ch; }
+
+/* popup da versão completa (só no público) */
+.ph-pop-completo { position: fixed; right: 24px; bottom: 24px; z-index: 60; background: var(--ph-card); color: var(--ph-text); border: 1px solid var(--ph-border); border-radius: var(--ph-raio-lg); width: min(380px, calc(100vw - 32px)); padding: 16px 18px; display: grid; gap: 10px; box-shadow: var(--ph-sombra-alta); border-left: 4px solid var(--ph-accent); animation: ph-pop-entra .35s var(--ph-saida) both; }
+.ph-pop-topo { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+.ph-pop-topo .ph-h3 { display: flex; align-items: center; gap: 8px; margin: 0; }
+.ph-pop-completo .ph-texto-mudo { margin: 0; }
+.ph-pop-continuar { justify-self: start; }
+@keyframes ph-pop-entra { from { opacity: 0; transform: translateY(12px); } }
+@media (prefers-reduced-motion: reduce) { .ph-pop-completo { animation: none; } }
+@media (max-width: 639.98px) { .ph-pop-completo { right: 16px; left: 16px; bottom: 16px; width: auto; } }

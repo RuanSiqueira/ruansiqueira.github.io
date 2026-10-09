@@ -185,6 +185,9 @@
     foraVideo: P('Veja o sistema completo em ação', 'See the full system in action'),
     foraContatoTitulo: P('Tem interesse na versão completa?', 'Interested in the full version?'),
     completoBotao: P('Versão completa', 'Full version'),
+    popTitulo: P(n => 'Gostou do sistema ' + n + '?', n => 'Like ' + n + '?'),
+    popTexto: P('Você está na versão pública: a tela principal, com dados fictícios. Fale comigo e eu libero a versão completa para a sua empresa.', 'You are in the public version: the main screen, with fictitious data. Get in touch and I will give your company access to the full version.'),
+    popContinuar: P('Continuar explorando', 'Keep exploring'),
     completoTitulo: P(n => 'Versão completa: ' + n, n => 'Full version: ' + n),
     completoTexto: P('Esta demonstração pública mostra a tela principal, com dados fictícios. Quer ver o sistema completo funcionando? Fale comigo e eu libero o acesso para a sua empresa.', 'This public demo shows the main screen, with fictitious data. Want to see the full system running? Get in touch and I will give your company access.'),
     completoFaixaTitulo: P('Você está na versão pública da demonstração', 'You are in the public version of the demo'),
@@ -2316,7 +2319,37 @@
         corpo));
   }
 
+  /* Popup da versão completa (só no público): aparece alguns segundos depois de abrir um sistema, uma vez por sistema em cada visita;
+     não bloqueia a tela, some ao trocar de rota ou ao começar um tour, e não aparece durante o tour nem com um diálogo aberto. */
+  const popsMostrados = new Set();
+  let popEl = null, popTimer = null, popPara = null;
+  /* fecha o cartão; o agendamento só cai quando a rota sai do sistema (desmontar() limpa os timers do core ao montar o módulo, por isso o popup tem o seu) */
+  function fecharPop() {
+    if (popEl) { popEl.remove(); popEl = null; }
+    if (popTimer && rotaAtual().id !== popPara) { clearTimeout(popTimer); popTimer = null; popPara = null; }
+  }
+  function agendarPop(item) {
+    if (!publico() || popsMostrados.has(item.id) || popPara === item.id) return;
+    clearTimeout(popTimer);
+    popPara = item.id;
+    popTimer = setTimeout(() => {
+      popTimer = null; popPara = null;
+      if (tour || abertos.size || popEl || rotaAtual().id !== item.id || popsMostrados.has(item.id)) return;
+      popsMostrados.add(item.id);
+      const tid = uid('pop');
+      const fechar = botao({ icone: 'fechar', titulo: TX.fechar, tom: 'fantasma', tamanho: 'p', aoClicar: fecharPop });
+      popEl = h('aside', { class: 'ph-pop-completo', role: 'dialog', 'aria-modal': 'false', 'aria-labelledby': tid,
+        onkeydown: e => { if (e.key === 'Escape') fecharPop(); } },
+        h('div', { class: 'ph-pop-topo' }, h('p', { class: 'ph-h3', id: tid }, icone('lock'), h('span', null, tx('popTitulo', t(item.nome)))), fechar),
+        h('p', { class: 'ph-texto-mudo' }, TX.popTexto),
+        linksContato(),
+        botao({ texto: TX.popContinuar, tom: 'fantasma', tamanho: 'p', classe: 'ph-pop-continuar', aoClicar: fecharPop }));
+      document.body.append(popEl);
+    }, 6000);
+  }
+
   function telaSistema(item) {
+    agendarPop(item); // aqui e não no depois: quando o arquivo chega depois, o módulo monta sem refazer a tela
     const migs = [{ texto: nomeGrupo(item.grupo) }, { texto: item.nome, href: '#/' + item.id }];
     if (!item.def) {
       if (SOB_DEMANDA && item.catalogo && cargas.get(item.id) !== 'falhou') {
@@ -2840,6 +2873,7 @@
       focoAntes: document.activeElement, perfilInicial: perfilId, perfilAutoInicial: perfilAuto, perfilTroca: null, ...extra };
   }
   function tourIniciar(def, modo) {
+    fecharPop();
     if (!def || !def.passos || !def.passos.length) return;
     const focoAntes = tour ? tour.focoAntes : document.activeElement;
     const perfilAntes = tour && !tour.convite ? { perfilInicial: tour.perfilInicial, perfilAutoInicial: tour.perfilAutoInicial } : {}; // "Ver de novo" lembra o perfil de quem começou
@@ -3315,6 +3349,7 @@
 
   function rotear(navegou, manterFoco) {
     if (!main) return;
+    fecharPop();
     const r = rotaAtual();
     if (r.id === 'tour') { tourDaRota(r.sub); return; } // #/tour (links do portfólio) começa o tour principal; #/tour/passo, no passo a passo
     if (navegou && cargas.get(r.id) === 'falhou') cargas.delete(r.id); // voltar à rota tenta baixar o arquivo de novo
