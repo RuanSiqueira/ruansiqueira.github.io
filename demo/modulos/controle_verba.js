@@ -1,7 +1,7 @@
 /* Controle de verba · versão pública curta do módulo (id controle_verba) para o site.
-   Só a tela principal (Controle de Verba) é navegável, com dados fictícios já prontos; as telas da Base Orçamentária
-   continuam na navegação e mostram o cartão "fora da demonstração". Visual do kit do hub, só tokens --ph-*,
-   nenhuma chamada de rede. Projetado e construído por Ruan Siqueira. */
+   A tela principal (Controle de Verba) é navegável, com dados fictícios já prontos. O orçamento anual com os gestores é
+   outro sistema, o planejamento_orcamentario. Visual do kit do hub, só tokens --ph-*, nenhuma chamada de rede.
+   Projetado e construído por Ruan Siqueira. */
 (() => {
   'use strict';
   if (!window.Hub) return;
@@ -21,7 +21,7 @@
   const lim = v => Math.max(0, Math.min(100, v));
 
   const IC = {
-    chevl: '<path d="m15 18-6-6 6-6"/>', chevr: '<path d="m9 18 6-6-6-6"/>', chevd: '<path d="m6 9 6 6 6-6"/>',
+    chevl: '<path d="m15 18-6-6 6-6"/>', chevr: '<path d="m9 18 6-6-6-6"/>',
     refresh: '<path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/>',
     bell: '<path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/>',
     lock: '<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
@@ -29,14 +29,7 @@
     info: '<circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>',
     eye: '<path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/>',
     server: '<rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/><line x1="6" x2="6.01" y1="6" y2="6"/><line x1="6" x2="6.01" y1="18" y2="18"/>',
-    sliders: '<path d="M4 21v-7"/><path d="M4 10V3"/><path d="M12 21v-9"/><path d="M12 8V3"/><path d="M20 21v-5"/><path d="M20 12V3"/><path d="M2 14h4"/><path d="M10 8h4"/><path d="M18 16h4"/>',
     wallet: '<path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/>',
-    handcoins: '<path d="M11 15h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 17"/><path d="m7 21 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9"/><path d="m2 16 6 6"/><circle cx="16" cy="9" r="2.9"/><circle cx="6" cy="5" r="3"/>',
-    dashboard: '<rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/>',
-    clipboard: '<rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/>',
-    table: '<path d="M12 3v18"/><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/>',
-    users: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
-    gear: '<path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/>',
   };
 
   /* um bloco de estilo (#cvb-css), todo seletor prefixado por .cvb, só com tokens --ph-* e nenhuma regra por tema */
@@ -47,12 +40,7 @@
     '.cvb .num{font-variant-numeric:tabular-nums lining-nums}.cvb .mono{font-family:var(--ph-font-mono);font-variant-numeric:tabular-nums}.cvb .neg{color:var(--ph-erro)}',
     '.cvb .acbtn:focus-visible,.cvb .x-erp:focus-visible{outline:var(--ph-foco-largura) solid var(--ph-focus);outline-offset:2px}',
     '.cvb .hint{font-size:12px;color:var(--ph-text-dim)}',
-    /* faixa "Controles da demonstração" e botões tracejados (só existem na demonstração) */
-    '.cvb .x-demo{border-bottom:1px dashed var(--ph-border-soft);background:var(--ph-surface);font-size:13px;color:var(--ph-text-muted)}',
-    '.cvb .x-demo summary{cursor:pointer;padding:8px 16px;display:flex;align-items:center;flex-wrap:wrap;gap:4px 8px;list-style:none;' + ROT + ';color:var(--ph-text-dim)}.cvb .x-demo summary:focus-visible{outline-offset:-2px}',
-    '.cvb .x-demo summary::-webkit-details-marker{display:none}.cvb .x-demo summary .nota{font:400 12px/1.5 var(--ph-font);letter-spacing:0;text-transform:none;font-stretch:100%}.cvb .x-demo[open] summary .x-ic:last-child{transform:rotate(180deg)}',
-    '.cvb .x-demo .corpo{display:flex;flex-direction:column;gap:8px;padding:2px 16px 12px}.cvb .x-demo .ln{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;min-width:0}',
-    '.cvb .x-demo .rt{' + ROT + ';color:var(--ph-text-dim);min-width:96px}.cvb .x-demo .dim{font-size:12.5px;color:var(--ph-text-dim)}',
+    /* botões tracejados (só existem na demonstração) */
     '.cvb .x-erp{display:inline-flex;align-items:center;gap:4px;padding:1px 7px;border:1px dashed currentColor;border-radius:var(--ph-raio);background:none;color:var(--ph-accent-light);font:inherit;font-size:11.5px;font-weight:600;line-height:1.6;white-space:nowrap;vertical-align:middle;cursor:pointer}.cvb .x-erp:hover{background:var(--ph-accent-soft)}',
     '.cvb .x-aids{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin-top:12px}.cvb .x-aids .x-leg{font-size:11.5px;color:var(--ph-text-dim)}',
     /* barra do painel */
@@ -98,13 +86,13 @@
     '.cvb .det-scroll{max-height:336px;overflow-y:auto;overscroll-behavior:contain;padding-right:4px}.cvb .det-tab{width:100%;border-collapse:collapse}',
     '.cvb .acct .det-tab td{padding:5px 6px;border-top:1px solid var(--ph-border-soft);border-bottom:0;font-size:12.5px;text-align:left;vertical-align:middle;white-space:normal;background:none;box-shadow:none}',
     '.cvb .acct .det-tab td.r{text-align:right;font-weight:650;white-space:nowrap}.cvb .acct .det-tab td.mono{white-space:nowrap}.cvb .det-dt{font-size:12px;color:var(--ph-text-dim)}.cvb .det-cofre .det-dt{min-width:130px}.cvb .det-vazio{margin:2px 0 6px;font-size:12.5px;color:var(--ph-text-dim)}.cvb .det-tab .ph-badge .x-ic{width:11px;height:11px}',
-    '.cvb.cv .state.ph-card{padding:8px}.cvb.dsp.x-tela{padding:0}',
+    '.cvb.cv .state.ph-card{padding:8px}',
     /* responsivo */
     '@media (max-width:1100px){.cvb .cfg-pop{position:fixed;left:12px;right:12px;top:auto;bottom:12px;width:auto;max-width:580px;max-height:76vh;margin:0 auto;overflow:auto}}',
     '@media (max-width:1080px){.cvb.cv .hero.ph-card{grid-template-columns:minmax(0,1fr)}}',
     '@media (max-width:900px){.cvb .det-cols{grid-template-columns:minmax(0,1fr)}}',
     '@media (max-width:760px){.cvb .acct .gauge-cell{display:none}.cvb .det{padding:12px 10px}.cvb.cv .legend{gap:12px 20px}.cvb.cv .hero.ph-card{padding:16px}}',
-    '@media (max-width:640px){.cvb .x-demo .corpo{padding-inline:12px}.cvb.cv .cv-head .spacer{display:none}}',
+    '@media (max-width:640px){.cvb.cv .cv-head .spacer{display:none}}',
     '@media (prefers-reduced-motion:reduce){.cvb *{transition:none!important}}',
   ].join('\n');
   function injetarCss() {
@@ -151,58 +139,50 @@
     icone: 'dinheiro',
     nome: P('Controle de verba', 'Budget control'),
     resumo: P(
-      'Verba de cada conta em uma tela: planejado, previsto, realizado e saldo, com um robô que acompanha as ordens de compra, aviso de estouro e a base orçamentária do ano seguinte, montada com os gestores.',
-      'The budget of each account on one screen: planned, committed, actual and balance, with a robot that follows purchase orders, overrun alerts and next year\'s budget base, built with the managers.'
+      'A camada inteligente sobre o ERP para a verba de cada conta: planejado, previsto, realizado e saldo, cofre de reservas mantido por um robô e aviso de estouro a quem pediu e a quem aprovou a compra.',
+      'The intelligent layer on top of the ERP for the budget of each account: planned, committed, actual and balance, a reservation vault kept by a robot and overrun alerts to whoever requested and whoever approved the purchase.'
     ),
     manual: {
       pt: {
-        destaque: 'O Controle de Verba mostra, conta por conta, quanto foi planejado, quanto já está comprometido em ordens de compra e quanto virou despesa, para o gestor saber quanto ainda cabe antes de comprar. A Base Orçamentária fecha o ciclo: os gestores montam o orçamento do ano seguinte mês a mês, o Financeiro aprova e tudo fica com histórico.',
-        oque: 'O problema. A verba de cada conta era planejada no ERP, mas nenhuma tela respondia a pergunta do dia a dia: quanto ainda cabe nesta conta antes de comprar? Notas de ordens de compra ficavam presas por falta de verba, o financeiro parava para destravar e o orçamento do ano seguinte circulava em planilhas por e-mail.\n\nO que o sistema faz. Para o período e a unidade escolhidos, o painel mostra o planejado, o previsto, o realizado e o saldo de cada conta; ao abrir a conta aparece o extrato com as ordens de compra e as notas. Um robô acompanha cada ordem de compra até a nota chegar, destrava casos de verba presa e avisa estouro a quem pediu e a quem aprovou. O planejado do ERP nunca é alterado e tudo nasceu em modo sombra. Com o robô de notas fiscais, a verba nunca é contada duas vezes.\n\nNesta demonstração pública, a tela principal do Controle de Verba funciona com dados fictícios; as telas da Base Orçamentária ficam fora da demonstração.',
-        finalidade: 'Dar ao gestor, em uma tela, o número que antes exigia uma consulta ao financeiro: quanto ainda cabe nesta conta. Trocar o conserto depois do problema pela visão antes da compra, e as planilhas por e-mail por um fluxo único de orçamento, com histórico.\n\nProjetado e construído por Ruan Siqueira.',
+        destaque: 'O Controle de Verba mostra, conta por conta, quanto foi planejado, quanto já está comprometido em ordens de compra e quanto virou despesa, para o gestor saber quanto ainda cabe antes de comprar.',
+        oque: 'O problema. A verba de cada conta era planejada no ERP, mas nenhuma tela respondia a pergunta do dia a dia: quanto ainda cabe nesta conta antes de comprar? Notas de ordens de compra ficavam presas por falta de verba e o financeiro parava para destravar.\n\nO que o sistema faz. Para o período e a unidade escolhidos, o painel mostra o planejado, o previsto, o realizado e o saldo de cada conta; ao abrir a conta aparece o extrato com as ordens de compra e as notas. Um robô acompanha cada ordem de compra até a nota chegar, destrava casos de verba presa e avisa estouro a quem pediu e a quem aprovou. O planejado do ERP nunca é alterado e tudo nasceu em modo sombra. Com o robô de notas fiscais, a verba nunca é contada duas vezes. O orçamento anual montado com os gestores é outro sistema do hub, o Planejamento orçamentário.\n\nNesta demonstração pública, a tela principal do Controle de Verba funciona com dados fictícios.',
+        finalidade: 'Dar ao gestor, em uma tela, o número que antes exigia uma consulta ao financeiro: quanto ainda cabe nesta conta. Trocar o conserto depois do problema pela visão antes da compra.\n\nProjetado e construído por Ruan Siqueira.',
         alcance: [
           'Painel por conta com planejado, previsto, realizado, saldo e consumo, por período e por unidade de negócio',
           'Extrato da conta com as ordens de compra, as notas e o que aguarda liberação',
           'Robô que acompanha cada ordem de compra e avisa estouro a quem pediu e a quem aprovou',
-          'Orçamento anual montado pelos gestores, com envio, aprovação e histórico',
-          'Validação: o realizado bateu com a planilha de orçamento em 30 de 30 valores, ao centavo',
+          'Validação: as fórmulas do painel conferidas conta a conta contra a tela de saldo de verbas do ERP',
         ],
         tecnologias: ['C# / .NET', 'SQL Server', 'Next.js / React', 'TypeScript'],
       },
       en: {
-        destaque: 'Budget Control shows, account by account, how much was planned, how much is already committed in purchase orders and how much has become expense, so managers know how much still fits before buying. Budget Base closes the cycle: managers build next year\'s budget month by month, Finance approves and everything keeps a history.',
-        oque: 'The problem. The budget of each account was planned in the ERP, but the everyday question had no answer on a single screen: how much still fits in this account before buying? Purchase order invoices got stuck for lack of budget, finance stopped to unblock them and next year\'s budget travelled in spreadsheets by email.\n\nWhat the system does. For the chosen period and business unit, the dashboard shows the planned, committed, actual and balance of each account; opening an account shows its statement with the purchase orders and invoices. A robot follows each purchase order until the invoice arrives, unblocks stuck budget cases and alerts overruns to whoever requested and whoever approved. The planned amount in the ERP is never changed and everything started in shadow mode. Together with the invoice robot, the budget is never counted twice.\n\nIn this public demo, the main Budget Control screen works on fictitious data; the Budget Base screens are outside the demo.',
-        finalidade: 'Give managers, on one screen, the answer that used to require a call to finance: how much still fits in this account. Replace the fix after the problem with the view before the purchase, and the spreadsheets sent by email with a single budget flow, with history.\n\nDesigned and built by Ruan Siqueira.',
+        destaque: 'Budget Control shows, account by account, how much was planned, how much is already committed in purchase orders and how much has become expense, so managers know how much still fits before buying.',
+        oque: 'The problem. The budget of each account was planned in the ERP, but the everyday question had no answer on a single screen: how much still fits in this account before buying? Purchase order invoices got stuck for lack of budget and finance stopped to unblock them.\n\nWhat the system does. For the chosen period and business unit, the dashboard shows the planned, committed, actual and balance of each account; opening an account shows its statement with the purchase orders and invoices. A robot follows each purchase order until the invoice arrives, unblocks stuck budget cases and alerts overruns to whoever requested and whoever approved. The planned amount in the ERP is never changed and everything started in shadow mode. Together with the invoice robot, the budget is never counted twice. The yearly budget built with the managers is another system of the hub, Budget planning.\n\nIn this public demo, the main Budget Control screen works on fictitious data.',
+        finalidade: 'Give managers, on one screen, the answer that used to require a call to finance: how much still fits in this account. Replace the fix after the problem with the view before the purchase.\n\nDesigned and built by Ruan Siqueira.',
         alcance: [
           'Dashboard per account with planned, committed, actual, balance and usage, by period and business unit',
           'Account statement with the purchase orders, the invoices and what awaits release',
           'A robot that follows each purchase order and alerts overruns to whoever requested and whoever approved',
-          'Yearly budget built by the managers, with submit, approval and history',
-          'Validation: actuals matched the budget spreadsheet in 30 of 30 values, to the cent',
+          'Validation: the dashboard formulas checked account by account against the ERP budget balance screen',
         ],
         tecnologias: ['C# / .NET', 'SQL Server', 'Next.js / React', 'TypeScript'],
       },
     },
-    /* mini tour: só ganchos do módulo (.cvb, data-f), nada que dependa do idioma. O 1o passo volta ao Controle de Verba
-       (o tour termina na Base Orçamentária e o estado sobrevive); o 3o abre a primeira entre 6205 e 6425 que estiver fechada. */
+    /* mini tour: só ganchos do módulo (.cvb, data-f), nada que dependa do idioma. O 2o passo abre a primeira entre 6205 e 6425
+       que estiver fechada. Sem aba fora da demonstração, o último passo traz no balão o vídeo e o contato (CONTRATO, seção 10). */
     tour: [
-      { alvo: '.cvb [data-f="sis-verba"]', acao: 'clicar', titulo: P('Quanto ainda cabe na conta?', 'How much still fits in the account?'),
-        texto: P('Antes, o gestor perguntava ao financeiro antes de cada compra. Agora o Controle de Verba mostra isso em uma tela, conta por conta.',
-          'Managers used to ask finance before every purchase. Now Budget Control shows it on one screen, account by account.') },
-      { alvo: '.cvb .hero', titulo: P('O saldo em primeiro lugar', 'The balance comes first'),
-        texto: P('Para o período e a unidade escolhidos na barra de cima, o saldo disponível vem em destaque. Ao lado, a verba dividida em realizado, previsto em ordens de compra e livre.',
-          'For the period and business unit picked in the bar above, the available balance stands out. Next to it, the budget split into actual, committed in purchase orders and free.') },
+      { alvo: '.cvb .hero', titulo: P('Quanto ainda cabe na conta?', 'How much still fits in the account?'),
+        texto: P('Antes, o gestor perguntava ao financeiro antes de cada compra. Agora o saldo disponível vem em destaque, com a verba dividida em realizado, previsto em ordens de compra e livre.',
+          'Managers used to ask finance before every purchase. Now the available balance stands out, with the budget split into actual, committed in purchase orders and free.') },
       { alvo: '.cvb tr.clk:not(.aberta) [data-f="conta-6205"], .cvb tr.clk:not(.aberta) [data-f="conta-6425"]', acao: 'clicar', titulo: P('Conta por conta', 'Account by account'),
         texto: P('Cada linha traz planejado, previsto, realizado, saldo e consumo, com a cor do risco. Um clique na conta abre o extrato.',
           'Each row shows planned, committed, actual, balance and usage, coloured by risk. One click on the account opens its statement.') },
       { alvo: '.cvb .det', titulo: P('O extrato e o cofre do robô', 'The statement and the robot vault'),
-        texto: P('Ordens de compra e notas da conta, ao lado do cofre com o que o robô reservou. Se a conta estoura, ele avisa quem pediu e quem aprovou; o sino no topo conta cada ciclo.',
-          'Purchase orders and invoices of the account, next to the vault with what the robot reserved. If the account overruns, it alerts whoever requested and whoever approved; the bell at the top lists every cycle.') },
-      { alvo: '.cvb [data-f="sis-base"]', acao: 'clicar', titulo: P('E o orçamento do ano seguinte', 'And next year\'s budget'),
-        texto: P('Na Base Orçamentária os gestores montam o orçamento mês a mês, o Financeiro aprova e tudo fica com histórico. Nada de planilha por e-mail.',
-          'In Budget Base managers build the budget month by month, Finance approves and everything keeps a history. No more spreadsheets by email.') },
-      { alvo: '.cvb .ph-fora', titulo: P('O resto está na versão completa', 'The rest is in the full version'),
-        texto: P('A demonstração pública mostra a tela principal. Quer ver o sistema inteiro funcionando? É só me chamar por aqui.',
-          'The public demo shows the main screen. Want to see the whole system running? Just reach me from here.') },
+        texto: P('Ordens de compra e notas da conta, ao lado do cofre com o que o robô reservou. Se a conta estoura, ele avisa quem pediu e quem aprovou.',
+          'Purchase orders and invoices of the account, next to the vault with what the robot reserved. If the account overruns, it alerts whoever requested and whoever approved.') },
+      { alvo: '.cvb .bell', titulo: P('O robô, ciclo a ciclo', 'The robot, cycle by cycle'),
+        texto: P('O sino conta cada ação do robô. Quer ver o sistema inteiro funcionando? É só me chamar por aqui.',
+          'The bell lists every robot action. Want to see the whole system running? Just reach me from here.') },
     ],
 
     montar(el, api) {
@@ -216,8 +196,6 @@
       const ic = (nome, tam = 14) => h('span', { class: 'x-ic', 'aria-hidden': 'true', style: 'width:' + tam + 'px;height:' + tam + 'px', html: '<svg viewBox="0 0 24 24" focusable="false">' + (IC[nome] || IC.info) + '</svg>' });
       const e = (tag, classe, ...kids) => h(tag, classe ? { class: classe } : null, ...kids);
       const CAMPO = ui.campo({}).input.className, TAB = ui.tabela({ colunas: [], busca: false }).querySelector('table').className;
-      const fora = titulo => (api.ui.foraDaDemo ? api.ui.foraDaDemo({ titulo })
-        : ui.vazio({ icone: 'info', titulo, texto: P('Esta tela fica fora da demonstração pública.', 'This screen is outside the public demo.') }));
       let raiz = null;
 
       const btn = (texto, aoClicar, o = {}) => {
@@ -419,30 +397,15 @@
           h('div', { class: 'x-aids' }, e('span', 'x-leg', P('Recursos da demonstração:', 'Demo aids:')), botaoConsulta(() => rastroConta(c))));
       }
 
-      /* ---------- Base Orçamentária: as telas na navegação, fora da demonstração pública ---------- */
-      const TELAS_BO = [['meu', P('Meu orçamento', 'My budget'), 'wallet'], ['verba', P('Solicitações de verba', 'Budget requests'), 'handcoins'], ['painel', P('Painel', 'Dashboard'), 'dashboard'],
-        ['orcamentos', P('Orçamentos', 'Budgets'), 'clipboard'], ['grade', P('Grade', 'Grid'), 'table'], ['gestores', P('Gestores', 'Managers'), 'users'], ['config', P('Configuração', 'Settings'), 'gear']];
-      const pintarBase = p => p.append(ui.abas({ rotulo: P('Telas da Base Orçamentária', 'Budget Base screens'), chave: 'boTela',
-        abas: TELAS_BO.map(([id, rotulo, icn]) => ({ id, rotulo, icone: IC[icn], montar: painel => painel.append(fora(rotulo)) })) }));
-
-      /* ---------- casca: faixa "Controles da demonstração" e o sistema escolhido ---------- */
-      const SIS = [['verba', P('Controle de Verba', 'Budget Control')], ['base', P('Base Orçamentária', 'Budget Base')]];
-      E.sis = E.sis === 'base' ? 'base' : 'verba';
-      const estreito = () => { try { return matchMedia('(max-width: 639.98px)').matches; } catch (err) { return false; } };
+      /* ---------- casca: a tela principal ---------- */
       raiz = h('div', { class: 'cvb x-shell' });
       el.append(raiz);
 
       /* redesenha a tela; foco = valor de data-f do controle que volta a ter o foco */
       function pintar(foco) {
-        const sistemas = ui.chips({ rotulo: P('Sistema', 'System'), valor: E.sis, opcoes: SIS.map(s => ({ valor: s[0], texto: t(s[1]) })), aoMudar: v => { E.sis = v === 'base' ? 'base' : 'verba'; E.pop = false; pintar('sis-' + E.sis); } });
-        [...sistemas.children].forEach((b, i) => b.setAttribute('data-f', 'sis-' + SIS[i][0]));
-        const faixaDemo = h('details', { class: 'x-demo', open: E.demoAberto != null ? E.demoAberto : !estreito(), ontoggle: ev => { E.demoAberto = !!ev.target.open; } },
-          h('summary', null, ic('sliders', 13), h('span', null, P('Controles da demonstração', 'Demo controls')), e('span', 'nota', P('não fazem parte do sistema real, assim como os botões tracejados nas telas', 'not part of the real system, nor are the dashed buttons on the screens')), ic('chevd', 13)),
-          h('div', { class: 'corpo' },
-            h('div', { class: 'ln' }, e('span', 'rt', P('Sistema', 'System')), sistemas, e('span', 'dim', P('no hub real são dois projetos do Financeiro', 'in the real hub these are two Finance projects')))));
-        const telaEl = h('div', { class: E.sis === 'verba' ? 'cvb cv x-tela ph-pagina' : 'cvb dsp x-tela' });
-        (E.sis === 'verba' ? pintarVerba : pintarBase)(telaEl);
-        raiz.replaceChildren(faixaDemo, telaEl);
+        const telaEl = h('div', { class: 'cvb cv x-tela ph-pagina' });
+        pintarVerba(telaEl);
+        raiz.replaceChildren(telaEl);
         const alvo = foco && raiz.querySelector('[data-f="' + foco + '"]');
         if (alvo) alvo.focus();
       }

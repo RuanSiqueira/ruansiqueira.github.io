@@ -45,9 +45,9 @@
   let altoContraste = ler(CHAVE_CONTRASTE) != null ? ler(CHAVE_CONTRASTE) === '1' : (ehContraste(ler(CHAVE_VISUAL)) || consulta('(prefers-contrast: more)'));
   const visualAplicado = () => (altoContraste ? 'contraste' : visual);
 
-  /* ---------- catálogo: os 14 sistemas aparecem no menu e no painel sem baixar o arquivo do módulo ---------- */
+  /* ---------- catálogo: os 15 sistemas aparecem no menu e no painel sem baixar o arquivo do módulo ---------- */
   const GRUPOS = [
-    { id: 'fiscal', nome: P('Fiscal e financeiro', 'Tax and finance'), icone: 'landmark', descricao: P('Entrada de notas, notas de débito e controle da verba orçamentária.', 'Inbound invoices, debit notes and budget control.') },
+    { id: 'fiscal', nome: P('Fiscal e financeiro', 'Tax and finance'), icone: 'landmark', descricao: P('Entrada de notas, notas de débito, controle de verba e planejamento orçamentário.', 'Inbound invoices, debit notes, budget control and budget planning.') },
     { id: 'comercial', nome: P('Comercial', 'Sales'), icone: 'chart-line', descricao: P('Reativação da base, funis, campanhas, CRM e atendimento automático.', 'Customer reactivation, funnels, campaigns, CRM and automated service.') },
     { id: 'pessoas', nome: P('Pessoas', 'People'), icone: 'users-round', descricao: P('Pesquisas de clima, eNPS e entrevistas de desligamento.', 'Climate surveys, eNPS and exit interviews.') },
     { id: 'operacao', nome: P('Operação', 'Operations'), icone: 'factory', descricao: P('Almoxarifado, frota e comunicação nas TVs.', 'Stockroom, fleet and factory TV signage.') },
@@ -55,14 +55,15 @@
     { id: 'outros', nome: P('Outros', 'Other'), icone: 'folder', descricao: P('Sistemas fora do catálogo.', 'Systems outside the catalog.') },
   ];
   const T3 = (pt, en) => ({ pt, en: en || pt });
-  /* Os 6 sistemas com vídeo de ~20 s da versão completa (caminho a partir da raiz do site): o cartão "fora da demonstração" mostra o vídeo.
+  /* Os sistemas com vídeo de ~20 s da versão completa (hoje todos; caminho a partir da raiz do site): o cartão "fora da demonstração" mostra o vídeo.
      O testes/ferramenta_publicar.js lê esta lista para conferir os arquivos. */
   const CONTATO = { linkedin: 'https://www.linkedin.com/in/ruan-siqueira-1898b7252', email: 'ruandoaqw@gmail.com', completo: 'https://ruan-hub-completo.pages.dev/' }; // os mesmos da seção Contato do portfólio
-  const VIDEOS = ['nf_autonoma', 'nota_debito', 'controle_verba', 'disparos', 'base', 'leads', 'exportacao', 'raio_x', 'dash_ia', 'pesquisa_clima', 'estoque_epi', 'controle_veiculos', 'carrossel_tv', 'base_conhecimento'];
+  const VIDEOS = ['nf_autonoma', 'nota_debito', 'controle_verba', 'planejamento_orcamentario', 'disparos', 'base', 'leads', 'exportacao', 'raio_x', 'dash_ia', 'pesquisa_clima', 'estoque_epi', 'controle_veiculos', 'carrossel_tv', 'base_conhecimento'];
   const CATALOGO = [
     ['nf_autonoma', 'fiscal', 'receipt', P('Notas fiscais de entrada', 'Inbound invoices'), P('Lança no ERP as notas fiscais de entrada e os CT-es (fretes) da empresa, conferindo cada uma antes de gravar; no modo automático, lança tudo sozinha.', 'Posts the company\'s inbound invoices and CT-es (freight bills) to the ERP, checking each one before writing; in automatic mode, it posts everything on its own.'), T3(['C# / .NET', 'SQL Server', 'API de IA generativa'], ['C# / .NET', 'SQL Server', 'Generative AI API'])],
     ['nota_debito', 'fiscal', 'file-minus', P('Notas de débito', 'Debit notes'), P('Nota de Débito de pagamento antecipado exigida pela Reforma Tributária: emitida a partir do pedido e acompanhada até a venda, sem controle manual.', 'Advance-payment debit note required by Brazil\'s tax reform: issued from the sales order and tracked through to the sale, with no manual control.'), T3(['C# / .NET', 'SQL Server', 'Next.js / React'])],
-    ['controle_verba', 'fiscal', 'wallet', P('Controle de verba', 'Budget control'), P('A camada inteligente sobre o ERP para a verba de cada conta: planejado, previsto, realizado e saldo, cofre de reservas mantido por um robô, aviso de estouro e a base orçamentária do ano seguinte.', 'The intelligent layer on top of the ERP for the budget of each account: planned, committed, actual and balance, a reservation vault kept by a robot, overrun alerts and next year\'s budget base.'), T3(['C# / .NET', 'SQL Server', 'Next.js / React'])],
+    ['controle_verba', 'fiscal', 'wallet', P('Controle de verba', 'Budget control'), P('A camada inteligente sobre o ERP para a verba de cada conta: planejado, previsto, realizado e saldo, cofre de reservas mantido por um robô e aviso de estouro.', 'The intelligent layer on top of the ERP for the budget of each account: planned, committed, actual and balance, a reservation vault kept by a robot and overrun alerts.'), T3(['C# / .NET', 'SQL Server', 'Next.js / React'])],
+    ['planejamento_orcamentario', 'fiscal', 'calculator', P('Planejamento orçamentário', 'Budget planning'), P('O orçamento anual de cada gestor no lugar da planilha: grade de contas por mês com o realizado do ano anterior como referência, envio para aprovação e pedidos de verba entre gestores.', 'Each manager\'s annual budget in place of the spreadsheet: an accounts-by-month grid with last year\'s actuals as a reference, submission for approval and budget requests between managers.'), T3(['C# / .NET', 'SQL Server', 'Next.js / React'])],
     ['disparos', 'comercial', 'refresh-cw', P('Reativação de clientes', 'Customer reactivation'), P('Reativa a base de clientes pelo WhatsApp e mede quanto virou orçamento e compra no funil do vendedor.', 'Reactivates the customer base on WhatsApp and measures how much turned into quotes and orders in the sales rep\'s funnel.'), T3(['C# / .NET', 'SQL Server', 'Next.js / React'])],
     ['base', 'comercial', 'funnel', P('Funis do CRM', 'CRM funnels'), P('A camada inteligente sobre o ERP que leva ao funil de vendas todo cliente tocado pelas campanhas de WhatsApp, pela Regra do Ciclo: um card por cliente, para o vendedor certo, sem duplicar.', 'The intelligent layer on top of the ERP that takes every customer touched by WhatsApp campaigns to the sales funnel, using the Cycle Rule: one card per customer, for the right sales rep, with no duplicates.'), T3(['C# / .NET', 'SQL Server', 'Next.js / React'])],
     ['leads', 'comercial', 'megaphone', P('Leads e campanhas', 'Leads and campaigns'), P('Responde ao lead do marketing em minutos pelo WhatsApp, avança a oportunidade no ERP, manda o lead de exportação para o setor certo e dispara campanhas por lista.', 'Answers the marketing lead within minutes on WhatsApp, moves the opportunity forward in the ERP, routes export leads to the right team and runs list campaigns.'), T3(['Next.js / React', 'TypeScript', 'C# / .NET'])],
@@ -151,7 +152,7 @@
     abrindoModulo: P('Abrindo o sistema', 'Opening the system'),
     naoEncontrado: P('Página não encontrada', 'Page not found'),
     naoEncontradoSis: P('Sistema não encontrado', 'System not found'),
-    naoEncontradoTexto: P('O endereço não corresponde a nenhum dos 14 sistemas nem a uma tela do hub.', 'This address does not match any of the 14 systems or a hub screen.'),
+    naoEncontradoTexto: P('O endereço não corresponde a nenhum dos 15 sistemas nem a uma tela do hub.', 'This address does not match any of the 15 systems or a hub screen.'),
     irInicio: P('Voltar ao painel', 'Back to the dashboard'),
     tentarDeNovo: P('Tentar de novo', 'Try again'),
     secoes: P('Seções', 'Sections'),
@@ -334,6 +335,7 @@
     receipt: "<path d='M12 17V7'/><path d='M16 8h-6a2 2 0 0 0 0 4h4a2 2 0 0 1 0 4H8'/><path d='M4 3a1 1 0 0 1 1-1 1.3 1.3 0 0 1 .7.2l.933.6a1.3 1.3 0 0 0 1.4 0l.934-.6a1.3 1.3 0 0 1 1.4 0l.933.6a1.3 1.3 0 0 0 1.4 0l.933-.6a1.3 1.3 0 0 1 1.4 0l.934.6a1.3 1.3 0 0 0 1.4 0l.933-.6A1.3 1.3 0 0 1 19 2a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1 1.3 1.3 0 0 1-.7-.2l-.933-.6a1.3 1.3 0 0 0-1.4 0l-.934.6a1.3 1.3 0 0 1-1.4 0l-.933-.6a1.3 1.3 0 0 0-1.4 0l-.933.6a1.3 1.3 0 0 1-1.4 0l-.934-.6a1.3 1.3 0 0 0-1.4 0l-.933.6a1.3 1.3 0 0 1-.7.2 1 1 0 0 1-1-1z'/>",
     'file-minus': "<path d='M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z'/><path d='M14 2v5a1 1 0 0 0 1 1h5'/><path d='M9 15h6'/>",
     wallet: "<path d='M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1'/><path d='M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4'/>",
+    calculator: "<rect width='16' height='20' x='4' y='2' rx='2'/><line x1='8' x2='16' y1='6' y2='6'/><line x1='16' x2='16' y1='14' y2='18'/><path d='M16 10h.01'/><path d='M12 10h.01'/><path d='M8 10h.01'/><path d='M12 14h.01'/><path d='M8 14h.01'/><path d='M12 18h.01'/><path d='M8 18h.01'/>",
     'refresh-cw': "<path d='M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8'/><path d='M21 3v5h-5'/><path d='M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16'/><path d='M8 16H3v5'/>",
     funnel: "<path d='M10 20a1 1 0 0 0 .553.895l2 1A1 1 0 0 0 14 21v-7a2 2 0 0 1 .517-1.341L21.74 4.67A1 1 0 0 0 21 3H3a1 1 0 0 0-.742 1.67l7.225 7.989A2 2 0 0 1 10 14z'/>",
     megaphone: "<path d='M11 6a13 13 0 0 0 8.4-2.8A1 1 0 0 1 21 4v12a1 1 0 0 1-1.6.8A13 13 0 0 0 11 14H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z'/><path d='M6 14a12 12 0 0 0 2.4 7.2 2 2 0 0 0 3.2-2.4A8 8 0 0 1 10 14'/><path d='M8 6v8'/>",
@@ -561,7 +563,7 @@
   }
   const temDemo = x => !!(x.def || (SOB_DEMANDA && x.catalogo && cargas.get(x.id) !== 'falhou'));
 
-  /* Menu, painel, busca e contagem mostram só o catálogo (os 14). Um módulo fora do catálogo (página de teste do kit)
+  /* Menu, painel, busca e contagem mostram só o catálogo (os 15). Um módulo fora do catálogo (página de teste do kit)
      abre só pelo endereço direto e nunca aparece para o visitante nem entra na contagem. */
   function itens() {
     return CATALOGO.map(c => {
@@ -590,7 +592,7 @@
   const PERFIS = {
     visitante: { rotulo: P('Visitante', 'Visitor'), descricao: P('Navega pelo painel e pelos sistemas, sem administração.', 'Browses the dashboard and the systems, no administration.'), nome: P('Visitante da demonstração', 'Demo visitor'), email: 'visitante@empresademo.example', admin: false, super: false, deptos: [], meus: ['nf_autonoma', 'raio_x', 'base_conhecimento'] },
     membro: { rotulo: P('Membro', 'Member'), descricao: P('Opera os sistemas do seu departamento.', 'Operates the systems of their department.'), nome: 'Lucas Andrade', email: 'lucas.andrade@empresademo.example', admin: false, super: false, deptos: ['fiscal'], meus: ['nf_autonoma', 'nota_debito'] },
-    gestor: { rotulo: P('Gestor do departamento', 'Department manager'), descricao: P('Também administra as pessoas do seu departamento.', 'Also manages the people in their department.'), nome: 'Carla Menezes', email: 'carla.menezes@empresademo.example', admin: true, super: false, deptos: ['fiscal'], meus: ['nf_autonoma', 'nota_debito', 'controle_verba'] },
+    gestor: { rotulo: P('Gestor do departamento', 'Department manager'), descricao: P('Também administra as pessoas do seu departamento.', 'Also manages the people in their department.'), nome: 'Carla Menezes', email: 'carla.menezes@empresademo.example', admin: true, super: false, deptos: ['fiscal'], meus: ['nf_autonoma', 'nota_debito', 'controle_verba', 'planejamento_orcamentario'] },
     super: { rotulo: P('Super admin', 'Super admin'), descricao: P('Vê e administra todo o hub: usuários, departamentos e auditoria.', 'Sees and manages the whole hub: users, departments and audit log.'), nome: 'Marina Costa', email: 'marina.costa@empresademo.example', admin: true, super: true, deptos: [], meus: ['nf_autonoma', 'controle_verba', 'base_conhecimento', 'carrossel_tv'] },
   };
   let perfilId = PERFIS[ler(CHAVE_PERFIL)] ? ler(CHAVE_PERFIL) : null;
@@ -672,6 +674,7 @@
     ['Robô NF', P('Nota lançada', 'Invoice posted'), 'ok', P('NF 15510 de Fornecedor A Ltda lançada na produção', 'Invoice 15510 from Fornecedor A Ltda posted to production'), 'nf_autonoma', true],
     ['Juliana Rocha', P('Manual publicado', 'Manual published'), 'info', P('Procedimento de recebimento de notas, versão 3', 'Invoice receiving procedure, version 3'), 'base_conhecimento'],
     ['Robô NF', P('Pendência', 'Pending'), 'alerta', P('NF 3318 aguarda conferência do comprador', 'Invoice 3318 is waiting for the buyer\'s review'), 'nf_autonoma'],
+    ['Carla Menezes', P('Orçamento enviado', 'Budget submitted'), 'info', P('Orçamento anual da Administração enviado para aprovação', 'Annual budget for Administration submitted for approval'), 'planejamento_orcamentario'],
   ];
   const TOM_TIPO = { create: 'ok', update: 'info', delete: 'erro' };
   /* Todo gesto da demonstração (administração, tema, ações dos sistemas) entra na auditoria e no feed do painel. */
@@ -2041,13 +2044,13 @@
     const linhasTerm = [
       ['$', 'projecthub iniciar --empresa "EMPRESA DEMO"', ''],
       ['>', P('conectando ao motor central ....... ', 'connecting to the core engine ..... '), 'ok'],
-      ['>', P('14 sistemas em 5 departamentos .... ', '14 systems in 5 departments ....... '), 'ok'],
+      ['>', P('15 sistemas em 5 departamentos .... ', '15 systems in 5 departments ....... '), 'ok'],
       ['>', P('robô de notas fiscais ............. ', 'invoice robot ..................... '), P('em execução', 'running')],
       ['>', P('modo demonstração: dados fictícios', 'demo mode: fictitious data'), ''],
     ];
     const term = h('div', { class: 'ph-terminal', 'aria-hidden': 'true' });
     const pintarTerm = n => term.replaceChildren(...linhasTerm.slice(0, n).map(([pre, txt, ok], k) => h('pre', { class: cls(k === linhasTerm.length - 1 && 'is-aviso') }, h('span', { class: 'ph-term-pre' }, pre), h('code', null, txt, ok && h('span', { class: 'ph-term-ok' }, ok === 'ok' ? 'ok' : ok))), n >= linhasTerm.length && h('pre', null, h('span', { class: 'ph-term-pre' }, '$'), h('span', { class: 'ph-cursor' }))));
-    const nums = [[14, P('sistemas', 'systems')], [5, P('departamentos', 'departments')], [42, P('lançamentos hoje', 'postings today')]];
+    const nums = [[15, P('sistemas', 'systems')], [5, P('departamentos', 'departments')], [42, P('lançamentos hoje', 'postings today')]];
     const el = h('div', { class: 'ph-login' },
       h('div', { class: 'ph-login-topo' },
         h('span', { class: 'ph-marca-txt' }, marca(false), h('span', null, 'ProjectHub')),
@@ -2141,7 +2144,7 @@
     const saud = hora < 12 ? P('Bom dia', 'Good morning') : hora < 18 ? P('Boa tarde', 'Good afternoon') : P('Boa noite', 'Good evening');
     const primeiroNome = p.id === 'visitante' ? t(P('visitante', 'visitor')) : String(t(p.nome)).split(' ')[0];
     const tiles = [
-      { cor: 'azul', ic: 'app-window', rot: P('Sistemas ativos', 'Active systems'), valor: lista.length, nota: P('em 5 departamentos', 'in 5 departments'), serie: [9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 13, 14, 14, 14], pat: 'PAT-0101', leds: 1 },
+      { cor: 'azul', ic: 'app-window', rot: P('Sistemas ativos', 'Active systems'), valor: lista.length, nota: P('em 5 departamentos', 'in 5 departments'), serie: [9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 14, 15, 15], pat: 'PAT-0101', leds: 1 },
       { cor: 'verde', ic: 'zap', rot: P('Lançamentos hoje', 'Postings today'), valor: d.lancHoje, nota: P('8 a mais que ontem', '8 more than yesterday'), serie: [18, 26, 22, 31, 28, 35, 30, 38, 29, 34, 36, 33, 34, 42], pat: 'PAT-0102', id: 'lanc', leds: 2 },
       { cor: 'ambar', ic: 'hourglass', rot: P('Pendências', 'Pending items'), valor: 7, nota: P('2 notas bloqueadas na fila', '2 invoices blocked in the queue'), serie: [12, 10, 11, 9, 9, 8, 10, 9, 8, 7, 8, 6, 8, 7], pat: 'PAT-0103', leds: 1 },
       { cor: 'vermelho', ic: 'triangle-alert', rot: P('Alertas', 'Alerts'), valor: 2, nota: P('1 de verba, 1 de estoque', '1 budget, 1 stock'), serie: [1, 0, 2, 1, 1, 3, 2, 1, 2, 2, 1, 3, 2, 2], pat: 'PAT-0104', leds: 3 },
@@ -2798,11 +2801,11 @@
         { capitulo: C.entrada, rota: '#/entrar', alvo: '.ph-login-temas', titulo: TX.tourNome,
           texto: P('Bem-vindo. Eu levo você pela mão, na interface de verdade. Primeiro, como o hub se veste: Plaqueta, Rack ou Crachá. A escolha vale na hora.', 'Welcome. I will walk you through the real interface. First, how the hub dresses up: Asset tag, Rack or Badge. The choice applies at once.') },
         { capitulo: C.entrada, rota: '#/entrar', antes: 'escolher-visitante', alvo: '[data-acao="entrar-visitante"]', acao: 'clicar', titulo: P('Entre como visitante', 'Enter as a visitor'),
-          texto: P('Sem senha e sem cadastro. Cada perfil vê o hub de um jeito; o visitante navega pelo painel e pelos 14 sistemas.', 'No password and no sign-up. Each profile sees the hub its own way; the visitor browses the dashboard and the 14 systems.') },
+          texto: P('Sem senha e sem cadastro. Cada perfil vê o hub de um jeito; o visitante navega pelo painel e pelos 15 sistemas.', 'No password and no sign-up. Each profile sees the hub its own way; the visitor browses the dashboard and the 15 systems.') },
         { capitulo: C.painel, rota: '#/', alvo: () => (depoisDe(2600) ? '.ph-feed' : '.ph-tiles'), titulo: P('O painel do dia', 'Today\'s dashboard'),
           texto: P('Primeiro os indicadores, uma cor cada. Depois a atividade em tempo real: robôs e pessoas registrando o que fazem, uma linha nova a cada poucos segundos.', 'First the indicators, one color each. Then live activity: robots and people logging what they do, a new line every few seconds.') },
         { capitulo: C.sistema, rota: '#/', antes: 'abrir-menu', alvo: '#ph-nav a[href="#/nf_autonoma"]', acao: 'clicar', titulo: P('Abra um sistema pelo menu', 'Open a system from the menu'),
-          texto: P('Os 14 sistemas ficam no menu, por departamento. Vamos ao robô que lança no ERP as notas fiscais de entrada.', 'The 14 systems live in the menu, by department. Let us visit the robot that posts inbound invoices to the ERP.') },
+          texto: P('Os 15 sistemas ficam no menu, por departamento. Vamos ao robô que lança no ERP as notas fiscais de entrada.', 'The 15 systems live in the menu, by department. Let us visit the robot that posts inbound invoices to the ERP.') },
         { capitulo: C.sistema, rota: '#/nf_autonoma', alvo: () => (largo() && !depoisDe(2600) ? '#ph-lateral' : '.ph-sysbar'), titulo: P('O menu recolhe, o sistema ganha espaço', 'The menu folds, the system gets room'),
           texto: P('Dentro de um sistema o menu vira um trilho de ícones e a moldura mostra departamento, situação e número de patrimônio.', 'Inside a system the menu becomes an icon rail and the frame shows department, status and asset number.') },
         { capitulo: C.sistema, rota: '#/nf_autonoma', antes: telaDaFila, alvo: '.nfa-real button.n-robo.ph-btn--ok', acao: 'clicar', titulo: P('A fila viva e um gesto', 'The live queue and one gesture'),

@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ruan Siqueira · TI de ponta a ponta</title>
-<meta name="description" content="Ruan Siqueira, engenheiro de software em Marau-RS. Da infraestrutura à integração com ERP e IA: um hub de 14 sistemas sobre o ERP, projetado e construído por ele sozinho, com seis projetos em detalhe, do robô de notas fiscais ao CRM.">
+<meta name="description" content="Ruan Siqueira, engenheiro de software em Marau-RS. Da infraestrutura à integração com ERP e IA: um hub de 15 sistemas sobre o ERP, projetado e construído por ele sozinho, com sete projetos em detalhe, do robô de notas fiscais ao planejamento orçamentário.">
 <meta name="theme-color" content="#111214">
 <link rel="canonical" href="https://ruansiqueira.dev.br/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Ruan Siqueira">
 <meta property="og:title" content="Ruan Siqueira · TI de ponta a ponta">
-<meta property="og:description" content="Da infraestrutura à integração com ERP e IA: um hub de 14 sistemas sobre o ERP e seis projetos em detalhe (NF Autônoma, Nota de Débito, AUTO CRM, Motor de clientes, Pesquisa de Clima e RH e Carrossel TV), com demonstração navegável.">
+<meta property="og:description" content="Da infraestrutura à integração com ERP e IA: um hub de 15 sistemas sobre o ERP e sete projetos em detalhe (NF Autônoma, Nota de Débito, AUTO CRM, Motor de clientes, Pesquisa de Clima e RH, Carrossel TV e Planejamento orçamentário), com demonstração navegável.">
 <meta property="og:url" content="https://ruansiqueira.dev.br/">
 <meta property="og:image" content="https://ruansiqueira.dev.br/assets/foto.jpg">
 <meta property="og:image:width" content="888">
@@ -169,7 +169,7 @@ h1,h2,h3,h4,p{margin:0}
 /* Fileira de plaquetas */
 .row{margin-top:auto;padding-top:clamp(16px,3vh,36px)}
 .tags-wrap{position:relative}
-.tags{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px}
+.tags{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:12px}
 .tag,.pl{
   position:relative;display:flex;flex-direction:column;min-width:0;overflow:hidden;
   padding:12px 14px 0;border-radius:6px;
@@ -177,7 +177,7 @@ h1,h2,h3,h4,p{margin:0}
   color:var(--alu-ink);text-shadow:0 1px 0 rgba(255,255,255,.35);
   box-shadow:0 10px 20px -4px rgba(0,0,0,.6),0 2px 3px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.6),inset 0 -1px 0 rgba(0,0,0,.25);
 }
-.tag{transition:transform .3s var(--out),box-shadow .3s var(--out)}
+.tag{padding-inline:12px;transition:transform .3s var(--out),box-shadow .3s var(--out)}
 .tag:hover{transform:translateY(-3px);box-shadow:0 16px 26px -6px rgba(0,0,0,.65),0 2px 3px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.6),inset 0 -1px 0 rgba(0,0,0,.25)}
 .tag:focus-within{outline:2px solid var(--tape);outline-offset:3px}
 .tag:nth-child(2){background-position:-180px -40px,0 0}
@@ -185,6 +185,7 @@ h1,h2,h3,h4,p{margin:0}
 .tag:nth-child(4){background-position:-90px -170px,0 0}
 .tag:nth-child(5){background-position:-270px -10px,0 0}
 .tag:nth-child(6){background-position:-450px -90px,0 0}
+.tag:nth-child(7){background-position:-540px -200px,0 0}
 .tag-top{display:flex;align-items:center;justify-content:space-between;gap:8px;font:700 .6875rem/1 var(--f-b);font-stretch:75%;letter-spacing:.18em;text-transform:uppercase;color:var(--alu-ink-2)}
 .rivet{flex:none;width:9px;height:9px;border-radius:50%;background:#A2A8AE;box-shadow:inset 0 1px 1.5px rgba(0,0,0,.5),0 1px 0 rgba(255,255,255,.7)}
 .bc{height:40px;margin-top:10px;color:var(--ink)}
@@ -196,7 +197,8 @@ h1,h2,h3,h4,p{margin:0}
 .tag-name a::after{content:"";position:absolute;inset:0;z-index:1}
 .tag-name a:focus-visible{outline:none}
 .tag:hover .tag-name a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.22em}
-.tag-measure{margin:6px 0 14px;font-size:.8125rem;line-height:1.38;color:var(--alu-ink-2)}
+.tag-measure{margin:6px 0 14px;font-size:.8125rem;font-stretch:92%;line-height:1.38;color:var(--alu-ink-2)}
+.tag .tag-state{margin-inline:-12px;padding-inline:12px}
 .tag-state{display:flex;align-items:center;gap:8px;margin:auto -14px 0;padding:9px 14px 10px;background:rgba(17,18,20,.1);color:var(--alu-ink-2);text-shadow:none;font:700 .6875rem/1 var(--f-b);font-stretch:75%;letter-spacing:.16em;text-transform:uppercase;transition:background-color .45s var(--out),color .45s var(--out)}
 .tag-state::before{content:"";flex:none;width:8px;height:8px;border:1.5px solid currentColor;transition:background-color .45s var(--out),border-color .45s var(--out)}
 .st{display:none}
@@ -496,8 +498,11 @@ a.link-to{padding-right:36px}
 .motion .blade{animation:cut .36s cubic-bezier(.6,0,.4,1) 2.62s both}
 .motion .printer{animation:jolt .22s ease-out 2.7s both}
 
+/* 7 plaquetas: abaixo de 1180 px a primeira (o projeto mais difícil) ocupa duas colunas, e as linhas fecham cheias: 2+1+1 / 4 aqui e 2 / 2 / 2 / 2 no celular */
 @media (max-width:1180px){
-  .tags{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .tags{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .tag:first-child{grid-column:span 2}
+  .tag:first-child .bc{width:min(100%,15rem);margin-inline:auto}
 }
 /* Até 1080 px o menu desce para uma segunda linha da barra: plaquetas de alumínio presas num cabo, que rola de lado quando não cabe */
 @media (max-width:1080px){
@@ -674,7 +679,7 @@ a.link-to{padding-right:36px}
     <div class="rest">
       <div class="lede wrap">
         <p class="phrase" data-i18n="phrase">Da infraestrutura à integração com ERP e IA.</p>
-        <p class="apoio" data-i18n="apoio">Sou engenheiro de software e trabalho na TI da Robustec, onde projetei e construí sozinho um portal interno com 14 sistemas, vários deles integrados ao ERP.</p>
+        <p class="apoio" data-i18n="apoio">Sou engenheiro de software e trabalho na TI da Robustec, onde projetei e construí sozinho um portal interno com 15 sistemas, vários deles integrados ao ERP.</p>
         <div class="actions">
           <a class="btn" href="#projetos"><span data-i18n="cta">Ver projetos</span><svg class="ico ico--down" aria-hidden="true" focusable="false"><use href="#i-down"/></svg></a>
           <a class="ext" href="demo/index.html#/entrar"><span data-i18n="cta2">Entrar no hub de demonstração</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-right"/></svg></a>
@@ -733,10 +738,18 @@ a.link-to{padding-right:36px}
               <p class="tag-measure" data-i18n="p6m">Cada TV da empresa com o recado certo para o seu setor, trocado em um clique de dentro do hub.</p>
               <p class="tag-state"><span class="st st-idle" data-i18n="st_idle">Aguardando leitura</span><span class="st st-read" data-i18n="st_read">Conferindo</span><span class="st st-prod" data-i18n="st_prod">Em produção</span></p>
             </li>
+            <li class="tag" data-state="prod">
+              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Patrimônio</span><span class="rivet"></span></div>
+              <div class="bc" data-code="PAT-0007"></div>
+              <div class="bc-num" aria-hidden="true">PAT-0007</div>
+              <h3 class="tag-name"><a href="#p-planejamento-orcamentario" data-i18n="p7n">Planejamento orçamentário</a></h3>
+              <p class="tag-measure" data-i18n="p7m">Cada gestor monta o orçamento do ano no hub, com o ano anterior ao lado, e envia para aprovação. Fim da planilha por e-mail.</p>
+              <p class="tag-state"><span class="st st-idle" data-i18n="st_idle">Aguardando leitura</span><span class="st st-read" data-i18n="st_read">Conferindo</span><span class="st st-prod" data-i18n="st_prod">Em produção</span></p>
+            </li>
           </ol>
           <div class="laser" aria-hidden="true"></div>
         </div>
-        <p class="readout" data-readout>6 de 6 lidas · em produção</p>
+        <p class="readout" data-readout>7 de 7 lidas · em produção</p>
       </div>
     </div>
   </section>
@@ -770,7 +783,7 @@ a.link-to{padding-right:36px}
         <ol class="trail">
           <li>
             <span class="yr" data-i18n="tr1_y">jan. 2026 até hoje</span>
-            <div><h4><span data-i18n="tr1_r">Analista de TI</span> · <span class="org">Robustec</span></h4><p data-i18n="tr1_d">Projetei e construí sozinho o hub interno que reúne 14 sistemas, com 3 níveis de acesso, 26 rotinas automáticas registradas e integração com o ERP.</p></div>
+            <div><h4><span data-i18n="tr1_r">Analista de TI</span> · <span class="org">Robustec</span></h4><p data-i18n="tr1_d">Projetei e construí sozinho o hub interno que reúne 15 sistemas, com 3 níveis de acesso, 26 rotinas automáticas registradas e integração com o ERP.</p></div>
           </li>
           <li>
             <span class="yr" data-i18n="tr2_y">2024 a 2025</span>
@@ -812,7 +825,7 @@ a.link-to{padding-right:36px}
       <div class="hub-copy">
         <p data-i18n="hub_p1">Uma camada inteligente sobre o ERP: o cérebro que conecta fiscal, financeiro, comercial e RH, e automatiza o que o ERP sozinho não faz. Projetei e construí sozinho este portal interno na Robustec, onde antes os controles de cada área ficavam em planilhas e ferramentas separadas.</p>
         <p data-i18n="hub_p1b">Ele se integra ao ERP que a empresa já usa, mas não depende dele para existir: cadastros, regras, permissões, auditoria e rotinas moram no próprio hub. Se a empresa precisar, ele cresce para fazer o papel do ERP.</p>
-        <p data-i18n="hub_p2">Quase tudo conversa por ele. Cada sistema entra como um módulo, com um login só, 3 níveis de acesso, permissão por projeto e registro das ações críticas. Os seis projetos desta página vivem aqui dentro, e cada um dos 14 sistemas abre na demonstração.</p>
+        <p data-i18n="hub_p2">Quase tudo conversa por ele. Cada sistema entra como um módulo, com um login só, 3 níveis de acesso, permissão por projeto e registro das ações críticas. Os sete projetos desta página vivem aqui dentro, e cada um dos 15 sistemas abre na demonstração.</p>
         <p data-i18n="hub_p3">Por trás, há 26 rotinas automáticas registradas em segundo plano, e parte delas integra o hub ao ERP. Como o banco do ERP é compartilhado com a empresa inteira, a primeira consulta que otimizo é a minha, e toda automação nasce com regras de consumo para não pesar no trabalho de ninguém.</p>
         <p data-i18n="hub_p4">O hub de demonstração tem um motor de temas no próprio código: três visuais únicos, cada um com um conceito, que trocam a interface inteira na hora. A Plaqueta, de etiqueta de patrimônio, o Rack de servidores e o Crachá de acesso, além de um modo de alto contraste para acessibilidade. Os sistemas seguem o mesmo visual do hub, dentro de uma moldura própria.</p>
       </div>
@@ -821,7 +834,7 @@ a.link-to{padding-right:36px}
         <span class="rivet r-tl"></span><span class="rivet r-tr"></span><span class="rivet r-bl"></span><span class="rivet r-br"></span>
         <div class="plate-head">
           <div class="plate-id"><span class="plate-k" data-i18n="asset">Patrimônio</span><span class="plate-num">PAT-0000</span></div>
-          <div class="plate-title"><strong data-i18n="plate_title">Sistemas do portal</strong><span data-i18n="plate_sub">14 módulos com login único. Toque em qualquer um para abrir na demonstração.</span></div>
+          <div class="plate-title"><strong data-i18n="plate_title">Sistemas do portal</strong><span data-i18n="plate_sub">15 módulos com login único. Toque em qualquer um para abrir na demonstração.</span></div>
           <div class="bc bc--plate" data-code="PAT-0000"></div>
         </div>
         <ol class="register">
@@ -834,11 +847,12 @@ a.link-to{padding-right:36px}
           <li><a href="demo/index.html#/raio_x"><span class="reg-n">07</span><span class="reg-name" data-i18n="s07">Raio-X do cliente</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
           <li><a href="demo/index.html#/dash_ia"><span class="reg-n">08</span><span class="reg-name" data-i18n="s08">Atendimento com IA</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
           <li><a href="demo/index.html#/controle_verba"><span class="reg-n">09</span><span class="reg-name" data-i18n="s09">Controle de verba</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
-          <li><a href="demo/index.html#/estoque_epi"><span class="reg-n">10</span><span class="reg-name" data-i18n="s10">Almoxarifado</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
-          <li><a href="demo/index.html#/controle_veiculos"><span class="reg-n">11</span><span class="reg-name" data-i18n="s11">Controle de veículos</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
-          <li><a href="demo/index.html#/pesquisa_clima"><span class="reg-n">12</span><span class="reg-name" data-i18n="s12">Pesquisa de clima</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
-          <li><a href="demo/index.html#/base_conhecimento"><span class="reg-n">13</span><span class="reg-name" data-i18n="s13">Base de conhecimento</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
-          <li><a href="demo/index.html#/carrossel_tv"><span class="reg-n">14</span><span class="reg-name" data-i18n="s14">Comunicação nas TVs</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
+          <li><a href="demo/index.html#/planejamento_orcamentario"><span class="reg-n">10</span><span class="reg-name" data-i18n="s10">Planejamento orçamentário</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
+          <li><a href="demo/index.html#/estoque_epi"><span class="reg-n">11</span><span class="reg-name" data-i18n="s11">Almoxarifado</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
+          <li><a href="demo/index.html#/controle_veiculos"><span class="reg-n">12</span><span class="reg-name" data-i18n="s12">Controle de veículos</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
+          <li><a href="demo/index.html#/pesquisa_clima"><span class="reg-n">13</span><span class="reg-name" data-i18n="s13">Pesquisa de clima</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
+          <li><a href="demo/index.html#/base_conhecimento"><span class="reg-n">14</span><span class="reg-name" data-i18n="s14">Base de conhecimento</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
+          <li><a href="demo/index.html#/carrossel_tv"><span class="reg-n">15</span><span class="reg-name" data-i18n="s15">Comunicação nas TVs</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
         </ol>
       </div>
 
@@ -861,7 +875,7 @@ a.link-to{padding-right:36px}
               <a class="node sys-node" href="#p-nf-autonoma"><strong data-i18n="p1n">NF Autônoma</strong><span>PAT-0001</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-down"/></svg></a>
               <ul class="sys-links">
                 <li class="link"><span class="node link-to link-to--erp"><strong>ERP</strong></span><span class="vh">: </span><span class="link-tag" data-i18n="c1a">Lê a nota e a ordem de compra e lança a nota completa no ERP</span></li>
-                <li class="link"><span class="node link-to"><strong data-i18n="s10">Controle de verba</strong></span><span class="vh">: </span><span class="link-tag" data-i18n="c1b">Confere a verba antes do lançamento</span></li>
+                <li class="link"><span class="node link-to"><strong data-i18n="s09">Controle de verba</strong></span><span class="vh">: </span><span class="link-tag" data-i18n="c1b">Confere a verba antes do lançamento</span></li>
               </ul>
             </li>
             <li class="sys">
@@ -895,6 +909,12 @@ a.link-to{padding-right:36px}
                 <li class="link"><span class="node link-to"><strong data-i18n="conv_tvs">TVs da empresa</strong></span><span class="vh">: </span><span class="link-tag" data-i18n="c6a">Entrega o carrossel de cada TV e recebe o sinal de vida; não fala com o ERP</span></li>
               </ul>
             </li>
+            <li class="sys">
+              <a class="node sys-node" href="#p-planejamento-orcamentario"><strong data-i18n="p7n">Planejamento orçamentário</strong><span>PAT-0007</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-down"/></svg></a>
+              <ul class="sys-links">
+                <li class="link"><span class="node link-to link-to--erp"><strong>ERP</strong></span><span class="vh">: </span><span class="link-tag" data-i18n="c7a">Lê as contas e o realizado do ano anterior; somente leitura</span></li>
+              </ul>
+            </li>
           </ol>
           <figcaption data-i18n="conv_cap">Cada cabo é uma conversa que passa pelo hub. Login, permissões, envio de WhatsApp, e-mail e IA generativa são serviços comuns, usados por mais de um sistema, e tudo o que grava no ERP passa por travas de segurança.</figcaption>
         </figure>
@@ -925,7 +945,7 @@ a.link-to{padding-right:36px}
   <section class="projects" id="projetos" aria-labelledby="projetos-h">
     <div class="wrap">
       <h2 class="label label--paper" id="projetos-h"><span data-i18n="projects_h">Projetos</span></h2>
-      <p class="sec-p" data-i18n="projects_p">Seis sistemas do hub, do mais difícil para o mais simples. Cada ficha traz o problema, como o sistema funciona, como medi, o resultado e um vídeo do sistema completo, e abre a tela principal e o manual na demonstração.</p>
+      <p class="sec-p" data-i18n="projects_p">Sete sistemas do hub, do mais difícil para o mais simples. Cada ficha traz o problema, como o sistema funciona, como medi, o resultado e um vídeo do sistema completo, e abre a tela principal e o manual na demonstração.</p>
 
       <div class="fichas">
         <!-- PAT-0001 · o ciclo abre a ficha; medições em tabela -->
@@ -1328,6 +1348,63 @@ a.link-to{padding-right:36px}
             </div>
           </div>
         </article>
+
+        <!-- PAT-0007 · plaqueta à esquerda, o ciclo abre a ficha; situação, o que fiz, como medi e resultado em duas colunas -->
+        <article class="ficha" id="p-planejamento-orcamentario" aria-labelledby="p7-h">
+          <div class="ficha-plate">
+            <div class="pl">
+              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Patrimônio</span><span class="rivet"></span></div>
+              <div class="bc" data-code="PAT-0007"></div>
+              <p class="bc-num">PAT-0007</p>
+              <p class="tag-state"><span data-i18n="st_prod">Em produção</span></p>
+            </div>
+          </div>
+          <div class="ficha-body">
+            <header>
+              <h3 class="ficha-title" id="p7-h" data-i18n="p7n">Planejamento orçamentário</h3>
+              <p class="ficha-line" data-i18n="p7l">O orçamento anual da empresa, montado com os gestores dentro do hub. Cada um preenche as suas contas mês a mês, com o realizado do ano anterior como referência, e envia para aprovação. Durante o ano, um gestor pode pedir verba da conta de outro, e quem decide é o dono da conta.</p>
+            </header>
+            <div>
+              <h4 class="mini-h" data-i18n="lbl_cycle">Ciclo completo</h4>
+              <ol class="flow">
+                <li><span class="flow-n" aria-hidden="true">01</span><span data-i18n="n7_f1">Grade de contas vinda do ERP</span></li>
+                <li><span class="flow-n" aria-hidden="true">02</span><span data-i18n="n7_f2">Gestor preenche mês a mês</span></li>
+                <li><span class="flow-n" aria-hidden="true">03</span><span data-i18n="n7_f3">Envio para aprovação</span></li>
+                <li><span class="flow-n" aria-hidden="true">04</span><span data-i18n="n7_f4">Aprova, devolve ou reabre</span></li>
+                <li><span class="flow-n" aria-hidden="true">05</span><span data-i18n="n7_f5">Orçamento do ano aprovado</span></li>
+                <li><span class="flow-n" aria-hidden="true">06</span><span data-i18n="n7_f6">Pedidos de verba entre gestores</span></li>
+              </ol>
+            </div>
+            <dl class="spec spec--split">
+              <div class="sp-sit"><dt data-i18n="lbl_sit">Situação</dt><dd data-i18n="n7_sit">Cada gestor montava o orçamento do ano numa planilha própria, com o realizado do ano anterior copiado ao lado. As planilhas circulavam por e-mail, voltavam devolvidas para ajuste e eram consolidadas à mão, e não havia um lugar só para saber quem já tinha enviado, o que estava aprovado e quanto cada conta ainda tinha para usar.</dd></div>
+              <div class="sp-did"><dt data-i18n="lbl_did">O que fiz</dt><dd><ol class="did">
+                <li data-i18n="n7_d1">Levantei com o Financeiro como a planilha era montada e projetei e construí sozinho o sistema, do banco de dados à tela.</li>
+                <li data-i18n="n7_d2">Troquei a planilha por uma grade de contas por mês dentro do hub, com o realizado do ano anterior ao lado, lido do ERP sem gravar nada nele.</li>
+                <li data-i18n="n7_d3">Poupei digitação: um valor se repete até dezembro com um clique, e o gestor abre na hora outra conta gerencial quando precisa.</li>
+                <li data-i18n="n7_d4">Criei o caminho da aprovação: o gestor envia, e quem cuida do orçamento aprova, devolve, ajusta ou reabre, com cada passo guardado no histórico daquele orçamento.</li>
+                <li data-i18n="n7_d5">Criei a solicitação de verba: um gestor pede para usar a conta de outro, o dono aprova ou recusa e acompanha o saldo da conta a cada pedido.</li>
+                <li data-i18n="n7_d6">Refiz a primeira versão do zero, mais simples, quando vi que ela pedia cadastros que ninguém precisava manter. O prazo virou um interruptor por ano.</li>
+              </ol></dd></div>
+              <div class="sp-how"><dt data-i18n="lbl_how">Como medi</dt><dd data-i18n="n7_how">Antes de escolher de onde viria o realizado de referência, comparei a planilha de uma gestora com as fontes do ERP, célula por célula, e fiquei com a que batia ao centavo. A mesma comparação mostrou que a planilha mudava de critério no meio do ano; no sistema, o critério é um só.</dd></div>
+              <div class="sp-res"><dt data-i18n="lbl_res">Resultado</dt><dd class="res" data-i18n="n7_res">O orçamento do ano saiu da planilha e passou a viver no hub: cada gestor preenche e envia o seu, quem aprova acompanha todos num só lugar, e cada pedido de verba entre gestores fica registrado com quem pediu, quanto e quem decidiu. Nenhum e-mail é disparado e nada é escrito no ERP.</dd></div>
+            </dl>
+            <div>
+              <h4 class="mini-h" data-i18n="lbl_tech">Tecnologias</h4>
+              <ul class="cables">
+                <li>C# / .NET</li><li>ASP.NET Core</li><li data-i18n="n7_t3">SQL Server / T-SQL (transações)</li><li>Next.js / React / TypeScript</li><li data-i18n="n7_t5">Integração com ERP (somente leitura)</li>
+              </ul>
+            </div>
+            <figure class="reel">
+              <figcaption data-i18n="vid_cap">O sistema completo em 20 segundos</figcaption>
+              <video controls muted loop playsinline preload="none" width="1280" height="720" poster="assets/videos/planejamento_orcamentario.jpg"><source src="assets/videos/planejamento_orcamentario.mp4" type="video/mp4"><source src="assets/videos/planejamento_orcamentario.webm" type="video/webm"></video>
+            </figure>
+            <p class="reel-cta"><span data-i18n="reel_cta">Quer ver este sistema completo funcionando?</span> <a href="https://ruan-hub-completo.pages.dev/demo/index.html?sistema=planejamento_orcamentario" target="_blank" rel="noopener" data-i18n="reel_cta_link">Solicite o acesso</a></p>
+            <div class="ficha-links">
+              <a class="btn btn--sm" href="demo/index.html#/planejamento_orcamentario"><span data-i18n="open_sys">Abrir o sistema</span><svg class="ico ico--right" aria-hidden="true" focusable="false"><use href="#i-right"/></svg></a>
+              <a class="ext" href="demo/index.html#/planejamento_orcamentario/manual"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-doc"/></svg><span data-i18n="read_manual">Ler o manual</span></a>
+            </div>
+          </div>
+        </article>
       </div>
     </div>
   </section>
@@ -1371,9 +1448,9 @@ a.link-to{padding-right:36px}
         <div class="plate plate--eco">
           <span class="rivet r-tl"></span><span class="rivet r-tr"></span><span class="rivet r-bl"></span><span class="rivet r-br"></span>
           <div class="plate-head">
-            <div class="plate-id"><span class="plate-k" data-i18n="asset">Patrimônio</span><span class="plate-num">PAT-0007</span></div>
+            <div class="plate-id"><span class="plate-k" data-i18n="asset">Patrimônio</span><span class="plate-num">PAT-0008</span></div>
             <div class="plate-title"><strong data-i18n="eco_plate_title">Base do ecossistema</strong><span data-i18n="eco_plate_sub">O que mantém a memória organizada, segura e ao alcance de quem vier depois</span></div>
-            <div class="bc bc--plate" data-code="PAT-0007"></div>
+            <div class="bc bc--plate" data-code="PAT-0008"></div>
           </div>
           <ul class="reg2">
             <li><strong data-i18n="b1_k">Skills próprias</strong><span data-i18n="b1_d">para começar projeto novo e para orientar qual ferramenta usar</span></li>
@@ -1481,12 +1558,12 @@ a.link-to{padding-right:36px}
   /* Idioma: o português vem do próprio HTML (lido uma vez); o inglês fica aqui. */
   const EN = {
     title: 'Ruan Siqueira · End-to-end IT',
-    desc: 'Ruan Siqueira, software engineer in Marau, Brazil. From infrastructure to ERP integration and AI: a 14-system hub on top of the ERP, designed and built on his own, with six projects in detail, from the invoice-posting robot to the CRM.',
+    desc: 'Ruan Siqueira, software engineer in Marau, Brazil. From infrastructure to ERP integration and AI: a 15-system hub on top of the ERP, designed and built on his own, with seven projects in detail, from the invoice-posting robot to budget planning.',
     skip: 'Skip to content', nav_label: 'Sections', nav_about: 'About', nav_projects: 'Projects', nav_eco: 'Ecosystem', nav_contact: 'Contact',
     demo_long: 'Demo hub', lang_label: 'Language',
     t_tag: 'End-to-end IT',
     phrase: 'From infrastructure to ERP integration and AI.',
-    apoio: 'I’m a software engineer working in IT at Robustec, where I designed and built, on my own, an internal portal with 14 systems, many of them integrated with the ERP.',
+    apoio: 'I’m a software engineer working in IT at Robustec, where I designed and built, on my own, an internal portal with 15 systems, many of them integrated with the ERP.',
     cta: 'See projects', cta2: 'Enter the demo hub',
     projects_h2: 'Projects in production', asset: 'Asset tag',
     p1n: 'Autonomous Invoice Posting', p1m: 'Reads the XML, decides and posts the company’s inbound invoices and freight documents into the ERP on its own. Switch on automatic mode and the typing is over.',
@@ -1495,6 +1572,7 @@ a.link-to{padding-right:36px}
     p4n: 'Customer Engine', p4m: 'Finds who stopped buying, brings them back over WhatsApp and even finds new customers in the public company registry.',
     p5n: 'Workplace Climate Survey and HR', p5m: 'Truly listens to the team: anonymous surveys and feedback with an instant report, plus the HR area for exit interviews.',
     p6n: 'TV Carousel', p6m: 'Every TV in the company with the right message for its department, changed in one click from inside the hub.',
+    p7n: 'Budget planning', p7m: 'Each manager builds the year’s budget in the hub, with last year alongside, and submits it for approval. No more spreadsheets by email.',
     st_idle: 'Awaiting scan', st_read: 'Checking', st_prod: 'In production',
 
     about_h: 'About',
@@ -1503,7 +1581,7 @@ a.link-to{padding-right:36px}
     about_p3: 'Along the way I also organized how I work: shared memory, assistants, agents and a versioned method. That is what lets another IT professional deploy and maintain everything I built.',
     role: 'Software Engineer', loc: 'Marau, Brazil', photo_alt: 'Photo of Ruan Siqueira',
     trail_h: 'Career',
-    tr1_y: 'Jan 2026 to present', tr1_r: 'IT Analyst', tr1_d: 'Designed and built, on my own, the internal hub that brings together 14 systems, with 3 access levels, 26 registered automated routines and ERP integration.',
+    tr1_y: 'Jan 2026 to present', tr1_r: 'IT Analyst', tr1_d: 'Designed and built, on my own, the internal hub that brings together 15 systems, with 3 access levels, 26 registered automated routines and ERP integration.',
     tr2_y: '2024 to 2025', tr2_r: 'IT Analyst', tr2_d: 'Sole IT person for the Sana group, about 500 employees: replaced the server, firewall and antivirus, migrated more than 500 email accounts, and handled purchasing, asset records and equipment loans for every employee. Later I coordinated one more person on the IT team.',
     tr3_y: '2023 to 2024', tr3_r: 'Controllership Assistant', tr3_d: 'Inventory and data analysis in controllership, the business grounding I now bring to ERP-integrated systems.',
     tr4_y: '2021 to 2023', tr4_r: 'Network Analyst', tr4_o: 'Internet service provider', tr4_d: 'Installed and configured routers and MikroTik devices, and learned that a well-built network is one nobody notices.',
@@ -1512,7 +1590,7 @@ a.link-to{padding-right:36px}
     hub_h: 'ProjectHub: the brain on top of the ERP',
     hub_p1: 'A smart layer on top of the ERP: the brain that connects tax, finance, sales and HR, and automates what the ERP alone does not do. I designed and built this internal portal on my own at Robustec, where each department used to keep its controls in spreadsheets and separate tools.',
     hub_p1b: 'It integrates with the ERP the company already uses, but does not depend on it to exist: master data, rules, permissions, audit trail and routines live in the hub itself. If the company needs it, it can grow to take on the role of the ERP.',
-    hub_p2: 'Almost everything talks through it. Every system plugs in as a module, with a single login, 3 access levels, per-project permissions and an audit trail of critical actions. The six projects on this page live inside it, and each of the 14 systems opens in the demo.',
+    hub_p2: 'Almost everything talks through it. Every system plugs in as a module, with a single login, 3 access levels, per-project permissions and an audit trail of critical actions. The seven projects on this page live inside it, and each of the 15 systems opens in the demo.',
     hub_p3: 'Behind it are 26 registered background jobs, and some of them integrate the hub with the ERP. Since the ERP database is shared with the whole company, the first query I tune is my own, and every automation starts with usage rules so it never weighs on anyone’s work.',
     hub_p4: 'The demo hub has a theme engine built into its own code: three unique visuals, each with a concept, that switch the whole interface instantly. Asset tag, Server rack and Access badge, plus a high-contrast mode for accessibility. The systems follow the same visual as the hub, inside a frame of their own.',
     conv_h: 'How the systems talk to each other',
@@ -1524,13 +1602,14 @@ a.link-to{padding-right:36px}
     c4b: 'Delivers the campaign lead to the new-leads inbox',
     c5a: 'Looks up payroll for the HR area; read-only',
     c6a: 'Delivers each TV’s carousel and receives its heartbeat; does not talk to the ERP',
+    c7a: 'Reads the accounts and last year’s actuals; read-only',
     conv_tvs: 'Company TVs',
     conv_cap: 'Each cable is a conversation that runs through the hub. Login, permissions, WhatsApp sending, email and generative AI are shared services, used by more than one system, and anything that writes to the ERP goes through safety guardrails.',
-    plate_title: 'Portal systems', plate_sub: '14 modules, single sign-on. Tap any of them to open it in the demo.',
+    plate_title: 'Portal systems', plate_sub: '15 modules, single sign-on. Tap any of them to open it in the demo.',
     s01: 'Inbound invoices', s02: 'Debit notes', s03: 'Customer reactivation', s04: 'CRM funnels',
     s05: 'Leads and campaigns', s06: 'AUTO CRM', s07: 'Customer X-ray', s08: 'AI customer service',
-    s09: 'Budget control', s10: 'Stockroom', s11: 'Fleet control', s12: 'Workplace climate survey',
-    s13: 'Knowledge base', s14: 'Factory TV signage',
+    s09: 'Budget control', s10: 'Budget planning', s11: 'Stockroom', s12: 'Fleet control',
+    s13: 'Workplace climate survey', s14: 'Knowledge base', s15: 'Factory TV signage',
     demo_h: 'Demo hub',
     demo_p: 'A replica of the portal, rebuilt from scratch: the public demo shows the hub and each system’s main screen, and the videos show the full version.',
     demo_note: 'Fictitious data, feel free to explore.',
@@ -1549,7 +1628,7 @@ a.link-to{padding-right:36px}
     tech_h: 'Technologies', ht_jwt: 'JWT with HttpOnly cookie',
 
     projects_h: 'Projects',
-    projects_p: 'Six systems from the hub, hardest first. Each sheet covers the problem, how the system works, how I measured it, the result and a video of the full system, and opens the main screen and the manual in the demo.',
+    projects_p: 'Seven systems from the hub, hardest first. Each sheet covers the problem, how the system works, how I measured it, the result and a video of the full system, and opens the main screen and the manual in the demo.',
     lbl_sit: 'Context', lbl_did: 'What I did', lbl_how: 'How I measured', lbl_res: 'Result',
     lbl_ba: 'Before and after', lbl_flow: 'Flow', lbl_tech: 'Technologies',
     lbl_cycle: 'Full cycle', lbl_layers: 'Layered decision', lbl_modes: 'Operating modes', lbl_engine: 'Rules engine',
@@ -1664,6 +1743,19 @@ a.link-to{padding-right:36px}
     n6_m2v: '18 s', n6_m2: 'for the TV to apply a new list on its own, in the same test.',
     n6_m3v: '6 versions', n6_m3: 'in six days, from the first version in the hub to the one with sound in videos.',
     n6_t2: 'ASP.NET Core (background service)', n6_t5: 'JavaScript ES5 (TV page)', n6_t7: 'Windows in kiosk mode',
+
+    p7l: 'The company’s annual budget, built with the managers inside the hub. Each one fills in their accounts month by month, with last year’s actuals as a reference, and submits it for approval. During the year, a manager can request budget from another’s account, and the account owner makes the call.',
+    n7_f1: 'Account grid from the ERP', n7_f2: 'Manager fills in month by month', n7_f3: 'Submitted for approval', n7_f4: 'Approve, return or reopen', n7_f5: 'Year’s budget approved', n7_f6: 'Budget requests between managers',
+    n7_sit: 'Each manager built the year’s budget in a spreadsheet of their own, with last year’s actuals copied alongside. The spreadsheets went around by email, came back for changes and were consolidated by hand, and there was no single place to see who had already sent theirs, what was approved and how much each account still had left to use.',
+    n7_d1: 'Worked with Finance to map how the spreadsheet was put together, then designed and built the system on my own, from the database to the screen.',
+    n7_d2: 'Replaced the spreadsheet with an accounts-by-month grid inside the hub, with last year’s actuals alongside, read from the ERP without writing anything to it.',
+    n7_d3: 'Cut down the typing: a value carries through to December in one click, and the manager can open another management account on the spot when needed.',
+    n7_d4: 'Built the approval path: the manager submits, and whoever runs the budget approves, returns, adjusts or reopens it, with every step kept in that budget’s history.',
+    n7_d5: 'Built budget requests: a manager asks to use another’s account, and the owner approves or declines and follows the account’s balance with every request.',
+    n7_d6: 'Rebuilt the first version from scratch, simpler, when I saw it asked for setup nobody needed to maintain. The deadline became one switch per year.',
+    n7_how: 'Before choosing where the reference actuals would come from, I compared one manager’s spreadsheet with the ERP’s sources, cell by cell, and kept the one that matched to the cent. The same comparison showed the spreadsheet changed its criteria mid-year; in the system, there is only one.',
+    n7_res: 'The year’s budget left the spreadsheet and now lives in the hub: each manager fills in and submits their own, the approver follows them all in one place, and every budget request between managers is recorded with who asked, how much and who decided. No email is sent and nothing is written to the ERP.',
+    n7_t3: 'SQL Server / T-SQL (transactions)', n7_t5: 'ERP integration (read-only)',
 
     eco_h: 'My working ecosystem',
     eco_lede: 'Every project left something behind for the next one: a memory, a rule, an assistant, a tool. I organized it the way I organize a system, and that is how each project became part of the ecosystem that supports the hub today.',
