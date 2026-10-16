@@ -39,7 +39,7 @@
 }
 
 /* Rack de servidores (data-visual="escuro", padrão): a sala de TI. Painéis de metal anodizado escovado presos no rack com parafusos,
-   frestas de ventilação, LEDs de status na cor de cada indicador e a etiqueta de patrimônio colada no equipamento. */
+   frestas de ventilação e LEDs de status na cor de cada indicador. */
 :root, :root[data-visual="escuro"] {
   color-scheme: dark;
   --color-base-100: #1d2026; --color-base-200: #14171b; --color-base-300: #0c0e11; --color-base-content: #eef2f7;
@@ -270,7 +270,7 @@ body {
 @keyframes ph-roda { to { transform: rotate(360deg); } }
 @keyframes ph-no { 50% { transform: scale(1.25); opacity: .75; } }
 
-/* código de barras (Code 128): decorativo, na etiqueta de patrimônio (Rack e Plaqueta) */
+/* código de barras (Code 128): decorativo, na etiqueta do passo do tour (Rack e Plaqueta) */
 .ph-barras-cod { display: block; }
 .ph-barras-cod svg { display: block; width: 100%; height: 100%; }
 .ph-barras-cod path { fill: currentColor; }
@@ -490,7 +490,6 @@ body {
 .ph-tile-ico .ph-ico { width: 20px; height: 20px; }
 .ph-tile-valor { font-family: var(--ph-font-display); font-size: calc(clamp(1.875rem, 3vw, 2.375rem) * var(--ph-display-scale)); font-weight: 700; line-height: 1.05; margin-top: -6px; color: var(--ph-text); font-variant-numeric: tabular-nums; }
 .ph-tile-nota { font-size: 12.5px; color: var(--ph-text-muted); }
-.ph-tile-placa { display: none; }
 .ph-spark { display: block; height: 44px; margin: 6px -18px 0; color: var(--vivo, var(--cor, var(--ph-accent))); }
 .ph-spark svg { display: block; width: 100%; height: 100%; }
 .ph-spark-linha { fill: none; stroke: currentColor; stroke-width: 2; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
@@ -578,7 +577,7 @@ body {
 .ph-sis:hover .ph-sis-ir .ph-ico { transform: translateX(3px); }
 
 /* moldura do sistema: o hub é uma coisa, o que está dentro dele é outra. Cabeçalho (ícone, departamento na cor dele, nome,
-   situação, PAT com código de barras, Manual) e o módulo no corpo. Base neutra; cada tema veste a moldura no fim do arquivo. */
+   situação, Manual) e o módulo no corpo. Base neutra; cada tema veste a moldura no fim do arquivo. */
 .ph-moldura { --cor: var(--ph-accent); position: relative; min-width: 0; background: var(--ph-card); border: 1px solid var(--ph-border-soft); border-radius: var(--ph-raio-lg); box-shadow: var(--ph-sombra); }
 .ph-sysbar { position: relative; isolation: isolate; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; padding: 14px 18px; border-bottom: 1px solid var(--ph-border); border-radius: var(--ph-raio-lg) var(--ph-raio-lg) 0 0; }
 .ph-sysbar-icone { display: grid; place-items: center; width: 40px; height: 40px; flex: none; border-radius: var(--ph-raio); color: var(--cor); background: color-mix(in srgb, var(--cor) 14%, transparent); border: 1px solid color-mix(in srgb, var(--cor) 38%, transparent); }
@@ -590,8 +589,6 @@ body {
 .ph-sysbar-estado { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .ph-status { display: inline-flex; align-items: center; gap: 8px; padding: 5px 10px; white-space: nowrap; font-size: 11px; font-weight: 700; line-height: 1.2; letter-spacing: .08em; text-transform: uppercase; color: var(--ph-ok); background: color-mix(in srgb, var(--ph-ok) 10%, var(--ph-card)); border: 1px solid color-mix(in srgb, var(--ph-ok) 35%, transparent); border-radius: var(--ph-raio); }
 .ph-status-led { width: 8px; height: 8px; flex: none; border-radius: 50%; background: currentColor; }
-.ph-sysbar-pat { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; font: 600 11px/1 var(--ph-font-mono); letter-spacing: .08em; color: var(--ph-text-muted); white-space: nowrap; }
-.ph-sysbar-pat .ph-barras-cod { width: 92px; height: 18px; }
 .ph-sysbar-acoes { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; } /* no celular os botões da moldura (Tour, Manual, Versão completa) quebram a linha em vez de vazar */
 .ph-moldura-corpo { min-width: 0; border-radius: 0 0 var(--ph-raio-lg) var(--ph-raio-lg); overflow: clip; }
 .ph-sys { min-width: 0; font-size: 14px; line-height: 1.5; }
@@ -1135,11 +1132,9 @@ textarea.ph-input { min-height: 76px; resize: vertical; line-height: 1.45; }
 :root[data-visual="escuro"] .ph-menu .dy-menu-active, :root[data-visual="escuro"] .ph-menu a[aria-current="page"] { background: var(--ph-metal); color: var(--ph-text); box-shadow: inset 3px 0 0 #34d399, inset 0 0 0 1px #2d323b; }
 :root[data-visual="escuro"] .ph-chip-vivo { border-radius: 3px; background: #0f1115; border-color: #2d323b; }
 :root[data-visual="escuro"] .ph-pulso { box-shadow: 0 0 8px var(--tom); }
-/* cabeçalho das telas do hub: só o metal escovado. Orelhas, parafusos e etiqueta de patrimônio são da moldura do sistema (.ph-sysbar) */
+/* cabeçalho das telas do hub: só o metal escovado. Orelhas e parafusos são da moldura do sistema (.ph-sysbar) */
 :root[data-visual="escuro"] .ph-cabecalho { background: var(--ph-metal); border-color: #2d323b; }
 :root[data-visual="escuro"] .ph-cabecalho::before { display: none; }
-:root[data-visual="escuro"] .ph-sysbar-pat { padding: 6px 8px; background: var(--ph-etiqueta); color: #16181c; border-radius: 2px; transform: rotate(.6deg); box-shadow: 0 1px 2px rgba(0, 0, 0, .6); font: 600 11px/1 var(--ph-font-mono); letter-spacing: .08em; }
-:root[data-visual="escuro"] .ph-sysbar-pat .ph-barras-cod { width: 80px; height: 14px; }
 /* indicadores: painel com fresta de ventilação, LEDs na cor do bloco e a posição U no rack */
 :root[data-visual="escuro"] .ph-tile.dy-card { padding: 30px 18px 14px; background: var(--ph-metal); border: 1px solid #2d323b; }
 :root[data-visual="escuro"] .ph-tile.dy-card::before, :root[data-visual="escuro"] .ph-tile-ico, :root[data-visual="escuro"] .ph-tile .ph-spark-area { display: none; }
@@ -1195,8 +1190,6 @@ textarea.ph-input { min-height: 76px; resize: vertical; line-height: 1.45; }
 :root[data-visual="claro"] .ph-cabecalho::before { display: none; }
 :root[data-visual="claro"] .ph-sysbar::before { content: ""; position: absolute; inset: 9px auto auto 50%; width: 46px; height: 8px; margin-left: -23px; border-radius: 8px; background: #e6ebf2; box-shadow: inset 0 1px 2px rgba(0, 0, 0, .15); pointer-events: none; }
 :root[data-visual="claro"] .ph-sysbar::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 4px; background: var(--ph-faixa); pointer-events: none; }
-:root[data-visual="claro"] .ph-sysbar-pat { color: #334155; font: 600 11px/1 var(--ph-font-mono); letter-spacing: .08em; }
-:root[data-visual="claro"] .ph-sysbar-pat .ph-barras-cod { display: none; }
 :root[data-visual="claro"] .ph-chip-ouro { display: block; position: relative; width: 34px; height: 26px; border-radius: 5px; background: var(--ph-chip); box-shadow: inset 0 0 0 1px rgba(120, 90, 20, .4); }
 :root[data-visual="claro"] .ph-chip-ouro::before { content: ""; position: absolute; inset: 6px 8px; border: 1px solid rgba(120, 90, 20, .55); border-radius: 3px; }
 /* indicadores: cartão de PVC com a faixa do setor no topo */
@@ -1286,8 +1279,6 @@ textarea.ph-input { min-height: 76px; resize: vertical; line-height: 1.45; }
 :root[data-visual="contraste"] .ph-moldura { background: #000; border: 2px solid #fff; box-shadow: none; }
 :root[data-visual="contraste"] .ph-sysbar { background: #000; border-bottom: 2px solid #fff; }
 :root[data-visual="contraste"] .ph-status { background: #000; color: var(--ph-ok); border: 2px solid var(--ph-ok); }
-:root[data-visual="contraste"] .ph-sysbar-pat { color: #fff; }
-:root[data-visual="contraste"] .ph-sysbar-pat .ph-barras-cod { display: none; }
 
 /* ===================================================================== tema Plaqueta (data-visual="portfolio", o mundo do portfólio) */
 /* fundo da casca: as linhas de tráfego ficam presas à tela (camada fixa sob o conteúdo) e traços curtos correm devagar em cima delas
@@ -1327,8 +1318,8 @@ textarea.ph-input { min-height: 76px; resize: vertical; line-height: 1.45; }
 :root[data-visual="portfolio"] .ph-cabecalho .ph-chip-vivo .ph-ico { color: var(--ph-bg); }
 :root[data-visual="portfolio"] .ph-cabecalho .ph-pulso { --tom: var(--ph-bg); }
 :root[data-visual="portfolio"] .ph-hero-ponto { background: var(--ph-bg); }
-/* indicadores viram plaquetas de patrimônio: alumínio, rebites, número grande e rodapé preto com PAT e código de barras na cor do bloco */
-:root[data-visual="portfolio"] .ph-tile.dy-card { background: var(--ph-placa-alu); color: #1a1c1f; border: 0; border-radius: 6px; padding-bottom: 12px; text-shadow: 0 1px 0 rgba(255, 255, 255, .35); box-shadow: 0 10px 20px -4px rgba(0, 0, 0, .6), 0 2px 3px rgba(0, 0, 0, .4), inset 0 1px 0 rgba(255, 255, 255, .6), inset 0 -1px 0 rgba(0, 0, 0, .25); }
+/* indicadores viram plaquetas de alumínio: rebites, número grande e o gráfico encostado na borda de baixo */
+:root[data-visual="portfolio"] .ph-tile.dy-card { background: var(--ph-placa-alu); color: #1a1c1f; border: 0; border-radius: 6px; text-shadow: 0 1px 0 rgba(255, 255, 255, .35); box-shadow: 0 10px 20px -4px rgba(0, 0, 0, .6), 0 2px 3px rgba(0, 0, 0, .4), inset 0 1px 0 rgba(255, 255, 255, .6), inset 0 -1px 0 rgba(0, 0, 0, .25); }
 :root[data-visual="portfolio"] .ph-tile.dy-card::before { inset: 0; height: auto; background: var(--ph-rebite); opacity: 1; }
 :root[data-visual="portfolio"] .ph-tile.dy-card:hover { box-shadow: 0 16px 24px -6px rgba(0, 0, 0, .65), 0 3px 6px rgba(0, 0, 0, .4), inset 0 1px 0 rgba(255, 255, 255, .6); }
 :root[data-visual="portfolio"] .ph-tile-cab { padding-right: 14px; }
@@ -1336,10 +1327,7 @@ textarea.ph-input { min-height: 76px; resize: vertical; line-height: 1.45; }
 :root[data-visual="portfolio"] .ph-tile-ico { background: var(--ph-bg); color: var(--cor); border: 0; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08); }
 :root[data-visual="portfolio"] .ph-tile-valor { color: #141517; text-shadow: 0 1px 0 rgba(255, 255, 255, .4); font-family: var(--ph-font-display); font-weight: 800; font-size: 46px; line-height: 1; }
 :root[data-visual="portfolio"] .ph-tile-nota { color: #3a3e43; }
-:root[data-visual="portfolio"] .ph-tile .ph-spark { color: #4b5057; margin-bottom: 6px; }
-:root[data-visual="portfolio"] .ph-tile-placa { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 0 -18px -12px; padding: 7px 14px 8px; background: var(--ph-bg); color: var(--cor); font: 600 11px/1 "IBM Plex Mono", ui-monospace, monospace; letter-spacing: .08em; text-shadow: none; }
-:root[data-visual="portfolio"] .ph-tile-placa .ph-barras-cod { width: 96px; min-width: 0; height: 16px; color: var(--cor); }
-:root[data-visual="portfolio"] .ph-tile-placa span:first-child { flex: none; white-space: nowrap; }
+:root[data-visual="portfolio"] .ph-tile .ph-spark { color: #4b5057; }
 @media (max-width: 479.98px) {
   :root[data-visual="portfolio"] .ph-tile-cab { padding-right: 0; gap: 6px; }
   :root[data-visual="portfolio"] .ph-tile-rotulo { letter-spacing: .06em; }
@@ -1400,7 +1388,7 @@ textarea.ph-input { min-height: 76px; resize: vertical; line-height: 1.45; }
 :root[data-visual="portfolio"] .ph-heroi-titulo b { background: var(--ph-accent); color: var(--ph-on-accent); -webkit-background-clip: border-box; background-clip: border-box; padding: 0 .12em; }
 :root[data-visual="portfolio"] .ph-heroi-nums strong { font-family: var(--ph-font); font-stretch: 75%; }
 :root[data-visual="portfolio"] .ph-seg.dy-join .dy-btn { border-radius: 0; }
-/* moldura: a plaqueta de alumínio com parafusos, o nome na fita ciano, PAT e código de barras; o corpo é o bloco ardósia */
+/* moldura: a plaqueta de alumínio com parafusos e o nome na fita ciano; o corpo é o bloco ardósia */
 :root[data-visual="portfolio"] .ph-moldura { background: var(--ph-card); border-color: var(--ph-border); border-radius: 6px; box-shadow: 0 2px 3px rgba(0, 0, 0, .45); }
 :root[data-visual="portfolio"] .ph-sysbar { padding: 18px 28px; background: var(--ph-placa-alu); color: #141517; border-bottom: 0; border-radius: 5px 5px 0 0; text-shadow: 0 1px 0 rgba(255, 255, 255, .4); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5), 0 6px 14px rgba(0, 0, 0, .45); }
 :root[data-visual="portfolio"] .ph-sysbar::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: var(--ph-rebite); }
@@ -1411,7 +1399,6 @@ textarea.ph-input { min-height: 76px; resize: vertical; line-height: 1.45; }
 :root[data-visual="portfolio"] .ph-status { color: var(--ph-ok); background: var(--ph-bg); border-color: var(--ph-bg); border-radius: 3px; text-shadow: none; }
 :root[data-visual="portfolio"] .ph-status-led { display: none; }
 :root[data-visual="portfolio"] .ph-sysbar .ph-badge.dy-badge { background: #f7f7f2; text-shadow: none; }
-:root[data-visual="portfolio"] .ph-sysbar-pat { color: #141517; font: 600 11px/1 "IBM Plex Mono", ui-monospace, monospace; letter-spacing: .08em; }
 :root[data-visual="portfolio"] .ph-moldura-corpo { background: var(--ph-card); }
 
 /* ===================================================================== movimento reduzido: tudo parado, nada some */

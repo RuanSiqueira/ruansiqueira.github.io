@@ -30,7 +30,7 @@
   /* Três temas com conceito (data-visual mantém os ids antigos: escuro = Rack, claro = Crachá, portfolio = Plaqueta).
      O alto contraste não é tema: é uma opção de acessibilidade que vale sobre qualquer um (data-visual="contraste"). */
   const VISUAIS = {
-    escuro: { rotulo: P('Rack', 'Rack'), desc: P('A sala de TI: painéis de metal presos no rack, LEDs de status e etiqueta de patrimônio.', 'The server room: metal panels mounted on the rack, status LEDs and an asset sticker.'), cor: '#0c0e11', amostra: ['#0c0e11', '#23272e', '#60a5fa', '#34d399'] },
+    escuro: { rotulo: P('Rack', 'Rack'), desc: P('A sala de TI: painéis de metal presos no rack e LEDs de status.', 'The server room: metal panels mounted on the rack and status LEDs.'), cor: '#0c0e11', amostra: ['#0c0e11', '#23272e', '#60a5fa', '#34d399'] },
     claro: { rotulo: P('Crachá', 'Badge'), desc: P('O crachá corporativo: cartões brancos, chip dourado e uma faixa de cor por indicador.', 'The corporate badge: white cards, a gold chip and one color stripe per indicator.'), cor: '#eef2f7', amostra: ['#e8edf4', '#ffffff', '#3b82f6', '#10b981'] },
     portfolio: { rotulo: P('Plaqueta', 'Asset tag'), desc: P('O tema do portfólio: fita ciano, ardósia com linhas de dados e alumínio escovado.', 'The portfolio theme: cyan label tape, slate with data lines and brushed aluminum.'), cor: '#0e1720', amostra: ['#0e1720', '#bfc4c9', '#5adbea', '#a39bff'] },
   };
@@ -568,14 +568,14 @@
   function itens() {
     return CATALOGO.map(c => {
       const def = modulos.get(c.id) || null;
-      return { id: c.id, grupo: c.grupo, nome: (def && def.nome) || c.nome, icone: c.icone, resumo: (def && def.resumo) || c.resumo, tecs: c.tecs, ordem: def && Number.isFinite(def.ordem) ? def.ordem : c.ordem, pat: c.ordem, def, catalogo: true };
+      return { id: c.id, grupo: c.grupo, nome: (def && def.nome) || c.nome, icone: c.icone, resumo: (def && def.resumo) || c.resumo, tecs: c.tecs, ordem: def && Number.isFinite(def.ordem) ? def.ordem : c.ordem, def, catalogo: true };
     });
   }
   function itemForaDoCatalogo(id) {
     const def = modulos.get(id);
     if (!def) return null;
     const g = GRUPOS.find(gr => def.grupo && norm(t(gr.nome)) === norm(t(def.grupo)));
-    return { id, grupo: g ? g.id : 'outros', nome: def.nome || id, icone: def.icone || 'app-window', resumo: def.resumo, tecs: null, ordem: 99, pat: 99, def, catalogo: false };
+    return { id, grupo: g ? g.id : 'outros', nome: def.nome || id, icone: def.icone || 'app-window', resumo: def.resumo, tecs: null, ordem: 99, def, catalogo: false };
   }
   function gruposComItens(lista) {
     return GRUPOS.map(g => ({ ...g, itens: lista.filter(x => x.grupo === g.id).sort((a, b) => a.ordem - b.ordem) })).filter(g => g.itens.length);
@@ -586,7 +586,6 @@
   const manualDe = def => (def && def.manual && (def.manual[lang] || def.manual.pt)) || {};
   const tecsDe = x => { const m = manualDe(x.def); return (m.tecnologias && m.tecnologias.length ? m.tecnologias : x.tecs ? t(x.tecs) : []) || []; };
   const itemPorId = id => itens().find(x => x.id === id) || itemForaDoCatalogo(id);
-  const patDe = item => 'PAT-' + String(item.pat).padStart(4, '0');
 
   /* ---------- dados do hub (fictícios): perfis, usuários, departamentos, auditoria e atividade ---------- */
   const PERFIS = {
@@ -2144,10 +2143,10 @@
     const saud = hora < 12 ? P('Bom dia', 'Good morning') : hora < 18 ? P('Boa tarde', 'Good afternoon') : P('Boa noite', 'Good evening');
     const primeiroNome = p.id === 'visitante' ? t(P('visitante', 'visitor')) : String(t(p.nome)).split(' ')[0];
     const tiles = [
-      { cor: 'azul', ic: 'app-window', rot: P('Sistemas ativos', 'Active systems'), valor: lista.length, nota: P('em 5 departamentos', 'in 5 departments'), serie: [9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 14, 15, 15], pat: 'PAT-0101', leds: 1 },
-      { cor: 'verde', ic: 'zap', rot: P('Lançamentos hoje', 'Postings today'), valor: d.lancHoje, nota: P('8 a mais que ontem', '8 more than yesterday'), serie: [18, 26, 22, 31, 28, 35, 30, 38, 29, 34, 36, 33, 34, 42], pat: 'PAT-0102', id: 'lanc', leds: 2 },
-      { cor: 'ambar', ic: 'hourglass', rot: P('Pendências', 'Pending items'), valor: 7, nota: P('2 notas bloqueadas na fila', '2 invoices blocked in the queue'), serie: [12, 10, 11, 9, 9, 8, 10, 9, 8, 7, 8, 6, 8, 7], pat: 'PAT-0103', leds: 1 },
-      { cor: 'vermelho', ic: 'triangle-alert', rot: P('Alertas', 'Alerts'), valor: 2, nota: P('1 de verba, 1 de estoque', '1 budget, 1 stock'), serie: [1, 0, 2, 1, 1, 3, 2, 1, 2, 2, 1, 3, 2, 2], pat: 'PAT-0104', leds: 3 },
+      { cor: 'azul', ic: 'app-window', rot: P('Sistemas ativos', 'Active systems'), valor: lista.length, nota: P('em 5 departamentos', 'in 5 departments'), serie: [9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 14, 15, 15], leds: 1 },
+      { cor: 'verde', ic: 'zap', rot: P('Lançamentos hoje', 'Postings today'), valor: d.lancHoje, nota: P('8 a mais que ontem', '8 more than yesterday'), serie: [18, 26, 22, 31, 28, 35, 30, 38, 29, 34, 36, 33, 34, 42], id: 'lanc', leds: 2 },
+      { cor: 'ambar', ic: 'hourglass', rot: P('Pendências', 'Pending items'), valor: 7, nota: P('2 notas bloqueadas na fila', '2 invoices blocked in the queue'), serie: [12, 10, 11, 9, 9, 8, 10, 9, 8, 7, 8, 6, 8, 7], leds: 1 },
+      { cor: 'vermelho', ic: 'triangle-alert', rot: P('Alertas', 'Alerts'), valor: 2, nota: P('1 de verba, 1 de estoque', '1 budget, 1 stock'), serie: [1, 0, 2, 1, 1, 3, 2, 1, 2, 2, 1, 3, 2, 2], leds: 3 },
     ];
     const kpiLanc = { el: null };
     const tilesEl = h('div', { class: 'ph-tiles' }, tiles.map((k, i) => {
@@ -2160,8 +2159,7 @@
         h('div', { class: 'ph-tile-cab' }, h('h3', { class: 'ph-tile-rotulo' }, k.rot), h('span', { class: 'ph-tile-ico' }, icone(k.ic))),
         h('p', { class: 'ph-tile-valor' }, num),
         h('p', { class: 'ph-tile-nota' }, k.nota),
-        sparkline(k.serie),
-        h('div', { class: 'ph-tile-placa', 'aria-hidden': 'true' }, h('span', null, k.pat), codigoBarras(k.pat)));
+        sparkline(k.serie));
     }));
 
     /* gráfico de 14 dias */
@@ -2302,9 +2300,8 @@
 
   /* --- sistema, manual, preparação, restrita, não encontrada --- */
   /* Moldura do sistema: o hub é uma coisa, o que está dentro dele é outra. Cabeçalho com ícone, departamento (na cor dele),
-     nome, situação, número PAT com código de barras e Manual; o módulo (ou o manual) monta no corpo. Cada tema veste a moldura. */
+     nome, situação e Manual; o módulo (ou o manual) monta no corpo. Cada tema veste a moldura. */
   function moldura(item, sub, corpo) {
-    const pat = patDe(item);
     return h('div', { class: 'ph-pagina ph-moldura-pagina' },
       h('section', { class: 'ph-moldura', style: { '--cor': corGrupo(item.grupo) }, 'aria-labelledby': 'ph-sys-titulo' },
         h('header', { class: 'ph-sysbar' },
@@ -2315,7 +2312,7 @@
           h('div', { class: 'ph-sysbar-estado' },
             h('span', { class: 'ph-status' }, h('span', { class: 'ph-status-led', 'aria-hidden': 'true' }), TX.emProducao),
             badge(TX.dadosCurto, 'info')),
-          h('div', { class: 'ph-sysbar-pat', 'aria-hidden': 'true' }, h('span', { class: 'ph-chip-ouro' }), h('span', null, pat), codigoBarras(pat)),
+          h('span', { class: 'ph-chip-ouro', 'aria-hidden': 'true' }),
           h('div', { class: 'ph-sysbar-acoes' },
             sub === 'manual'
               ? h('a', { class: 'ph-btn ph-btn--primario dy-btn dy-btn-primary dy-btn-sm', href: '#/' + item.id }, h('span', null, TX.entrar), icone('arrow-right'))
@@ -2807,7 +2804,7 @@
         { capitulo: C.sistema, rota: '#/', antes: 'abrir-menu', alvo: '#ph-nav a[href="#/nf_autonoma"]', acao: 'clicar', titulo: P('Abra um sistema pelo menu', 'Open a system from the menu'),
           texto: P('Os 15 sistemas ficam no menu, por departamento. Vamos ao robô que lança no ERP as notas fiscais de entrada.', 'The 15 systems live in the menu, by department. Let us visit the robot that posts inbound invoices to the ERP.') },
         { capitulo: C.sistema, rota: '#/nf_autonoma', alvo: () => (largo() && !depoisDe(2600) ? '#ph-lateral' : '.ph-sysbar'), titulo: P('O menu recolhe, o sistema ganha espaço', 'The menu folds, the system gets room'),
-          texto: P('Dentro de um sistema o menu vira um trilho de ícones e a moldura mostra departamento, situação e número de patrimônio.', 'Inside a system the menu becomes an icon rail and the frame shows department, status and asset number.') },
+          texto: P('Dentro de um sistema o menu vira um trilho de ícones e a moldura mostra departamento e situação.', 'Inside a system the menu becomes an icon rail and the frame shows department and status.') },
         { capitulo: C.sistema, rota: '#/nf_autonoma', antes: telaDaFila, alvo: '.nfa-real button.n-robo.ph-btn--ok', acao: 'clicar', titulo: P('A fila viva e um gesto', 'The live queue and one gesture'),
           texto: P('O robô simula cada nota antes de gravar. Esta passou limpa: um clique em Lançar e ela segue para a produção.', 'The robot simulates every invoice before writing. This one passed clean: one click on Post and it goes to production.') },
         { capitulo: C.sistema, alvo: ['.ph-modal-rodape .dy-btn-primary', '.ph-modal'], acao: 'clicar', titulo: P('Confirme: lançar agora', 'Confirm: post now'),
