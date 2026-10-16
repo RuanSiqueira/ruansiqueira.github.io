@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ruan Siqueira · TI de ponta a ponta</title>
 <meta name="description" content="Ruan Siqueira, engenheiro de software em Marau-RS. Da infraestrutura à integração com ERP e IA: um hub de 15 sistemas sobre o ERP, projetado e construído por ele sozinho, com sete projetos em detalhe, do robô de notas fiscais ao planejamento orçamentário.">
-<meta name="theme-color" content="#111214">
+<meta name="theme-color" content="#0E1720">
 <link rel="canonical" href="https://ruansiqueira.dev.br/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Ruan Siqueira">
@@ -19,7 +19,7 @@
 <meta property="og:locale" content="pt_BR">
 <meta property="og:locale:alternate" content="en_US">
 <meta name="twitter:card" content="summary">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23111214'/%3E%3Crect x='3' y='9' width='26' height='14' fill='%23F2C500'/%3E%3Cpath d='M6 11h2v10H6zm4 0h1v10h-1zm3 0h3v10h-3zm5 0h1v10h-1zm3 0h2v10h-2zm4 0h1v10h-1z' fill='%23111214'/%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230E1720'/%3E%3Crect x='3' y='9' width='26' height='14' fill='%235ADBEA'/%3E%3Cpath d='M6 11h2v10H6zm4 0h1v10h-1zm3 0h3v10h-3zm5 0h1v10h-1zm3 0h2v10h-2zm4 0h1v10h-1z' fill='%230E1720'/%3E%3C/svg%3E">
 <script>try{if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('motion')}catch(e){}</script>
 <link rel="preload" href="assets/fonts/big-shoulders-display-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -29,13 +29,18 @@
 @font-face{font-family:'Archivo';font-style:normal;font-weight:400 800;font-stretch:62% 125%;font-display:swap;src:url(assets/fonts/archivo-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 @font-face{font-family:'Big Shoulders Display';font-style:normal;font-weight:700 900;font-display:swap;src:url(assets/fonts/big-shoulders-display-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
 @font-face{font-family:'Big Shoulders Display';font-style:normal;font-weight:700 900;font-display:swap;src:url(assets/fonts/big-shoulders-display-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-/* Mundo: plaqueta de patrimônio. Paleta fechada; vermelho só no laser, âmbar só para estado pendente. */
+/* Mundo: plaqueta de sistema. Três cores por papel (c1, c2, c3; ver o contrato); vermelho só no laser, orquídea só para estado pendente. */
 :root{
-  --ink:#111214;
-  --ink-3:#2A2D31;
-  --line:#2E3136;
-  --tape:#F2C500;
-  --tape-ink-2:#4A3D00;
+  --ink:#0E1720;
+  --ink-3:#1C2836;
+  --line:#22303E;
+  /* Contrato de cores: prototipos/visual-2026-10/paletas/CONTRATO.md. Paleta: Ciano · fluxo de dados (16/10). */
+  --c1:#5ADBEA;--on-c1:#0E1720;
+  --c2:#A39BFF;--on-c2:#0E1720;
+  --c3:#38BE68;--on-c3:#0E1720;
+  --tape:var(--c1);
+  --tape-ink-2:color-mix(in srgb,var(--on-c1) 75%,var(--c1));
+  --c1-deep:color-mix(in srgb,var(--c1) 37%,#000);
   --alu:#BFC4C9;
   --alu-ink:#1A1C1F;
   --alu-ink-2:#232528;
@@ -43,7 +48,15 @@
   --text:#E4E6E8;
   --muted:#A3A9AF;
   --laser:#E5231B;
-  --amber:#F39200;
+  --pendente:#E6A0F5;
+  --rivet:#A2A8AE;
+  --idle:#ADB1B6;
+  --steel:#3A3E43;
+  --steel-2:#5A5F65;
+  --paper-2:#4D5156;
+  --cable-1:#41454B;
+  --cable-2:#1B1D20;
+  --laser-hot:#FF6B5E;
   --g:clamp(16px,3.4vw,48px);
   --maxw:1344px;
   --bar-h:72px;
@@ -51,13 +64,17 @@
   --f-d:"Big Shoulders Display","Archivo",system-ui,sans-serif;
   --f-b:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
   --out:cubic-bezier(.16,1,.3,1);
-  --vis:220px;
-  --hide:84px;
+  --vis:28px;
   --ph:200px;
+  --press-mt:clamp(10px,2.5vh,32px);
+  --edge:max(var(--g),calc((100vw - var(--maxw)) / 2));
+  --stack-w:clamp(340px,27vw,400px);
+  --art-r:.46;
   --tape-fs:clamp(2.5rem,5.25vw,5.25rem);
   --settle:translate(-12px,2px) rotate(-.35deg);
-  --brushed:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='240'%3E%3Cfilter id='a' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.0032 .92' numOctaves='3' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 1.3 0 0 0 -.6'/%3E%3C/filter%3E%3Cfilter id='b' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.0022 .55' numOctaves='2' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1.1 0 0 0 -.58'/%3E%3C/filter%3E%3Crect width='640' height='240' filter='url(%23a)'/%3E%3Crect width='640' height='240' filter='url(%23b)'/%3E%3C/svg%3E");
-  --anod:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='240'%3E%3Cfilter id='a' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.0028 .8' numOctaves='3' seed='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 .4 0 0 0 -.2'/%3E%3C/filter%3E%3Crect width='640' height='240' filter='url(%23a)'/%3E%3C/svg%3E");
+  --brushed:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='240'%3E%3Cfilter id='a' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.0032 .92' numOctaves='3' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 .8 0 0 0 -.38'/%3E%3C/filter%3E%3Cfilter id='b' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.0022 .55' numOctaves='2' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .45 0 0 0 -.25'/%3E%3C/filter%3E%3Crect width='640' height='240' filter='url(%23a)'/%3E%3Crect width='640' height='240' filter='url(%23b)'/%3E%3C/svg%3E");
+  /* linhas de tráfego: tile 640x240, períodos dos tracejados dividem 640 (emenda limpa); usado também na .top */
+  --anod:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='240'%3E%3Cg fill='none' stroke='%2367D6E4'%3E%3Cpath d='M0 14.5h640' stroke-opacity='.07' stroke-dasharray='2 6'/%3E%3Cpath d='M0 37.5h640' stroke-opacity='.09' stroke-dasharray='48 16 8 8' stroke-dashoffset='22'/%3E%3Cpath d='M0 58.5h640' stroke-opacity='.05' stroke-dasharray='120 40' stroke-dashoffset='70'/%3E%3Cpath d='M0 91.5h640' stroke-opacity='.08' stroke-dasharray='4 4 4 4 4 44' stroke-dashoffset='9'/%3E%3Cpath d='M0 118.5h640' stroke-opacity='.10' stroke-dasharray='64 24 16 24' stroke-dashoffset='40'/%3E%3Cpath d='M0 139.5h640' stroke-opacity='.06' stroke-dasharray='1 3'/%3E%3Cpath d='M0 171.5h640' stroke='%23A39BFF' stroke-opacity='.09' stroke-dasharray='200 40 40 40' stroke-dashoffset='130'/%3E%3Cpath d='M0 196.5h640' stroke-opacity='.07' stroke-dasharray='12 20' stroke-dashoffset='5'/%3E%3Cpath d='M0 223.5h640' stroke-opacity='.09' stroke-dasharray='96 32 8 24' stroke-dashoffset='60'/%3E%3C/g%3E%3C/svg%3E");
   /* marca de giz: traço com falhas, para o valor antigo */
   --chalk:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 24' preserveAspectRatio='none'%3E%3Cfilter id='c' x='-2%25' y='-40%25' width='104%25' height='180%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9 .35' numOctaves='2' seed='7' result='n'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='n' scale='5' xChannelSelector='R' yChannelSelector='G' result='d'/%3E%3CfeColorMatrix in='n' type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3.2 0 0 0 -1.15' result='m'/%3E%3CfeComposite in='d' in2='m' operator='in'/%3E%3C/filter%3E%3Cpath d='M4 15C60 10 150 13 236 8' fill='none' stroke='%23F7F7F2' stroke-width='7' stroke-linecap='round' filter='url(%23c)'/%3E%3C/svg%3E");
   --arrow-r:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='12'%3E%3Cpath d='M0 6h41M35 1.5 41 6l-6 4.5' stroke='%23BFC4C9' stroke-width='2' fill='none'/%3E%3C/svg%3E");
@@ -65,22 +82,28 @@
   color-scheme:dark;
 }
 *,*::before,*::after{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;scrollbar-color:#3A3E43 var(--ink);scrollbar-width:thin;scroll-padding-top:calc(var(--bar-h) + var(--nav-h) + 8px)}
+html{-webkit-text-size-adjust:100%;scrollbar-color:var(--steel) var(--ink);scrollbar-width:thin;scroll-padding-top:calc(var(--bar-h) + var(--nav-h) + 8px)}
 ::-webkit-scrollbar{width:10px;height:10px}
 ::-webkit-scrollbar-track{background:var(--ink)}
-::-webkit-scrollbar-thumb{background:#3A3E43;border:2px solid var(--ink);border-radius:6px}
+::-webkit-scrollbar-thumb{background:var(--steel);border:2px solid var(--ink);border-radius:6px}
 ::-webkit-scrollbar-thumb:hover{background:var(--alu)}
 @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
 body{
   margin:0;min-width:320px;overflow-x:clip;
-  background:var(--anod) 0 0/640px 240px,var(--ink);
+  background:var(--ink);
   color:var(--paper);
   font:400 1.0625rem/1.55 var(--f-b);
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
   caret-color:var(--tape);
 }
-::selection{background:var(--tape);color:var(--ink)}
-:focus-visible{outline:2px solid var(--tape);outline-offset:3px}
+/* Fundo: as linhas ficam presas à tela (camada fixa) e os traços com rastro correm sobre elas; a camada dos traços sobra 640 px à esquerda e anda um tile. */
+:root::before,body::before{content:"";position:fixed;z-index:-1;top:0;bottom:0;left:0;right:0;pointer-events:none}
+:root::before{background:var(--anod) 0 0/640px 240px}
+body::before{left:-640px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='240'%3E%3ClinearGradient id='t'%3E%3Cstop offset='0' stop-color='%2367D6E4' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%2367D6E4'/%3E%3C/linearGradient%3E%3Cg fill='url(%23t)'%3E%3Crect x='70' y='14' width='22' height='1' opacity='.11'/%3E%3Crect x='410' y='58' width='14' height='1' opacity='.12'/%3E%3Crect x='230' y='139' width='28' height='1' opacity='.12'/%3E%3Crect x='540' y='196' width='18' height='1' opacity='.11'/%3E%3Crect x='130' y='91' width='12' height='1' opacity='.11'/%3E%3C/g%3E%3C/svg%3E") 0 0/640px 240px;animation:fluxo 48s linear infinite}
+@keyframes fluxo{to{transform:translateX(640px)}}
+@media (prefers-reduced-motion:reduce){body::before{animation:none}}
+::selection{background:var(--tape);color:var(--on-c1)}
+:focus-visible{outline:2px solid var(--c2);outline-offset:3px}
 main:focus{outline:none}
 a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.3em}
 img,svg{display:block}
@@ -88,10 +111,10 @@ h1,h2,h3,h4,p{margin:0}
 .vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 .defs{position:absolute;width:0;height:0;overflow:hidden}
 .wrap{width:100%;max-width:calc(var(--maxw) + 2 * var(--g));margin-inline:auto;padding-inline:var(--g)}
-.skip{position:absolute;left:var(--g);top:0;transform:translateY(-100%);z-index:60;background:var(--tape);color:var(--ink);padding:10px 14px;font-weight:700;text-decoration:none}
+.skip{position:absolute;left:var(--g);top:0;transform:translateY(-100%);z-index:60;background:var(--tape);color:var(--on-c1);padding:10px 14px;font-weight:700;text-decoration:none}
 .skip:focus{transform:translateY(12px)}
-.pend{outline:1px dashed var(--amber)!important;outline-offset:3px}
-.field .pend{background-color:rgba(243,146,0,.3)}
+.pend{outline:1px dashed var(--pendente)!important;outline-offset:3px}
+.field .pend{background-color:color-mix(in srgb,var(--pendente) 30%,transparent)}
 .ico{width:16px;height:16px;flex:none}
 
 /* Barra superior fixa */
@@ -100,59 +123,41 @@ h1,h2,h3,h4,p{margin:0}
 .mark{margin-right:auto;font:800 1.375rem/1 var(--f-d);letter-spacing:.03em;text-transform:uppercase;text-decoration:none;color:var(--paper);white-space:nowrap}
 .nav{display:flex;gap:24px}
 .nav a{padding:8px 0;font:600 .9375rem/1 var(--f-b);color:var(--alu);text-decoration:none;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
-.nav a:hover{color:var(--paper);border-bottom-color:var(--tape)}
-.demo-link{display:inline-flex;align-items:center;gap:8px;padding:10px 12px 9px 14px;background:var(--tape);color:var(--ink);font:700 .8125rem/1 var(--f-b);font-stretch:75%;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;white-space:nowrap;box-shadow:0 2px 3px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.4);transition:transform .2s var(--out),box-shadow .2s var(--out)}
+.nav a:hover{color:var(--paper);border-bottom-color:var(--c2)}
+.demo-link{display:inline-flex;align-items:center;gap:8px;padding:10px 12px 9px 14px;background:var(--tape);color:var(--on-c1);font:700 .8125rem/1 var(--f-b);font-stretch:75%;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;white-space:nowrap;box-shadow:0 2px 3px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.4);transition:transform .2s var(--out),box-shadow .2s var(--out)}
 .demo-link:hover{transform:translateY(-1px);box-shadow:0 6px 10px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.4)}
 .demo-link .ico{width:14px;height:14px}
 .dl-short{display:none}
 .lang{display:flex;align-items:center;gap:4px}
 .lang button{appearance:none;border:0;border-radius:0;margin:0;background:transparent;color:var(--alu);cursor:pointer;padding:9px 10px 8px;font:700 .8125rem/1 var(--f-b);font-stretch:75%;letter-spacing:.14em;transition:background-color .3s var(--out),color .3s var(--out)}
 .lang button:hover{color:var(--paper)}
-.lang button[aria-pressed="true"]{background:var(--tape);color:var(--ink);cursor:default}
-.lang button.is-pending{background:transparent;color:var(--amber);outline:1px dashed var(--amber);outline-offset:2px}
-.lang-sep{color:#5A5F65;font-size:.8125rem}
+.lang button[aria-pressed="true"]{background:var(--c2);color:var(--on-c2);cursor:default}
+.lang button.is-pending{background:transparent;color:var(--pendente);outline:1px dashed var(--pendente);outline-offset:2px}
+.lang-sep{color:var(--steel-2);font-size:.8125rem}
 
 /* Primeira tela */
 .hero{position:relative;display:flex;flex-direction:column;min-height:calc(100vh - var(--bar-h) - var(--nav-h));min-height:calc(100svh - var(--bar-h) - var(--nav-h));padding-bottom:clamp(24px,4vh,40px)}
-.press{position:relative;display:flex;align-items:center;min-height:var(--ph);margin-top:clamp(10px,2.5vh,32px);overflow:hidden;overflow:clip visible}
+.press{position:relative;display:flex;align-items:center;min-height:var(--ph);margin-top:var(--press-mt);overflow:hidden;overflow:clip visible}
 .feedline{position:relative;flex:1;min-width:0}
 .track{position:relative;z-index:2;margin-right:var(--vis);overflow:hidden;padding:6px 0 12px}
 .tape{
   display:block;
   padding:.2em 1.2em .19em calc(var(--g) + 12px);
-  background:var(--tape);color:var(--ink);
+  background:var(--tape);color:var(--on-c1);
   font-family:var(--f-d);font-weight:800;font-size:calc(var(--tape-fs) * var(--fit,1));line-height:1;
   letter-spacing:.01em;text-transform:uppercase;white-space:nowrap;
   transform:var(--settle);
-  box-shadow:0 3px 5px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.4),inset 0 -1px 0 rgba(90,70,0,.25);
+  box-shadow:0 3px 5px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.4),inset 0 -1px 0 color-mix(in srgb,var(--c1-deep) 25%,transparent);
 }
 .tape ::selection{background:var(--ink);color:var(--tape)}
 .tape-text{display:inline-block;width:max-content}
 .t-sep{padding-inline:.28em}
-.mouth{position:absolute;z-index:1;right:calc(var(--vis) - 12px);width:20px;top:0;bottom:6px;background:#060607;border-radius:5px 0 0 5px}
-.stub{position:absolute;z-index:2;right:var(--vis);width:7px;top:6px;bottom:12px;background:var(--tape);box-shadow:inset -2px 0 2px rgba(0,0,0,.28)}
-.blade{position:absolute;z-index:4;right:calc(var(--vis) + 1px);width:3px;top:-2px;bottom:4px;background:#D9DDE1;border-radius:1px;opacity:0;transform-origin:50% 0;box-shadow:1px 0 0 rgba(0,0,0,.4)}
-.printer{
-  position:absolute;z-index:3;top:50%;right:calc(-1 * var(--hide));
-  width:calc(var(--vis) + var(--hide));height:var(--ph);margin-top:calc(var(--ph) / -2);
-  background:var(--alu);
-  border-radius:30px 0 0 30px;
-  box-shadow:-10px 14px 24px rgba(0,0,0,.5);
-}
-.lcd{position:absolute;left:30px;top:26px;width:154px;height:44px;padding-left:14px;background:#15171A;border-radius:4px;color:var(--alu);font:700 .75rem/44px var(--f-b);font-stretch:75%;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;overflow:hidden}
-.lcd[data-s="print"],.lcd[data-s="cut"]{color:var(--amber)}
-.cassette{position:absolute;left:30px;bottom:26px;width:96px;height:36px;border-radius:4px;background:#15171A;overflow:hidden}
-.cassette::before{content:"";position:absolute;left:0;right:30px;top:13px;height:10px;background:var(--tape)}
-.cassette::after{content:"";position:absolute;right:8px;top:7px;width:22px;height:22px;border-radius:50%;background:#15171A;border:6px solid var(--tape)}
-.keys{position:absolute;left:144px;bottom:36px;display:flex;gap:10px}
-.keys span{width:16px;height:16px;border-radius:50%;background:var(--ink-3)}
-
 .rest{position:relative;flex:1;display:flex;flex-direction:column}
 .lede{margin-top:clamp(12px,2.5vh,28px)}
 .phrase{max-width:28ch;font:400 clamp(1.5rem,2.5vw,2.25rem)/1.18 var(--f-b);font-stretch:92%;letter-spacing:-.012em;color:var(--paper);text-wrap:balance}
 .apoio{max-width:60ch;margin-top:14px;font-size:clamp(1rem,1.2vw,1.125rem);line-height:1.55;color:var(--alu);text-wrap:pretty}
 .actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px;margin-top:20px}
-.btn{display:inline-flex;align-items:center;gap:12px;padding:15px 20px 14px 22px;background:var(--tape);color:var(--ink);font:800 1.1875rem/1 var(--f-d);letter-spacing:.05em;text-transform:uppercase;text-decoration:none;box-shadow:0 2px 3px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.4);transition:transform .25s var(--out),box-shadow .25s var(--out)}
+.btn{display:inline-flex;align-items:center;gap:12px;padding:15px 20px 14px 22px;background:var(--tape);color:var(--on-c1);font:800 1.1875rem/1 var(--f-d);letter-spacing:.05em;text-transform:uppercase;text-decoration:none;box-shadow:0 2px 3px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.4);transition:transform .25s var(--out),box-shadow .25s var(--out)}
 .btn .ico{width:18px;height:18px;transition:transform .25s var(--out)}
 .btn:hover{transform:translateY(-2px);box-shadow:0 8px 14px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.4)}
 .btn:hover .ico--down{transform:translateY(2px)}
@@ -160,10 +165,10 @@ h1,h2,h3,h4,p{margin:0}
 .btn:hover .ico--out{transform:translate(2px,-2px)}
 .btn:active{transform:none;box-shadow:0 1px 2px rgba(0,0,0,.5)}
 .btn--sm{padding:12px 16px 11px 18px;font-size:1.0625rem}
-.btn--ink{background:var(--ink);color:var(--tape);box-shadow:0 2px 3px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.12)}
+.btn--ink{background:var(--ink);color:var(--c2);box-shadow:0 2px 3px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.12)}
 .btn--ink:hover{box-shadow:0 8px 14px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.12)}
-.ext{display:inline-flex;align-items:center;gap:8px;padding:10px 0;font:600 1rem/1 var(--f-b);color:var(--alu);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.32em;text-decoration-color:rgba(191,196,201,.45);transition:color .2s,text-decoration-color .2s}
-.ext:hover{color:var(--paper);text-decoration-color:var(--tape)}
+.ext{display:inline-flex;align-items:center;gap:8px;padding:10px 0;font:600 1rem/1 var(--f-b);color:var(--alu);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.32em;text-decoration-color:color-mix(in srgb,var(--alu) 45%,transparent);transition:color .2s,text-decoration-color .2s}
+.ext:hover{color:var(--paper);text-decoration-color:var(--c2)}
 .ext .ico{width:14px;height:14px}
 
 /* Fileira de plaquetas */
@@ -179,43 +184,42 @@ h1,h2,h3,h4,p{margin:0}
 }
 .tag{padding-inline:12px;transition:transform .3s var(--out),box-shadow .3s var(--out)}
 .tag:hover{transform:translateY(-3px);box-shadow:0 16px 26px -6px rgba(0,0,0,.65),0 2px 3px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.6),inset 0 -1px 0 rgba(0,0,0,.25)}
-.tag:focus-within{outline:2px solid var(--tape);outline-offset:3px}
+.tag:focus-within{outline:2px solid var(--c2);outline-offset:3px}
 .tag:nth-child(2){background-position:-180px -40px,0 0}
 .tag:nth-child(3){background-position:-360px -120px,0 0}
 .tag:nth-child(4){background-position:-90px -170px,0 0}
 .tag:nth-child(5){background-position:-270px -10px,0 0}
 .tag:nth-child(6){background-position:-450px -90px,0 0}
 .tag:nth-child(7){background-position:-540px -200px,0 0}
-.tag-top{display:flex;align-items:center;justify-content:space-between;gap:8px;font:700 .6875rem/1 var(--f-b);font-stretch:75%;letter-spacing:.18em;text-transform:uppercase;color:var(--alu-ink-2)}
-.rivet{flex:none;width:9px;height:9px;border-radius:50%;background:#A2A8AE;box-shadow:inset 0 1px 1.5px rgba(0,0,0,.5),0 1px 0 rgba(255,255,255,.7)}
+.tag-top{display:flex;align-items:center;justify-content:space-between;gap:8px;font:700 .75rem/1 var(--f-b);font-stretch:75%;letter-spacing:.18em;text-transform:uppercase;color:var(--alu-ink-2)}
+.rivet{flex:none;width:9px;height:9px;border-radius:50%;background:var(--rivet);box-shadow:inset 0 1px 1.5px rgba(0,0,0,.5),0 1px 0 rgba(255,255,255,.7)}
 .bc{height:40px;margin-top:10px;color:var(--ink)}
 .bc svg{width:100%;height:100%}
 .bc path{fill:currentColor}
-.bc-num{margin-top:5px;text-align:center;font:700 .8125rem/1 var(--f-b);font-stretch:75%;letter-spacing:.14em;font-variant-numeric:tabular-nums lining-nums}
-.tag-name{margin-top:12px;padding-top:11px;border-top:1px solid rgba(17,18,20,.22);font:700 .9375rem/1.3 var(--f-b);font-stretch:92%;text-wrap:balance}
+.tag-area{align-self:flex-start;margin-top:10px;padding:4px 7px 3px;border-radius:3px;background:var(--c3);color:var(--on-c3);text-shadow:none;font:700 .75rem/1.2 var(--f-b);font-stretch:75%;letter-spacing:.12em;text-transform:uppercase;box-shadow:inset 0 -1px 0 color-mix(in srgb,var(--ink) 20%,transparent)}
+.tag-name{margin-top:12px;padding-top:11px;border-top:1px solid color-mix(in srgb,var(--ink) 22%,transparent);font:700 .9375rem/1.3 var(--f-b);font-stretch:92%;text-wrap:balance}
 .tag-name a{text-decoration:none}
 .tag-name a::after{content:"";position:absolute;inset:0;z-index:1}
 .tag-name a:focus-visible{outline:none}
 .tag:hover .tag-name a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.22em}
-.tag-measure{margin:6px 0 14px;font-size:.8125rem;font-stretch:92%;line-height:1.38;color:var(--alu-ink-2)}
+.tag-measure{margin:6px 0 14px;font-size:.875rem;font-stretch:92%;line-height:1.4;color:var(--alu-ink-2)}
 .tag .tag-state{margin-inline:-12px;padding-inline:12px}
-.tag-state{display:flex;align-items:center;gap:8px;margin:auto -14px 0;padding:9px 14px 10px;background:rgba(17,18,20,.1);color:var(--alu-ink-2);text-shadow:none;font:700 .6875rem/1 var(--f-b);font-stretch:75%;letter-spacing:.16em;text-transform:uppercase;transition:background-color .45s var(--out),color .45s var(--out)}
+.tag-state{display:flex;align-items:center;gap:8px;margin:auto -14px 0;padding:9px 14px 10px;background:color-mix(in srgb,var(--ink) 10%,transparent);color:var(--alu-ink-2);text-shadow:none;font:700 .75rem/1 var(--f-b);font-stretch:75%;letter-spacing:.16em;text-transform:uppercase;transition:background-color .45s var(--out),color .45s var(--out)}
 .tag-state::before{content:"";flex:none;width:8px;height:8px;border:1.5px solid currentColor;transition:background-color .45s var(--out),border-color .45s var(--out)}
 .st{display:none}
 .tag[data-state="idle"] .st-idle,.tag[data-state="read"] .st-read,.tag[data-state="prod"] .st-prod{display:inline}
-.tag[data-state="read"]{outline:2px dashed var(--amber);outline-offset:3px}
-.tag[data-state]:focus-within{outline:2px solid var(--tape);outline-offset:3px}
-.tag[data-state="read"] .tag-state{background:var(--amber);color:var(--ink)}
+.tag[data-state="read"]{outline:2px dashed var(--pendente);outline-offset:3px}
+.tag[data-state]:focus-within{outline:2px solid var(--c2);outline-offset:3px}
+.tag[data-state="read"] .tag-state{background:var(--pendente);color:var(--ink)}
 .tag[data-state="read"] .tag-state::before{background:var(--ink);border-color:var(--ink)}
-.tag[data-state="prod"] .tag-state,.pl .tag-state{background:var(--ink);color:var(--tape)}
-.tag[data-state="prod"] .tag-state::before,.pl .tag-state::before{background:var(--tape);border-color:var(--tape)}
-.tag[data-state="idle"] .tag-state{background:#adb1b6}
+.tag[data-state="prod"] .tag-state,.pl .tag-state{background:var(--ink);color:var(--c3)}
+.tag[data-state="prod"] .tag-state::before,.pl .tag-state::before{background:var(--c3);border-color:var(--c3)}
+.tag[data-state="idle"] .tag-state{background:var(--idle)}
 .readout{margin-top:16px;font:700 .75rem/1 var(--f-b);font-stretch:75%;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-variant-numeric:tabular-nums}
 /* Notebook de tela baixa: a plaqueta fica só com número, título e estado para a leitura caber na primeira tela */
 @media (min-width:1000px) and (max-height:860px){
   .tag-measure{display:none}
   .tag-name{margin:10px 0 12px;padding-top:9px}
-  .bc{height:30px;margin-top:8px}
   .apoio{margin-top:10px}
   .actions{margin-top:16px}
 }
@@ -223,9 +227,9 @@ h1,h2,h3,h4,p{margin:0}
 /* Laser do leitor: o único vermelho da página */
 .laser{position:absolute;z-index:4;left:0;top:0;width:var(--w,0px);height:2px;margin-top:-1px;transform:translate(var(--x,0px),var(--y,0px));opacity:0;pointer-events:none;transition:opacity .2s linear}
 .laser.on{opacity:1;transition:opacity .2s linear,transform .3s var(--out),width .3s var(--out)}
-.laser::before{content:"";position:absolute;inset:0;border-radius:2px;background:linear-gradient(90deg,rgba(229,35,27,0),var(--laser) 10%,#FF6B5E 50%,var(--laser) 90%,rgba(229,35,27,0))}
+.laser::before{content:"";position:absolute;inset:0;border-radius:2px;background:linear-gradient(90deg,transparent,var(--laser) 10%,var(--laser-hot) 50%,var(--laser) 90%,transparent)}
 .laser.on::before{animation:jit 90ms steps(2,end) infinite}
-.laser::after{content:"";position:absolute;left:6%;right:6%;top:-3px;height:8px;background:rgba(229,35,27,.16);filter:blur(2px)}
+.laser::after{content:"";position:absolute;left:6%;right:6%;top:-3px;height:8px;background:color-mix(in srgb,var(--laser) 16%,transparent);filter:blur(2px)}
 @keyframes jit{0%{transform:translateY(-.5px)}100%{transform:translateY(.5px)}}
 
 /* Etiquetas de título: fita impressa que quebra em pedaços */
@@ -240,8 +244,8 @@ h1,h2,h3,h4,p{margin:0}
 .field .mini-h{color:var(--tape-ink-2)}
 .sub-h{font:800 1.625rem/1 var(--f-d);letter-spacing:.02em;text-transform:uppercase}
 
-/* Campos amarelos */
-.field{position:relative;background:var(--tape);color:var(--ink)}
+/* Campos de cor (c1) */
+.field{position:relative;background:var(--tape);color:var(--on-c1)}
 .field ::selection{background:var(--ink);color:var(--tape)}
 .field :focus-visible{outline-color:var(--ink)}
 
@@ -256,25 +260,25 @@ h1,h2,h3,h4,p{margin:0}
 .clip{position:absolute;z-index:2;left:50%;top:-30px;width:30px;height:56px;margin-left:-15px;border-radius:8px 8px 5px 5px;background:var(--brushed) 0 0/640px 240px,var(--alu);box-shadow:0 3px 5px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.6),inset 0 -2px 0 rgba(0,0,0,.2)}
 .badge-photo{position:relative;margin:18px 18px 0;aspect-ratio:1/1.06;overflow:hidden;border-radius:3px;background:var(--ink)}
 .badge-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 34%;filter:url(#print)}
-.badge-photo::after{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(rgba(17,18,20,.9) .55px,transparent 1.15px);background-size:3px 3px;mix-blend-mode:multiply;opacity:.35}
+.badge-photo::after{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(color-mix(in srgb,var(--ink) 90%,transparent) .55px,transparent 1.15px);background-size:3px 3px;mix-blend-mode:multiply;opacity:.35}
 .badge-cap{display:grid;gap:4px;padding:16px 20px 0}
 .badge-name{font:800 1.875rem/.95 var(--f-d);letter-spacing:.01em;text-transform:uppercase}
 .badge-role{font:650 .9375rem/1.3 var(--f-b)}
-.badge-loc{font:500 .875rem/1.3 var(--f-b);color:#4D5156}
+.badge-loc{font:500 .875rem/1.3 var(--f-b);color:var(--paper-2)}
 .bc--badge{height:34px;margin:14px 20px 0;padding-bottom:20px;box-sizing:content-box}
 .about-text{min-width:0;padding-top:12px}
 .about-copy{display:grid;gap:18px;max-width:62ch;margin:32px 0 56px}
 .about-copy p{font-size:clamp(1.0625rem,1.3vw,1.1875rem);line-height:1.55;text-wrap:pretty}
 .about-copy p:first-child{font-size:clamp(1.125rem,1.45vw,1.3125rem);line-height:1.5}
 .trail{list-style:none;margin:18px 0 0;padding:0;border-top:2px solid var(--ink)}
-.trail li{display:grid;grid-template-columns:10rem minmax(0,1fr);gap:6px 28px;padding:18px 0 20px;border-bottom:1px solid rgba(17,18,20,.3)}
+.trail li{display:grid;grid-template-columns:10rem minmax(0,1fr);gap:6px 28px;padding:18px 0 20px;border-bottom:1px solid color-mix(in srgb,var(--ink) 30%,transparent)}
 .yr{padding-top:3px;font:700 1rem/1.35 var(--f-b);font-stretch:75%;letter-spacing:.06em;text-transform:uppercase;font-variant-numeric:tabular-nums lining-nums}
 .trail h4{font:700 1.125rem/1.3 var(--f-b)}
 .trail .org{font-weight:500}
 .trail p{max-width:62ch;margin-top:4px;color:var(--tape-ink-2);line-height:1.5}
 .edu{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:32px 48px;margin-top:48px}
 .edu-list{list-style:none;margin:18px 0 0;padding:0;border-top:2px solid var(--ink)}
-.edu-list li{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:2px 16px;padding:14px 0 15px;border-bottom:1px solid rgba(17,18,20,.3)}
+.edu-list li{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:2px 16px;padding:14px 0 15px;border-bottom:1px solid color-mix(in srgb,var(--ink) 30%,transparent)}
 .edu-list strong{font-weight:700}
 .edu-list span{color:var(--tape-ink-2);font-variant-numeric:tabular-nums}
 
@@ -286,15 +290,12 @@ h1,h2,h3,h4,p{margin:0}
 .plate{position:relative;margin-top:clamp(40px,5vw,64px);padding:30px 40px 34px;border-radius:10px;background:var(--brushed) 0 0/640px 240px,var(--alu);color:var(--alu-ink);text-shadow:0 1px 0 rgba(255,255,255,.4);box-shadow:0 24px 44px -8px rgba(0,0,0,.6),0 2px 4px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.65),inset 0 -2px 0 rgba(0,0,0,.18)}
 .plate>.rivet{position:absolute}
 .r-tl{left:14px;top:14px}.r-tr{right:14px;top:14px}.r-bl{left:14px;bottom:14px}.r-br{right:14px;bottom:14px}
-.plate-head{display:grid;grid-template-columns:auto minmax(0,1fr) minmax(160px,280px);gap:16px 40px;align-items:center;padding-bottom:22px;border-bottom:1px solid rgba(17,18,20,.28);box-shadow:0 1px 0 rgba(255,255,255,.45)}
-.plate-id{display:grid;gap:6px}
-.plate-k{font:700 .6875rem/1 var(--f-b);font-stretch:75%;letter-spacing:.18em;text-transform:uppercase;color:var(--alu-ink-2)}
-.plate-num{font:700 2rem/1 var(--f-b);font-stretch:75%;letter-spacing:.04em;font-variant-numeric:tabular-nums lining-nums}
+.plate-head{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;padding-bottom:22px;border-bottom:1px solid color-mix(in srgb,var(--ink) 28%,transparent);box-shadow:0 1px 0 rgba(255,255,255,.45)}
+.plate-k{font:700 .75rem/1 var(--f-b);font-stretch:75%;letter-spacing:.18em;text-transform:uppercase;color:var(--alu-ink-2)}
 .plate-title strong{display:block;font:800 1.75rem/1 var(--f-d);letter-spacing:.02em;text-transform:uppercase}
 .plate-title span{display:block;margin-top:6px;font:500 .9375rem/1.3 var(--f-b);color:var(--alu-ink-2)}
-.bc--plate{height:46px;margin-top:0}
 .register{list-style:none;margin:8px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:36px}
-.register li{min-width:0;border-bottom:1px solid rgba(17,18,20,.2);box-shadow:0 1px 0 rgba(255,255,255,.4)}
+.register li{min-width:0;border-bottom:1px solid color-mix(in srgb,var(--ink) 20%,transparent);box-shadow:0 1px 0 rgba(255,255,255,.4)}
 .register a{display:flex;align-items:baseline;gap:12px;padding:14px 0 13px;text-decoration:none}
 .reg-n{flex:none;min-width:2ch;font:700 .8125rem/1 var(--f-b);font-stretch:75%;letter-spacing:.08em;color:var(--alu-ink-2);font-variant-numeric:tabular-nums lining-nums}
 .reg-name{min-width:0;font:600 1rem/1.3 var(--f-b);text-decoration:underline;text-decoration-color:transparent;text-decoration-thickness:1px;text-underline-offset:.24em;transition:text-decoration-color .2s}
@@ -303,7 +304,7 @@ h1,h2,h3,h4,p{margin:0}
 .register a:hover .ico{opacity:1;transform:translate(2px,-2px)}
 .register a:focus-visible{outline-color:var(--ink)}
 
-.demo-cta{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px 48px;align-items:center;margin-top:clamp(40px,5vw,56px);padding:clamp(28px,3.4vw,40px) clamp(24px,3.4vw,48px);transform:rotate(-.25deg);box-shadow:0 4px 8px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.4),inset 0 -1px 0 rgba(90,70,0,.25)}
+.demo-cta{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px 48px;align-items:center;margin-top:clamp(40px,5vw,56px);padding:clamp(28px,3.4vw,40px) clamp(24px,3.4vw,48px);transform:rotate(-.25deg);box-shadow:0 4px 8px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.4),inset 0 -1px 0 color-mix(in srgb,var(--c1-deep) 25%,transparent)}
 .demo-cta h3{font:800 clamp(1.75rem,2.6vw,2.25rem)/1 var(--f-d);letter-spacing:.02em;text-transform:uppercase}
 .demo-cta p{max-width:58ch;margin-top:10px;line-height:1.5}
 .demo-cta .demo-note{margin-top:8px;font:700 .8125rem/1.3 var(--f-b);font-stretch:75%;letter-spacing:.14em;text-transform:uppercase;color:var(--tape-ink-2)}
@@ -314,14 +315,14 @@ h1,h2,h3,h4,p{margin:0}
 .arch-grid{list-style:none;margin:20px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-areas:"nav portal api db" ". . jobs erp";gap:28px 44px}
 .node{position:relative;padding:14px 16px 16px;background:var(--paper);color:var(--ink);border-radius:3px;box-shadow:0 3px 6px rgba(0,0,0,.45),inset 0 -1px 0 rgba(0,0,0,.1)}
 .node strong{display:block;font:800 1.3125rem/1.05 var(--f-d);letter-spacing:.02em;text-transform:uppercase}
-.node span{display:block;margin-top:6px;font-size:.875rem;line-height:1.4;color:var(--alu-ink-2)}
+.node span{display:block;margin-top:6px;font-size:1rem;line-height:1.4;color:var(--alu-ink-2)}
 .node--nav{grid-area:nav}.node--portal{grid-area:portal}.node--api{grid-area:api}.node--db{grid-area:db}
 .node--jobs{grid-area:jobs}
-.node--erp{grid-area:erp;background:var(--tape)}
+.node--erp{grid-area:erp;background:var(--tape);color:var(--on-c1)}
 .node--erp span{color:var(--tape-ink-2)}
 .to-r::after{content:"";position:absolute;left:100%;top:50%;width:44px;height:12px;margin-top:-6px;background:var(--arrow-r) 0 0/44px 12px no-repeat}
 .node--jobs::before{content:"";position:absolute;left:50%;bottom:100%;width:12px;height:28px;margin-left:-6px;background:var(--arrow-d) 0 0/12px 28px no-repeat}
-.arch figcaption,.conv figcaption{margin-top:18px;max-width:72ch;color:var(--muted);font-size:.9375rem;line-height:1.5}
+.arch figcaption,.conv figcaption{margin-top:18px;max-width:72ch;color:var(--muted);font-size:1rem;line-height:1.5}
 /* Conversas entre os sistemas: de cada sistema do hub sai um cabo com a etiqueta do que trafega */
 .conv{margin:0}
 .conv-list{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:16px}
@@ -329,24 +330,23 @@ h1,h2,h3,h4,p{margin:0}
 .sys-node{z-index:1;display:flex;flex-direction:column;justify-content:center;padding-right:36px}
 .sys-node,a.link-to{text-decoration:none;transition:transform .25s var(--out),box-shadow .25s var(--out)}
 .sys-node:hover,a.link-to:hover{transform:translateY(-2px);box-shadow:0 8px 14px rgba(0,0,0,.5),inset 0 -1px 0 rgba(0,0,0,.1)}
-.sys-node span{font-weight:700;font-stretch:75%;letter-spacing:.1em;font-variant-numeric:tabular-nums lining-nums}
 .conv .node .ico{position:absolute;right:12px;top:50%;width:14px;height:14px;margin-top:-7px;color:var(--alu-ink-2);transition:transform .25s var(--out)}
 .conv a.node:hover .ico{transform:translateY(2px)}
 .sys-links{list-style:none;margin:0;padding:0;display:grid;align-content:center;gap:10px}
 .link{position:relative;isolation:isolate;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,12.5rem);align-items:center;gap:8px 24px;padding-left:24px}
-.link::before{content:"";position:absolute;z-index:-1;left:-6px;right:10px;top:50%;height:6px;margin-top:-3px;border-radius:3px;background:linear-gradient(#41454B,#1B1D20);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 1px 2px rgba(0,0,0,.5)}
+.link::before{content:"";position:absolute;z-index:-1;left:-6px;right:10px;top:50%;height:6px;margin-top:-3px;border-radius:3px;background:linear-gradient(var(--cable-1),var(--cable-2));box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 1px 2px rgba(0,0,0,.5)}
 .link-tag{grid-area:1 / 1;justify-self:start;padding:6px 10px 5px;background:var(--paper);color:var(--ink);border-radius:2px;font:600 .8125rem/1.3 var(--f-b);font-stretch:88%;box-shadow:0 2px 3px rgba(0,0,0,.45),inset 0 -1px 0 rgba(0,0,0,.12)}
 .link-tag.pend{outline-offset:1px}
 .link-to{grid-area:1 / 2;display:block;padding:10px 14px 11px}
 a.link-to{padding-right:36px}
 .link-to strong{font-size:1.125rem}
-.link-to--erp{background:var(--tape)}
+.link-to--erp{background:var(--tape);color:var(--on-c1)}
 .link-to--erp ::selection{background:var(--ink);color:var(--tape)}
 
 /* Etiquetas de cabo */
 .cables{list-style:none;margin:16px 0 0;padding:0 14px;display:flex;flex-wrap:wrap;gap:14px 20px;isolation:isolate}
 .cables li{position:relative;padding:6px 10px 5px;background:var(--paper);color:var(--ink);border-radius:2px;font:600 .8125rem/1.25 var(--f-b);font-stretch:88%;box-shadow:0 2px 3px rgba(0,0,0,.45),inset 0 -1px 0 rgba(0,0,0,.12)}
-.cables li::before{content:"";position:absolute;z-index:-1;left:-14px;right:-14px;top:50%;height:6px;margin-top:-3px;border-radius:3px;background:linear-gradient(#41454B,#1B1D20);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 1px 2px rgba(0,0,0,.5)}
+.cables li::before{content:"";position:absolute;z-index:-1;left:-14px;right:-14px;top:50%;height:6px;margin-top:-3px;border-radius:3px;background:linear-gradient(var(--cable-1),var(--cable-2));box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 1px 2px rgba(0,0,0,.5)}
 
 /* Projetos: uma ficha por linha */
 .projects{position:relative;padding-block:clamp(72px,9vw,120px) clamp(48px,6vw,80px);border-top:1px solid var(--line)}
@@ -357,8 +357,7 @@ a.link-to{padding-right:36px}
 .ficha--r .ficha-plate{order:2}
 .ficha-plate{position:sticky;top:calc(var(--bar-h) + var(--nav-h) + 28px);align-self:start}
 .pl{padding:14px 16px 0;border-radius:8px}
-.pl .bc{height:58px;margin-top:12px}
-.pl .bc-num{margin-top:8px;font-size:1.125rem;letter-spacing:.1em}
+.pl-name{margin-top:12px;padding-top:11px;border-top:1px solid color-mix(in srgb,var(--ink) 22%,transparent);font:800 1.625rem/1 var(--f-d);letter-spacing:.02em;text-transform:uppercase;text-wrap:balance}
 .pl .tag-state{margin:16px -16px 0;padding:11px 16px 12px}
 .ficha-body{min-width:0;display:grid;gap:clamp(32px,3.4vw,44px);align-content:start}
 .ficha-title{max-width:22ch;font:800 clamp(2rem,3.4vw,3.125rem)/.98 var(--f-d);letter-spacing:.005em;text-transform:uppercase;text-wrap:balance}
@@ -383,13 +382,13 @@ a.link-to{padding-right:36px}
 /* Lista do que o sistema tem: o quadrado cheio vale, o vazado ainda está em implantação */
 .feat{list-style:none;margin:0;padding:0;display:grid;gap:12px}
 .feat li{position:relative;padding-left:1.375rem}
-.feat li::before{content:"";position:absolute;left:0;top:.56em;width:8px;height:8px;background:var(--tape)}
+.feat li::before{content:"";position:absolute;left:0;top:.56em;width:8px;height:8px;background:var(--c2)}
 .feat .is-next::before{background:none;border:1.5px solid var(--alu)}
-.stamp{display:inline-block;margin-left:.5em;padding:3px 7px 2px;border:1px solid rgba(191,196,201,.55);color:var(--alu);font:700 .6875rem/1.2 var(--f-b);font-stretch:75%;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;vertical-align:.14em}
+.stamp{display:inline-block;margin-left:.5em;padding:3px 7px 2px;border:1px solid color-mix(in srgb,var(--alu) 55%,transparent);color:var(--alu);font:700 .75rem/1.2 var(--f-b);font-stretch:75%;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;vertical-align:.14em}
 /* Medições: o valor ocupa a coluna do rótulo da ficha */
 .mini-h+.spec{margin-top:14px}
 .spec--num>div{align-items:baseline}
-.spec--num dt{padding-top:0;font:800 clamp(1.5rem,2.2vw,1.875rem)/1.05 var(--f-b);font-stretch:72%;letter-spacing:-.005em;text-transform:none;color:var(--paper);font-variant-numeric:tabular-nums lining-nums;white-space:nowrap}
+.spec--num dt{padding-top:0;font:800 clamp(1.5rem,2.2vw,1.875rem)/1.05 var(--f-b);font-stretch:72%;letter-spacing:-.005em;text-transform:none;color:var(--c2);font-variant-numeric:tabular-nums lining-nums;white-space:nowrap}
 
 .ba{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));gap:24px 44px;margin-top:16px}
 .ba-item{padding-top:14px;border-top:1px solid var(--line)}
@@ -397,13 +396,13 @@ a.link-to{padding-right:36px}
 .ba-v{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 22px;margin-top:14px;font-variant-numeric:tabular-nums lining-nums}
 .ba del{position:relative;text-decoration:none;color:var(--muted);font:600 1.375rem/1.1 var(--f-b);font-stretch:80%;white-space:nowrap}
 .ba del::after{content:"";position:absolute;left:-3%;right:-3%;top:50%;height:.4em;margin-top:-.2em;background:var(--chalk) 0 0/100% 100% no-repeat;opacity:.6;transform:rotate(-3deg);pointer-events:none}
-.ba ins{text-decoration:none;color:var(--paper);font:800 clamp(2rem,3.2vw,2.75rem)/1 var(--f-b);font-stretch:72%;letter-spacing:-.005em}
+.ba ins{text-decoration:none;color:var(--c2);font:800 clamp(2rem,3.2vw,2.75rem)/1 var(--f-b);font-stretch:72%;letter-spacing:-.005em}
 .ba--lead ins{font-size:clamp(2.5rem,4.4vw,3.75rem)}
 
-.flow{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));background:var(--tape);color:var(--ink);transform:rotate(-.25deg);box-shadow:0 3px 6px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.4),inset 0 -1px 0 rgba(90,70,0,.25)}
+.flow{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));background:var(--tape);color:var(--on-c1);transform:rotate(-.25deg);box-shadow:0 3px 6px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.4),inset 0 -1px 0 color-mix(in srgb,var(--c1-deep) 25%,transparent)}
 .flow ::selection{background:var(--ink);color:var(--tape)}
 .flow li{position:relative;padding:12px 14px 16px;font:600 .9375rem/1.3 var(--f-b);font-stretch:92%}
-.flow li+li{border-left:2px dashed rgba(17,18,20,.4)}
+.flow li+li{border-left:2px dashed color-mix(in srgb,var(--ink) 40%,transparent)}
 .flow li+li::before,.flow li+li::after{content:"";position:absolute;left:-7px;width:12px;height:12px;border-radius:50%;background:var(--ink)}
 .flow li+li::before{top:-6px}
 .flow li+li::after{bottom:-6px}
@@ -413,8 +412,8 @@ a.link-to{padding-right:36px}
 .ficha-links{display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px}
 /* Vídeo da versão completa: tela escura presa por uma tira de fita. Sem pôster, o quadro 16:9 segura o espaço. */
 .reel{margin:0;max-width:52rem}
-.reel-cta{margin:10px 0 0;font-size:.9375rem}.reel-cta a{font-weight:700}
-.reel figcaption{position:relative;z-index:1;display:inline-block;margin:0 0 -10px 14px;padding:6px 10px 5px;background:var(--tape);color:var(--ink);font:700 .75rem/1.3 var(--f-b);font-stretch:75%;letter-spacing:.14em;text-transform:uppercase;transform:rotate(-.8deg);box-shadow:0 2px 4px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.4)}
+.reel-cta{margin:10px 0 0;font-size:1rem}.reel-cta a{font-weight:700}
+.reel figcaption{position:relative;z-index:1;display:inline-block;margin:0 0 -10px 14px;padding:6px 10px 5px;background:var(--tape);color:var(--on-c1);font:700 .75rem/1.3 var(--f-b);font-stretch:75%;letter-spacing:.14em;text-transform:uppercase;transform:rotate(-.8deg);box-shadow:0 2px 4px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.4)}
 .reel video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:var(--ink-3);border:1px solid var(--line);border-radius:6px;box-shadow:0 6px 14px rgba(0,0,0,.45)}
 
 /* Ecossistema */
@@ -424,12 +423,12 @@ a.link-to{padding-right:36px}
 .thesis-block{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:28px 64px;align-items:end;margin-top:clamp(48px,6vw,80px)}
 .thesis{transform:rotate(-.6deg);transform-origin:0 50%;font:800 clamp(2rem,4.4vw,4rem)/1.12 var(--f-d);letter-spacing:.005em;text-transform:uppercase;text-wrap:balance}
 .thesis span{padding:.06em .3em .02em;background:var(--ink);color:var(--tape);-webkit-box-decoration-break:clone;box-decoration-break:clone;box-shadow:0 3px 6px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.14)}
-.thesis ::selection{background:var(--tape);color:var(--ink)}
+.thesis ::selection{background:var(--tape);color:var(--on-c1)}
 .thesis-p{max-width:52ch;font-size:1.125rem;line-height:1.55}
 .eco-map{margin:clamp(56px,7vw,96px) 0 0}
 .chain{position:relative;list-style:none;margin:18px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:48px}
-.chain::before{content:"";position:absolute;left:4%;right:4%;top:50%;height:10px;margin-top:-5px;border-radius:5px;background:var(--ink);box-shadow:inset 0 2px 0 rgba(255,255,255,.12),0 3px 4px rgba(90,70,0,.35)}
-.enode{position:relative;z-index:1;display:flex;flex-direction:column;gap:8px;padding:16px 18px 18px;border-radius:8px;background:var(--brushed) 0 0/640px 240px,var(--alu);color:var(--alu-ink);text-shadow:0 1px 0 rgba(255,255,255,.35);box-shadow:0 14px 24px -8px rgba(60,45,0,.55),0 2px 3px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.6),inset 0 -1px 0 rgba(0,0,0,.25)}
+.chain::before{content:"";position:absolute;left:4%;right:4%;top:50%;height:10px;margin-top:-5px;border-radius:5px;background:var(--ink);box-shadow:inset 0 2px 0 rgba(255,255,255,.12),0 3px 4px color-mix(in srgb,var(--c1-deep) 35%,transparent)}
+.enode{position:relative;z-index:1;display:flex;flex-direction:column;gap:8px;padding:16px 18px 18px;border-radius:8px;background:var(--brushed) 0 0/640px 240px,var(--alu);color:var(--alu-ink);text-shadow:0 1px 0 rgba(255,255,255,.35);box-shadow:0 14px 24px -8px color-mix(in srgb,var(--c1-deep) 55%,transparent),0 2px 3px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.6),inset 0 -1px 0 rgba(0,0,0,.25)}
 .enode:nth-child(2){background-position:-220px -60px,0 0}
 .enode:nth-child(3){background-position:-410px -150px,0 0}
 .enode+.enode::before{content:"";position:absolute;left:-32px;top:50%;margin-top:-9px;border-left:14px solid var(--ink);border-block:9px solid transparent}
@@ -437,21 +436,20 @@ a.link-to{padding-right:36px}
 .enode h4{font:800 1.375rem/1 var(--f-d);letter-spacing:.02em;text-transform:uppercase}
 .e-num{font-weight:800;font-variant-numeric:tabular-nums lining-nums}
 .e-date{margin-top:14px;font-size:.875rem;color:var(--alu-ink-2)}
-.e-d{font-size:.9375rem;line-height:1.42;color:var(--alu-ink-2)}
+.e-d{font-size:1rem;line-height:1.42;color:var(--alu-ink-2)}
 .enode--end{background:var(--ink);color:var(--paper);text-shadow:none}
 .enode--end .e-d{color:var(--alu)}
-.enode--end .rivet{background:#3A3E43;box-shadow:inset 0 1px 1.5px rgba(0,0,0,.6),0 1px 0 rgba(255,255,255,.12)}
-.enode--end ::selection{background:var(--tape);color:var(--ink)}
+.enode--end .rivet{background:var(--steel);box-shadow:inset 0 1px 1.5px rgba(0,0,0,.6),0 1px 0 rgba(255,255,255,.12)}
+.enode--end .e-num{color:var(--c2)}
+.enode--end ::selection{background:var(--tape);color:var(--on-c1)}
 .eco-base{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:48px 64px;align-items:start;margin-top:clamp(56px,7vw,96px)}
-.plate--eco{margin-top:0;padding:26px 32px 28px;box-shadow:0 22px 36px -10px rgba(60,45,0,.55),0 2px 4px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.65),inset 0 -2px 0 rgba(0,0,0,.18)}
-.plate--eco .plate-head{grid-template-columns:auto minmax(0,1fr)}
-.plate--eco .bc--plate{grid-column:1 / -1;max-width:280px;height:38px}
+.plate--eco{margin-top:0;padding:26px 32px 28px;box-shadow:0 22px 36px -10px color-mix(in srgb,var(--c1-deep) 55%,transparent),0 2px 4px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.65),inset 0 -2px 0 rgba(0,0,0,.18)}
 .reg2{list-style:none;margin:6px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:32px}
-.reg2 li{display:grid;gap:3px;padding:14px 0 13px;border-bottom:1px solid rgba(17,18,20,.2);box-shadow:0 1px 0 rgba(255,255,255,.4)}
+.reg2 li{display:grid;gap:3px;padding:14px 0 13px;border-bottom:1px solid color-mix(in srgb,var(--ink) 20%,transparent);box-shadow:0 1px 0 rgba(255,255,255,.4)}
 .reg2 strong{font:700 1rem/1.3 var(--f-b)}
-.reg2 span{font-size:.875rem;line-height:1.4;color:var(--alu-ink-2)}
+.reg2 span{font-size:1rem;line-height:1.4;color:var(--alu-ink-2)}
 .rules{list-style:none;margin:18px 0 0;padding:0;border-top:2px solid var(--ink)}
-.rules li{padding:18px 0 20px;border-bottom:1px solid rgba(17,18,20,.3)}
+.rules li{padding:18px 0 20px;border-bottom:1px solid color-mix(in srgb,var(--ink) 30%,transparent)}
 .rules h4{font:700 1.125rem/1.3 var(--f-b)}
 .rules p{max-width:60ch;margin-top:6px;color:var(--tape-ink-2);line-height:1.5}
 
@@ -459,14 +457,24 @@ a.link-to{padding-right:36px}
 .skills{position:relative;padding-block:clamp(88px,11vw,136px)}
 .groups{margin:clamp(40px,5vw,64px) 0 0;border-top:1px solid var(--line)}
 .groups>div{display:grid;grid-template-columns:17rem minmax(0,1fr);gap:16px 40px;align-items:center;padding:24px 0 26px;border-bottom:1px solid var(--line)}
-.groups dt{justify-self:start;padding:.12em .4em .06em;background:var(--tape);color:var(--ink);font:800 1.5rem/1.05 var(--f-d);letter-spacing:.02em;text-transform:uppercase;transform:rotate(-.6deg);box-shadow:0 2px 4px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.4)}
-.groups dt ::selection,.groups dt::selection{background:var(--ink);color:var(--tape)}
+.groups dt{justify-self:start;padding:.12em .4em .06em;background:var(--c3);color:var(--on-c3);font:800 1.5rem/1.05 var(--f-d);letter-spacing:.02em;text-transform:uppercase;transform:rotate(-.6deg);box-shadow:0 2px 4px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.4)}
+.groups dt ::selection,.groups dt::selection{background:var(--on-c3);color:var(--c3)}
 .groups dd{margin:0}
-.chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px 12px}
-.chips li{padding:8px 12px 7px;background:var(--paper);color:var(--ink);font:700 .9375rem/1.1 var(--f-b);font-stretch:85%;transform:rotate(-.4deg);box-shadow:0 2px 3px rgba(0,0,0,.45),inset 0 -1px 0 rgba(0,0,0,.12)}
-.chips li:nth-child(even){transform:rotate(.35deg)}
-.chips li:nth-child(3n){transform:rotate(-.15deg)}
-.chips ::selection{background:var(--ink);color:var(--paper)}
+/* Selos: logotipo monocromático na cor do tema + nome; ícones genéricos mais discretos */
+.selos{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px 12px}
+.selo{display:inline-flex;align-items:center;gap:9px;padding:4px 12px 4px 4px;background:var(--paper);color:var(--ink);border-radius:2px;font:700 .9375rem/1.1 var(--f-b);font-stretch:85%;transform:rotate(-.4deg);box-shadow:0 2px 3px rgba(0,0,0,.45),inset 0 -1px 0 rgba(0,0,0,.12)}
+.selo:nth-child(even){transform:rotate(.35deg)}
+.selo:nth-child(3n){transform:rotate(-.15deg)}
+.selos ::selection{background:var(--ink);color:var(--paper)}
+.lg{position:relative;flex:none;width:30px;height:30px;border-radius:2px;background:var(--ink)}
+.lg::before{content:"";position:absolute;inset:4px;background:var(--c2);-webkit-mask:var(--m) center / contain no-repeat;mask:var(--m) center / contain no-repeat}
+/* Logotipo que é o nome escrito (o desenho ocupa só uma faixa do quadrado 24x24): caixa larga e o desenho na largura toda; a altura não muda. */
+.lg.w{width:52px}
+.lg.w::before{inset:3px 4px;-webkit-mask-size:100% auto;mask-size:100% auto}
+.lg.ww{width:64px}
+.selo.gen{gap:8px;padding:8px 12px 7px 10px}
+.selo.gen .lg{width:18px;height:18px;background:none}
+.selo.gen .lg::before{inset:0;background:var(--paper-2)}
 
 /* Contato */
 .contact{padding-block:clamp(88px,11vw,144px)}
@@ -475,41 +483,95 @@ a.link-to{padding-right:36px}
 .contact-actions{grid-column:1 / -1;display:flex;flex-wrap:wrap;gap:14px}
 .foot{padding-block:28px 40px}
 .foot .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 32px}
-.foot p{color:var(--muted);font-size:.875rem}
-.foot a{color:var(--alu);font-size:.875rem;text-decoration-color:rgba(191,196,201,.45)}
-.foot a:hover{color:var(--paper);text-decoration-color:var(--tape)}
-.bc--foot{width:200px;height:26px;margin:0;color:#3A3E43}
+.foot p{color:var(--muted);font-size:1rem}
+.foot a{color:var(--alu);font-size:1rem;text-decoration-color:color-mix(in srgb,var(--alu) 45%,transparent)}
+.foot a:hover{color:var(--paper);text-decoration-color:var(--c2)}
+.bc--foot{width:200px;height:26px;margin:0;color:var(--steel)}
 
-/* O efeito: a etiquetadora imprime, corta, e o leitor confere */
+/* A fita assenta no lugar: aparece inteira desde o início, sem esperar a animação */
 @keyframes feed{
   0%{transform:translate(calc(100% + 24px),0) rotate(0deg);animation-timing-function:linear}
   74%{transform:translate(0,0) rotate(0deg)}
   82%{transform:translate(0,0) rotate(0deg);animation-timing-function:cubic-bezier(.16,1,.3,1)}
   100%{transform:var(--settle)}
 }
-@keyframes cut{
-  0%{opacity:0;transform:scaleY(0)}
-  35%,65%{opacity:1;transform:scaleY(1)}
-  100%{opacity:0;transform:scaleY(0)}
-}
-@keyframes jolt{0%,100%{transform:none}30%{transform:translateX(2px)}60%{transform:translateX(-1px)}}
 @keyframes seam{from{transform:scaleY(0)}to{transform:scaleY(1)}}
 .motion .tape{animation:feed 3s linear .35s both}
-.motion .blade{animation:cut .36s cubic-bezier(.6,0,.4,1) 2.62s both}
-.motion .printer{animation:jolt .22s ease-out 2.7s both}
+
+/* Pilha de ponta a ponta: placas de alumínio empilhadas, da rede (base) à IA (topo).
+   Bordas por grupo: infraestrutura em c3, ERP e sistemas em c1, IA em c2; eixo e pulso em c2. */
+.stack{margin:0;container-type:inline-size}
+.stack .l1,.stack .l2{--lc:var(--c3)}
+.stack .l3,.stack .l4{--lc:var(--c1)}
+.stack .l5{--lc:var(--c2)}
+.stack-art{position:relative;height:calc(100cqw * var(--art-r) * 2.1)}
+.stack-art svg{position:absolute;left:0;top:0;width:auto;height:100%;overflow:visible}
+.stack .st-alu{fill:var(--alu)}
+.stack .topo-f{fill:url(#st-alu);stroke:color-mix(in srgb,var(--alu-ink) 55%,transparent);stroke-width:1;vector-effect:non-scaling-stroke}
+.stack .lado-d{fill:var(--lc)}
+.stack .lado-e{fill:color-mix(in srgb,var(--lc) 62%,var(--ink))}
+.stack .glifo *{fill:none;stroke:var(--alu-ink-2);stroke-width:1.25;vector-effect:non-scaling-stroke}
+.stack .glifo .cheio{fill:color-mix(in srgb,var(--alu-ink) 22%,transparent)}
+.stack .glifo .ac,.stack .glifo .ac-cheio{fill:var(--lc);stroke:var(--alu-ink)}
+.stack .glifo .tr{stroke-dasharray:2 3}
+.stack .glifo .riv{fill:var(--rivet);stroke:color-mix(in srgb,var(--ink) 55%,transparent)}
+.stack .guia{stroke:var(--steel);stroke-width:1;vector-effect:non-scaling-stroke}
+.stack .guia-p{fill:var(--lc)}
+.stack .eixo{stroke:color-mix(in srgb,var(--c2) 60%,transparent);stroke-width:1;stroke-dasharray:10 4 2 4;vector-effect:non-scaling-stroke}
+.stack .seta{fill:none;stroke:var(--c2);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.stack .pulso{stroke:var(--c2);stroke-width:2.6;stroke-linecap:round;stroke-dasharray:44 1200;stroke-dashoffset:44}
+.stack .no{fill:var(--c2)}
+.stack .no-anel{fill:var(--ink);stroke:var(--c2);stroke-width:1;vector-effect:non-scaling-stroke}
+.stack .ping{fill:none;stroke:var(--c2);stroke-width:1;vector-effect:non-scaling-stroke;opacity:0;transform-box:fill-box;transform-origin:center}
+.stack-rot{list-style:none;margin:0;padding:0}
+.stack-rot li{position:absolute;left:calc(var(--art-r) * 100%);right:0;top:var(--y);transform:translateY(-50%);padding-left:8px}
+.stack-rot .cod{display:inline-block;margin-right:7px;font:700 .75rem/1 var(--f-b);font-stretch:75%;letter-spacing:.1em;color:var(--lc);font-variant-numeric:tabular-nums lining-nums}
+.stack-rot b{font:700 1.0625rem/1.2 var(--f-b);color:var(--paper)}
+.stack-rot small{display:block;margin-top:3px;font-size:.8125rem;line-height:1.35;color:var(--alu)}
+.stack-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px;margin-top:10px;padding-top:10px;border-top:1px solid var(--line);font-size:.8125rem;line-height:1.4;color:var(--muted)}
+.stack-btn{appearance:none;display:inline-flex;align-items:center;gap:8px;margin:0;padding:8px 10px 7px;border:1px solid var(--steel);border-radius:3px;background:transparent;color:var(--alu);font:700 .75rem/1 var(--f-b);font-stretch:75%;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:color .2s,border-color .2s}
+.stack-btn:hover{color:var(--paper);border-color:var(--c2)}
+.stack-btn svg{width:10px;height:10px;fill:currentColor}
+.stack-btn .when-paused,.stack-btn .i-play,.is-paused .stack-btn .when-run,.is-paused .stack-btn .i-pause{display:none}
+.is-paused .stack-btn .when-paused,.is-paused .stack-btn .i-play{display:inline}
+html:not(.motion) .stack-btn{display:none}
+@keyframes st-corre{0%{stroke-dashoffset:44}72%,100%{stroke-dashoffset:-640}}
+@keyframes st-ping{0%{opacity:0;transform:scale(1)}3%{opacity:.9}22%,100%{opacity:0;transform:scale(3.2)}}
+.motion .stack .pulso{animation:st-corre 6s linear infinite}
+.motion .stack .ping{animation:st-ping 6s ease-out infinite var(--d)}
+.stack.is-paused .pulso,.stack.is-paused .ping{animation-play-state:paused}
+/* A partir de 901 px a pilha divide a primeira tela com a fita e o texto: coluna própria à direita */
+@media (min-width:901px){
+  .hero{display:grid;grid-template-columns:minmax(0,1fr) calc(var(--stack-w) + var(--edge));grid-template-rows:auto 1fr auto}
+  .rest{display:contents}
+  .press{grid-area:1 / 1}
+  .lede{grid-area:2 / 1;align-self:start;max-width:none;margin-inline:0;padding-left:var(--edge);padding-right:clamp(24px,3vw,40px)}
+  .stack{grid-area:1 / 2 / 3 / 3;align-self:start;margin-top:var(--press-mt);padding-right:var(--edge)}
+  .row{grid-area:3 / 1 / 4 / -1}
+}
+/* Fita em duas linhas: no celular e quando a pilha divide a largura com ela (901 a 1180 px) */
+@media (max-width:720px),(min-width:901px) and (max-width:1180px){
+  .tape{white-space:normal;padding:.42em .9em .5em calc(var(--g) + 8px)}
+  .t-name{display:block;width:max-content;font-size:1.95em;line-height:.92}
+  .t-sep{display:none}
+  .t-tag{display:block;width:max-content;margin-top:.32em;letter-spacing:.03em}
+}
+@media (min-width:901px) and (max-width:1180px){
+  :root{--stack-w:clamp(280px,33vw,340px);--art-r:.4}
+  .tape{--tape-fs:clamp(24px,3.2vw,36px)}
+}
 
 /* 7 plaquetas: abaixo de 1180 px a primeira (o projeto mais difícil) ocupa duas colunas, e as linhas fecham cheias: 2+1+1 / 4 aqui e 2 / 2 / 2 / 2 no celular */
 @media (max-width:1180px){
   .tags{grid-template-columns:repeat(4,minmax(0,1fr))}
   .tag:first-child{grid-column:span 2}
-  .tag:first-child .bc{width:min(100%,15rem);margin-inline:auto}
 }
 /* Até 1080 px o menu desce para uma segunda linha da barra: plaquetas de alumínio presas num cabo, que rola de lado quando não cabe */
 @media (max-width:1080px){
   :root{--nav-h:2.75rem}
   .bar{flex-wrap:wrap;height:auto;row-gap:0}
   .mark{display:flex;align-items:center;height:var(--bar-h)}
-  .nav{order:9;flex:0 0 calc(100% + 2 * var(--g));align-items:center;gap:10px;height:var(--nav-h);margin-inline:calc(-1 * var(--g));padding-inline:var(--g);scroll-padding-inline:var(--g);overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;border-top:1px solid var(--line);background:linear-gradient(#41454B,#1B1D20) 0 50%/100% 6px no-repeat local}
+  .nav{order:9;flex:0 0 calc(100% + 2 * var(--g));align-items:center;gap:10px;height:var(--nav-h);margin-inline:calc(-1 * var(--g));padding-inline:var(--g);scroll-padding-inline:var(--g);overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;border-top:1px solid var(--line);background:linear-gradient(var(--cable-1),var(--cable-2)) 0 50%/100% 6px no-repeat local}
   .nav::-webkit-scrollbar{display:none}
   .nav a{flex:none;padding:7px 10px 6px;border:0;border-radius:3px;background:var(--brushed) 0 0/640px 240px,var(--alu);color:var(--alu-ink);text-shadow:0 1px 0 rgba(255,255,255,.35);font:700 .75rem/1 var(--f-b);font-stretch:75%;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap;box-shadow:0 2px 3px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.6),inset 0 -1px 0 rgba(0,0,0,.25);transition:transform .2s var(--out),box-shadow .2s var(--out)}
   .nav a:nth-child(2){background-position:-180px -40px,0 0}
@@ -519,15 +581,13 @@ a.link-to{padding-right:36px}
   .nav a:hover{color:var(--alu-ink);transform:translateY(-1px);box-shadow:0 5px 8px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.6),inset 0 -1px 0 rgba(0,0,0,.25)}
 }
 @media (max-width:1000px){
-  :root{--vis:150px;--hide:110px}
-  .lcd,.keys{display:none}
   .register{grid-template-columns:repeat(2,minmax(0,1fr))}
   .ficha,.ficha--r{grid-template-columns:minmax(0,1fr)}
   .ficha--r .ficha-plate{order:0}
   .ficha-plate{position:static;width:100%;max-width:300px}
   .flow{grid-template-columns:minmax(0,1fr);max-width:560px}
   .flow li{display:flex;gap:14px}
-  .flow li+li{border-left:0;border-top:2px dashed rgba(17,18,20,.4)}
+  .flow li+li{border-left:0;border-top:2px dashed color-mix(in srgb,var(--ink) 40%,transparent)}
   .flow li+li::before{left:-6px;top:-7px}
   .flow li+li::after{left:auto;right:-6px;top:-7px;bottom:auto}
   .flow-n{flex:none;min-width:2ch;margin:3px 0 0}
@@ -542,11 +602,11 @@ a.link-to{padding-right:36px}
   .eco-base{grid-template-columns:minmax(0,1fr)}
 }
 @media (max-width:900px){
+  :root{--vis:var(--g);--art-r:.42}
+  .stack{margin:clamp(28px,5vw,40px) var(--g) 0;max-width:460px}
   .about-grid{grid-template-columns:minmax(0,1fr);gap:56px}
   .badge-col{width:min(100%,320px)}
   .hub-copy,.eco-head,.thesis-block,.contact-grid,.edu{grid-template-columns:minmax(0,1fr)}
-  .plate-head{grid-template-columns:auto minmax(0,1fr)}
-  .bc--plate{grid-column:1 / -1;max-width:320px}
   .spec--split{grid-template-columns:minmax(0,1fr)}
   .spec--split>.sp-did,.spec--split>.sp-how,.spec--split>.sp-res{grid-column:1;grid-row:auto}
   .groups>div{grid-template-columns:minmax(0,1fr)}
@@ -561,34 +621,27 @@ a.link-to{padding-right:36px}
   .link-to,.link-tag{grid-area:auto}
   .link-to{justify-self:start;min-width:min(100%,10rem)}
   .link::before{left:-20px;right:auto;top:17px;width:22px;margin-top:0}
-  .link::after{content:"";position:absolute;z-index:-1;left:-20px;top:-24px;bottom:-2px;width:6px;border-radius:3px;background:linear-gradient(90deg,#41454B,#1B1D20);box-shadow:inset 1px 0 0 rgba(255,255,255,.14)}
+  .link::after{content:"";position:absolute;z-index:-1;left:-20px;top:-24px;bottom:-2px;width:6px;border-radius:3px;background:linear-gradient(90deg,var(--cable-1),var(--cable-2));box-shadow:inset 1px 0 0 rgba(255,255,255,.14)}
   .link:last-child::after{bottom:auto;height:47px}
 }
 /* Celular: a fita imprime em duas linhas e vira uma linha fina que costura a página */
 @media (max-width:720px){
-  :root{--vis:56px;--hide:44px;--ph:132px;--settle:translate(-8px,1px) rotate(-.6deg);--bar-h:60px}
+  :root{--ph:132px;--settle:translate(-8px,1px) rotate(-.6deg);--bar-h:60px}
   .bar{column-gap:12px}
   .mark{font-size:1.1875rem}
   .dl-long{display:none}
   .dl-short{display:inline}
   .demo-link{padding:9px 10px 8px 12px}
   .lang button{padding:9px 8px 8px}
-  .tape{--tape-fs:22px;white-space:normal;padding:.42em .9em .5em calc(var(--g) + 8px)}
-  .t-name{display:block;width:max-content;font-size:1.95em;line-height:.92}
-  .t-sep{display:none}
-  .t-tag{display:block;width:max-content;margin-top:.32em;letter-spacing:.03em}
-  .cassette{display:none}
-  .printer{border-radius:22px 0 0 22px}
+  .tape{--tape-fs:22px}
   .phrase{font-size:1.5rem}
   .tags{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
   .tag{padding:10px 12px 0}
   .tag .tag-state{margin-inline:-12px;padding-inline:12px;letter-spacing:.12em}
-  .bc{height:34px}
   .badge-col{margin-inline:auto}
   .badge{max-width:264px}
   .trail li{grid-template-columns:minmax(0,1fr);gap:2px}
   .plate{padding:24px 18px 26px}
-  .plate-head,.plate--eco .plate-head{grid-template-columns:minmax(0,1fr)}
   .register{column-gap:16px}
   .reg-name{font-size:.9375rem}
   .reg2{grid-template-columns:minmax(0,1fr)}
@@ -597,8 +650,7 @@ a.link-to{padding-right:36px}
   .ficha{gap:20px}
   .ficha-plate{max-width:196px}
   .pl{padding:10px 12px 0}
-  .pl .bc{height:30px;margin-top:8px}
-  .pl .bc-num{font-size:.875rem;margin-top:5px}
+  .pl-name{font-size:1.375rem}
   .pl .tag-state{margin:10px -12px 0;padding:8px 12px 9px}
   .btn--xl{padding:15px 18px 14px 20px;font-size:1.1875rem}
   .cables{padding-inline:10px;gap:12px 18px}
@@ -606,7 +658,7 @@ a.link-to{padding-right:36px}
   .rest::before,.about::before,.hub::before,.projects::before,.eco::before,.skills::before,.contact::before{content:"";position:absolute;z-index:0;left:6px;top:0;bottom:0;width:3px;background:var(--tape)}
   .field::before{background:var(--ink)!important}
   .rest::before{transform-origin:50% 0}
-  .motion .rest::before{animation:seam 1.2s cubic-bezier(.16,1,.3,1) 2.9s both}
+  .motion .rest::before{animation:seam 1.2s cubic-bezier(.16,1,.3,1) .5s both}
   .label::before{content:"";position:absolute;right:100%;top:50%;width:calc(var(--g) - 9px);height:3px;margin-top:-1.5px;background:var(--tape)}
   .field .label::before{background:var(--ink)}
 }
@@ -616,6 +668,7 @@ a.link-to{padding-right:36px}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
+  .stack-btn{display:none}
   .laser{display:none}
 }
 </style>
@@ -662,17 +715,9 @@ a.link-to{padding-right:36px}
   <section class="hero" aria-labelledby="titulo">
     <div class="press">
       <div class="feedline">
-        <span class="mouth" aria-hidden="true"></span>
         <div class="track">
           <h1 class="tape" id="titulo"><span class="tape-text"><span class="t-name">Ruan Siqueira</span><span class="vh">, </span><span class="t-sep" aria-hidden="true">·</span><span class="t-tag" data-i18n="t_tag">TI de ponta a ponta</span></span></h1>
         </div>
-        <span class="stub" aria-hidden="true"></span>
-        <span class="blade" aria-hidden="true"></span>
-      </div>
-      <div class="printer" aria-hidden="true">
-        <span class="lcd" data-s="ready">Pronto</span>
-        <span class="cassette"></span>
-        <span class="keys"><span></span><span></span></span>
       </div>
     </div>
 
@@ -686,62 +731,187 @@ a.link-to{padding-right:36px}
         </div>
       </div>
 
+      <figure class="stack">
+        <div class="stack-art">
+          <svg viewBox="0 0 300 630" aria-hidden="true" focusable="false">
+            <defs>
+              <pattern id="st-alu" width="640" height="240" patternUnits="userSpaceOnUse" patternTransform="matrix(.433 .25 -.433 .25 0 0)">
+                <rect class="st-alu" width="640" height="240"/>
+                <image width="640" height="240" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='240'%3E%3Cfilter id='a' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.0032 .92' numOctaves='3' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 1.3 0 0 0 -.6'/%3E%3C/filter%3E%3Cfilter id='b' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.0022 .55' numOctaves='2' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1.1 0 0 0 -.58'/%3E%3C/filter%3E%3Crect width='640' height='240' filter='url(%23a)'/%3E%3Crect width='640' height='240' filter='url(%23b)'/%3E%3C/svg%3E"/>
+              </pattern>
+            </defs>
+            <!-- 01 Rede -->
+            <g class="camada l1" transform="translate(140 532)">
+              <path class="lado-e" d="M-112.6 0 0 65v10l-112.6-65z"/>
+              <path class="lado-d" d="M0 65 112.6 0v10L0 75z"/>
+              <path class="topo-f" d="M0-65 112.6 0 0 65-112.6 0z"/>
+              <g class="glifo" transform="matrix(.866 .5 -.866 .5 0 0)">
+                <circle r="24" class="tr"/>
+                <path d="M0 0H38M0 0V38M0 0H-38M0 0V-38"/>
+                <rect x="38" y="-6" width="12" height="12" rx="1" class="ac"/>
+                <rect x="-6" y="38" width="12" height="12" rx="1" class="cheio"/>
+                <rect x="-50" y="-6" width="12" height="12" rx="1" class="cheio"/>
+                <rect x="-6" y="-50" width="12" height="12" rx="1" class="cheio"/>
+                <circle class="riv" cx="57" cy="57" r="3"/><circle class="riv" cx="57" cy="-57" r="3"/><circle class="riv" cx="-57" cy="57" r="3"/><circle class="riv" cx="-57" cy="-57" r="3"/>
+              </g>
+              <path class="guia" d="M112.6 0H150"/><circle class="guia-p" cx="150" r="2.6"/>
+            </g>
+            <!-- 02 Servidores -->
+            <g class="camada l2" transform="translate(140 422)">
+              <path class="lado-e" d="M-112.6 0 0 65v10l-112.6-65z"/>
+              <path class="lado-d" d="M0 65 112.6 0v10L0 75z"/>
+              <path class="topo-f" d="M0-65 112.6 0 0 65-112.6 0z"/>
+              <g class="glifo" transform="matrix(.866 .5 -.866 .5 0 0)">
+                <rect x="-46" y="12" width="92" height="11" rx="1" class="cheio"/>
+                <rect x="-46" y="29" width="92" height="11" rx="1" class="cheio"/>
+                <rect x="-46" y="46" width="92" height="11" rx="1" class="cheio"/>
+                <path d="M-30 12v11M-30 29v11M-30 46v11M-22 12v11M-22 29v11M-22 46v11"/>
+                <circle cx="36" cy="17.5" r="2.2" class="ac-cheio"/>
+                <circle cx="36" cy="34.5" r="2.2" class="ac-cheio"/>
+                <circle cx="36" cy="51.5" r="2.2"/>
+                <rect x="12" y="-46" width="11" height="40" rx="1"/>
+                <rect x="29" y="-46" width="11" height="40" rx="1"/>
+                <circle class="riv" cx="57" cy="57" r="3"/><circle class="riv" cx="57" cy="-57" r="3"/><circle class="riv" cx="-57" cy="57" r="3"/><circle class="riv" cx="-57" cy="-57" r="3"/>
+              </g>
+              <path class="guia" d="M112.6 0H150"/><circle class="guia-p" cx="150" r="2.6"/>
+            </g>
+            <!-- 03 ERP -->
+            <g class="camada l3" transform="translate(140 312)">
+              <path class="lado-e" d="M-112.6 0 0 65v10l-112.6-65z"/>
+              <path class="lado-d" d="M0 65 112.6 0v10L0 75z"/>
+              <path class="topo-f" d="M0-65 112.6 0 0 65-112.6 0z"/>
+              <g class="glifo" transform="matrix(.866 .5 -.866 .5 0 0)">
+                <rect x="12" y="-46" width="10" height="92" class="cheio"/>
+                <rect x="12" y="-46" width="46" height="92" rx="1"/>
+                <path d="M31-46V46M40-46V46M49-46V46M12-15H58M12 16H58"/>
+                <rect x="-56" y="12" width="40" height="40" rx="1"/>
+                <path d="M-56 25H-16M-56 38H-16"/>
+                <rect x="-16" y="29" width="28" height="6" class="ac"/>
+                <circle class="riv" cx="57" cy="57" r="3"/><circle class="riv" cx="57" cy="-57" r="3"/><circle class="riv" cx="-57" cy="57" r="3"/><circle class="riv" cx="-57" cy="-57" r="3"/>
+              </g>
+              <path class="guia" d="M112.6 0H150"/><circle class="guia-p" cx="150" r="2.6"/>
+            </g>
+            <!-- 04 Sistemas -->
+            <g class="camada l4" transform="translate(140 202)">
+              <path class="lado-e" d="M-112.6 0 0 65v10l-112.6-65z"/>
+              <path class="lado-d" d="M0 65 112.6 0v10L0 75z"/>
+              <path class="topo-f" d="M0-65 112.6 0 0 65-112.6 0z"/>
+              <g class="glifo" transform="matrix(.866 .5 -.866 .5 0 0)">
+                <rect x="-44.5" y="10" width="13" height="13" rx="1" class="ac"/>
+                <rect x="-25.5" y="10" width="13" height="13" rx="1"/>
+                <rect x="-6.5" y="10" width="13" height="13" rx="1" class="cheio"/>
+                <rect x="12.5" y="10" width="13" height="13" rx="1"/>
+                <rect x="31.5" y="10" width="13" height="13" rx="1" class="cheio"/>
+                <rect x="-44.5" y="29" width="13" height="13" rx="1" class="cheio"/>
+                <rect x="-25.5" y="29" width="13" height="13" rx="1"/>
+                <rect x="-6.5" y="29" width="13" height="13" rx="1"/>
+                <rect x="12.5" y="29" width="13" height="13" rx="1" class="cheio"/>
+                <rect x="31.5" y="29" width="13" height="13" rx="1"/>
+                <rect x="-44.5" y="48" width="13" height="13" rx="1"/>
+                <rect x="-25.5" y="48" width="13" height="13" rx="1" class="cheio"/>
+                <rect x="-6.5" y="48" width="13" height="13" rx="1"/>
+                <rect x="12.5" y="48" width="13" height="13" rx="1"/>
+                <rect x="31.5" y="48" width="13" height="13" rx="1" class="cheio"/>
+                <path d="M-50-40H50M-50-28H20" class="tr"/>
+                <circle class="riv" cx="57" cy="57" r="3"/><circle class="riv" cx="57" cy="-57" r="3"/><circle class="riv" cx="-57" cy="57" r="3"/><circle class="riv" cx="-57" cy="-57" r="3"/>
+              </g>
+              <path class="guia" d="M112.6 0H150"/><circle class="guia-p" cx="150" r="2.6"/>
+            </g>
+            <!-- 05 IA -->
+            <g class="camada l5" transform="translate(140 92)">
+              <path class="lado-e" d="M-112.6 0 0 65v10l-112.6-65z"/>
+              <path class="lado-d" d="M0 65 112.6 0v10L0 75z"/>
+              <path class="topo-f" d="M0-65 112.6 0 0 65-112.6 0z"/>
+              <g class="glifo" transform="matrix(.866 .5 -.866 .5 0 0)">
+                <circle r="42" class="tr"/>
+                <circle r="20"/>
+                <path d="M0 0 42 0M0 0 21 36.4M0 0-21 36.4M0 0-42 0M0 0-21-36.4M0 0 21-36.4"/>
+                <circle cx="42" r="4.5" class="ac-cheio"/>
+                <circle cx="21" cy="36.4" r="4" class="cheio"/>
+                <circle cx="-21" cy="36.4" r="4.5" class="ac-cheio"/>
+                <circle cx="-42" r="4" class="cheio"/>
+                <circle cx="-21" cy="-36.4" r="4" class="cheio"/>
+                <circle cx="21" cy="-36.4" r="4" class="cheio"/>
+                <circle class="riv" cx="57" cy="57" r="3"/><circle class="riv" cx="57" cy="-57" r="3"/><circle class="riv" cx="-57" cy="57" r="3"/><circle class="riv" cx="-57" cy="-57" r="3"/>
+              </g>
+              <path class="guia" d="M112.6 0H150"/><circle class="guia-p" cx="150" r="2.6"/>
+            </g>
+            <line class="eixo" x1="140" y1="620" x2="140" y2="16"/>
+            <path class="seta" d="M134 21l6-7 6 7"/>
+            <line class="pulso" x1="140" y1="620" x2="140" y2="16"/>
+            <g>
+              <circle class="ping" style="--d:.54s" cx="140" cy="532" r="5"/>
+              <circle class="ping" style="--d:1.33s" cx="140" cy="422" r="5"/>
+              <circle class="ping" style="--d:2.12s" cx="140" cy="312" r="5"/>
+              <circle class="ping" style="--d:2.92s" cx="140" cy="202" r="5"/>
+              <circle class="ping" style="--d:3.71s" cx="140" cy="92" r="5"/>
+              <circle class="no-anel" cx="140" cy="532" r="5.5"/><circle class="no" cx="140" cy="532" r="2.6"/>
+              <circle class="no-anel" cx="140" cy="422" r="5.5"/><circle class="no" cx="140" cy="422" r="2.6"/>
+              <circle class="no-anel" cx="140" cy="312" r="5.5"/><circle class="no" cx="140" cy="312" r="2.6"/>
+              <circle class="no-anel" cx="140" cy="202" r="5.5"/><circle class="no" cx="140" cy="202" r="2.6"/>
+              <circle class="no-anel" cx="140" cy="92" r="5.5"/><circle class="no" cx="140" cy="92" r="2.6"/>
+            </g>
+          </svg>
+          <ol class="stack-rot">
+            <li class="l1" style="--y:84.44%"><span class="cod">01</span><b data-i18n="sk1">Rede</b><small>MikroTik, UniFi, Fortinet</small></li>
+            <li class="l2" style="--y:66.98%"><span class="cod">02</span><b data-i18n="g1_3">Servidores</b><small>VMware, Synology, Veeam</small></li>
+            <li class="l3" style="--y:49.52%"><span class="cod">03</span><b>ERP</b><small>CIGAM, SAP, SQL Server</small></li>
+            <li class="l4" style="--y:32.06%"><span class="cod">04</span><b data-i18n="e4_k">Sistemas</b><small>C#/.NET, Next.js, TypeScript</small></li>
+            <li class="l5" style="--y:14.6%"><span class="cod">05</span><b data-i18n="sk5">IA</b><small data-i18n="sk5_t">Claude Code, API de IA, Agentes</small></li>
+          </ol>
+        </div>
+        <figcaption class="stack-bar"><span data-i18n="stack_cap">De ponta a ponta: da rede à IA, em camadas.</span><button type="button" class="stack-btn"><svg viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path class="i-pause" d="M1.5 1h2.5v8H1.5zM6 1h2.5v8H6z"/><path class="i-play" d="M2 1l7 4-7 4z"/></svg><span class="when-run" data-i18n="stack_pause">Pausar animação</span><span class="when-paused" data-i18n="stack_play">Retomar animação</span></button></figcaption>
+      </figure>
+
       <div class="row wrap">
         <h2 class="vh" data-i18n="projects_h2">Projetos em produção</h2>
         <div class="tags-wrap">
           <ol class="tags">
             <li class="tag" data-state="prod">
-              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Patrimônio</span><span class="rivet"></span></div>
-              <div class="bc" data-code="PAT-0001"></div>
-              <div class="bc-num" aria-hidden="true">PAT-0001</div>
+              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Sistema</span><span class="rivet"></span></div>
+              <p class="tag-area" data-i18n="ar_fc">Fiscal · Compras</p>
               <h3 class="tag-name"><a href="#p-nf-autonoma" data-i18n="p1n">NF Autônoma</a></h3>
               <p class="tag-measure" data-i18n="p1m">Lê o XML, decide e lança sozinha no ERP as notas fiscais de entrada e os CT-es da empresa. Ligou o automático, a digitação acabou.</p>
               <p class="tag-state"><span class="st st-idle" data-i18n="st_idle">Aguardando leitura</span><span class="st st-read" data-i18n="st_read">Conferindo</span><span class="st st-prod" data-i18n="st_prod">Em produção</span></p>
             </li>
             <li class="tag" data-state="prod">
-              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Patrimônio</span><span class="rivet"></span></div>
-              <div class="bc" data-code="PAT-0002"></div>
-              <div class="bc-num" aria-hidden="true">PAT-0002</div>
+              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Sistema</span><span class="rivet"></span></div>
+              <p class="tag-area" data-i18n="ar_ff">Fiscal · Financeiro</p>
               <h3 class="tag-name"><a href="#p-notas-debito" data-i18n="p2n">Nota de Débito</a></h3>
               <p class="tag-measure" data-i18n="p2m">Cria e emite a nota a partir do pedido, vincula tudo sozinha e, na venda, acha o gatilho para levá-la ao cliente, como a Reforma Tributária pede.</p>
               <p class="tag-state"><span class="st st-idle" data-i18n="st_idle">Aguardando leitura</span><span class="st st-read" data-i18n="st_read">Conferindo</span><span class="st st-prod" data-i18n="st_prod">Em produção</span></p>
             </li>
             <li class="tag" data-state="prod">
-              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Patrimônio</span><span class="rivet"></span></div>
-              <div class="bc" data-code="PAT-0003"></div>
-              <div class="bc-num" aria-hidden="true">PAT-0003</div>
+              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Sistema</span><span class="rivet"></span></div>
+              <p class="tag-area" data-i18n="ar_com">Comercial</p>
               <h3 class="tag-name"><a href="#p-auto-crm" data-i18n="p3n">AUTO CRM</a></h3>
               <p class="tag-measure" data-i18n="p3m">O CRM que a própria gestão monta: funil, metas e cadências na tela, carteira e prospecção num lugar só, pronto para qualquer setor.</p>
               <p class="tag-state"><span class="st st-idle" data-i18n="st_idle">Aguardando leitura</span><span class="st st-read" data-i18n="st_read">Conferindo</span><span class="st st-prod" data-i18n="st_prod">Em produção</span></p>
             </li>
             <li class="tag" data-state="prod">
-              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Patrimônio</span><span class="rivet"></span></div>
-              <div class="bc" data-code="PAT-0004"></div>
-              <div class="bc-num" aria-hidden="true">PAT-0004</div>
+              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Sistema</span><span class="rivet"></span></div>
+              <p class="tag-area" data-i18n="ar_com">Comercial</p>
               <h3 class="tag-name"><a href="#p-motor-clientes" data-i18n="p4n">Motor de clientes</a></h3>
               <p class="tag-measure" data-i18n="p4m">Descobre quem parou de comprar, chama de volta pelo WhatsApp e ainda encontra clientes novos na base pública de CNPJ.</p>
               <p class="tag-state"><span class="st st-idle" data-i18n="st_idle">Aguardando leitura</span><span class="st st-read" data-i18n="st_read">Conferindo</span><span class="st st-prod" data-i18n="st_prod">Em produção</span></p>
             </li>
             <li class="tag" data-state="prod">
-              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Patrimônio</span><span class="rivet"></span></div>
-              <div class="bc" data-code="PAT-0005"></div>
-              <div class="bc-num" aria-hidden="true">PAT-0005</div>
+              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Sistema</span><span class="rivet"></span></div>
+              <p class="tag-area" data-i18n="ar_rh">RH</p>
               <h3 class="tag-name"><a href="#p-pesquisa-clima" data-i18n="p5n">Pesquisa de Clima e RH</a></h3>
               <p class="tag-measure" data-i18n="p5m">Escuta a equipe de verdade: pesquisas anônimas e feedbacks com relatório pronto na hora, e a área do RH para as entrevistas de desligamento.</p>
               <p class="tag-state"><span class="st st-idle" data-i18n="st_idle">Aguardando leitura</span><span class="st st-read" data-i18n="st_read">Conferindo</span><span class="st st-prod" data-i18n="st_prod">Em produção</span></p>
             </li>
             <li class="tag" data-state="prod">
-              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Patrimônio</span><span class="rivet"></span></div>
-              <div class="bc" data-code="PAT-0006"></div>
-              <div class="bc-num" aria-hidden="true">PAT-0006</div>
+              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Sistema</span><span class="rivet"></span></div>
+              <p class="tag-area" data-i18n="ar_all">Todos os setores</p>
               <h3 class="tag-name"><a href="#p-carrossel-tv" data-i18n="p6n">Carrossel TV</a></h3>
               <p class="tag-measure" data-i18n="p6m">Cada TV da empresa com o recado certo para o seu setor, trocado em um clique de dentro do hub.</p>
               <p class="tag-state"><span class="st st-idle" data-i18n="st_idle">Aguardando leitura</span><span class="st st-read" data-i18n="st_read">Conferindo</span><span class="st st-prod" data-i18n="st_prod">Em produção</span></p>
             </li>
             <li class="tag" data-state="prod">
-              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Patrimônio</span><span class="rivet"></span></div>
-              <div class="bc" data-code="PAT-0007"></div>
-              <div class="bc-num" aria-hidden="true">PAT-0007</div>
+              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Sistema</span><span class="rivet"></span></div>
+              <p class="tag-area" data-i18n="ar_ges">Gestores</p>
               <h3 class="tag-name"><a href="#p-planejamento-orcamentario" data-i18n="p7n">Planejamento orçamentário</a></h3>
               <p class="tag-measure" data-i18n="p7m">Cada gestor monta o orçamento do ano no hub, com o ano anterior ao lado, e envia para aprovação. Fim da planilha por e-mail.</p>
               <p class="tag-state"><span class="st st-idle" data-i18n="st_idle">Aguardando leitura</span><span class="st st-read" data-i18n="st_read">Conferindo</span><span class="st st-prod" data-i18n="st_prod">Em produção</span></p>
@@ -833,9 +1003,8 @@ a.link-to{padding-right:36px}
       <div class="plate">
         <span class="rivet r-tl"></span><span class="rivet r-tr"></span><span class="rivet r-bl"></span><span class="rivet r-br"></span>
         <div class="plate-head">
-          <div class="plate-id"><span class="plate-k" data-i18n="asset">Patrimônio</span><span class="plate-num">PAT-0000</span></div>
+          <span class="plate-k" data-i18n="asset">Sistema</span>
           <div class="plate-title"><strong data-i18n="plate_title">Sistemas do portal</strong><span data-i18n="plate_sub">15 módulos com login único. Toque em qualquer um para abrir na demonstração.</span></div>
-          <div class="bc bc--plate" data-code="PAT-0000"></div>
         </div>
         <ol class="register">
           <li><a href="demo/index.html#/nf_autonoma"><span class="reg-n">01</span><span class="reg-name" data-i18n="s01">Notas fiscais de entrada</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
@@ -872,45 +1041,45 @@ a.link-to{padding-right:36px}
           <h3 class="mini-h" id="conv-h" data-i18n="conv_h">Como os sistemas conversam</h3>
           <ol class="conv-list">
             <li class="sys">
-              <a class="node sys-node" href="#p-nf-autonoma"><strong data-i18n="p1n">NF Autônoma</strong><span>PAT-0001</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-down"/></svg></a>
+              <a class="node sys-node" href="#p-nf-autonoma"><strong data-i18n="p1n">NF Autônoma</strong><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-down"/></svg></a>
               <ul class="sys-links">
                 <li class="link"><span class="node link-to link-to--erp"><strong>ERP</strong></span><span class="vh">: </span><span class="link-tag" data-i18n="c1a">Lê a nota e a ordem de compra e lança a nota completa no ERP</span></li>
                 <li class="link"><span class="node link-to"><strong data-i18n="s09">Controle de verba</strong></span><span class="vh">: </span><span class="link-tag" data-i18n="c1b">Confere a verba antes do lançamento</span></li>
               </ul>
             </li>
             <li class="sys">
-              <a class="node sys-node" href="#p-notas-debito"><strong data-i18n="p2n">Nota de Débito</strong><span>PAT-0002</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-down"/></svg></a>
+              <a class="node sys-node" href="#p-notas-debito"><strong data-i18n="p2n">Nota de Débito</strong><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-down"/></svg></a>
               <ul class="sys-links">
                 <li class="link"><span class="node link-to link-to--erp"><strong>ERP</strong></span><span class="vh">: </span><span class="link-tag" data-i18n="c2a">Lê o pedido e o adiantamento; emite a nota e grava o vínculo com a nota de venda</span></li>
               </ul>
             </li>
             <li class="sys">
-              <a class="node sys-node" href="#p-auto-crm"><strong data-i18n="p3n">AUTO CRM</strong><span>PAT-0003</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-down"/></svg></a>
+              <a class="node sys-node" href="#p-auto-crm"><strong data-i18n="p3n">AUTO CRM</strong><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-down"/></svg></a>
               <ul class="sys-links">
                 <li class="link"><span class="node link-to link-to--erp"><strong>ERP</strong></span><span class="vh">: </span><span class="link-tag" data-i18n="c3a">Espelha vendas e metas; somente leitura</span></li>
               </ul>
             </li>
             <li class="sys">
-              <a class="node sys-node" href="#p-motor-clientes"><strong data-i18n="p4n">Motor de clientes</strong><span>PAT-0004</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-down"/></svg></a>
+              <a class="node sys-node" href="#p-motor-clientes"><strong data-i18n="p4n">Motor de clientes</strong><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-down"/></svg></a>
               <ul class="sys-links">
                 <li class="link"><span class="node link-to link-to--erp"><strong>ERP</strong></span><span class="vh">: </span><span class="link-tag" data-i18n="c4a">Lê a base de clientes, registra o contato e mede orçamento, compra e perda</span></li>
                 <li class="link"><a class="node link-to" href="#p-auto-crm"><strong data-i18n="p3n">AUTO CRM</strong><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-down"/></svg></a><span class="vh">: </span><span class="link-tag" data-i18n="c4b">Entrega o lead de campanha na caixa de leads novos</span></li>
               </ul>
             </li>
             <li class="sys">
-              <a class="node sys-node" href="#p-pesquisa-clima"><strong data-i18n="p5n">Pesquisa de Clima e RH</strong><span>PAT-0005</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-down"/></svg></a>
+              <a class="node sys-node" href="#p-pesquisa-clima"><strong data-i18n="p5n">Pesquisa de Clima e RH</strong><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-down"/></svg></a>
               <ul class="sys-links">
                 <li class="link"><span class="node link-to link-to--erp"><strong>ERP</strong></span><span class="vh">: </span><span class="link-tag" data-i18n="c5a">Consulta a folha de pagamento para a área de RH; somente leitura</span></li>
               </ul>
             </li>
             <li class="sys">
-              <a class="node sys-node" href="#p-carrossel-tv"><strong data-i18n="p6n">Carrossel TV</strong><span>PAT-0006</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-down"/></svg></a>
+              <a class="node sys-node" href="#p-carrossel-tv"><strong data-i18n="p6n">Carrossel TV</strong><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-down"/></svg></a>
               <ul class="sys-links">
                 <li class="link"><span class="node link-to"><strong data-i18n="conv_tvs">TVs da empresa</strong></span><span class="vh">: </span><span class="link-tag" data-i18n="c6a">Entrega o carrossel de cada TV e recebe o sinal de vida; não fala com o ERP</span></li>
               </ul>
             </li>
             <li class="sys">
-              <a class="node sys-node" href="#p-planejamento-orcamentario"><strong data-i18n="p7n">Planejamento orçamentário</strong><span>PAT-0007</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-down"/></svg></a>
+              <a class="node sys-node" href="#p-planejamento-orcamentario"><strong data-i18n="p7n">Planejamento orçamentário</strong><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-down"/></svg></a>
               <ul class="sys-links">
                 <li class="link"><span class="node link-to link-to--erp"><strong>ERP</strong></span><span class="vh">: </span><span class="link-tag" data-i18n="c7a">Lê as contas e o realizado do ano anterior; somente leitura</span></li>
               </ul>
@@ -948,13 +1117,13 @@ a.link-to{padding-right:36px}
       <p class="sec-p" data-i18n="projects_p">Sete sistemas do hub, do mais difícil para o mais simples. Cada ficha traz o problema, como o sistema funciona, como medi, o resultado e um vídeo do sistema completo, e abre a tela principal e o manual na demonstração.</p>
 
       <div class="fichas">
-        <!-- PAT-0001 · o ciclo abre a ficha; medições em tabela -->
+        <!-- Ficha 1 · o ciclo abre a ficha; medições em tabela -->
         <article class="ficha" id="p-nf-autonoma" aria-labelledby="p1-h">
           <div class="ficha-plate">
             <div class="pl">
-              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Patrimônio</span><span class="rivet"></span></div>
-              <div class="bc" data-code="PAT-0001"></div>
-              <p class="bc-num">PAT-0001</p>
+              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Sistema</span><span class="rivet"></span></div>
+              <p class="tag-area" data-i18n="ar_fc">Fiscal · Compras</p>
+              <p class="pl-name" aria-hidden="true" data-i18n="p1n">NF Autônoma</p>
               <p class="tag-state"><span data-i18n="st_prod">Em produção</span></p>
             </div>
           </div>
@@ -1021,13 +1190,13 @@ a.link-to{padding-right:36px}
           </div>
         </article>
 
-        <!-- PAT-0002 · plaqueta à direita, ficha em duas colunas, antes e depois no fim -->
+        <!-- Ficha 2 · plaqueta à direita, ficha em duas colunas, antes e depois no fim -->
         <article class="ficha ficha--r" id="p-notas-debito" aria-labelledby="p2-h">
           <div class="ficha-plate">
             <div class="pl">
-              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Patrimônio</span><span class="rivet"></span></div>
-              <div class="bc" data-code="PAT-0002"></div>
-              <p class="bc-num">PAT-0002</p>
+              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Sistema</span><span class="rivet"></span></div>
+              <p class="tag-area" data-i18n="ar_ff">Fiscal · Financeiro</p>
+              <p class="pl-name" aria-hidden="true" data-i18n="p2n">Nota de Débito</p>
               <p class="tag-state"><span data-i18n="st_prod">Em produção</span></p>
             </div>
           </div>
@@ -1084,13 +1253,13 @@ a.link-to{padding-right:36px}
           </div>
         </article>
 
-        <!-- PAT-0003 · o que o sistema tem abre a ficha, em duas colunas; sem antes e depois -->
+        <!-- Ficha 3 · o que o sistema tem abre a ficha, em duas colunas; sem antes e depois -->
         <article class="ficha" id="p-auto-crm" aria-labelledby="p3-h">
           <div class="ficha-plate">
             <div class="pl">
-              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Patrimônio</span><span class="rivet"></span></div>
-              <div class="bc" data-code="PAT-0003"></div>
-              <p class="bc-num">PAT-0003</p>
+              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Sistema</span><span class="rivet"></span></div>
+              <p class="tag-area" data-i18n="ar_com">Comercial</p>
+              <p class="pl-name" aria-hidden="true" data-i18n="p3n">AUTO CRM</p>
               <p class="tag-state"><span data-i18n="st_prod">Em produção</span></p>
             </div>
           </div>
@@ -1153,13 +1322,13 @@ a.link-to{padding-right:36px}
           </div>
         </article>
 
-        <!-- PAT-0004 · plaqueta à direita, a medição abre a ficha -->
+        <!-- Ficha 4 · plaqueta à direita, a medição abre a ficha -->
         <article class="ficha ficha--r" id="p-motor-clientes" aria-labelledby="p4-h">
           <div class="ficha-plate">
             <div class="pl">
-              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Patrimônio</span><span class="rivet"></span></div>
-              <div class="bc" data-code="PAT-0004"></div>
-              <p class="bc-num">PAT-0004</p>
+              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Sistema</span><span class="rivet"></span></div>
+              <p class="tag-area" data-i18n="ar_com">Comercial</p>
+              <p class="pl-name" aria-hidden="true" data-i18n="p4n">Motor de clientes</p>
               <p class="tag-state"><span data-i18n="st_prod">Em produção</span></p>
             </div>
           </div>
@@ -1214,13 +1383,13 @@ a.link-to{padding-right:36px}
           </div>
         </article>
 
-        <!-- PAT-0005 · a situação abre a ficha, o ciclo fecha; duas metades lado a lado: pesquisa anônima e RH identificado -->
+        <!-- Ficha 5 · a situação abre a ficha, o ciclo fecha; duas metades lado a lado: pesquisa anônima e RH identificado -->
         <article class="ficha" id="p-pesquisa-clima" aria-labelledby="p5-h">
           <div class="ficha-plate">
             <div class="pl">
-              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Patrimônio</span><span class="rivet"></span></div>
-              <div class="bc" data-code="PAT-0005"></div>
-              <p class="bc-num">PAT-0005</p>
+              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Sistema</span><span class="rivet"></span></div>
+              <p class="tag-area" data-i18n="ar_rh">RH</p>
+              <p class="pl-name" aria-hidden="true" data-i18n="p5n">Pesquisa de Clima e RH</p>
               <p class="tag-state"><span data-i18n="st_prod">Em produção</span></p>
             </div>
           </div>
@@ -1283,13 +1452,13 @@ a.link-to{padding-right:36px}
           </div>
         </article>
 
-        <!-- PAT-0006 · plaqueta à direita, as medições abrem a ficha -->
+        <!-- Ficha 6 · plaqueta à direita, as medições abrem a ficha -->
         <article class="ficha ficha--r" id="p-carrossel-tv" aria-labelledby="p6-h">
           <div class="ficha-plate">
             <div class="pl">
-              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Patrimônio</span><span class="rivet"></span></div>
-              <div class="bc" data-code="PAT-0006"></div>
-              <p class="bc-num">PAT-0006</p>
+              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Sistema</span><span class="rivet"></span></div>
+              <p class="tag-area" data-i18n="ar_all">Todos os setores</p>
+              <p class="pl-name" aria-hidden="true" data-i18n="p6n">Carrossel TV</p>
               <p class="tag-state"><span data-i18n="st_prod">Em produção</span></p>
             </div>
           </div>
@@ -1349,13 +1518,13 @@ a.link-to{padding-right:36px}
           </div>
         </article>
 
-        <!-- PAT-0007 · plaqueta à esquerda, o ciclo abre a ficha; situação, o que fiz, como medi e resultado em duas colunas -->
+        <!-- Ficha 7 · plaqueta à esquerda, o ciclo abre a ficha; situação, o que fiz, como medi e resultado em duas colunas -->
         <article class="ficha" id="p-planejamento-orcamentario" aria-labelledby="p7-h">
           <div class="ficha-plate">
             <div class="pl">
-              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Patrimônio</span><span class="rivet"></span></div>
-              <div class="bc" data-code="PAT-0007"></div>
-              <p class="bc-num">PAT-0007</p>
+              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Sistema</span><span class="rivet"></span></div>
+              <p class="tag-area" data-i18n="ar_ges">Gestores</p>
+              <p class="pl-name" aria-hidden="true" data-i18n="p7n">Planejamento orçamentário</p>
               <p class="tag-state"><span data-i18n="st_prod">Em produção</span></p>
             </div>
           </div>
@@ -1438,7 +1607,7 @@ a.link-to{padding-right:36px}
           </li>
           <li class="enode enode--end">
             <div class="enode-top"><h4 data-i18n="e4_k">Sistemas</h4><span class="rivet"></span></div>
-            <p class="e-d"><span class="e-num">16</span> <span data-i18n="e4_d">sistemas no hub, implantados e mantidos seguindo essa memória</span></p>
+            <p class="e-d"><span class="e-num">15</span> <span data-i18n="e4_d">sistemas no hub, implantados e mantidos seguindo essa memória</span></p>
           </li>
         </ol>
         <p class="e-date" data-i18n="eco_date">Contagem de 01/10/2026.</p>
@@ -1448,9 +1617,8 @@ a.link-to{padding-right:36px}
         <div class="plate plate--eco">
           <span class="rivet r-tl"></span><span class="rivet r-tr"></span><span class="rivet r-bl"></span><span class="rivet r-br"></span>
           <div class="plate-head">
-            <div class="plate-id"><span class="plate-k" data-i18n="asset">Patrimônio</span><span class="plate-num">PAT-0008</span></div>
+            <span class="plate-k" data-i18n="asset">Sistema</span>
             <div class="plate-title"><strong data-i18n="eco_plate_title">Base do ecossistema</strong><span data-i18n="eco_plate_sub">O que mantém a memória organizada, segura e ao alcance de quem vier depois</span></div>
-            <div class="bc bc--plate" data-code="PAT-0008"></div>
           </div>
           <ul class="reg2">
             <li><strong data-i18n="b1_k">Skills próprias</strong><span data-i18n="b1_d">para começar projeto novo e para orientar qual ferramenta usar</span></li>
@@ -1479,13 +1647,13 @@ a.link-to{padding-right:36px}
     <div class="wrap">
       <h2 class="label label--paper" id="skills-h"><span data-i18n="skills_h">Competências</span></h2>
       <dl class="groups">
-        <div><dt data-i18n="g1">Infraestrutura</dt><dd><ul class="chips"><li data-i18n="g1_1">Redes</li><li>MikroTik</li><li>Cisco</li><li>Meraki</li><li>UniFi</li><li data-i18n="g1_3">Servidores</li><li>VMware</li><li>Active Directory</li><li>Microsoft 365</li><li>Synology</li><li>Backup</li><li>Veeam</li></ul></dd></div>
-        <div><dt data-i18n="g6">Segurança, monitoramento e suporte</dt><dd><ul class="chips"><li>Firewall</li><li>Fortinet (FortiGate)</li><li>CrowdStrike</li><li>Zabbix</li><li>GLPI</li></ul></dd></div>
-        <div><dt data-i18n="g2">ERPs e integração</dt><dd><ul class="chips"><li>SAP</li><li>CIGAM</li><li>Atua</li><li>SQL Server</li><li>T-SQL</li><li data-i18n="g2_3">NF-e</li><li data-i18n="g2_4">SEFAZ</li></ul></dd></div>
-        <div><dt data-i18n="g3">Desenvolvimento</dt><dd><ul class="chips"><li>C#/.NET</li><li>ASP.NET Core</li><li>Next.js</li><li>React</li><li>TypeScript</li><li>Java</li><li>Git</li><li>GitHub</li></ul></dd></div>
-        <div><dt data-i18n="g4">IA aplicada</dt><dd><ul class="chips"><li>Claude Code</li><li>NotebookLM</li><li data-i18n="g4_2">API de IA</li><li data-i18n="g4_3">Agentes</li><li data-i18n="g4_4">Modo sombra</li></ul></dd></div>
-        <div><dt data-i18n="g7">Canais digitais</dt><dd><ul class="chips"><li>Suri</li><li data-i18n="g7_2">Meta (WhatsApp Business)</li><li>Tray</li></ul></dd></div>
-        <div><dt data-i18n="g5">Dados</dt><dd><ul class="chips"><li>Parquet</li><li>DuckDB</li><li data-i18n="g5_3">Otimização de consultas</li><li data-i18n="g5_4">Carga de bases públicas</li></ul></dd></div>
+        <div><dt data-i18n="g1">Infraestrutura</dt><dd><ul class="selos"><li class="selo gen"><span class="lg" style="--m:url(assets/logos/generico-network.svg)" aria-hidden="true"></span><span data-i18n="g1_1">Redes</span></li><li class="selo"><span class="lg" style="--m:url(assets/logos/mikrotik.svg)" aria-hidden="true"></span>MikroTik</li><li class="selo"><span class="lg w" style="--m:url(assets/logos/cisco.svg)" aria-hidden="true"></span>Cisco</li><li class="selo"><span class="lg w" style="--m:url(assets/logos/cisco.svg)" aria-hidden="true"></span>Meraki</li><li class="selo"><span class="lg" style="--m:url(assets/logos/ubiquiti.svg)" aria-hidden="true"></span>UniFi</li><li class="selo gen"><span class="lg" style="--m:url(assets/logos/generico-server.svg)" aria-hidden="true"></span><span data-i18n="g1_3">Servidores</span></li><li class="selo"><span class="lg w ww" style="--m:url(assets/logos/vmware.svg)" aria-hidden="true"></span>VMware</li><li class="selo gen"><span class="lg" style="--m:url(assets/logos/generico-users.svg)" aria-hidden="true"></span>Active Directory</li><li class="selo gen"><span class="lg" style="--m:url(assets/logos/generico-cloud.svg)" aria-hidden="true"></span>Microsoft 365</li><li class="selo"><span class="lg w ww" style="--m:url(assets/logos/synology.svg)" aria-hidden="true"></span>Synology</li><li class="selo gen"><span class="lg" style="--m:url(assets/logos/generico-archive-restore.svg)" aria-hidden="true"></span>Backup</li><li class="selo"><span class="lg w ww" style="--m:url(assets/logos/veeam.svg)" aria-hidden="true"></span>Veeam</li></ul></dd></div>
+        <div><dt data-i18n="g6">Segurança, monitoramento e suporte</dt><dd><ul class="selos"><li class="selo gen"><span class="lg" style="--m:url(assets/logos/generico-shield.svg)" aria-hidden="true"></span>Firewall</li><li class="selo"><span class="lg" style="--m:url(assets/logos/fortinet.svg)" aria-hidden="true"></span>Fortinet (FortiGate)</li><li class="selo gen"><span class="lg" style="--m:url(assets/logos/generico-shield-check.svg)" aria-hidden="true"></span>CrowdStrike</li><li class="selo gen"><span class="lg" style="--m:url(assets/logos/generico-activity.svg)" aria-hidden="true"></span>Zabbix</li><li class="selo gen"><span class="lg" style="--m:url(assets/logos/generico-life-buoy.svg)" aria-hidden="true"></span>GLPI</li></ul></dd></div>
+        <div><dt data-i18n="g2">ERPs e integração</dt><dd><ul class="selos"><li class="selo"><span class="lg w" style="--m:url(assets/logos/sap.svg)" aria-hidden="true"></span>SAP</li><li class="selo gen"><span class="lg" style="--m:url(assets/logos/generico-building-2.svg)" aria-hidden="true"></span>CIGAM</li><li class="selo gen"><span class="lg" style="--m:url(assets/logos/generico-building-2.svg)" aria-hidden="true"></span>Atua</li><li class="selo gen"><span class="lg" style="--m:url(assets/logos/generico-database.svg)" aria-hidden="true"></span>SQL Server</li><li class="selo gen"><span class="lg" style="--m:url(assets/logos/generico-code.svg)" aria-hidden="true"></span>T-SQL</li><li class="selo gen"><span class="lg" style="--m:url(assets/logos/generico-file-text.svg)" aria-hidden="true"></span><span data-i18n="g2_3">NF-e</span></li><li class="selo gen"><span class="lg" style="--m:url(assets/logos/generico-landmark.svg)" aria-hidden="true"></span><span data-i18n="g2_4">SEFAZ</span></li></ul></dd></div>
+        <div><dt data-i18n="g3">Desenvolvimento</dt><dd><ul class="selos"><li class="selo"><span class="lg w" style="--m:url(assets/logos/dotnet.svg)" aria-hidden="true"></span>C#/.NET</li><li class="selo"><span class="lg w" style="--m:url(assets/logos/dotnet.svg)" aria-hidden="true"></span>ASP.NET Core</li><li class="selo"><span class="lg" style="--m:url(assets/logos/nextdotjs.svg)" aria-hidden="true"></span>Next.js</li><li class="selo"><span class="lg" style="--m:url(assets/logos/react.svg)" aria-hidden="true"></span>React</li><li class="selo"><span class="lg" style="--m:url(assets/logos/typescript.svg)" aria-hidden="true"></span>TypeScript</li><li class="selo"><span class="lg" style="--m:url(assets/logos/openjdk.svg)" aria-hidden="true"></span>Java</li><li class="selo"><span class="lg" style="--m:url(assets/logos/git.svg)" aria-hidden="true"></span>Git</li><li class="selo"><span class="lg" style="--m:url(assets/logos/github.svg)" aria-hidden="true"></span>GitHub</li></ul></dd></div>
+        <div><dt data-i18n="g4">IA aplicada</dt><dd><ul class="selos"><li class="selo"><span class="lg" style="--m:url(assets/logos/claudecode.svg)" aria-hidden="true"></span>Claude Code</li><li class="selo"><span class="lg" style="--m:url(assets/logos/notebooklm.svg)" aria-hidden="true"></span>NotebookLM</li><li class="selo gen"><span class="lg" style="--m:url(assets/logos/generico-brain.svg)" aria-hidden="true"></span><span data-i18n="g4_2">API de IA</span></li><li class="selo gen"><span class="lg" style="--m:url(assets/logos/generico-bot.svg)" aria-hidden="true"></span><span data-i18n="g4_3">Agentes</span></li><li class="selo gen"><span class="lg" style="--m:url(assets/logos/generico-eye-off.svg)" aria-hidden="true"></span><span data-i18n="g4_4">Modo sombra</span></li></ul></dd></div>
+        <div><dt data-i18n="g7">Canais digitais</dt><dd><ul class="selos"><li class="selo gen"><span class="lg" style="--m:url(assets/logos/generico-message-circle.svg)" aria-hidden="true"></span>Suri</li><li class="selo"><span class="lg" style="--m:url(assets/logos/whatsapp.svg)" aria-hidden="true"></span><span data-i18n="g7_2">Meta (WhatsApp Business)</span></li><li class="selo gen"><span class="lg" style="--m:url(assets/logos/generico-shopping-cart.svg)" aria-hidden="true"></span>Tray</li></ul></dd></div>
+        <div><dt data-i18n="g5">Dados</dt><dd><ul class="selos"><li class="selo"><span class="lg" style="--m:url(assets/logos/apacheparquet.svg)" aria-hidden="true"></span>Parquet</li><li class="selo"><span class="lg" style="--m:url(assets/logos/duckdb.svg)" aria-hidden="true"></span>DuckDB</li><li class="selo gen"><span class="lg" style="--m:url(assets/logos/generico-gauge.svg)" aria-hidden="true"></span><span data-i18n="g5_3">Otimização de consultas</span></li><li class="selo gen"><span class="lg" style="--m:url(assets/logos/generico-hard-drive-download.svg)" aria-hidden="true"></span><span data-i18n="g5_4">Carga de bases públicas</span></li></ul></dd></div>
       </dl>
     </div>
   </section>
@@ -1565,7 +1733,7 @@ a.link-to{padding-right:36px}
     phrase: 'From infrastructure to ERP integration and AI.',
     apoio: 'I’m a software engineer working in IT at Robustec, where I designed and built, on my own, an internal portal with 15 systems, many of them integrated with the ERP.',
     cta: 'See projects', cta2: 'Enter the demo hub',
-    projects_h2: 'Projects in production', asset: 'Asset tag',
+    projects_h2: 'Projects in production', asset: 'System',
     p1n: 'Autonomous Invoice Posting', p1m: 'Reads the XML, decides and posts the company’s inbound invoices and freight documents into the ERP on its own. Switch on automatic mode and the typing is over.',
     p2n: 'Debit Note', p2m: 'Creates and issues the note from the order, links everything on its own and, at the sale, finds the trigger to deliver it to the customer, as Brazil’s tax reform requires.',
     p3n: 'AUTO CRM', p3m: 'The CRM managers build themselves: funnel, goals and cadences on screen, accounts and prospecting in one place, ready for any team.',
@@ -1780,6 +1948,9 @@ a.link-to{padding-right:36px}
     r4_t: 'Every mistake becomes a rule', r4_p: 'A build that failed with 8 compile errors, all caused by the same field name, became a checklist I run before every delivery.',
 
     skills_h: 'Skills',
+    ar_fc: 'Tax · Purchasing', ar_ff: 'Tax · Finance', ar_com: 'Sales', ar_rh: 'HR', ar_all: 'All departments', ar_ges: 'Managers',
+    sk1: 'Network', sk5: 'AI', sk5_t: 'Claude Code, AI APIs, Agents',
+    stack_cap: 'End to end: from network to AI, in layers.', stack_pause: 'Pause animation', stack_play: 'Resume animation',
     g1: 'Infrastructure', g1_1: 'Networking', g1_3: 'Servers',
     g2: 'ERPs and integration', g2_3: 'NF-e (Brazilian e-invoicing)', g2_4: 'SEFAZ (state tax authority)',
     g3: 'Development',
@@ -1795,8 +1966,8 @@ a.link-to{padding-right:36px}
   };
 
   const LIVE = {
-    pt: { lang: 'pt-BR', readout: (n, t) => n + ' de ' + t + ' lidas' + (n === t ? ' · em produção' : ''), lcd_print: 'Imprimindo', lcd_cut: 'Corte', lcd_ready: 'Pronto' },
-    en: { lang: 'en', readout: (n, t) => n + ' of ' + t + ' scanned' + (n === t ? ' · in production' : ''), lcd_print: 'Printing', lcd_cut: 'Cut', lcd_ready: 'Ready' }
+    pt: { lang: 'pt-BR', readout: (n, t) => n + ' de ' + t + ' lidas' + (n === t ? ' · em produção' : '') },
+    en: { lang: 'en', readout: (n, t) => n + ' of ' + t + ' scanned' + (n === t ? ' · in production' : '') }
   };
 
   const textEls = $$('[data-i18n]');
@@ -1810,14 +1981,12 @@ a.link-to{padding-right:36px}
   let lang = 'pt';
   const tape = $('.tape');
   const tapeText = $('.tape-text');
-  const lcd = $('.lcd');
   const readout = $('[data-readout]');
   const tags = $$('.tag');
   const langBtns = $$('.lang button');
   let scanned = tags.length;
 
   const renderReadout = () => { if (readout) readout.textContent = LIVE[lang].readout(scanned, tags.length); };
-  const setLcd = s => { if (!lcd) return; lcd.dataset.s = s; lcd.textContent = LIVE[lang]['lcd_' + s]; };
 
   function setLang(next, animate) {
     const d = DICT[next];
@@ -1834,9 +2003,8 @@ a.link-to{padding-right:36px}
     if (metaDesc) metaDesc.setAttribute('content', d.desc);
     langBtns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === next)));
     renderReadout();
-    setLcd(lcd && lcd.dataset.s ? lcd.dataset.s : 'ready');
     if (animate) {
-      /* Modo sombra: o que mudou aparece em âmbar e só depois vale. */
+      /* Modo sombra: o que mudou aparece na cor de pendente e só depois vale. */
       const marked = changed.filter(el => !el.closest('.tape') && !el.closest('.vh') && !el.classList.contains('vh'));
       marked.forEach(el => el.classList.add('pend'));
       setTimeout(() => marked.forEach(el => el.classList.remove('pend')), 700);
@@ -1853,21 +2021,11 @@ a.link-to{padding-right:36px}
     if (avail > 0 && w > avail) tape.style.setProperty('--fit', (avail / w).toFixed(3));
   }
 
-  let lcdTimers = [];
-  function runLcd() {
-    lcdTimers.forEach(clearTimeout);
-    setLcd('print');
-    lcdTimers = [setTimeout(() => setLcd('cut'), 2600), setTimeout(() => setLcd('ready'), 3000)];
-  }
   function reprint() {
-    ['.tape', '.blade', '.printer'].forEach(s => {
-      const el = $(s);
-      if (!el) return;
-      el.style.animation = 'none';
-      void el.offsetWidth;
-      el.style.animation = '';
-    });
-    runLcd();
+    if (!tape) return;
+    tape.style.animation = 'none';
+    void tape.offsetWidth;
+    tape.style.animation = '';
   }
 
   let busy = false;
@@ -1890,7 +2048,6 @@ a.link-to{padding-right:36px}
   let stored = null;
   try { stored = localStorage.getItem('plaqueta-lang'); } catch (e) { stored = null; }
   if (stored === 'en') setLang('en', false); else renderReadout();
-  if (motion) runLcd(); else setLcd('ready');
 
   requestAnimationFrame(fitTape);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitTape);
@@ -1905,19 +2062,22 @@ a.link-to{padding-right:36px}
     else if (a.right > n.right - m) nav.scrollLeft += a.right - n.right + m;
   });
 
-  /* Leitor: o laser passa por cada código de barras; a plaqueta fica âmbar (conferindo) e depois vale (em produção). */
+  /* Leitor: o laser passa pela faixa de estado de cada plaqueta; a plaqueta fica na cor de pendente (conferindo) e depois vale (em produção). */
   const wrapEl = $('.tags-wrap');
   const laser = $('.laser');
   const sleep = ms => new Promise(r => setTimeout(r, ms));
   function aim(tag) {
-    const bc = $('.bc', tag);
-    if (!bc) return;
-    const a = bc.getBoundingClientRect();
+    const bar = $('.tag-state', tag);
+    if (!bar) return;
+    const a = bar.getBoundingClientRect();
     const b = wrapEl.getBoundingClientRect();
     const over = Math.round(a.width * 0.1);
-    laser.style.setProperty('--x', (a.left - b.left - over) + 'px');
+    /* o feixe passa um pouco da faixa, mas nunca sai da fileira (senão a página ganha rolagem lateral no celular) */
+    const x0 = Math.max(0, a.left - b.left - over);
+    const x1 = Math.min(b.width, a.right - b.left + over);
+    laser.style.setProperty('--x', x0 + 'px');
     laser.style.setProperty('--y', (a.top - b.top + a.height / 2) + 'px');
-    laser.style.setProperty('--w', (a.width + over * 2) + 'px');
+    laser.style.setProperty('--w', (x1 - x0) + 'px');
   }
   async function scan() {
     aim(tags[0]);
@@ -1936,6 +2096,11 @@ a.link-to{padding-right:36px}
     await sleep(260);
     laser.classList.remove('on');
   }
+  /* Pilha do topo: o pulso pode ser pausado (com movimento reduzido ele nem começa, e o botão some). */
+  const stack = $('.stack');
+  const stackBtn = $('.stack-btn');
+  if (stack && stackBtn) stackBtn.addEventListener('click', () => stack.classList.toggle('is-paused'));
+
   /* Vídeos das fichas: tocam só enquanto estão na tela e nunca sozinhos com movimento reduzido (sem a classe motion).
      Se a pessoa pausar com o vídeo à vista, ele deixa de ser tocado automaticamente. */
   const reels = $$('.reel video');

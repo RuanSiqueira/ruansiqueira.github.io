@@ -32,7 +32,7 @@
   const VISUAIS = {
     escuro: { rotulo: P('Rack', 'Rack'), desc: P('A sala de TI: painéis de metal presos no rack, LEDs de status e etiqueta de patrimônio.', 'The server room: metal panels mounted on the rack, status LEDs and an asset sticker.'), cor: '#0c0e11', amostra: ['#0c0e11', '#23272e', '#60a5fa', '#34d399'] },
     claro: { rotulo: P('Crachá', 'Badge'), desc: P('O crachá corporativo: cartões brancos, chip dourado e uma faixa de cor por indicador.', 'The corporate badge: white cards, a gold chip and one color stripe per indicator.'), cor: '#eef2f7', amostra: ['#e8edf4', '#ffffff', '#3b82f6', '#10b981'] },
-    portfolio: { rotulo: P('Plaqueta', 'Asset tag'), desc: P('O tema do portfólio: fita amarela, preto anodizado e alumínio escovado.', 'The portfolio theme: yellow label tape, anodized black and brushed aluminum.'), cor: '#111214', amostra: ['#111214', '#bfc4c9', '#f2c500', '#f39200'] },
+    portfolio: { rotulo: P('Plaqueta', 'Asset tag'), desc: P('O tema do portfólio: fita ciano, ardósia com linhas de dados e alumínio escovado.', 'The portfolio theme: cyan label tape, slate with data lines and brushed aluminum.'), cor: '#0e1720', amostra: ['#0e1720', '#bfc4c9', '#5adbea', '#a39bff'] },
   };
   const ALIAS_VISUAL = { rack: 'escuro', corporativo: 'escuro', cracha: 'claro', plaqueta: 'portfolio' };
   const normVisual = v => (VISUAIS[v] ? v : (ALIAS_VISUAL[v] || null));
@@ -2028,7 +2028,7 @@
     /* tema à vista na entrada ("nem todos gostam do preto"): a miniatura mostra o visual do tema mesmo com a tela em outro;
        trocar aplica na hora pela mesma função do cabeçalho (grava e entra na auditoria quando há perfil). O alto contraste fica em Configurações. */
     const nomeTema = uid('tema');
-    const CURTA = { portfolio: P('Preto e alumínio, fita amarela', 'Black and aluminum, yellow tape'), escuro: P('Escuro, metal e LEDs', 'Dark, metal and LEDs'), claro: P('Fundo claro, cartões brancos', 'Light background, white cards') };
+    const CURTA = { portfolio: P('Ardósia e alumínio, fita ciano', 'Slate and aluminum, cyan tape'), escuro: P('Escuro, metal e LEDs', 'Dark, metal and LEDs'), claro: P('Fundo claro, cartões brancos', 'Light background, white cards') };
     const temas = h('fieldset', { class: 'ph-perfis ph-login-temas' }, h('legend', { class: 'ph-campo-rotulo' }, TX.temaInterface),
       h('div', { class: 'ph-temas-grade' }, ['portfolio', 'escuro', 'claro'].map(k => {
         const id = nomeTema + '-' + k;
