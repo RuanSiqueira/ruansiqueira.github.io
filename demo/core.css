@@ -585,6 +585,13 @@ body {
 .ph-sysbar-estado { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .ph-status { display: inline-flex; align-items: center; gap: 8px; padding: 5px 10px; white-space: nowrap; font-size: 11px; font-weight: 700; line-height: 1.2; letter-spacing: .08em; text-transform: uppercase; color: var(--ph-ok); background: color-mix(in srgb, var(--ph-ok) 10%, var(--ph-card)); border: 1px solid color-mix(in srgb, var(--ph-ok) 35%, transparent); border-radius: var(--ph-raio); }
 .ph-status-led { width: 8px; height: 8px; flex: none; border-radius: 50%; background: currentColor; }
+/* Em implantação: o mesmo selo no âmbar de alerta do tema; a especificidade passa as regras de cada tema */
+.ph-status.is-implantacao, :root[data-visual] .ph-status.is-implantacao { color: var(--ph-alerta); background: color-mix(in srgb, var(--ph-alerta) 12%, var(--ph-card)); border-color: color-mix(in srgb, var(--ph-alerta) 45%, transparent); }
+:root[data-visual] .ph-status.is-implantacao .ph-status-led { background: currentColor; box-shadow: none; }
+:root[data-visual="escuro"] .ph-status.is-implantacao .ph-status-led { box-shadow: 0 0 8px currentColor; }
+:root[data-visual="contraste"] .ph-status.is-implantacao { background: var(--ph-card); border-color: var(--ph-alerta); }
+/* Crachá: o âmbar do tema sobre o fundo tingido fica abaixo de 4,5:1 no rótulo de 11px; sobre o cartão passa */
+:root[data-visual="claro"] .ph-status.is-implantacao { background: var(--ph-card); }
 .ph-sysbar-acoes { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; } /* no celular os botões da moldura (Tour, Manual, Versão completa) quebram a linha em vez de vazar */
 .ph-moldura-corpo { min-width: 0; border-radius: 0 0 var(--ph-raio-lg) var(--ph-raio-lg); overflow: clip; }
 .ph-sys { min-width: 0; font-size: 14px; line-height: 1.5; }

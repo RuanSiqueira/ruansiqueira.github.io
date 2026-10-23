@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ruan Siqueira · TI de ponta a ponta</title>
-<meta name="description" content="Ruan Siqueira, engenheiro de software em Marau-RS. Da infraestrutura à integração com ERP e IA: um hub de 15 sistemas sobre o ERP, projetado e construído por ele sozinho, com sete projetos em detalhe, do robô de notas fiscais ao planejamento orçamentário.">
+<meta name="description" content="Ruan Siqueira, engenheiro de software em Marau-RS. Da infraestrutura à integração com ERP e IA: um hub de 17 sistemas sobre o ERP, projetado e construído por ele sozinho, com nove projetos em detalhe, do robô de notas fiscais ao planejamento de importados.">
 <meta name="theme-color" content="#111214">
 <link rel="canonical" href="https://ruansiqueira.dev.br/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Ruan Siqueira">
 <meta property="og:title" content="Ruan Siqueira · TI de ponta a ponta">
-<meta property="og:description" content="Da infraestrutura à integração com ERP e IA: um hub de 15 sistemas sobre o ERP e sete projetos em detalhe (NF Autônoma, Nota de Débito, AUTO CRM, Motor de clientes, Pesquisa de Clima e RH, Carrossel TV e Planejamento orçamentário), com demonstração navegável.">
+<meta property="og:description" content="Da infraestrutura à integração com ERP e IA: um hub de 17 sistemas sobre o ERP e nove projetos em detalhe (NF Autônoma, Nota de Débito, AUTO CRM, Motor de clientes, Pesquisa de Clima, Gestão de Pessoas, Carrossel TV, Planejamento orçamentário e Planejamento de importados), com demonstração navegável.">
 <meta property="og:url" content="https://ruansiqueira.dev.br/">
 <meta property="og:image" content="https://ruansiqueira.dev.br/assets/foto.jpg">
 <meta property="og:image:width" content="888">
@@ -167,7 +167,9 @@ h1,h2,h3,h4,p{margin:0}
 /* Fileira de plaquetas */
 .row{margin-top:auto;padding-top:clamp(16px,3vh,36px)}
 .tags-wrap{position:relative}
-.tags{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:12px}
+/* 9 plaquetas em duas linhas cheias, sem espremer: 5 colunas com a primeira (o projeto mais difícil) em duas, 4 + 5 */
+.tags{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.tag:first-child{grid-column:span 2}
 .tag,.pl{
   position:relative;display:flex;flex-direction:column;min-width:0;overflow:hidden;
   padding:12px 14px 0;border-radius:6px;
@@ -184,6 +186,8 @@ h1,h2,h3,h4,p{margin:0}
 .tag:nth-child(5){background-position:-270px -10px,0 0}
 .tag:nth-child(6){background-position:-450px -90px,0 0}
 .tag:nth-child(7){background-position:-540px -200px,0 0}
+.tag:nth-child(8){background-position:-130px -60px,0 0}
+.tag:nth-child(9){background-position:-400px -150px,0 0}
 .tag-top{display:flex;align-items:center;justify-content:space-between;gap:8px;font:700 .75rem/1 var(--f-b);font-stretch:75%;letter-spacing:.18em;text-transform:uppercase;color:var(--alu-ink-2)}
 .rivet{flex:none;width:9px;height:9px;border-radius:50%;background:var(--rivet);box-shadow:inset 0 1px 1.5px rgba(0,0,0,.5),0 1px 0 rgba(255,255,255,.7)}
 .bc{height:40px;margin-top:10px;color:var(--ink)}
@@ -200,7 +204,7 @@ h1,h2,h3,h4,p{margin:0}
 .tag-state{display:flex;align-items:center;gap:8px;margin:auto -14px 0;padding:9px 14px 10px;background:color-mix(in srgb,var(--ink) 10%,transparent);color:var(--alu-ink-2);text-shadow:none;font:700 .75rem/1 var(--f-b);font-stretch:75%;letter-spacing:.16em;text-transform:uppercase;transition:background-color .45s var(--out),color .45s var(--out)}
 .tag-state::before{content:"";flex:none;width:8px;height:8px;border:1.5px solid currentColor;transition:background-color .45s var(--out),border-color .45s var(--out)}
 .st{display:none}
-.tag[data-state="idle"] .st-idle,.tag[data-state="read"] .st-read,.tag[data-state="prod"] .st-prod{display:inline}
+.tag[data-state="idle"] .st-idle,.tag[data-state="read"] .st-read,.tag[data-state="prod"] .st-prod,.tag[data-state="impl"] .st-impl{display:inline}
 .tag[data-state="read"]{outline:2px dashed var(--pendente);outline-offset:3px}
 .tag[data-state]:focus-within{outline:2px solid var(--c2);outline-offset:3px}
 .tag[data-state="read"] .tag-state{background:var(--pendente);color:var(--ink)}
@@ -208,6 +212,9 @@ h1,h2,h3,h4,p{margin:0}
 .tag[data-state="prod"] .tag-state,.pl .tag-state{background:var(--ink);color:var(--c3)}
 .tag[data-state="prod"] .tag-state::before,.pl .tag-state::before{background:var(--c3);border-color:var(--c3)}
 .tag[data-state="idle"] .tag-state{background:var(--idle)}
+/* Em implantação: faixa preta com o âmbar de estado pendente (na plaqueta da fileira e na da ficha) */
+.tag[data-state="impl"] .tag-state,.pl--impl .tag-state{background:var(--ink);color:var(--pendente)}
+.tag[data-state="impl"] .tag-state::before,.pl--impl .tag-state::before{background:var(--pendente);border-color:var(--pendente)}
 .readout{margin-top:16px;font:700 .75rem/1 var(--f-b);font-stretch:75%;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-variant-numeric:tabular-nums}
 /* Notebook de tela baixa: a plaqueta fica só com número, título e estado para a leitura caber na primeira tela */
 @media (min-width:1000px) and (max-height:860px){
@@ -407,7 +414,8 @@ a.link-to{padding-right:36px}
 .reel{margin:0;max-width:52rem}
 .reel-cta{margin:10px 0 0;font-size:1rem}.reel-cta a{font-weight:700}
 .reel figcaption{position:relative;z-index:1;display:inline-block;margin:0 0 -10px 14px;padding:6px 10px 5px;background:var(--tape);color:var(--on-c1);font:700 .75rem/1.3 var(--f-b);font-stretch:75%;letter-spacing:.14em;text-transform:uppercase;transform:rotate(-.8deg);box-shadow:0 2px 4px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.4)}
-.reel video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:var(--ink-3);border:1px solid var(--line);border-radius:6px;box-shadow:0 6px 14px rgba(0,0,0,.45)}
+.ficha-title .stamp{vertical-align:middle}
+.reel video,.reel img{display:block;width:100%;height:auto;aspect-ratio:16/9;background:var(--ink-3);border:1px solid var(--line);border-radius:6px;box-shadow:0 6px 14px rgba(0,0,0,.45)}
 
 /* Ecossistema */
 .eco{padding-block:clamp(88px,11vw,144px)}
@@ -554,10 +562,10 @@ html:not(.motion) .stack-btn{display:none}
   .tape{--tape-fs:clamp(24px,3.2vw,36px)}
 }
 
-/* 7 plaquetas: abaixo de 1180 px a primeira (o projeto mais difícil) ocupa duas colunas, e as linhas fecham cheias: 2+1+1 / 4 aqui e 2 / 2 / 2 / 2 no celular */
+/* 9 plaquetas: abaixo de 1180 px, três linhas de 3 (cada plaqueta com 230 px ou mais); no celular, a primeira na largura toda e 4 linhas de 2 */
 @media (max-width:1180px){
-  .tags{grid-template-columns:repeat(4,minmax(0,1fr))}
-  .tag:first-child{grid-column:span 2}
+  .tags{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .tag:first-child{grid-column:auto}
 }
 /* Até 1080 px o menu desce para uma segunda linha da barra: plaquetas de alumínio presas num cabo, que rola de lado quando não cabe */
 @media (max-width:1080px){
@@ -629,6 +637,7 @@ html:not(.motion) .stack-btn{display:none}
   .tape{--tape-fs:22px}
   .phrase{font-size:1.5rem}
   .tags{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .tag:first-child{grid-column:span 2}
   .tag{padding:10px 12px 0}
   .tag .tag-state{margin-inline:-12px;padding-inline:12px;letter-spacing:.12em}
   .badge-col{margin-inline:auto}
@@ -717,7 +726,7 @@ html:not(.motion) .stack-btn{display:none}
     <div class="rest">
       <div class="lede wrap">
         <p class="phrase" data-i18n="phrase">Da infraestrutura à integração com ERP e IA.</p>
-        <p class="apoio" data-i18n="apoio">Sou engenheiro de software e trabalho na TI da Robustec, onde projetei e construí sozinho um portal interno com 15 sistemas, vários deles integrados ao ERP.</p>
+        <p class="apoio" data-i18n="apoio">Sou engenheiro de software e trabalho na TI da Robustec, onde projetei e construí sozinho um portal interno com 17 sistemas, vários deles integrados ao ERP.</p>
         <div class="actions">
           <a class="btn" href="#projetos"><span data-i18n="cta">Ver projetos</span><svg class="ico ico--down" aria-hidden="true" focusable="false"><use href="#i-down"/></svg></a>
           <a class="ext" href="demo/index.html#/entrar"><span data-i18n="cta2">Entrar no hub de demonstração</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-right"/></svg></a>
@@ -857,7 +866,7 @@ html:not(.motion) .stack-btn{display:none}
       </figure>
 
       <div class="row wrap">
-        <h2 class="vh" data-i18n="projects_h2">Projetos em produção</h2>
+        <h2 class="vh" data-i18n="projects_h2">Projetos em produção e em implantação</h2>
         <div class="tags-wrap">
           <ol class="tags">
             <li class="tag" data-state="prod">
@@ -890,9 +899,16 @@ html:not(.motion) .stack-btn{display:none}
             </li>
             <li class="tag" data-state="prod">
               <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Sistema</span><span class="rivet"></span></div>
+              <p class="tag-area" data-i18n="ar_rhm">RH · Marketing</p>
+              <h3 class="tag-name"><a href="#p-pesquisa-clima" data-i18n="p5n">Pesquisa de Clima</a></h3>
+              <p class="tag-measure" data-i18n="p5m">Escuta a equipe e os clientes: pesquisas anônimas com relatório pronto na hora e, para clientes, a pesquisa identificada com NPS.</p>
+              <p class="tag-state"><span class="st st-idle" data-i18n="st_idle">Aguardando leitura</span><span class="st st-read" data-i18n="st_read">Conferindo</span><span class="st st-prod" data-i18n="st_prod">Em produção</span></p>
+            </li>
+            <li class="tag" data-state="prod">
+              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Sistema</span><span class="rivet"></span></div>
               <p class="tag-area" data-i18n="ar_rh">RH</p>
-              <h3 class="tag-name"><a href="#p-pesquisa-clima" data-i18n="p5n">Pesquisa de Clima e RH</a></h3>
-              <p class="tag-measure" data-i18n="p5m">Escuta a equipe de verdade: pesquisas anônimas e feedbacks com relatório pronto na hora, e a área do RH para as entrevistas de desligamento.</p>
+              <h3 class="tag-name"><a href="#p-gestao-pessoas" data-i18n="p8n">Gestão de Pessoas</a></h3>
+              <p class="tag-measure" data-i18n="p8m">Cria sozinho, a partir da folha, as entrevistas de desligamento e as conversas de 30 e 90 dias, e o RH só registra o que foi conversado.</p>
               <p class="tag-state"><span class="st st-idle" data-i18n="st_idle">Aguardando leitura</span><span class="st st-read" data-i18n="st_read">Conferindo</span><span class="st st-prod" data-i18n="st_prod">Em produção</span></p>
             </li>
             <li class="tag" data-state="prod">
@@ -909,10 +925,17 @@ html:not(.motion) .stack-btn{display:none}
               <p class="tag-measure" data-i18n="p7m">Cada gestor monta o orçamento do ano no hub, com o ano anterior ao lado, e envia para aprovação. Fim da planilha por e-mail.</p>
               <p class="tag-state"><span class="st st-idle" data-i18n="st_idle">Aguardando leitura</span><span class="st st-read" data-i18n="st_read">Conferindo</span><span class="st st-prod" data-i18n="st_prod">Em produção</span></p>
             </li>
+            <li class="tag" data-state="impl" data-final="impl">
+              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Sistema</span><span class="rivet"></span></div>
+              <p class="tag-area" data-i18n="ar_com">Comercial</p>
+              <h3 class="tag-name"><a href="#p-planejamento-importados" data-i18n="p9n">Planejamento de importados</a></h3>
+              <p class="tag-measure" data-i18n="p9m">Diz o que comprar de importados, quanto e até quando, pelo prazo de cada fornecedor. A planilha por família sai de cena.</p>
+              <p class="tag-state"><span class="st st-idle" data-i18n="st_idle">Aguardando leitura</span><span class="st st-read" data-i18n="st_read">Conferindo</span><span class="st st-impl" data-i18n="st_impl">Em implantação</span></p>
+            </li>
           </ol>
           <div class="laser" aria-hidden="true"></div>
         </div>
-        <p class="readout" data-readout>7 de 7 lidas · em produção</p>
+        <p class="readout" data-readout>9 de 9 lidas · 8 em produção, 1 em implantação</p>
       </div>
     </div>
   </section>
@@ -946,7 +969,7 @@ html:not(.motion) .stack-btn{display:none}
         <ol class="trail">
           <li>
             <span class="yr" data-i18n="tr1_y">jan. 2026 até hoje</span>
-            <div><h4><span data-i18n="tr1_r">Analista de TI</span> · <span class="org">Robustec</span></h4><p data-i18n="tr1_d">Projetei e construí sozinho o hub interno que reúne 15 sistemas, com 3 níveis de acesso, 26 rotinas automáticas registradas e integração com o ERP.</p></div>
+            <div><h4><span data-i18n="tr1_r">Analista de TI</span> · <span class="org">Robustec</span></h4><p data-i18n="tr1_d">Projetei e construí sozinho o hub interno que reúne 17 sistemas, com 3 níveis de acesso, 26 rotinas automáticas registradas e integração com o ERP.</p></div>
           </li>
           <li>
             <span class="yr" data-i18n="tr2_y">2024 a 2025</span>
@@ -988,7 +1011,7 @@ html:not(.motion) .stack-btn{display:none}
       <div class="hub-copy">
         <p data-i18n="hub_p1">Uma camada inteligente sobre o ERP: o cérebro que conecta fiscal, financeiro, comercial e RH, e automatiza o que o ERP sozinho não faz. Projetei e construí sozinho este portal interno na Robustec, onde antes os controles de cada área ficavam em planilhas e ferramentas separadas.</p>
         <p data-i18n="hub_p1b">Ele se integra ao ERP que a empresa já usa, mas não depende dele para existir: cadastros, regras, permissões, auditoria e rotinas moram no próprio hub. Se a empresa precisar, ele cresce para fazer o papel do ERP.</p>
-        <p data-i18n="hub_p2">Quase tudo conversa por ele. Cada sistema entra como um módulo, com um login só, 3 níveis de acesso, permissão por projeto e registro das ações críticas. Os sete projetos desta página vivem aqui dentro, e cada um dos 15 sistemas abre na demonstração.</p>
+        <p data-i18n="hub_p2">Quase tudo conversa por ele. Cada sistema entra como um módulo, com um login só, 3 níveis de acesso, permissão por projeto e registro das ações críticas. Os nove projetos desta página vivem aqui dentro, e cada um dos 17 sistemas abre na demonstração.</p>
         <p data-i18n="hub_p3">Por trás, há 26 rotinas automáticas registradas em segundo plano, e parte delas integra o hub ao ERP. Como o banco do ERP é compartilhado com a empresa inteira, a primeira consulta que otimizo é a minha, e toda automação nasce com regras de consumo para não pesar no trabalho de ninguém.</p>
         <p data-i18n="hub_p4">O hub de demonstração tem um motor de temas no próprio código: três visuais únicos, cada um com um conceito, que trocam a interface inteira na hora. A Plaqueta, de etiqueta de patrimônio, o Rack de servidores e o Crachá de acesso, além de um modo de alto contraste para acessibilidade. Os sistemas seguem o mesmo visual do hub, dentro de uma moldura própria.</p>
       </div>
@@ -997,7 +1020,7 @@ html:not(.motion) .stack-btn{display:none}
         <span class="rivet r-tl"></span><span class="rivet r-tr"></span><span class="rivet r-bl"></span><span class="rivet r-br"></span>
         <div class="plate-head">
           <span class="plate-k" data-i18n="asset">Sistema</span>
-          <div class="plate-title"><strong data-i18n="plate_title">Sistemas do portal</strong><span data-i18n="plate_sub">15 módulos com login único. Toque em qualquer um para abrir na demonstração.</span></div>
+          <div class="plate-title"><strong data-i18n="plate_title">Sistemas do portal</strong><span data-i18n="plate_sub">17 módulos com login único. Toque em qualquer um para abrir na demonstração.</span></div>
         </div>
         <ol class="register">
           <li><a href="demo/index.html#/nf_autonoma"><span class="reg-n">01</span><span class="reg-name" data-i18n="s01">Notas fiscais de entrada</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
@@ -1008,13 +1031,15 @@ html:not(.motion) .stack-btn{display:none}
           <li><a href="demo/index.html#/exportacao"><span class="reg-n">06</span><span class="reg-name" data-i18n="s06">AUTO CRM</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
           <li><a href="demo/index.html#/raio_x"><span class="reg-n">07</span><span class="reg-name" data-i18n="s07">Raio-X do cliente</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
           <li><a href="demo/index.html#/dash_ia"><span class="reg-n">08</span><span class="reg-name" data-i18n="s08">Atendimento com IA</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
-          <li><a href="demo/index.html#/controle_verba"><span class="reg-n">09</span><span class="reg-name" data-i18n="s09">Controle de verba</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
-          <li><a href="demo/index.html#/planejamento_orcamentario"><span class="reg-n">10</span><span class="reg-name" data-i18n="s10">Planejamento orçamentário</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
-          <li><a href="demo/index.html#/estoque_epi"><span class="reg-n">11</span><span class="reg-name" data-i18n="s11">Almoxarifado</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
-          <li><a href="demo/index.html#/controle_veiculos"><span class="reg-n">12</span><span class="reg-name" data-i18n="s12">Controle de veículos</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
-          <li><a href="demo/index.html#/pesquisa_clima"><span class="reg-n">13</span><span class="reg-name" data-i18n="s13">Pesquisa de clima</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
-          <li><a href="demo/index.html#/base_conhecimento"><span class="reg-n">14</span><span class="reg-name" data-i18n="s14">Base de conhecimento</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
-          <li><a href="demo/index.html#/carrossel_tv"><span class="reg-n">15</span><span class="reg-name" data-i18n="s15">Comunicação nas TVs</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
+          <li><a href="demo/index.html#/planejamento_importados"><span class="reg-n">09</span><span class="reg-name" data-i18n="s17">Planejamento de importados</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
+          <li><a href="demo/index.html#/controle_verba"><span class="reg-n">10</span><span class="reg-name" data-i18n="s09">Controle de verba</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
+          <li><a href="demo/index.html#/planejamento_orcamentario"><span class="reg-n">11</span><span class="reg-name" data-i18n="s10">Planejamento orçamentário</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
+          <li><a href="demo/index.html#/estoque_epi"><span class="reg-n">12</span><span class="reg-name" data-i18n="s11">Almoxarifado</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
+          <li><a href="demo/index.html#/controle_veiculos"><span class="reg-n">13</span><span class="reg-name" data-i18n="s12">Controle de veículos</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
+          <li><a href="demo/index.html#/gestao_pessoas"><span class="reg-n">14</span><span class="reg-name" data-i18n="s16">Gestão de Pessoas</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
+          <li><a href="demo/index.html#/pesquisa_clima"><span class="reg-n">15</span><span class="reg-name" data-i18n="s13">Pesquisa de clima</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
+          <li><a href="demo/index.html#/base_conhecimento"><span class="reg-n">16</span><span class="reg-name" data-i18n="s14">Base de conhecimento</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
+          <li><a href="demo/index.html#/carrossel_tv"><span class="reg-n">17</span><span class="reg-name" data-i18n="s15">Comunicação nas TVs</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-out"/></svg></a></li>
         </ol>
       </div>
 
@@ -1060,9 +1085,15 @@ html:not(.motion) .stack-btn{display:none}
               </ul>
             </li>
             <li class="sys">
-              <a class="node sys-node" href="#p-pesquisa-clima"><strong data-i18n="p5n">Pesquisa de Clima e RH</strong><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-down"/></svg></a>
+              <a class="node sys-node" href="#p-pesquisa-clima"><strong data-i18n="p5n">Pesquisa de Clima</strong><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-down"/></svg></a>
               <ul class="sys-links">
-                <li class="link"><span class="node link-to link-to--erp"><strong>ERP</strong></span><span class="vh">: </span><span class="link-tag" data-i18n="c5a">Consulta a folha de pagamento para a área de RH; somente leitura</span></li>
+                <li class="link"><span class="node link-to"><strong>WhatsApp</strong></span><span class="vh">: </span><span class="link-tag" data-i18n="c5a">Envia o convite da pesquisa, que também sai por link; não fala com o ERP</span></li>
+              </ul>
+            </li>
+            <li class="sys">
+              <a class="node sys-node" href="#p-gestao-pessoas"><strong data-i18n="p8n">Gestão de Pessoas</strong><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-down"/></svg></a>
+              <ul class="sys-links">
+                <li class="link"><span class="node link-to"><strong data-i18n="conv_folha">Folha de pagamento</strong></span><span class="vh">: </span><span class="link-tag" data-i18n="c8a">Lê rescisões, admissões e equipes e cria as entrevistas e conversas que faltam; somente leitura</span></li>
               </ul>
             </li>
             <li class="sys">
@@ -1075,6 +1106,12 @@ html:not(.motion) .stack-btn{display:none}
               <a class="node sys-node" href="#p-planejamento-orcamentario"><strong data-i18n="p7n">Planejamento orçamentário</strong><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-down"/></svg></a>
               <ul class="sys-links">
                 <li class="link"><span class="node link-to link-to--erp"><strong>ERP</strong></span><span class="vh">: </span><span class="link-tag" data-i18n="c7a">Lê as contas e o realizado do ano anterior; somente leitura</span></li>
+              </ul>
+            </li>
+            <li class="sys">
+              <a class="node sys-node" href="#p-planejamento-importados"><strong data-i18n="p9n">Planejamento de importados</strong><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-down"/></svg></a>
+              <ul class="sys-links">
+                <li class="link"><span class="node link-to link-to--erp"><strong>ERP</strong></span><span class="vh">: </span><span class="link-tag" data-i18n="c9a">Lê estoque, estrutura dos produtos, consumo e ordens de compra; somente leitura</span></li>
               </ul>
             </li>
           </ol>
@@ -1107,7 +1144,7 @@ html:not(.motion) .stack-btn{display:none}
   <section class="projects" id="projetos" aria-labelledby="projetos-h">
     <div class="wrap">
       <h2 class="label label--paper" id="projetos-h"><span data-i18n="projects_h">Projetos</span></h2>
-      <p class="sec-p" data-i18n="projects_p">Sete sistemas do hub, do mais difícil para o mais simples. Cada ficha traz o problema, como o sistema funciona, como medi, o resultado e um vídeo do sistema completo, e abre a tela principal e o manual na demonstração.</p>
+      <p class="sec-p" data-i18n="projects_p">Nove sistemas do hub, do mais difícil para o mais simples, e o último ainda em implantação. Cada ficha traz o problema, como o sistema funciona, como medi, o resultado e um vídeo do sistema completo, e abre a tela principal e o manual na demonstração.</p>
 
       <div class="fichas">
         <!-- Ficha 1 · o ciclo abre a ficha; medições em tabela -->
@@ -1144,6 +1181,7 @@ html:not(.motion) .stack-btn{display:none}
                 <li data-i18n="n1_d3">Criei a simulação: o plano completo do lançamento, com cada bloqueio explicado, sem gravar nada.</li>
                 <li data-i18n="n1_d4">Desenvolvi a gravação no ERP no modelo tudo ou nada: o lançamento completo entra de uma vez e, se um passo falha, nada é gravado.</li>
                 <li data-i18n="n1_d5">Criei o acompanhamento depois do lançamento: o que a equipe corrige volta para o sistema, e as regras melhoram com o uso.</li>
+                <li><span data-i18n="n1_d7">Criei a conferência pós-lançamento: cada nota que o robô lançou com ordem de compra é comparada com a ordem como foi aprovada, e o que sai da conta aparece para revisão.</span> <span class="stamp" data-i18n="st_impl">Em implantação</span></li>
                 <li data-i18n="n1_d6">Implantei de forma gradual, validando cada etapa contra o trabalho da equipe antes de liberar a gravação.</li>
               </ol></dd></div>
               <div><dt data-i18n="lbl_layers">Decisão em camadas</dt><dd data-i18n="n1_layers">Primeiro valem as regras definidas pela área fiscal, decididas por código. A IA generativa só entra onde a regra não alcança, e sempre é conferida antes de valer. Na dúvida, o robô não lança: a nota vai para a fila da equipe com o motivo escrito.</dd></div>
@@ -1205,6 +1243,7 @@ html:not(.motion) .stack-btn{display:none}
                 <li data-i18n="n2_d2">Fiz o fluxo montar a Nota de Débito a partir do pedido e do adiantamento do cliente, já com a numeração oficial do ERP.</li>
                 <li data-i18n="n2_d3">Automatizei o envio à SEFAZ pelo próprio ERP, que continua assinando e transmitindo. O pedido só avança depois da autorização.</li>
                 <li data-i18n="n2_d4">Fiz o vínculo com a nota de venda ser gravado sozinho, a tempo da transmissão.</li>
+                <li data-i18n="n2_d7">Ensinei o fluxo a repartir um adiantamento que cobre vários pedidos: cada pedido recebe a parte proporcional ao seu valor e ganha a sua Nota de Débito. Quando o pagamento não bate com os pedidos, nenhuma nota é criada e o caso vai para a conferência da equipe, com aviso por e-mail.</li>
                 <li data-i18n="n2_d5">Validei tudo antes de ligar e deixei uma chave para desligar a automação sem precisar de versão nova.</li>
                 <li data-i18n="n2_d6">Montei a conferência nota a nota e os avisos por e-mail, e reescrevi as consultas: a tela de conferência foi de 25 s para 165 ms, e a rotina do vínculo passou a fazer cerca de 18 vezes menos leituras no banco.</li>
               </ol></dd></div>
@@ -1376,23 +1415,23 @@ html:not(.motion) .stack-btn{display:none}
           </div>
         </article>
 
-        <!-- Ficha 5 · a situação abre a ficha, o ciclo fecha; duas metades lado a lado: pesquisa anônima e RH identificado -->
+        <!-- Ficha 5 · a situação abre a ficha, o ciclo fecha; duas metades lado a lado: pesquisa anônima e pesquisa identificada -->
         <article class="ficha" id="p-pesquisa-clima" aria-labelledby="p5-h">
           <div class="ficha-plate">
             <div class="pl">
               <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Sistema</span><span class="rivet"></span></div>
-              <p class="tag-area" data-i18n="ar_rh">RH</p>
-              <p class="pl-name" aria-hidden="true" data-i18n="p5n">Pesquisa de Clima e RH</p>
+              <p class="tag-area" data-i18n="ar_rhm">RH · Marketing</p>
+              <p class="pl-name" aria-hidden="true" data-i18n="p5n">Pesquisa de Clima</p>
               <p class="tag-state"><span data-i18n="st_prod">Em produção</span></p>
             </div>
           </div>
           <div class="ficha-body">
             <header>
-              <h3 class="ficha-title" id="p5-h" data-i18n="p5n">Pesquisa de Clima e RH</h3>
-              <p class="ficha-line" data-i18n="p5l">Pesquisas internas em que o setor monta o questionário, distribui por disparo ou link público e lê o resultado pronto, com respostas anônimas. Ao lado, a área de RH para as entrevistas de desligamento, com registro por pessoa.</p>
+              <h3 class="ficha-title" id="p5-h" data-i18n="p5n">Pesquisa de Clima</h3>
+              <p class="ficha-line" data-i18n="p5l">Pesquisas em que o setor monta o questionário, distribui por disparo ou link público e lê o resultado pronto. Com a equipe, as respostas são anônimas; com clientes, a pesquisa identificada dá a cada contato um link próprio.</p>
             </header>
             <dl class="spec spec--split">
-              <div class="sp-sit"><dt data-i18n="lbl_sit">Situação</dt><dd data-i18n="n5_sit">A pesquisa de clima vivia em formulário externo e planilha, e a apresentação à diretoria era montada à mão. No RH, a entrevista de desligamento era feita em papel e digitada depois. Projetei e construí sozinho um módulo com duas metades de regras opostas: a pesquisa é anônima, o RH é identificado.</dd></div>
+              <div class="sp-sit"><dt data-i18n="lbl_sit">Situação</dt><dd data-i18n="n5_sit">A pesquisa de clima vivia em formulário externo e planilha, e a apresentação à diretoria era montada à mão. Pesquisa com cliente não dizia quem tinha respondido. Projetei e construí sozinho um módulo com duas metades de regras opostas: a pesquisa da equipe é anônima, a de clientes é identificada.</dd></div>
               <div><dt data-i18n="n5_k1">Pesquisas, com respostas anônimas</dt><dd><ul class="feat">
                 <li data-i18n="n5_a1">Questionário montado pelo próprio setor, com seções, escala, matriz, múltipla escolha e texto livre.</li>
                 <li data-i18n="n5_a2">Distribuição por disparo pela plataforma de WhatsApp ou por link público. A resposta não fica ligada ao nome de quem respondeu.</li>
@@ -1400,15 +1439,15 @@ html:not(.motion) .stack-btn{display:none}
                 <li data-i18n="n5_a4">Apresentação montada a partir do resultado e exibida no próprio portal, ocultando perguntas e escolhendo os comentários que entram.</li>
                 <li data-i18n="n5_a5">Análise do texto livre com IA generativa, sem identificar quem respondeu.</li>
               </ul></dd></div>
-              <div><dt data-i18n="n5_k2">Área de RH, com registro identificado</dt><dd><ul class="feat">
-                <li data-i18n="n5_r1">Entrevista de desligamento registrada por pessoa, com os dados lidos da folha de pagamento, somente leitura.</li>
-                <li data-i18n="n5_r2">Registro de ciência assinado na tela, com selo de integridade e trilha de auditoria.</li>
-                <li data-i18n="n5_r3">Dashboard com tipo e motivo do desligamento, setor e tempo de casa, cruzado com a folha.</li>
-                <li class="is-next"><span data-i18n="n5_r4">Acompanhamento de 30 e 90 dias.</span> <span class="stamp" data-i18n="st_impl">Em implantação</span></li>
-                <li class="is-next"><span data-i18n="n5_r5">Análise por IA das entrevistas.</span> <span class="stamp" data-i18n="st_impl">Em implantação</span></li>
+              <div><dt data-i18n="n5_k2">Pesquisa identificada, para clientes</dt><dd><ul class="feat">
+                <li data-i18n="n5_i1">Link próprio de uso único para cada contato, e a lista de destinatários mostra quem já respondeu.</li>
+                <li data-i18n="n5_i2">Escala de 0 a 10 com NPS, e o link geral continua aceitando respostas sem identificação.</li>
+                <li data-i18n="n5_i3">Respostas por contato só no relatório interno, com exportação em CSV. Elas nunca vão para o link público dos resultados nem para a análise por IA.</li>
+                <li data-i18n="n5_i4">No setor de RH a pesquisa é sempre anônima: a identificação nem aparece como opção.</li>
+                <li><span data-i18n="n5_i5">As entrevistas de desligamento e as conversas de 30 e 90 dias, que nasceram aqui, hoje têm sistema próprio:</span> <a href="#p-gestao-pessoas" data-i18n="p8n">Gestão de Pessoas</a></li>
               </ul></dd></div>
               <div><dt data-i18n="lbl_how">Como medi</dt><dd data-i18n="n5_how">Medi o tempo da chamada de análise por IA antes e depois de enxugá-la. Depois passei a análise para segundo plano e gravei o resultado, para não repetir a chamada a cada abertura do relatório.</dd></div>
-              <div><dt data-i18n="lbl_res">Resultado</dt><dd class="res" data-i18n="n5_res">Em produção: o setor monta a pesquisa, distribui e apresenta o resultado sem sair do portal, e o RH registra cada entrevista de desligamento com histórico e indicadores. O conteúdo das perguntas e o modelo da entrevista vieram do RH.</dd></div>
+              <div><dt data-i18n="lbl_res">Resultado</dt><dd class="res" data-i18n="n5_res">Em produção: o setor monta a pesquisa, distribui e apresenta o resultado sem sair do portal e, com clientes, sabe quem respondeu o quê sem expor isso fora do setor. O conteúdo das perguntas veio das áreas que usam o módulo.</dd></div>
             </dl>
             <div>
               <h4 class="mini-h" data-i18n="lbl_ba">Antes e depois</h4>
@@ -1430,7 +1469,7 @@ html:not(.motion) .stack-btn{display:none}
             <div>
               <h4 class="mini-h" data-i18n="lbl_tech">Tecnologias</h4>
               <ul class="cables">
-                <li>C# / .NET</li><li>ASP.NET Core</li><li>SQL Server</li><li>Next.js / React / TypeScript</li><li>ECharts</li><li data-i18n="n5_t6">API de IA generativa</li><li data-i18n="n5_t7">API da plataforma de WhatsApp</li><li data-i18n="n5_t8">SHA-256 (selo de integridade)</li><li data-i18n="n5_t9">Exportação para PowerPoint e Excel</li>
+                <li>C# / .NET</li><li>ASP.NET Core</li><li>SQL Server</li><li>Next.js / React / TypeScript</li><li>ECharts</li><li data-i18n="n5_t6">API de IA generativa</li><li data-i18n="n5_t7">API da plataforma de WhatsApp</li><li data-i18n="n5_t9">Exportação para PowerPoint e Excel</li>
               </ul>
             </div>
             <figure class="reel">
@@ -1445,8 +1484,65 @@ html:not(.motion) .stack-btn{display:none}
           </div>
         </article>
 
-        <!-- Ficha 6 · plaqueta à direita, as medições abrem a ficha -->
-        <article class="ficha ficha--r" id="p-carrossel-tv" aria-labelledby="p6-h">
+        <!-- Ficha 6 · plaqueta à direita, o ciclo abre a ficha; situação, o que fiz, como medi e resultado em duas colunas -->
+        <article class="ficha ficha--r" id="p-gestao-pessoas" aria-labelledby="p8-h">
+          <div class="ficha-plate">
+            <div class="pl">
+              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Sistema</span><span class="rivet"></span></div>
+              <p class="tag-area" data-i18n="ar_rh">RH</p>
+              <p class="pl-name" aria-hidden="true" data-i18n="p8n">Gestão de Pessoas</p>
+              <p class="tag-state"><span data-i18n="st_prod">Em produção</span></p>
+            </div>
+          </div>
+          <div class="ficha-body">
+            <header>
+              <h3 class="ficha-title" id="p8-h" data-i18n="p8n">Gestão de Pessoas</h3>
+              <p class="ficha-line" data-i18n="p8l">O sistema do RH dentro do hub. A folha de pagamento manda: quando ela mostra uma rescisão ou uma admissão, o sistema cria sozinho a entrevista de desligamento e as conversas de 30 e 90 dias, e o RH registra o que foi conversado.</p>
+            </header>
+              <div>
+                <h4 class="mini-h" data-i18n="lbl_cycle">Ciclo completo</h4>
+                <ol class="flow">
+                  <li><span class="flow-n" aria-hidden="true">01</span><span data-i18n="n8_f1">Rescisão ou admissão na folha</span></li>
+                  <li><span class="flow-n" aria-hidden="true">02</span><span data-i18n="n8_f2">Rotina cria o registro</span></li>
+                  <li><span class="flow-n" aria-hidden="true">03</span><span data-i18n="n8_f3">Pendência no Início, por prazo</span></li>
+                  <li><span class="flow-n" aria-hidden="true">04</span><span data-i18n="n8_f4">RH conversa e registra</span></li>
+                  <li><span class="flow-n" aria-hidden="true">05</span><span data-i18n="n8_f5">Retorno ao gestor</span></li>
+                  <li><span class="flow-n" aria-hidden="true">06</span><span data-i18n="n8_f6">Indicadores e análises</span></li>
+                </ol>
+              </div>
+            <dl class="spec spec--split">
+              <div class="sp-sit"><dt data-i18n="lbl_sit">Situação</dt><dd data-i18n="n8_sit">As entrevistas de desligamento eram feitas no papel e digitadas depois numa planilha. As conversas de 30 e 90 dias dependiam de lembrar a data de cada admissão, os feedbacks semestrais ficavam numa planilha por gestor, e perguntas simples, como quem está com férias a vencer, viravam pedido de relatório.</dd></div>
+              <div class="sp-did"><dt data-i18n="lbl_did">O que fiz</dt><dd><ol class="did">
+                  <li data-i18n="n8_d1">Levantei com o RH o caminho de cada conversa e projetei e construí sozinho o sistema, separado da Pesquisa de Clima: a pesquisa continua anônima, e aqui fica o que é registrado por pessoa.</li>
+                  <li data-i18n="n8_d2">Criei a rotina que lê a folha a cada 4 horas, só para leitura: rescisão nova vira entrevista a preencher, admissão nova vira as conversas de 30 e 90 dias, e um índice único impede criar em dobro.</li>
+                  <li data-i18n="n8_d3">Montei os feedbacks semestrais por equipe, com a equipe vinda da folha e o gestor vindo do portal do colaborador. O próximo nasce agendado seis meses depois, e os avisos por e-mail nascem desligados.</li>
+                  <li data-i18n="n8_d4">Fiz o perfil de permanência de cada cargo só com fatores ligados à função. A aderência ajuda a conversa e não elimina candidato, e atributos pessoais protegidos por lei não existem no sistema.</li>
+                  <li data-i18n="n8_d5">Criei um assistente do RH só de leitura, com uma lista fechada de consultas, recusa fixa para o que não é de RH e auditoria de cada pergunta. As análises por IA recebem só o agregado, sem nomes.</li>
+                  <li data-i18n="n8_d6">Liguei o acesso à regra do hub: entra quem é do departamento dono, membro do projeto ou super administrador, conferido no servidor.</li>
+                </ol></dd></div>
+              <div class="sp-how"><dt data-i18n="lbl_how">Como medi</dt><dd data-i18n="n8_how">Conferi a cobertura contra a própria folha: cada desligamento tem a sua entrevista, respondida ou marcada como não respondida, e a contagem do sistema bate com a da folha.</dd></div>
+              <div class="sp-res"><dt data-i18n="lbl_res">Resultado</dt><dd class="res" data-i18n="n8_res">Em produção: as entrevistas e as conversas nascem da folha, o RH abre o dia pela lista de pendências por prazo e registra em vez de controlar datas, e cada consulta e cada escrita ficam na auditoria. Os modelos de entrevista e os critérios de acompanhamento vieram do RH.</dd></div>
+            </dl>
+            <div>
+              <h4 class="mini-h" data-i18n="lbl_tech">Tecnologias</h4>
+              <ul class="cables">
+                <li>C# / .NET</li><li data-i18n="n1_t2">ASP.NET Core (serviços em segundo plano)</li><li>SQL Server</li><li>Next.js / React / TypeScript</li><li data-i18n="n8_t5">API de IA generativa com ferramentas</li><li data-i18n="n8_t6">Leitura da folha de pagamento</li>
+              </ul>
+            </div>
+            <figure class="reel">
+              <figcaption data-i18n="vid_cap">O sistema completo em 20 segundos</figcaption>
+              <video controls muted loop playsinline preload="none" width="1280" height="720" poster="assets/videos/gestao_pessoas.jpg"><source src="assets/videos/gestao_pessoas.mp4" type="video/mp4"><source src="assets/videos/gestao_pessoas.webm" type="video/webm"></video>
+            </figure>
+            <p class="reel-cta"><span data-i18n="reel_cta">Quer ver este sistema completo funcionando?</span> <a href="https://ruan-hub-completo.pages.dev/demo/index.html?sistema=gestao_pessoas" target="_blank" rel="noopener" data-i18n="reel_cta_link">Solicite o acesso</a></p>
+            <div class="ficha-links">
+              <a class="btn btn--sm" href="demo/index.html#/gestao_pessoas"><span data-i18n="open_sys">Abrir o sistema</span><svg class="ico ico--right" aria-hidden="true" focusable="false"><use href="#i-right"/></svg></a>
+              <a class="ext" href="demo/index.html#/gestao_pessoas/manual"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-doc"/></svg><span data-i18n="read_manual">Ler o manual</span></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Ficha 7 · plaqueta à esquerda, as medições abrem a ficha -->
+        <article class="ficha" id="p-carrossel-tv" aria-labelledby="p6-h">
           <div class="ficha-plate">
             <div class="pl">
               <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Sistema</span><span class="rivet"></span></div>
@@ -1511,8 +1607,8 @@ html:not(.motion) .stack-btn{display:none}
           </div>
         </article>
 
-        <!-- Ficha 7 · plaqueta à esquerda, o ciclo abre a ficha; situação, o que fiz, como medi e resultado em duas colunas -->
-        <article class="ficha" id="p-planejamento-orcamentario" aria-labelledby="p7-h">
+        <!-- Ficha 8 · plaqueta à direita, o ciclo abre a ficha; situação, o que fiz, como medi e resultado em duas colunas -->
+        <article class="ficha ficha--r" id="p-planejamento-orcamentario" aria-labelledby="p7-h">
           <div class="ficha-plate">
             <div class="pl">
               <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Sistema</span><span class="rivet"></span></div>
@@ -1567,6 +1663,63 @@ html:not(.motion) .stack-btn{display:none}
             </div>
           </div>
         </article>
+
+        <!-- Ficha 9 · plaqueta à esquerda, em implantação; o ciclo abre a ficha, situação, o que fiz, como medi e resultado em duas colunas -->
+        <article class="ficha" id="p-planejamento-importados" aria-labelledby="p9-h">
+          <div class="ficha-plate">
+            <div class="pl pl--impl">
+              <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Sistema</span><span class="rivet"></span></div>
+              <p class="tag-area" data-i18n="ar_com">Comercial</p>
+              <p class="pl-name" aria-hidden="true" data-i18n="p9n">Planejamento de importados</p>
+              <p class="tag-state"><span data-i18n="st_impl">Em implantação</span></p>
+            </div>
+          </div>
+          <div class="ficha-body">
+            <header>
+              <h3 class="ficha-title" id="p9-h"><span data-i18n="p9n">Planejamento de importados</span> <span class="stamp" data-i18n="st_impl">Em implantação</span></h3>
+              <p class="ficha-line" data-i18n="p9l">A compra de importados decidida no hub, e não mais na planilha: a programação de venda entra uma vez, por produto vendido, e o sistema diz para cada item em que mês falta, quanto comprar e até quando colocar a ordem de compra, pelo prazo de cada fornecedor.</p>
+            </header>
+              <div>
+                <h4 class="mini-h" data-i18n="lbl_cycle">Ciclo completo</h4>
+                <ol class="flow">
+                  <li><span class="flow-n" aria-hidden="true">01</span><span data-i18n="n9_f1">Programação por produto vendido</span></li>
+                  <li><span class="flow-n" aria-hidden="true">02</span><span data-i18n="n9_f2">Explosão da estrutura</span></li>
+                  <li><span class="flow-n" aria-hidden="true">03</span><span data-i18n="n9_f3">Conta do mês</span></li>
+                  <li><span class="flow-n" aria-hidden="true">04</span><span data-i18n="n9_f4">Fila pela data limite</span></li>
+                  <li><span class="flow-n" aria-hidden="true">05</span><span data-i18n="n9_f5">Processo de importação</span></li>
+                  <li><span class="flow-n" aria-hidden="true">06</span><span data-i18n="n9_f6">Acerto do mês</span></li>
+                </ol>
+              </div>
+            <dl class="spec spec--split">
+              <div class="sp-sit"><dt data-i18n="lbl_sit">Situação</dt><dd data-i18n="n9_sit">A compra de importados era decidida numa planilha com uma aba por família. A programação de venda era copiada à mão para cada item comprado e o saldo era refeito a cada mês. Para os componentes que entram em muitos produtos, era preciso abrir a estrutura de cada produto e somar peça por peça.</dd></div>
+              <div class="sp-did"><dt data-i18n="lbl_did">O que fiz</dt><dd><ol class="did">
+                  <li data-i18n="n9_d1">Levantei com o Comercial como a planilha era montada e projetei e construí sozinho o sistema, do banco de dados à tela.</li>
+                  <li data-i18n="n9_d2">Separei os dois tipos de item: o produto pronto, que chega importado e só troca de código, e o componente, cuja necessidade sai da explosão da estrutura de cada produto montado na fábrica.</li>
+                  <li data-i18n="n9_d3">Escrevi a conta do mês numa regra só: saldo, ordens que chegam, estoque de segurança e compra no primeiro mês com falta, com a data limite contada para trás pelo tempo de produção do fornecedor e pela modalidade de frete.</li>
+                  <li data-i18n="n9_d4">Criei o ciclo mensal: o Comercial valida o mês seguinte, o mês validado congela, e mudar depois abre uma nova versão sem apagar a anterior.</li>
+                  <li data-i18n="n9_d5">Fiz o acerto comparar a saída real com a programação validada, por item e por família. A IA explica o desvio e sugere um ajuste, sem alterar nada sozinha.</li>
+                  <li data-i18n="n9_d6">Deixei o ERP só para leitura e o envio de e-mail nascendo desligado, e toda alteração guarda quem, quando e o quê.</li>
+                </ol></dd></div>
+              <div class="sp-how"><dt data-i18n="lbl_how">Como medi</dt><dd data-i18n="n9_how">A carga inicial veio da planilha do Comercial, que é a referência: a regra de cálculo é conferida contra ela, item a item, antes de o sistema substituir a planilha.</dd></div>
+              <div class="sp-res"><dt data-i18n="lbl_res">Resultado</dt><dd class="res" data-i18n="n9_res">Em implantação: o sistema está construído e sendo ligado ao ERP. Em produção, a fila de compras passa a dizer o que comprar, quanto e até quando, e a planilha por família sai de cena.</dd></div>
+            </dl>
+            <div>
+              <h4 class="mini-h" data-i18n="lbl_tech">Tecnologias</h4>
+              <ul class="cables">
+                <li>C# / .NET</li><li>ASP.NET Core</li><li>SQL Server</li><li>Next.js / React / TypeScript</li><li data-i18n="n7_t5">Integração com ERP (somente leitura)</li><li data-i18n="n1_t4">API de IA generativa</li>
+              </ul>
+            </div>
+            <figure class="reel">
+              <figcaption data-i18n="vid_cap">O sistema completo em 20 segundos</figcaption>
+              <video controls muted loop playsinline preload="none" width="1280" height="720" poster="assets/videos/planejamento_importados.jpg"><source src="assets/videos/planejamento_importados.mp4" type="video/mp4"><source src="assets/videos/planejamento_importados.webm" type="video/webm"></video>
+            </figure>
+            <p class="reel-cta"><span data-i18n="reel_cta">Quer ver este sistema completo funcionando?</span> <a href="https://ruan-hub-completo.pages.dev/demo/index.html?sistema=planejamento_importados" target="_blank" rel="noopener" data-i18n="reel_cta_link">Solicite o acesso</a></p>
+            <div class="ficha-links">
+              <a class="btn btn--sm" href="demo/index.html#/planejamento_importados"><span data-i18n="open_sys">Abrir o sistema</span><svg class="ico ico--right" aria-hidden="true" focusable="false"><use href="#i-right"/></svg></a>
+              <a class="ext" href="demo/index.html#/planejamento_importados/manual"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-doc"/></svg><span data-i18n="read_manual">Ler o manual</span></a>
+            </div>
+          </div>
+        </article>
       </div>
     </div>
   </section>
@@ -1600,10 +1753,10 @@ html:not(.motion) .stack-btn{display:none}
           </li>
           <li class="enode enode--end">
             <div class="enode-top"><h4 data-i18n="e4_k">Sistemas</h4><span class="rivet"></span></div>
-            <p class="e-d"><span class="e-num">15</span> <span data-i18n="e4_d">sistemas no hub, implantados e mantidos seguindo essa memória</span></p>
+            <p class="e-d"><span class="e-num">17</span> <span data-i18n="e4_d">sistemas no hub, implantados e mantidos seguindo essa memória</span></p>
           </li>
         </ol>
-        <p class="e-date" data-i18n="eco_date">Contagem de 01/10/2026.</p>
+        <p class="e-date" data-i18n="eco_date">Contagem de 23/10/2026.</p>
       </figure>
 
       <div class="eco-base">
@@ -1719,21 +1872,23 @@ html:not(.motion) .stack-btn{display:none}
   /* Idioma: o português vem do próprio HTML (lido uma vez); o inglês fica aqui. */
   const EN = {
     title: 'Ruan Siqueira · End-to-end IT',
-    desc: 'Ruan Siqueira, software engineer in Marau, Brazil. From infrastructure to ERP integration and AI: a 15-system hub on top of the ERP, designed and built on his own, with seven projects in detail, from the invoice-posting robot to budget planning.',
+    desc: 'Ruan Siqueira, software engineer in Marau, Brazil. From infrastructure to ERP integration and AI: a 17-system hub on top of the ERP, designed and built on his own, with nine projects in detail, from the invoice-posting robot to import planning.',
     skip: 'Skip to content', nav_label: 'Sections', nav_about: 'About', nav_projects: 'Projects', nav_eco: 'Ecosystem', nav_contact: 'Contact',
     demo_long: 'Demo hub', lang_label: 'Language',
     t_tag: 'End-to-end IT',
     phrase: 'From infrastructure to ERP integration and AI.',
-    apoio: 'I’m a software engineer working in IT at Robustec, where I designed and built, on my own, an internal portal with 15 systems, many of them integrated with the ERP.',
+    apoio: 'I’m a software engineer working in IT at Robustec, where I designed and built, on my own, an internal portal with 17 systems, many of them integrated with the ERP.',
     cta: 'See projects', cta2: 'Enter the demo hub',
-    projects_h2: 'Projects in production', asset: 'System',
+    projects_h2: 'Projects in production and rolling out', asset: 'System',
     p1n: 'Autonomous Invoice Posting', p1m: 'Reads the XML, decides and posts the company’s inbound invoices and freight documents into the ERP on its own. Switch on automatic mode and the typing is over.',
     p2n: 'Debit Note', p2m: 'Creates and issues the note from the order, links everything on its own and, at the sale, finds the trigger to deliver it to the customer, as Brazil’s tax reform requires.',
     p3n: 'AUTO CRM', p3m: 'The CRM managers build themselves: funnel, goals and cadences on screen, accounts and prospecting in one place, ready for any team.',
     p4n: 'Customer Engine', p4m: 'Finds who stopped buying, brings them back over WhatsApp and even finds new customers in the public company registry.',
-    p5n: 'Workplace Climate Survey and HR', p5m: 'Truly listens to the team: anonymous surveys and feedback with an instant report, plus the HR area for exit interviews.',
+    p5n: 'Workplace Climate Survey', p5m: 'Listens to the team and to customers: anonymous surveys with an instant report and, for customers, the identified survey with NPS.',
+    p8n: 'People management', p8m: 'Creates exit interviews and 30 and 90-day conversations on its own from payroll, and HR only records what was said.',
     p6n: 'TV Carousel', p6m: 'Every TV in the company with the right message for its department, changed in one click from inside the hub.',
     p7n: 'Budget planning', p7m: 'Each manager builds the year’s budget in the hub, with last year alongside, and submits it for approval. No more spreadsheets by email.',
+    p9n: 'Import planning', p9m: 'Tells what to buy from abroad, how much and by when, using each supplier’s lead time. The per-family spreadsheet steps aside.',
     st_idle: 'Awaiting scan', st_read: 'Checking', st_prod: 'In production',
 
     about_h: 'About',
@@ -1742,7 +1897,7 @@ html:not(.motion) .stack-btn{display:none}
     about_p3: 'Along the way I also organized how I work: shared memory, assistants, agents and a versioned method. That is what lets another IT professional deploy and maintain everything I built.',
     role: 'Software Engineer', loc: 'Marau, Brazil', photo_alt: 'Photo of Ruan Siqueira',
     trail_h: 'Career',
-    tr1_y: 'Jan 2026 to present', tr1_r: 'IT Analyst', tr1_d: 'Designed and built, on my own, the internal hub that brings together 15 systems, with 3 access levels, 26 registered automated routines and ERP integration.',
+    tr1_y: 'Jan 2026 to present', tr1_r: 'IT Analyst', tr1_d: 'Designed and built, on my own, the internal hub that brings together 17 systems, with 3 access levels, 26 registered automated routines and ERP integration.',
     tr2_y: '2024 to 2025', tr2_r: 'IT Analyst', tr2_d: 'Sole IT person for the Sana group, about 500 employees: replaced the server, firewall and antivirus, migrated more than 500 email accounts, and handled purchasing, asset records and equipment loans for every employee. Later I coordinated one more person on the IT team.',
     tr3_y: '2023 to 2024', tr3_r: 'Controllership Assistant', tr3_d: 'Inventory and data analysis in controllership, the business grounding I now bring to ERP-integrated systems.',
     tr4_y: '2021 to 2023', tr4_r: 'Network Analyst', tr4_o: 'Internet service provider', tr4_d: 'Installed and configured routers and MikroTik devices, and learned that a well-built network is one nobody notices.',
@@ -1751,7 +1906,7 @@ html:not(.motion) .stack-btn{display:none}
     hub_h: 'ProjectHub: the brain on top of the ERP',
     hub_p1: 'A smart layer on top of the ERP: the brain that connects tax, finance, sales and HR, and automates what the ERP alone does not do. I designed and built this internal portal on my own at Robustec, where each department used to keep its controls in spreadsheets and separate tools.',
     hub_p1b: 'It integrates with the ERP the company already uses, but does not depend on it to exist: master data, rules, permissions, audit trail and routines live in the hub itself. If the company needs it, it can grow to take on the role of the ERP.',
-    hub_p2: 'Almost everything talks through it. Every system plugs in as a module, with a single login, 3 access levels, per-project permissions and an audit trail of critical actions. The seven projects on this page live inside it, and each of the 15 systems opens in the demo.',
+    hub_p2: 'Almost everything talks through it. Every system plugs in as a module, with a single login, 3 access levels, per-project permissions and an audit trail of critical actions. The nine projects on this page live inside it, and each of the 17 systems opens in the demo.',
     hub_p3: 'Behind it are 26 registered background jobs, and some of them integrate the hub with the ERP. Since the ERP database is shared with the whole company, the first query I tune is my own, and every automation starts with usage rules so it never weighs on anyone’s work.',
     hub_p4: 'The demo hub has a theme engine built into its own code: three unique visuals, each with a concept, that switch the whole interface instantly. Asset tag, Server rack and Access badge, plus a high-contrast mode for accessibility. The systems follow the same visual as the hub, inside a frame of their own.',
     conv_h: 'How the systems talk to each other',
@@ -1761,16 +1916,19 @@ html:not(.motion) .stack-btn{display:none}
     c3a: 'Mirrors sales and goals; read-only',
     c4a: 'Reads the customer base, logs the contact and measures quotes, purchases and losses',
     c4b: 'Delivers the campaign lead to the new-leads inbox',
-    c5a: 'Looks up payroll for the HR area; read-only',
+    c5a: 'Sends the survey invitation, which also goes out by link; does not talk to the ERP',
+    conv_folha: 'Payroll', c8a: 'Reads terminations, hires and teams and creates the missing interviews and conversations; read-only',
     c6a: 'Delivers each TV’s carousel and receives its heartbeat; does not talk to the ERP',
     c7a: 'Reads the accounts and last year’s actuals; read-only',
+    c9a: 'Reads stock, product structures, consumption and purchase orders; read-only',
     conv_tvs: 'Company TVs',
     conv_cap: 'Each cable is a conversation that runs through the hub. Login, permissions, WhatsApp sending, email and generative AI are shared services, used by more than one system, and anything that writes to the ERP goes through safety guardrails.',
-    plate_title: 'Portal systems', plate_sub: '15 modules, single sign-on. Tap any of them to open it in the demo.',
+    plate_title: 'Portal systems', plate_sub: '17 modules, single sign-on. Tap any of them to open it in the demo.',
     s01: 'Inbound invoices', s02: 'Debit notes', s03: 'Customer reactivation', s04: 'CRM funnels',
     s05: 'Leads and campaigns', s06: 'AUTO CRM', s07: 'Customer X-ray', s08: 'AI customer service',
     s09: 'Budget control', s10: 'Budget planning', s11: 'Stockroom', s12: 'Fleet control',
     s13: 'Workplace climate survey', s14: 'Knowledge base', s15: 'Factory TV signage',
+    s16: 'People management', s17: 'Import planning',
     demo_h: 'Demo hub',
     demo_p: 'A replica of the portal, rebuilt from scratch: the public demo shows the hub and each system’s main screen, and the videos show the full version.',
     demo_note: 'Fictitious data, feel free to explore.',
@@ -1789,7 +1947,7 @@ html:not(.motion) .stack-btn{display:none}
     tech_h: 'Technologies', ht_jwt: 'JWT with HttpOnly cookie',
 
     projects_h: 'Projects',
-    projects_p: 'Seven systems from the hub, hardest first. Each sheet covers the problem, how the system works, how I measured it, the result and a video of the full system, and opens the main screen and the manual in the demo.',
+    projects_p: 'Nine systems from the hub, hardest first, with the last one still rolling out. Each sheet covers the problem, how the system works, how I measured it, the result and a video of the full system, and opens the main screen and the manual in the demo.',
     lbl_sit: 'Context', lbl_did: 'What I did', lbl_how: 'How I measured', lbl_res: 'Result',
     lbl_ba: 'Before and after', lbl_flow: 'Flow', lbl_tech: 'Technologies',
     lbl_cycle: 'Full cycle', lbl_layers: 'Layered decision', lbl_modes: 'Operating modes', lbl_engine: 'Rules engine',
@@ -1807,6 +1965,7 @@ html:not(.motion) .stack-btn{display:none}
     n1_d4: 'Built the ERP posting as all or nothing: the complete posting goes in at once and, if any step fails, nothing is written.',
     n1_d5: 'Built the follow-up after posting: whatever the team corrects flows back into the system, and the rules improve with use.',
     n1_d6: 'Rolled it out gradually, validating each stage against the team’s work before allowing it to write.',
+    n1_d7: 'Built the post-posting audit: every invoice the robot posted against a purchase order is compared with the order as approved, and anything outside the numbers shows up for review.',
     n1_layers: 'The rules set by the Tax team come first, decided in code. Generative AI steps in only where the rules don’t reach, and it is always checked before it counts. When in doubt, the robot doesn’t post: the invoice goes to the team’s queue with the reason written out.',
     n1_o1k: 'Assisted.', n1_o1: 'The robot decides, simulates and prepares the posting, and a person confirms it.',
     n1_o2k: 'Automatic, within limits.', n1_o2: 'The robot posts on its own whatever passes every safeguard, within the limits the company sets. The mode switch is audited.',
@@ -1826,6 +1985,7 @@ html:not(.motion) .stack-btn{display:none}
     n2_d2: 'Made the flow build the Debit Note from the order and the customer’s prepayment, already carrying the ERP’s official numbering.',
     n2_d3: 'Automated the submission to SEFAZ through the ERP itself, which still signs and transmits. The order only moves forward after authorization.',
     n2_d4: 'Had the link to the sales invoice written automatically, in time for transmission.',
+    n2_d7: 'Taught the flow to split one prepayment that covers several orders: each order gets the share proportional to its value and its own Debit Note. When the payment does not match the orders, no note is created and the case goes to the team’s review, with an email alert.',
     n2_d5: 'Validated everything before switching it on and left a switch to turn the automation off without a new release.',
     n2_d6: 'Built the note-by-note check and the email alerts, and rewrote the queries: the review screen went from 25 s to 165 ms, and the linking routine now does about 18 times fewer database reads.',
     n2_how: 'The review screen shows, note by note, what is linked, what is waiting for the sale and what is overdue. I measured that screen’s load time and the linking routine’s reads before and after the rewrite. Before applying the new query, I proved in read-only mode that it returned exactly the same rows as the old one.',
@@ -1868,25 +2028,25 @@ html:not(.motion) .stack-btn{display:none}
     n4_f1: 'Customer base in the ERP', n4_f2: 'Qualification by priority', n4_f3: 'Daily queue', n4_f4: 'Sent through the WhatsApp platform', n4_f5: 'Reply by webhook', n4_f6: 'Quote, purchase or loss read from the ERP',
     n4_t1: 'C# / .NET (background services)', n4_t3: 'ERP integration', n4_t4: 'WhatsApp platform API', n4_t8: 'Brazilian Federal Revenue open data', n4_t9: 'Python (loop guard)',
 
-    p5l: 'Internal surveys where the department builds the questionnaire, distributes it by bulk message or public link and reads a ready-made result, with anonymous answers. Alongside it, the HR area for exit interviews, recorded per person.',
-    n5_sit: 'The climate survey lived in an external form and a spreadsheet, and the presentation to senior management was assembled by hand. In HR, exit interviews were done on paper and typed up later. I designed and built, on my own, a module with two halves that follow opposite rules: the survey is anonymous, HR is identified.',
+    p5l: 'Surveys where the department builds the questionnaire, distributes it by bulk message or public link and reads a ready-made result. With the team, answers are anonymous; with customers, the identified survey gives each contact a link of their own.',
+    n5_sit: 'The climate survey lived in an external form and a spreadsheet, and the presentation to senior management was assembled by hand. Customer surveys did not tell who had answered. I designed and built, on my own, a module with two halves that follow opposite rules: the team survey is anonymous, the customer survey is identified.',
     n5_k1: 'Surveys, with anonymous answers',
     n5_a1: 'A questionnaire built by the department itself, with sections, scales, matrices, multiple choice and free text.',
     n5_a2: 'Distribution by bulk message through the WhatsApp platform or by public link. The answer is not tied to the name of the person who gave it.',
     n5_a3: 'A ready-made report, with favorability by dimension, eNPS and comparison with past surveys.',
     n5_a4: 'A presentation built from the results and shown right in the portal, hiding questions and choosing which comments go in.',
     n5_a5: 'Free-text analysis with generative AI, without identifying who answered.',
-    n5_k2: 'HR area, with identified records',
-    n5_r1: 'Exit interviews recorded per person, with data read from payroll, read-only.',
-    n5_r2: 'Acknowledgment signed on screen, with an integrity seal and an audit trail.',
-    n5_r3: 'A dashboard with the type and reason for leaving, department and length of service, cross-checked against payroll.',
-    n5_r4: '30- and 90-day follow-up.',
-    n5_r5: 'AI analysis of the interviews.',
+    n5_k2: 'Identified survey, for customers',
+    n5_i1: 'A single-use link of their own for each contact, and the recipient list shows who has already answered.',
+    n5_i2: 'A 0 to 10 scale with NPS, and the general link still accepts answers without identification.',
+    n5_i3: 'Answers per contact only in the internal report, with CSV export. They never go to the public results link or to the AI analysis.',
+    n5_i4: 'In the HR department the survey is always anonymous: identification is not even offered.',
+    n5_i5: 'Exit interviews and 30 and 90-day conversations, which started here, now have a system of their own:',
     n5_how: 'I timed the AI analysis call before and after trimming the request. I then moved the analysis to the background and stored the result, so the call is not repeated every time the report is opened.',
-    n5_res: 'In production: the department builds the survey, distributes it and presents the results without leaving the portal, and HR records every exit interview with history and indicators. The questions and the interview template came from HR.',
+    n5_res: 'In production: the department builds the survey, distributes it and presents the results without leaving the portal and, with customers, knows who answered what without exposing it outside the department. The questions came from the teams that use the module.',
     n5_b1k: 'AI analysis call', n5_b1a: '25 to 37 s', n5_b1n: 'under 15 s',
     n5_f1: 'Questionnaire in sections', n5_f2: 'Bulk message or public link', n5_f3: 'Anonymous answers', n5_f4: 'Report with eNPS', n5_f5: 'AI analysis', n5_f6: 'Presentation in the portal',
-    n5_t6: 'Generative AI API', n5_t7: 'WhatsApp platform API', n5_t8: 'SHA-256 (integrity seal)', n5_t9: 'PowerPoint and Excel export',
+    n5_t6: 'Generative AI API', n5_t7: 'WhatsApp platform API', n5_t9: 'PowerPoint and Excel export',
 
     p6l: 'Internal communication on the company’s TVs, run from inside the hub. Each TV plays its department’s carousel on its own and reports when it goes off the air.',
     n6_f1: 'Media library', n6_f2: 'A carousel for each TV', n6_f3: 'Schedules and hours', n6_f4: 'TV plays on its own', n6_f5: 'Heartbeat', n6_f6: 'Watcher alerts by email',
@@ -1918,6 +2078,32 @@ html:not(.motion) .stack-btn{display:none}
     n7_res: 'The year’s budget left the spreadsheet and now lives in the hub: each manager fills in and submits their own, the approver follows them all in one place, and every budget request between managers is recorded with who asked, how much and who decided. No email is sent and nothing is written to the ERP.',
     n7_t3: 'SQL Server / T-SQL (transactions)', n7_t5: 'ERP integration (read-only)',
 
+    ar_rhm: 'HR · Marketing',
+    p8l: 'The HR system inside the hub. Payroll leads: when it shows a termination or a hire, the system creates the exit interview and the 30 and 90-day conversations on its own, and HR records what was said.',
+    n8_f1: 'Termination or hire in payroll', n8_f2: 'Routine creates the record', n8_f3: 'Pending item on the home screen, by deadline', n8_f4: 'HR talks and records', n8_f5: 'Feedback to the manager', n8_f6: 'Indicators and analyses',
+    n8_sit: 'Exit interviews were done on paper and typed into a spreadsheet later. The 30 and 90-day conversations depended on remembering each hire date, the semiannual feedback lived in a spreadsheet per manager, and simple questions, such as who has vacation coming due, turned into report requests.',
+    n8_d1: 'Mapped the path of each conversation with HR and designed and built the system on my own, separate from the Climate Survey: the survey stays anonymous, and this is where what is recorded per person lives.',
+    n8_d2: 'Built the routine that reads payroll every 4 hours, read-only: a new termination becomes an interview to fill in, a new hire becomes the 30 and 90-day conversations, and a unique index prevents duplicates.',
+    n8_d3: 'Built the semiannual feedback by team, with the team coming from payroll and the manager from the employee portal. The next one is scheduled six months later on its own, and the email reminders start switched off.',
+    n8_d4: 'Built the retention profile of each role only with factors tied to the job. The match helps the conversation and never rules a candidate out, and personal attributes protected by law do not exist in the system.',
+    n8_d5: 'Built a read-only HR assistant, with a closed list of lookups, a fixed refusal for anything outside HR and an audit trail of every question. The AI analyses receive only the aggregate, with no names.',
+    n8_d6: 'Tied access to the hub rule: the owning department, project members or a super admin get in, checked on the server.',
+    n8_how: 'I checked coverage against payroll itself: every termination has its interview, answered or marked as not answered, and the system count matches the payroll count.',
+    n8_res: 'In production: interviews and conversations are born from payroll, HR starts the day from the list of pending items by deadline and records instead of tracking dates, and every lookup and every write goes to the audit trail. The interview templates and follow-up criteria came from HR.',
+    n8_t5: 'Generative AI API with tools', n8_t6: 'Payroll reading',
+
+    p9l: 'Import purchasing decided in the hub instead of a spreadsheet: the sales schedule goes in once, per product sold, and the system tells for each item which month runs short, how much to buy and by when to place the purchase order, using each supplier’s lead time.',
+    n9_f1: 'Schedule per product sold', n9_f2: 'Structure explosion', n9_f3: 'Monthly calculation', n9_f4: 'Queue by deadline', n9_f5: 'Import process', n9_f6: 'Monthly accuracy check',
+    n9_sit: 'Import purchasing was decided in a spreadsheet with one tab per product family. The sales schedule was copied by hand for each purchased item and the balance was redone every month. For components used in many products, someone had to open each product’s structure and add it up piece by piece.',
+    n9_d1: 'Worked with Sales to map how the spreadsheet was put together, then designed and built the system on my own, from the database to the screen.',
+    n9_d2: 'Split the two kinds of item: the finished product, which arrives imported and only changes code, and the component, whose need comes from exploding the structure of each product assembled in the factory.',
+    n9_d3: 'Wrote the monthly calculation as a single rule: balance, incoming orders, safety stock and the purchase in the first month that runs short, with the deadline counted backwards from the supplier’s production time and the freight mode.',
+    n9_d4: 'Built the monthly cycle: Sales validates the next month, the validated month freezes, and any later change opens a new version without erasing the previous one.',
+    n9_d5: 'Had the accuracy check compare actual outflow with the validated schedule, by item and by family. The AI explains the gap and suggests an adjustment, without changing anything on its own.',
+    n9_d6: 'Kept the ERP read-only and email sending switched off by default, and every change records who, when and what.',
+    n9_how: 'The initial load came from the Sales spreadsheet, which is the reference: the calculation rule is checked against it, item by item, before the system replaces the spreadsheet.',
+    n9_res: 'Rolling out: the system is built and being connected to the ERP. In production, the purchase queue will tell what to buy, how much and by when, and the per-family spreadsheet steps aside.',
+
     eco_h: 'My working ecosystem',
     eco_lede: 'Every project left something behind for the next one: a memory, a rule, an assistant, a tool. I organized it the way I organize a system, and that is how each project became part of the ecosystem that supports the hub today.',
     eco_thesis: 'Knowledge doesn’t stay locked in one person.',
@@ -1926,7 +2112,7 @@ html:not(.motion) .stack-btn{display:none}
     e1_k: 'Memory', e1_d: 'shared memories the AI reads at the start of every session',
     e2_k: 'Assistants', e2_d: 'assistants specialized by subject (invoices, freight, checking, rules, innovation, hub and more), following 12 shared rules',
     e3_k: 'Agents', e3_d: 'specialized agents: checking, solving cases, maintaining the rules and proposing the next step',
-    e4_k: 'Systems', e4_d: 'systems in the hub, deployed and maintained by following that memory', eco_date: 'Count as of Oct 1, 2026.',
+    e4_k: 'Systems', e4_d: 'systems in the hub, deployed and maintained by following that memory', eco_date: 'Count as of Oct 23, 2026.',
     eco_plate_title: 'Ecosystem foundation', eco_plate_sub: 'What keeps the memory organized, safe and within reach of whoever comes next',
     b1_k: 'Custom skills', b1_d: 'to start a new project and to point to the right tool',
     b2_k: 'Knowledge library', b2_d: 'searchable and organised by topic',
@@ -1959,8 +2145,8 @@ html:not(.motion) .stack-btn{display:none}
   };
 
   const LIVE = {
-    pt: { lang: 'pt-BR', readout: (n, t) => n + ' de ' + t + ' lidas' + (n === t ? ' · em produção' : '') },
-    en: { lang: 'en', readout: (n, t) => n + ' of ' + t + ' scanned' + (n === t ? ' · in production' : '') }
+    pt: { lang: 'pt-BR', readout: (n, t, k) => n + ' de ' + t + ' lidas' + (n === t ? (k ? ' · ' + (t - k) + ' em produção, ' + k + ' em implantação' : ' · em produção') : '') },
+    en: { lang: 'en', readout: (n, t, k) => n + ' of ' + t + ' scanned' + (n === t ? (k ? ' · ' + (t - k) + ' in production, ' + k + ' rolling out' : ' · in production') : '') }
   };
 
   const textEls = $$('[data-i18n]');
@@ -1979,7 +2165,7 @@ html:not(.motion) .stack-btn{display:none}
   const langBtns = $$('.lang button');
   let scanned = tags.length;
 
-  const renderReadout = () => { if (readout) readout.textContent = LIVE[lang].readout(scanned, tags.length); };
+  const renderReadout = () => { if (readout) readout.textContent = LIVE[lang].readout(scanned, tags.length, tags.filter(t => t.dataset.final === 'impl').length); };
 
   function setLang(next, animate) {
     const d = DICT[next];
@@ -2055,7 +2241,7 @@ html:not(.motion) .stack-btn{display:none}
     else if (a.right > n.right - m) nav.scrollLeft += a.right - n.right + m;
   });
 
-  /* Leitor: o laser passa pela faixa de estado de cada plaqueta; a plaqueta fica âmbar (conferindo) e depois vale (em produção). */
+  /* Leitor: o laser passa pela faixa de estado de cada plaqueta; a plaqueta fica âmbar (conferindo) e depois vale (em produção, ou em implantação na que traz data-final="impl"). */
   const wrapEl = $('.tags-wrap');
   const laser = $('.laser');
   const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -2081,7 +2267,7 @@ html:not(.motion) .stack-btn{display:none}
       await sleep(220);
       tags[i].dataset.state = 'read';
       await sleep(380);
-      tags[i].dataset.state = 'prod';
+      tags[i].dataset.state = tags[i].dataset.final || 'prod';
       scanned = i + 1;
       renderReadout();
       await sleep(120);

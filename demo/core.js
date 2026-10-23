@@ -45,23 +45,23 @@
   let altoContraste = ler(CHAVE_CONTRASTE) != null ? ler(CHAVE_CONTRASTE) === '1' : (ehContraste(ler(CHAVE_VISUAL)) || consulta('(prefers-contrast: more)'));
   const visualAplicado = () => (altoContraste ? 'contraste' : visual);
 
-  /* ---------- catálogo: os 15 sistemas aparecem no menu e no painel sem baixar o arquivo do módulo ---------- */
+  /* ---------- catálogo: os 17 sistemas aparecem no menu e no painel sem baixar o arquivo do módulo ---------- */
   const GRUPOS = [
     { id: 'fiscal', nome: P('Fiscal e financeiro', 'Tax and finance'), icone: 'landmark', descricao: P('Entrada de notas, notas de débito, controle de verba e planejamento orçamentário.', 'Inbound invoices, debit notes, budget control and budget planning.') },
-    { id: 'comercial', nome: P('Comercial', 'Sales'), icone: 'chart-line', descricao: P('Reativação da base, funis, campanhas, CRM e atendimento automático.', 'Customer reactivation, funnels, campaigns, CRM and automated service.') },
-    { id: 'pessoas', nome: P('Pessoas', 'People'), icone: 'users-round', descricao: P('Pesquisas de clima, eNPS e entrevistas de desligamento.', 'Climate surveys, eNPS and exit interviews.') },
+    { id: 'comercial', nome: P('Comercial', 'Sales'), icone: 'chart-line', descricao: P('Reativação da base, funis, campanhas, CRM, atendimento automático e planejamento de importados.', 'Customer reactivation, funnels, campaigns, CRM, automated service and import planning.') },
+    { id: 'pessoas', nome: P('Pessoas', 'People'), icone: 'users-round', descricao: P('Gestão de pessoas (desligamentos, experiência, feedbacks e vagas) e pesquisas de clima.', 'People management (exits, onboarding check-ins, feedback and openings) and climate surveys.') },
     { id: 'operacao', nome: P('Operação', 'Operations'), icone: 'factory', descricao: P('Almoxarifado, frota e comunicação nas TVs.', 'Stockroom, fleet and factory TV signage.') },
     { id: 'conhecimento', nome: P('Conhecimento', 'Knowledge'), icone: 'graduation-cap', descricao: P('A base de conhecimento da TI: manuais, arquitetura e runbooks.', 'The IT knowledge base: manuals, architecture and runbooks.') },
     { id: 'outros', nome: P('Outros', 'Other'), icone: 'folder', descricao: P('Sistemas fora do catálogo.', 'Systems outside the catalog.') },
   ];
   const T3 = (pt, en) => ({ pt, en: en || pt });
-  /* Os sistemas com vídeo de ~20 s da versão completa (hoje todos; caminho a partir da raiz do site): o cartão "fora da demonstração" mostra o vídeo.
+  /* Os sistemas com vídeo de ~20 s da versão completa (hoje 15 dos 17: gestao_pessoas e planejamento_importados entram na etapa de vídeos; sem vídeo, o cartão e o fim do tour ficam só com o contato; caminho a partir da raiz do site): o cartão "fora da demonstração" mostra o vídeo.
      O testes/ferramenta_publicar.js lê esta lista para conferir os arquivos. */
   const CONTATO = { linkedin: 'https://www.linkedin.com/in/ruan-siqueira-1898b7252', email: 'ruandoaqw@gmail.com', completo: 'https://ruan-hub-completo.pages.dev/' }; // os mesmos da seção Contato do portfólio
-  const VIDEOS = ['nf_autonoma', 'nota_debito', 'controle_verba', 'planejamento_orcamentario', 'disparos', 'base', 'leads', 'exportacao', 'raio_x', 'dash_ia', 'pesquisa_clima', 'estoque_epi', 'controle_veiculos', 'carrossel_tv', 'base_conhecimento'];
+  const VIDEOS = ['nf_autonoma', 'nota_debito', 'controle_verba', 'planejamento_orcamentario', 'disparos', 'base', 'leads', 'exportacao', 'raio_x', 'dash_ia', 'planejamento_importados', 'gestao_pessoas', 'pesquisa_clima', 'estoque_epi', 'controle_veiculos', 'carrossel_tv', 'base_conhecimento'];
   const CATALOGO = [
-    ['nf_autonoma', 'fiscal', 'receipt', P('Notas fiscais de entrada', 'Inbound invoices'), P('Lança no ERP as notas fiscais de entrada e os CT-es (fretes) da empresa, conferindo cada uma antes de gravar; no modo automático, lança tudo sozinha.', 'Posts the company\'s inbound invoices and CT-es (freight bills) to the ERP, checking each one before writing; in automatic mode, it posts everything on its own.'), T3(['C# / .NET', 'SQL Server', 'API de IA generativa'], ['C# / .NET', 'SQL Server', 'Generative AI API'])],
-    ['nota_debito', 'fiscal', 'file-minus', P('Notas de débito', 'Debit notes'), P('Nota de Débito de pagamento antecipado exigida pela Reforma Tributária: emitida a partir do pedido e acompanhada até a venda, sem controle manual.', 'Advance-payment debit note required by Brazil\'s tax reform: issued from the sales order and tracked through to the sale, with no manual control.'), T3(['C# / .NET', 'SQL Server', 'Next.js / React'])],
+    ['nf_autonoma', 'fiscal', 'receipt', P('Notas fiscais de entrada', 'Inbound invoices'), P('A camada inteligente sobre o ERP que lança as notas fiscais de entrada e os CT-es (fretes) da empresa: decide em camadas, simula antes de gravar e, com o modo automático ligado, lança tudo sozinha.', 'The intelligent layer on top of the ERP that posts the company\'s inbound invoices and CT-es (freight bills): it decides in layers, simulates before writing and, with automatic mode on, posts everything on its own.'), T3(['C# / .NET', 'SQL Server', 'API de IA generativa'], ['C# / .NET', 'SQL Server', 'Generative AI API'])],
+    ['nota_debito', 'fiscal', 'file-minus', P('Notas de débito', 'Debit notes'), P('Nota de Débito de pagamento antecipado da Reforma Tributária: cria e emite a nota a partir do pedido, vincula a nota ao pedido e, na venda, encontra o gatilho para levar a nota ao cliente, como a Reforma pede.', 'Advance-payment debit note required by Brazil\'s tax reform: it creates and issues the note from the sales order, links it to the order and, at the sale, finds the trigger to carry the note to the customer, as the reform requires.'), T3(['C# / .NET', 'SQL Server', 'Next.js / React'])],
     ['controle_verba', 'fiscal', 'wallet', P('Controle de verba', 'Budget control'), P('A camada inteligente sobre o ERP para a verba de cada conta: planejado, previsto, realizado e saldo, cofre de reservas mantido por um robô e aviso de estouro.', 'The intelligent layer on top of the ERP for the budget of each account: planned, committed, actual and balance, a reservation vault kept by a robot and overrun alerts.'), T3(['C# / .NET', 'SQL Server', 'Next.js / React'])],
     ['planejamento_orcamentario', 'fiscal', 'calculator', P('Planejamento orçamentário', 'Budget planning'), P('O orçamento anual de cada gestor no lugar da planilha: grade de contas por mês com o realizado do ano anterior como referência, envio para aprovação e pedidos de verba entre gestores.', 'Each manager\'s annual budget in place of the spreadsheet: an accounts-by-month grid with last year\'s actuals as a reference, submission for approval and budget requests between managers.'), T3(['C# / .NET', 'SQL Server', 'Next.js / React'])],
     ['disparos', 'comercial', 'refresh-cw', P('Reativação de clientes', 'Customer reactivation'), P('Reativa a base de clientes pelo WhatsApp e mede quanto virou orçamento e compra no funil do vendedor.', 'Reactivates the customer base on WhatsApp and measures how much turned into quotes and orders in the sales rep\'s funnel.'), T3(['C# / .NET', 'SQL Server', 'Next.js / React'])],
@@ -70,12 +70,14 @@
     ['exportacao', 'comercial', 'bot', P('AUTO CRM', 'AUTO CRM'), P('CRM comercial por setor: funil de cada vendedor, leads com cadência, mapa de mercados e gerencial que une ERP e hub.', 'Sales CRM by sector: each seller\'s funnel, leads with a cadence, market map and a management report joining ERP and hub.'), T3(['Next.js', 'React', 'TypeScript'])],
     ['raio_x', 'comercial', 'id-card', P('Raio-X do cliente', 'Customer X-ray'), P('Digite o CNPJ ou o CPF e receba o resumo do cliente pronto para a ligação, em um mural de adesivos: score, notas, financeiro, produtos, insights, próxima ação e script.', 'Type in a tax ID and get the customer summary ready for the call on a sticky-note board: score, invoices, finances, products, insights, next action and script.'), T3(['Next.js / React', 'TypeScript', 'C# / .NET'])],
     ['dash_ia', 'comercial', 'bot-message-square', P('Atendimento com IA', 'AI customer service'), P('A camada inteligente sobre o ERP que mede o que cada disparo de WhatsApp devolve, leva o cliente ao vendedor da carteira e protege a IA de atendimento contra robô conversando com robô.', 'The intelligent layer on top of the ERP that measures what every WhatsApp message returns, routes the customer to the rep who owns the portfolio and protects the AI assistant from bots talking to bots.'), T3(['Next.js / React', 'C# / .NET', 'SQL Server'])],
-    ['pesquisa_clima', 'pessoas', 'clipboard-list', P('Pesquisa de clima e RH', 'Climate survey and HR'), P('Pesquisas internas por setor, respondidas de forma anônima por link, com relatório de favorabilidade e eNPS, comparativo, análise por IA e apresentação em slides.', 'Internal surveys per sector, answered anonymously through a link, with a favorability and eNPS report, comparison, AI analysis and slide presentation.'), T3(['Next.js', 'React', 'TypeScript'])],
+    ['planejamento_importados', 'comercial', 'ship', P('Planejamento de importados', 'Import planning'), P('Diz o que comprar de importados, quanto e até quando: programação por produto vendido, explosão da estrutura para os componentes, estoque de segurança e o prazo de cada fornecedor.', 'Tells what to buy from abroad, how much and by when: a schedule per product sold, structure explosion for the components, safety stock and each supplier lead time.'), T3(['C# / .NET', 'SQL Server', 'Next.js / React']), 'implantacao'],
+    ['gestao_pessoas', 'pessoas', 'users', P('Gestão de Pessoas', 'People management'), P('O sistema do RH no hub: entrevistas de desligamento e conversas de 30 e 90 dias criadas sozinhas a partir da folha, feedbacks semestrais por equipe, vagas com perfil de permanência por cargo, indicadores, análises por IA e um assistente só de leitura.', 'The HR system in the hub: exit interviews and 30 and 90-day conversations created on their own from payroll, semiannual feedback by team, openings with a retention profile by role, indicators, AI analyses and a read-only assistant.'), T3(['C# / .NET', 'SQL Server', 'API de IA generativa'], ['C# / .NET', 'SQL Server', 'Generative AI API'])],
+    ['pesquisa_clima', 'pessoas', 'clipboard-list', P('Pesquisa de clima', 'Climate survey'), P('Pesquisas por setor do começo ao fim: questionário em sessões, convite por WhatsApp ou link, relatório com favorabilidade e eNPS, comparativo, análise por IA e apresentação em slides. Para clientes, a pesquisa identificada com link próprio por contato e NPS de 0 a 10.', 'Surveys per sector from start to finish: questionnaire in sections, invitation through WhatsApp or a link, report with favorability and eNPS, comparison, AI analysis and slide presentation. For customers, the identified survey with an own link per contact and a 0 to 10 NPS.'), T3(['Next.js', 'React', 'TypeScript'])],
     ['estoque_epi', 'operacao', 'hard-hat', P('Almoxarifado', 'Stockroom'), P('EPI, uniformes, ferramentas e descartáveis de cada unidade em um só lugar: saldo, estoque mínimo e reposição, entrega em lote por funcionário, listas configuráveis e funcionários sincronizados com o RH.', 'PPE, uniforms, tools and disposables for every branch in one place: balance, minimum stock and restocking, batch delivery per employee, configurable lists and employees synced with HR.'), T3(['Next.js / React', 'C# / .NET', 'SQL Server'])],
-    ['controle_veiculos', 'operacao', 'truck', P('Controle de veículos', 'Fleet control'), P('Reserva, aprovação, chave, retorno e manutenção da frota da empresa, com quilometragem registrada em cada viagem e alerta de revisão.', 'Booking, approval, key handover, return and maintenance of the company fleet, with the odometer logged on every trip and service alerts.'), T3(['Next.js', 'React', 'TypeScript'])],
+    ['controle_veiculos', 'operacao', 'truck', P('Controle de veículos', 'Fleet control'), P('Reserva, aprovação pelo grupo, entrega e devolução da chave, frota e manutenção, com a ilustração animada de cada carro gerada pela descrição.', 'Booking, group approval, key handover and return, fleet and maintenance, with an animated illustration of each car generated from its description.'), T3(['Next.js', 'React', 'TypeScript'])],
     ['carrossel_tv', 'operacao', 'tv', P('Carrossel TV', 'TV Carousel'), P('Comunicação interna nas TVs da empresa: biblioteca de mídias, uma grade por setor, a TV que se atualiza e se defende sozinha, player para PC e aplicativo Android.', 'Internal communication on the company TVs: a media library, one grid per department, a TV that updates and defends itself, a PC player and an Android app.'), T3(['React / Next.js', 'ASP.NET Core (.NET)', 'SQL Server'])],
     ['base_conhecimento', 'conhecimento', 'book-open', P('Base de conhecimento', 'Knowledge base'), P('A base de conhecimento da TI: pilares, páginas de arquitetura e runbooks em Markdown, anexos com formatos permitidos, rascunho e publicação, busca em todo o texto.', 'The IT knowledge base: pillars, architecture pages and runbooks in Markdown, attachments with allowed formats, drafts and publishing, full-text search.'), T3(['Next.js', 'React', 'TypeScript'])],
-  ].map(([id, grupo, icone, nome, resumo, tecs], i) => ({ id, grupo, icone, nome, resumo, tecs, ordem: i + 1, ...(VIDEOS.includes(id) && { video: 'assets/videos/' + id + '.mp4', poster: 'assets/videos/' + id + '.jpg' }) }));
+  ].map(([id, grupo, icone, nome, resumo, tecs, situacao], i) => ({ id, grupo, icone, nome, resumo, tecs, situacao: situacao || 'producao', ordem: i + 1, ...(VIDEOS.includes(id) && { video: 'assets/videos/' + id + '.mp4', poster: 'assets/videos/' + id + '.jpg' }) }));
 
   /* ---------- textos da casca ---------- */
   const TX = {
@@ -98,6 +100,7 @@
     contrasteAjuda: P('Preto e branco com cores acima de 7:1, foco de 3 px e nenhuma animação decorativa. Vale sobre o tema escolhido.', 'Black and white with colors above 7:1, a 3 px focus ring and no decorative motion. It applies over the chosen theme.'),
     contrasteNota: P('O alto contraste para acessibilidade está ligado e vale sobre o tema escolhido.', 'High contrast for accessibility is on and applies over the chosen theme.'),
     emProducao: P('Em produção', 'In production'),
+    emImplantacao: P('Em implantação', 'Rolling out'),
     idioma: P('Idioma', 'Language'),
     inicio: P('Painel inicial', 'Home dashboard'),
     painelInicial: P('Painel inicial', 'Home dashboard'),
@@ -152,7 +155,7 @@
     abrindoModulo: P('Abrindo o sistema', 'Opening the system'),
     naoEncontrado: P('Página não encontrada', 'Page not found'),
     naoEncontradoSis: P('Sistema não encontrado', 'System not found'),
-    naoEncontradoTexto: P('O endereço não corresponde a nenhum dos 15 sistemas nem a uma tela do hub.', 'This address does not match any of the 15 systems or a hub screen.'),
+    naoEncontradoTexto: P('O endereço não corresponde a nenhum dos 17 sistemas nem a uma tela do hub.', 'This address does not match any of the 17 systems or a hub screen.'),
     irInicio: P('Voltar ao painel', 'Back to the dashboard'),
     tentarDeNovo: P('Tentar de novo', 'Try again'),
     secoes: P('Seções', 'Sections'),
@@ -323,6 +326,7 @@
     job: 'M12 7.5V12l3 2M20.5 12a8.5 8.5 0 1 1-2.6-6.1M20.5 4v4.5H16',
   };
   const LUCIDE = {
+    ship: "<path d='M12 10.189V14'/><path d='M12 2v3'/><path d='M19 13V7a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v6'/><path d='M19.38 20A11.6 11.6 0 0 0 21 14l-8.188-3.639a2 2 0 0 0-1.624 0L3 14a11.6 11.6 0 0 0 2.81 7.76'/><path d='M2 21c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1s1.2 1 2.5 1c2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1'/>",
     'panel-left-close': "<rect width='18' height='18' x='3' y='3' rx='2'/><path d='M9 3v18'/><path d='m16 15-3-3 3-3'/>",
     'panel-left-open': "<rect width='18' height='18' x='3' y='3' rx='2'/><path d='M9 3v18'/><path d='m14 9 3 3-3 3'/>",
     'layout-dashboard': "<rect width='7' height='9' x='3' y='3' rx='1'/><rect width='7' height='5' x='14' y='3' rx='1'/><rect width='7' height='9' x='14' y='12' rx='1'/><rect width='7' height='5' x='3' y='16' rx='1'/>",
@@ -563,12 +567,12 @@
   }
   const temDemo = x => !!(x.def || (SOB_DEMANDA && x.catalogo && cargas.get(x.id) !== 'falhou'));
 
-  /* Menu, painel, busca e contagem mostram só o catálogo (os 15). Um módulo fora do catálogo (página de teste do kit)
+  /* Menu, painel, busca e contagem mostram só o catálogo (os 17). Um módulo fora do catálogo (página de teste do kit)
      abre só pelo endereço direto e nunca aparece para o visitante nem entra na contagem. */
   function itens() {
     return CATALOGO.map(c => {
       const def = modulos.get(c.id) || null;
-      return { id: c.id, grupo: c.grupo, nome: (def && def.nome) || c.nome, icone: c.icone, resumo: (def && def.resumo) || c.resumo, tecs: c.tecs, ordem: def && Number.isFinite(def.ordem) ? def.ordem : c.ordem, def, catalogo: true };
+      return { id: c.id, grupo: c.grupo, nome: (def && def.nome) || c.nome, icone: c.icone, resumo: (def && def.resumo) || c.resumo, tecs: c.tecs, situacao: c.situacao, ordem: def && Number.isFinite(def.ordem) ? def.ordem : c.ordem, def, catalogo: true };
     });
   }
   function itemForaDoCatalogo(id) {
@@ -2043,13 +2047,13 @@
     const linhasTerm = [
       ['$', 'projecthub iniciar --empresa "EMPRESA DEMO"', ''],
       ['>', P('conectando ao motor central ....... ', 'connecting to the core engine ..... '), 'ok'],
-      ['>', P('15 sistemas em 5 departamentos .... ', '15 systems in 5 departments ....... '), 'ok'],
+      ['>', P(CATALOGO.length + ' sistemas em 5 departamentos .... ', CATALOGO.length + ' systems in 5 departments ....... '), 'ok'],
       ['>', P('robô de notas fiscais ............. ', 'invoice robot ..................... '), P('em execução', 'running')],
       ['>', P('modo demonstração: dados fictícios', 'demo mode: fictitious data'), ''],
     ];
     const term = h('div', { class: 'ph-terminal', 'aria-hidden': 'true' });
     const pintarTerm = n => term.replaceChildren(...linhasTerm.slice(0, n).map(([pre, txt, ok], k) => h('pre', { class: cls(k === linhasTerm.length - 1 && 'is-aviso') }, h('span', { class: 'ph-term-pre' }, pre), h('code', null, txt, ok && h('span', { class: 'ph-term-ok' }, ok === 'ok' ? 'ok' : ok))), n >= linhasTerm.length && h('pre', null, h('span', { class: 'ph-term-pre' }, '$'), h('span', { class: 'ph-cursor' }))));
-    const nums = [[15, P('sistemas', 'systems')], [5, P('departamentos', 'departments')], [42, P('lançamentos hoje', 'postings today')]];
+    const nums = [[CATALOGO.length, P('sistemas', 'systems')], [5, P('departamentos', 'departments')], [42, P('lançamentos hoje', 'postings today')]];
     const el = h('div', { class: 'ph-login' },
       h('div', { class: 'ph-login-topo' },
         h('span', { class: 'ph-marca-txt' }, marca(false), h('span', null, 'ProjectHub')),
@@ -2143,7 +2147,7 @@
     const saud = hora < 12 ? P('Bom dia', 'Good morning') : hora < 18 ? P('Boa tarde', 'Good afternoon') : P('Boa noite', 'Good evening');
     const primeiroNome = p.id === 'visitante' ? t(P('visitante', 'visitor')) : String(t(p.nome)).split(' ')[0];
     const tiles = [
-      { cor: 'azul', ic: 'app-window', rot: P('Sistemas ativos', 'Active systems'), valor: lista.length, nota: P('em 5 departamentos', 'in 5 departments'), serie: [9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 14, 15, 15], leds: 1 },
+      { cor: 'azul', ic: 'app-window', rot: P('Sistemas ativos', 'Active systems'), valor: lista.length, nota: P('em 5 departamentos', 'in 5 departments'), serie: [9, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 17, 17], leds: 1 },
       { cor: 'verde', ic: 'zap', rot: P('Lançamentos hoje', 'Postings today'), valor: d.lancHoje, nota: P('8 a mais que ontem', '8 more than yesterday'), serie: [18, 26, 22, 31, 28, 35, 30, 38, 29, 34, 36, 33, 34, 42], id: 'lanc', leds: 2 },
       { cor: 'ambar', ic: 'hourglass', rot: P('Pendências', 'Pending items'), valor: 7, nota: P('2 notas bloqueadas na fila', '2 invoices blocked in the queue'), serie: [12, 10, 11, 9, 9, 8, 10, 9, 8, 7, 8, 6, 8, 7], leds: 1 },
       { cor: 'vermelho', ic: 'triangle-alert', rot: P('Alertas', 'Alerts'), valor: 2, nota: P('1 de verba, 1 de estoque', '1 budget, 1 stock'), serie: [1, 0, 2, 1, 1, 3, 2, 1, 2, 2, 1, 3, 2, 2], leds: 3 },
@@ -2218,6 +2222,7 @@
           x.resumo && h('p', { class: 'ph-sis-resumo' }, x.resumo)),
         h('div', { class: 'ph-sis-rodape' },
           temDemo(x) ? badge(TX.demoDisponivel, 'ok') : badge(TX.emPreparacao, 'neutro'),
+          x.situacao === 'implantacao' && badge(TX.emImplantacao, 'alerta'),
           h('span', { class: 'ph-sis-acoes' },
             temDemo(x) && h('a', { class: 'ph-sis-manual', href: '#/' + x.id + '/manual', 'aria-label': tx('manualDe', t(x.nome)) }, TX.manual),
             h('span', { class: 'ph-sis-ir', 'aria-hidden': 'true' }, icone('arrow-right')))));
@@ -2310,7 +2315,7 @@
             h('p', { class: 'ph-kicker ph-sysbar-dep' }, h('i', { 'aria-hidden': 'true' }), nomeGrupo(item.grupo)),
             h('h1', { class: 'ph-h2 ph-sysbar-titulo', id: 'ph-sys-titulo', tabindex: '-1', 'data-foco': '' }, h('span', { class: 'ph-fita' }, item.nome, sub === 'manual' && [' · ', t(TX.manual)]))),
           h('div', { class: 'ph-sysbar-estado' },
-            h('span', { class: 'ph-status' }, h('span', { class: 'ph-status-led', 'aria-hidden': 'true' }), TX.emProducao),
+            h('span', { class: cls('ph-status', item.situacao === 'implantacao' && 'is-implantacao') }, h('span', { class: 'ph-status-led', 'aria-hidden': 'true' }), item.situacao === 'implantacao' ? TX.emImplantacao : TX.emProducao),
             badge(TX.dadosCurto, 'info')),
           h('span', { class: 'ph-chip-ouro', 'aria-hidden': 'true' }),
           h('div', { class: 'ph-sysbar-acoes' },
@@ -2798,11 +2803,11 @@
         { capitulo: C.entrada, rota: '#/entrar', alvo: '.ph-login-temas', titulo: TX.tourNome,
           texto: P('Bem-vindo. Eu levo você pela mão, na interface de verdade. Primeiro, como o hub se veste: Plaqueta, Rack ou Crachá. A escolha vale na hora.', 'Welcome. I will walk you through the real interface. First, how the hub dresses up: Asset tag, Rack or Badge. The choice applies at once.') },
         { capitulo: C.entrada, rota: '#/entrar', antes: 'escolher-visitante', alvo: '[data-acao="entrar-visitante"]', acao: 'clicar', titulo: P('Entre como visitante', 'Enter as a visitor'),
-          texto: P('Sem senha e sem cadastro. Cada perfil vê o hub de um jeito; o visitante navega pelo painel e pelos 15 sistemas.', 'No password and no sign-up. Each profile sees the hub its own way; the visitor browses the dashboard and the 15 systems.') },
+          texto: P('Sem senha e sem cadastro. Cada perfil vê o hub de um jeito; o visitante navega pelo painel e pelos 17 sistemas.', 'No password and no sign-up. Each profile sees the hub its own way; the visitor browses the dashboard and the 17 systems.') },
         { capitulo: C.painel, rota: '#/', alvo: () => (depoisDe(2600) ? '.ph-feed' : '.ph-tiles'), titulo: P('O painel do dia', 'Today\'s dashboard'),
           texto: P('Primeiro os indicadores, uma cor cada. Depois a atividade em tempo real: robôs e pessoas registrando o que fazem, uma linha nova a cada poucos segundos.', 'First the indicators, one color each. Then live activity: robots and people logging what they do, a new line every few seconds.') },
         { capitulo: C.sistema, rota: '#/', antes: 'abrir-menu', alvo: '#ph-nav a[href="#/nf_autonoma"]', acao: 'clicar', titulo: P('Abra um sistema pelo menu', 'Open a system from the menu'),
-          texto: P('Os 15 sistemas ficam no menu, por departamento. Vamos ao robô que lança no ERP as notas fiscais de entrada.', 'The 15 systems live in the menu, by department. Let us visit the robot that posts inbound invoices to the ERP.') },
+          texto: P('Os 17 sistemas ficam no menu, por departamento. Vamos ao robô que lança no ERP as notas fiscais de entrada.', 'The 17 systems live in the menu, by department. Let us visit the robot that posts inbound invoices to the ERP.') },
         { capitulo: C.sistema, rota: '#/nf_autonoma', alvo: () => (largo() && !depoisDe(2600) ? '#ph-lateral' : '.ph-sysbar'), titulo: P('O menu recolhe, o sistema ganha espaço', 'The menu folds, the system gets room'),
           texto: P('Dentro de um sistema o menu vira um trilho de ícones e a moldura mostra departamento e situação.', 'Inside a system the menu becomes an icon rail and the frame shows department and status.') },
         { capitulo: C.sistema, rota: '#/nf_autonoma', antes: telaDaFila, alvo: '.nfa-real button.n-robo.ph-btn--ok', acao: 'clicar', titulo: P('A fila viva e um gesto', 'The live queue and one gesture'),

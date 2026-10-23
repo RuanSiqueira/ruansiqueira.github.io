@@ -130,6 +130,7 @@
           'Resultado medido: 97% a 98% de acerto no frete, nos casos em que o sistema decide.',
           'Cada número compara a decisão do sistema com o lançamento feito por uma pessoa.',
           'Primeiro lançamento em produção 38 dias depois do início do projeto.',
+          'Conferência pós-lançamento: auditoria permanente, só de leitura, que compara cada nota lançada pelo robô com a ordem de compra como foi aprovada.',
         ],
         tecnologias: ['C# / .NET', 'SQL Server', 'API de IA generativa', 'Next.js / React', 'XML de NF-e e CT-e'],
       },
@@ -143,6 +144,7 @@
           'Measured result: 97% to 98% accuracy on freight, in the cases where the system decides.',
           'Each figure compares the system decision with the posting made by a person.',
           'First posting in production 38 days after the project started.',
+          'Post-posting check: a permanent, read-only audit that compares every invoice the robot posted with the purchase order as it was approved.',
         ],
         tecnologias: ['C# / .NET', 'SQL Server', 'Generative AI API', 'Next.js / React', 'NF-e and CT-e XML'],
       },
@@ -162,8 +164,8 @@
         texto: P('Com o modo automático ligado, o robô lança sozinho tudo o que passar limpo. Quem ligou ou desligou fica registrado, com dia e hora.',
           'With automatic mode on, the robot posts on its own everything that passes clean. Whoever turned it on or off is recorded, with date and time.') },
       { alvo: '.nfa-real [data-f="aba-motor"]', acao: 'clicar', titulo: P('Regras, IA e custo', 'Rules, AI and cost'),
-        texto: P('O motor de regras da casa, o custo da IA, o assistente e os avisos por e-mail moram nas outras áreas.',
-          'The house rules engine, the AI cost, the assistant and the email notices live in the other areas.') },
+        texto: P('O motor de regras da casa, o custo da IA, o assistente, os avisos por e-mail e a conferência pós-lançamento, que audita o que o robô gravou, moram nas outras áreas.',
+          'The house rules engine, the AI cost, the assistant, the email notices and the post-posting check, which audits what the robot wrote, live in the other areas.') },
       { alvo: '.nfa-real .ph-fora', titulo: P('O resto está na versão completa', 'The rest is in the full version'),
         texto: P('No vídeo, o sistema completo em ação. Quer ver tudo funcionando de verdade? É só me chamar por aqui.',
           'The video shows the full system in action. Want to see it all running for real? Just reach me from here.') },
@@ -280,6 +282,7 @@
     { id: 'cerebro', rot: P('Cérebro & custo', 'Brain & cost'), ic: 'sparkles' },
     { id: 'chat', rot: P('Assistente', 'Assistant'), ic: 'chat' },
     { id: 'emails', rot: P('E-mails', 'Emails'), ic: 'mail' },
+    { id: 'conf', rot: P('Conferência pós-lançamento', 'Post-posting check'), ic: 'check' },
   ];
   function montar(el) {
     injetarCss();

@@ -1,6 +1,7 @@
-/* Pesquisa de clima e RH · versão pública curta do módulo do ProjectHub de demonstração (id pesquisa_clima).
-   Só a lista de Pesquisas navega (indicadores do setor, filtro, link de convite, ativar, encerrar, duplicar e excluir);
-   as outras cinco áreas aparecem na navegação e abrem o cartão "fora da demonstração". Visual do kit do hub; o bloco
+/* Pesquisa de clima · versão pública curta do módulo do ProjectHub de demonstração (id pesquisa_clima).
+   Só a lista de Pesquisas navega (indicadores do setor, filtro, link de convite, ativar, encerrar, duplicar e excluir), com a
+   pesquisa identificada do Marketing (link próprio por contato); as outras quatro áreas aparecem na navegação e abrem o
+   cartão "fora da demonstração". As entrevistas do RH moram no sistema Gestão de Pessoas. Visual do kit do hub; o bloco
    de estilo #pcl-real-css só usa tokens --ph-*. Dados fictícios e prontos, nenhuma chamada de rede. */
 (() => {
   'use strict';
@@ -32,7 +33,7 @@
   };
   const ABAS = [
     ['pesquisas', P('Pesquisas', 'Surveys'), 'clipboard'], ['resultados', P('Resultados', 'Results'), 'bar'], ['apresentacao', P('Apresentação', 'Presentation'), 'monitor'],
-    ['destinatarios', P('Destinatários', 'Recipients'), 'users'], ['rh', P('RH', 'HR'), 'briefcase'], ['configuracoes', P('Configurações', 'Settings'), 'settings'],
+    ['destinatarios', P('Destinatários', 'Recipients'), 'users'], ['configuracoes', P('Configurações', 'Settings'), 'settings'],
   ];
   const SETORES = [[1, P('RH', 'HR')], [2, 'Marketing']];
   const ST = { rascunho: ['neutro', P('Rascunho', 'Draft')], ativa: ['ok', P('Ativa', 'Active')], encerrada: ['info', P('Encerrada', 'Closed')] };
@@ -46,12 +47,13 @@
     const anual = P('Edição anual. Leva cerca de 8 minutos e as respostas são anônimas.', 'Annual edition. It takes about 8 minutes and answers are anonymous.');
     const d = { seq: 10, pesquisas: [] };
     const pq = (setorId, titulo, link, status, ini, fim, perg, dest, resp, o = {}) =>
-      d.pesquisas.push({ id: ++d.seq, setorId, titulo, link, status, ini: api.data(ini, '08:00'), fim: api.data(fim, '18:00'), perg, dest, resp, template: o.tpl ? tpl : null, descricao: o.desc || null });
+      d.pesquisas.push({ id: ++d.seq, setorId, titulo, link, status, ini: api.data(ini, '08:00'), fim: api.data(fim, '18:00'), perg, dest, resp, template: o.tpl ? tpl : null, descricao: o.desc || null, identificada: !!o.ident });
     pq(1, P('Pesquisa de Clima ' + (ano - 1), 'Climate Survey ' + (ano - 1)), 'pesquisa-de-clima-' + (ano - 1), 'encerrada', -392, -364, 26, 268, 186, { tpl: 1, desc: anual });
     pq(1, P('Pesquisa de Clima ' + ano, 'Climate Survey ' + ano), 'pesquisa-de-clima-' + ano, 'ativa', -19, 11, 27, 324, 231, { tpl: 1, desc: anual });
     pq(1, P('Pulso de integração', 'Onboarding pulse'), 'pulso-de-integracao', 'rascunho', 14, 28, 6, 0, 0);
     pq(2, P('Satisfação com o evento de lançamento', 'Launch event satisfaction'), 'satisfacao-com-o-evento-de-lancamento', 'encerrada', -58, -44, 8, 82, 64, { tpl: 1 });
     pq(2, P('Percepção da marca interna', 'Internal brand perception'), 'percepcao-da-marca-interna', 'rascunho', 20, 40, 2, 0, 0);
+    pq(2, P('Satisfação de clientes ' + ano, 'Customer satisfaction ' + ano), 'satisfacao-de-clientes-' + ano, 'ativa', -9, 21, 5, 24, 15, { tpl: 1, ident: 1, desc: P('Pesquisa identificada: cada cliente recebe o próprio link.', 'Identified survey: each customer gets their own link.') });
     return d;
   }
 
@@ -89,34 +91,34 @@
 
   const MANUAL = {
     pt: {
-      destaque: 'Pesquisas internas do começo ao fim no mesmo lugar: o setor monta o questionário, distribui pela plataforma de WhatsApp ou por um link público, lê o relatório pronto e apresenta à diretoria sem sair do portal. Ao lado, uma área própria do RH para as entrevistas de desligamento, assinadas na tela.',
-      oque: 'É um módulo do hub com duas metades. A primeira é anônima: pesquisas respondidas por um link, que viram relatório e apresentação. A segunda é identificada: entrevistas do RH registradas por pessoa, com assinatura na tela e trilha de auditoria.'
-        + '\n\nSão seis áreas: Pesquisas, Resultados, Apresentação, Destinatários, RH e Configurações. Nesta demonstração pública a lista de Pesquisas é a tela navegável: indicadores do setor, filtro, link de convite e as ações de ativar, encerrar, duplicar e excluir, sobre dados fictícios.',
-      finalidade: 'Antes, a pesquisa de clima vivia em formulário externo e planilha, o resultado era difícil de ler, a apresentação para a diretoria era montada à mão e a entrevista de desligamento ficava em papel, digitada depois numa planilha que não virava indicador.'
-        + '\n\nHoje a empresa mede com a mesma régua a cada edição, enxerga a evolução, leva o resultado pronto para a reunião e mantém as entrevistas do RH como registro pesquisável, cruzado com a folha de pagamento do ERP.'
-        + '\n\nProjetado e construído por Ruan Siqueira. O conteúdo das perguntas e o modelo da entrevista vieram da área de RH.',
+      destaque: 'Pesquisas internas do começo ao fim no mesmo lugar: o setor monta o questionário, distribui pela plataforma de WhatsApp ou por um link público, lê o relatório pronto e apresenta à diretoria sem sair do portal. Para clientes, a pesquisa identificada dá a cada contato um link próprio.',
+      oque: 'É um módulo do hub para pesquisas por setor. A pesquisa de clima é anônima: respondida por um link, vira relatório e apresentação. A pesquisa identificada, para clientes, liga cada resposta ao contato que a recebeu, com CNPJ na lista e NPS de 0 a 10; quem respondeu o quê nunca vai para o link público nem para a IA, e no setor RH tudo segue anônimo.'
+        + '\n\nSão cinco áreas: Pesquisas, Resultados, Apresentação, Destinatários e Configurações. As entrevistas de desligamento e o acompanhamento de 30 e 90 dias moram no sistema Gestão de Pessoas. Nesta demonstração pública a lista de Pesquisas é a tela navegável: indicadores do setor, filtro, link de convite e as ações de ativar, encerrar, duplicar e excluir, sobre dados fictícios.',
+      finalidade: 'Antes, a pesquisa de clima vivia em formulário externo e planilha, o resultado era difícil de ler e a apresentação para a diretoria era montada à mão. Pesquisa com cliente não dizia quem tinha respondido.'
+        + '\n\nHoje a empresa mede com a mesma régua a cada edição, enxerga a evolução e leva o resultado pronto para a reunião; com clientes, sabe quem respondeu o quê sem expor isso fora do setor.'
+        + '\n\nProjetado e construído por Ruan Siqueira. O conteúdo das perguntas veio das áreas que usam o módulo.',
       alcance: [
-        'Pesquisas por setor, com questionário em sessões: escala, matriz, múltipla escolha e texto livre.',
+        'Pesquisas por setor, com questionário em sessões: escala (1 a 5, 1 a 10 ou 0 a 10), matriz, múltipla escolha e texto livre.',
         'Convite pela plataforma de WhatsApp ou por link público, com respostas anônimas.',
-        'Relatório com favorabilidade, eNPS, comparação entre edições e análise com IA.',
-        'Apresentação em slides a partir do resultado, com link público somente de leitura.',
-        'Área do RH com entrevistas de desligamento assinadas na tela e painel de indicadores. Tamanho: 57 rotas de API nas pesquisas e 20 no RH.',
+        'Pesquisa identificada para clientes: link próprio por contato, CNPJ na lista e NPS de 0 a 10, sem nada disso no link público nem na IA.',
+        'Relatório com favorabilidade, eNPS ou NPS, comparação entre edições e análise com IA.',
+        'Apresentação em slides a partir do resultado, com link público somente de leitura. Tamanho: 57 rotas de API nas pesquisas.',
       ],
       tecnologias: ['Next.js', 'React', 'TypeScript', 'ASP.NET Core', 'SQL Server', 'ECharts', 'IA generativa', 'API de WhatsApp'],
     },
     en: {
-      destaque: 'Internal surveys from start to finish in one place: the sector builds the questionnaire, distributes it through the WhatsApp platform or a public link, reads the finished report and presents it to the board without leaving the portal. Next to it, a dedicated HR area for exit interviews, signed on screen.',
-      oque: 'It is a hub module with two halves. The first is anonymous: surveys answered through a link, which become a report and a presentation. The second is identified: HR interviews recorded per person, with an on-screen signature and an audit trail.'
-        + '\n\nThere are six areas: Surveys, Results, Presentation, Recipients, HR and Settings. In this public demo the Surveys list is the screen you can use: sector indicators, filter, invitation link and the activate, close, duplicate and delete actions, on fictitious data.',
-      finalidade: 'Before, the climate survey lived in an external form and a spreadsheet, the result was hard to read, the board presentation was assembled by hand and the exit interview stayed on paper, typed later into a spreadsheet that never became an indicator.'
-        + '\n\nNow the company measures with the same ruler every edition, sees the trend, takes a finished result to the meeting and keeps HR interviews as a searchable record, cross-checked against the ERP payroll.'
-        + '\n\nDesigned and built by Ruan Siqueira. The question content and the interview template came from the HR team.',
+      destaque: 'Internal surveys from start to finish in one place: the sector builds the questionnaire, distributes it through the WhatsApp platform or a public link, reads the finished report and presents it to the board without leaving the portal. For customers, the identified survey gives each contact their own link.',
+      oque: 'It is a hub module for surveys per sector. The climate survey is anonymous: answered through a link, it becomes a report and a presentation. The identified survey, for customers, links each answer to the contact who received it, with the tax ID on the list and a 0 to 10 NPS; who answered what never goes to the public link or the AI, and in the HR sector everything stays anonymous.'
+        + '\n\nThere are five areas: Surveys, Results, Presentation, Recipients and Settings. Exit interviews and the 30 and 90-day follow-up live in the People management system. In this public demo the Surveys list is the screen you can use: sector indicators, filter, invitation link and the activate, close, duplicate and delete actions, on fictitious data.',
+      finalidade: 'Before, the climate survey lived in an external form and a spreadsheet, the result was hard to read and the board presentation was assembled by hand. Customer surveys did not tell who had answered.'
+        + '\n\nNow the company measures with the same ruler every edition, sees the trend and takes a finished result to the meeting; with customers, it knows who answered what without exposing that outside the sector.'
+        + '\n\nDesigned and built by Ruan Siqueira. The question content came from the teams that use the module.',
       alcance: [
-        'Surveys per sector, with a questionnaire in sections: scale, matrix, multiple choice and open text.',
+        'Surveys per sector, with a questionnaire in sections: scale (1 to 5, 1 to 10 or 0 to 10), matrix, multiple choice and open text.',
         'Invitation through the WhatsApp platform or a public link, with anonymous answers.',
-        'Report with favorability, eNPS, comparison between editions and AI analysis.',
-        'Slide presentation built from the result, with a read-only public link.',
-        'HR area with exit interviews signed on screen and an indicator dashboard. Size: 57 API routes for surveys and 20 for HR.',
+        'Identified survey for customers: own link per contact, tax ID on the list and a 0 to 10 NPS, none of it on the public link or in the AI.',
+        'Report with favorability, eNPS or NPS, comparison between editions and AI analysis.',
+        'Slide presentation built from the result, with a read-only public link. Size: 57 API routes for surveys.',
       ],
       tecnologias: ['Next.js', 'React', 'TypeScript', 'ASP.NET Core', 'SQL Server', 'ECharts', 'Generative AI', 'WhatsApp API'],
     },
@@ -125,28 +127,28 @@
   Hub.registrar({
     id: 'pesquisa_clima',
     icone: 'pessoas',
-    nome: P('Pesquisa de clima e RH', 'Climate survey and HR'),
-    resumo: P('Pesquisas internas por setor, respondidas de forma anônima por link, com relatório, comparativo, análise por IA e apresentação em slides. Ao lado, a área do RH com entrevistas de desligamento assinadas na tela.',
-      'Internal surveys per sector, answered anonymously through a link, with a report, comparison, AI analysis and slide presentation. Next to it, the HR area with exit interviews signed on screen.'),
+    nome: P('Pesquisa de clima', 'Climate survey'),
+    resumo: P('Pesquisas por setor do começo ao fim: questionário em sessões, convite por WhatsApp ou link, relatório com favorabilidade e eNPS, comparativo, análise por IA e apresentação em slides. Para clientes, a pesquisa identificada com link próprio por contato e NPS de 0 a 10.',
+      'Surveys per sector from start to finish: questionnaire in sections, invitation through WhatsApp or a link, report with favorability and eNPS, comparison, AI analysis and slide presentation. For customers, the identified survey with an own link per contact and a 0 to 10 NPS.'),
     manual: MANUAL,
-    /* mini tour: só ganchos do módulo (data-f, .kpis3, article.pq), nada que dependa do idioma */
+    /* mini tour: só ganchos do módulo (data-f, .kpis3, .p-setor), nada que dependa do idioma */
     tour: [
       { alvo: '.pcl-real [data-f="aba-pesquisas"]', acao: 'clicar', titulo: P('Pesquisas do começo ao fim', 'Surveys from start to finish'),
-        texto: P('O setor monta o questionário, convida a equipe e lê o resultado pronto, tudo no hub. Cada setor cuida das suas pesquisas.',
-          'The sector builds the questionnaire, invites the team and reads the finished result, all in the hub. Each sector looks after its own surveys.') },
+        texto: P('O setor monta o questionário, convida e lê o resultado pronto, tudo no hub. Cada setor cuida das suas pesquisas.',
+          'The sector builds the questionnaire, invites people and reads the finished result, all in the hub. Each sector looks after its own surveys.') },
       { alvo: '.pcl-real .kpis3', titulo: P('O setor num olhar', 'The sector at a glance'),
         texto: P('Quantas pesquisas existem, quantas estão no ar agora e quantas respostas já chegaram.',
           'How many surveys there are, how many are live right now and how many answers have come in.') },
-      { alvo: '.pcl-real article.pq', titulo: P('Cada pesquisa no seu cartão', 'Each survey on its own card'),
-        texto: P('Perguntas, destinatários, respostas e período à vista. Resultados, edição e uma cópia para a próxima edição ficam a um clique.',
-          'Questions, recipients, answers and dates in plain sight. Results, editing and a copy for the next edition are one click away.') },
       /* fechar-dialogos: uma janela aberta por um clique no cartão (Editar, Duplicar, Excluir) não fica por cima do holofote */
       { alvo: '.pcl-real [data-f="links"]', antes: 'fechar-dialogos', acao: 'clicar', titulo: P('Um link para todos', 'One link for everyone'),
         texto: P('Com a pesquisa no ar, o mesmo link vai pelo WhatsApp, por e-mail ou num QR. As respostas são anônimas.',
           'Once the survey is live, the same link goes out on WhatsApp, by email or as a QR code. Answers are anonymous.') },
+      { alvo: '.pcl-real .p-setor', titulo: P('E a pesquisa identificada, fora do RH', 'And the identified survey, outside HR'),
+        texto: P('No Marketing, a pesquisa com clientes dá a cada contato um link próprio, com CNPJ e NPS de 0 a 10. Quem respondeu o quê nunca vai para o link público nem para a IA.',
+          'In Marketing, the customer survey gives each contact their own link, with tax ID and a 0 to 10 NPS. Who answered what never goes to the public link or the AI.') },
       { alvo: '.pcl-real [data-f="aba-resultados"]', antes: 'fechar-dialogos', acao: 'clicar', titulo: P('Resultado pronto para a reunião', 'Results ready for the meeting'),
-        texto: P('Favorabilidade, eNPS e a comparação entre edições saem prontos, e a Apresentação vira slides para a diretoria. O RH ainda tem a sua área para as entrevistas de desligamento.',
-          'Favorability, eNPS and the comparison between editions come out ready, and the Presentation turns into slides for the board. HR also has its own area for exit interviews.') },
+        texto: P('Favorabilidade, eNPS e a comparação entre edições saem prontos, e a Apresentação vira slides para a diretoria.',
+          'Favorability, eNPS and the comparison between editions come out ready, and the Presentation turns into slides for the board.') },
       { alvo: '.pcl-real .ph-fora', antes: 'fechar-dialogos', titulo: P('Veja o sistema completo em ação', 'See the full system in action'),
         texto: P('Esta tela fica na versão completa. O vídeo mostra o sistema inteiro funcionando. Quer ver ao vivo? É só me chamar por aqui.',
           'This screen is in the full version. The video shows the whole system running. Want to see it live? Just reach me from here.') },
@@ -210,16 +212,17 @@
         return h('div', { class: 'lk' }, ic('link', 18), h('div', { class: 'f1' },
           h('p', { class: 'lk-t' }, P('Link de convite', 'Invitation link')),
           h('p', { class: 'lk-u' }, LINK + p.link),
-          h('p', { class: 'lk-d' }, P('O mesmo link para todos: WhatsApp, e-mail ou QR. Respostas anônimas.', 'The same link for everyone: WhatsApp, email or QR. Anonymous answers.')),
+          h('p', { class: 'lk-d' }, p.identificada ? P('Pesquisa identificada: cada contato recebe o próprio link. Este link geral continua aceitando respostas, que entram como "Sem identificação".', 'Identified survey: each contact gets their own link. This general link still takes answers, which come in as "Not identified".')
+            : P('O mesmo link para todos: WhatsApp, e-mail ou QR. Respostas anônimas.', 'The same link for everyone: WhatsApp, email or QR. Anonymous answers.')),
           h('div', { class: 'row' }, btn(P('Copiar link', 'Copy link'), () => copiar(LINK + p.link), { ic: 'copy' }))));
       }
       function cartao(p) {
         const cont = (n, rot) => h('span', null, h('b', null, fmt.num(n)), ' ', rot);
         const [tom, rot] = ST[p.status];
-        return h('article', { class: 'pq ph-lista-item' },
+        return h('article', { class: 'pq ph-lista-item' + (p.identificada ? ' pq-id' : '') },
           h('div', { class: 'pq-top' },
             h('div', { class: 'f1' },
-              h('div', { class: 'pq-tit' }, h('p', { class: 'el', title: t(p.titulo) }, p.titulo), ui.badge(rot, tom)),
+              h('div', { class: 'pq-tit' }, h('p', { class: 'el', title: t(p.titulo) }, p.titulo), ui.badge(rot, tom), p.identificada && ui.badge(P('Identificada', 'Identified'), 'info')),
               p.descricao && h('p', { class: 'pq-ds el', title: t(p.descricao) }, p.descricao),
               h('div', { class: 'pq-meta' },
                 cont(p.perg, P('perguntas', 'questions')), cont(p.dest, P('destinatários', 'recipients')), cont(p.resp, P('respostas', 'answers')),
@@ -266,9 +269,9 @@
       /* ---------- casca: setor, caminho e as seis áreas; só Pesquisas navega ---------- */
       function pintar() {
         const setor = SETORES.find(s => s[0] === E.setorId);
-        const abas = ABAS.filter(a => a[0] !== 'rh' || E.setorId === 1);
+        const abas = ABAS;
         const chips = ui.chips({ rotulo: P('Setor', 'Sector'), valor: E.setorId, opcoes: SETORES.map(([valor, texto]) => ({ valor, texto })),
-          aoMudar: v => { E.setorId = v; E.linkAberto = null; if (E.aba === 'rh') E.aba = 'pesquisas'; pintar(); } });
+          aoMudar: v => { E.setorId = v; E.linkAberto = null; pintar(); } });
         nav = ui.abas({ chave: 'aba', rotulo: P('Seções da pesquisa', 'Survey sections'),
           abas: abas.map(([id, rotulo, icn]) => ({ id, rotulo, icone: IC[icn], montar: pn => (id === 'pesquisas' ? telaPesquisas(pn) : pn.append(fora(rotulo))) })) });
         nav.querySelectorAll('[role="tab"]').forEach((b, i) => b.setAttribute('data-f', 'aba-' + abas[i][0]));

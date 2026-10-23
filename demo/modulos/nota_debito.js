@@ -16,7 +16,7 @@
   const CLI = {
     'C-1001': ['Metalúrgica Exemplo Ltda', 'PR'], 'C-1008': ['Comercial Modelo Ltda', 'SC'], 'C-1015': ['Agropecuária Demo Ltda', 'PR'],
     'C-1022': ['Construtora Amostra Ltda', 'SP'], 'C-1029': ['Transportes Fictícia Ltda', 'PR'], 'C-1036': ['Usinagem Exemplo Ltda', 'RS'],
-    'C-1043': ['Ferragens Modelo Ltda', 'MG'], 'C-1050': ['Distribuidora Demo Ltda', 'PR'], 'C-1057': ['Indústria Amostra Ltda', 'SC'],
+    'C-1043': ['Ferragens Modelo Ltda', 'MG'], 'C-1057': ['Indústria Amostra Ltda', 'SC'],
     'C-1064': ['Cooperativa Fictícia Ltda', 'PR'],
   };
   const UNID = { '001': P('Matriz', 'Head office'), '002': P('Filial', 'Branch') };
@@ -28,24 +28,26 @@
     'PA-5001': [P('Rolamento blindado', 'Sealed bearing'), '8482.10.10', 'PC'], 'PA-5120': [P('Correia dentada', 'Timing belt'), '4010.35.00', 'PC'],
     'PA-6033': [P('Protetor de eixo cardã', 'Driveshaft guard'), '3926.90.90', 'PC'], 'PA-7006': [P('Disco de arado 26 pol.', 'Plough disc 26 in'), '8432.90.00', 'PC'],
   };
-  /* pedidos na fila: [número, cliente, unidade, dias atrás, situação, itens [material, qtd, preço, valor na nota], adiantamento, nota [número, série]] */
+  /* pedidos na fila: [número, cliente, unidade, dias atrás, situação, itens [material, qtd, preço, valor na nota], adiantamento, nota [número, série], pagamento]
+     pagamento: pedidos com o mesmo código dividem UM pagamento do cliente, repartido na proporção de cada pedido (o adiantamento é a parte de cada um).
+     naobate: o pagamento não bate com o pedido nem com a soma dos pedidos do cliente; a nota não é criada. */
   const PEDIDOS = [
     ['715312', 'C-1001', '001', 0, 'apto', [['PA-1010', 4, 428.5, 1791.04], ['PA-2003', 20, 64.9, 1356.34], ['PA-5001', 6, 52.75, 330.72]], 3478.1, [61242, 'U01']],
     ['715309', 'C-1008', '002', 1, 'parcial', [['PA-1024', 3, 912, 1368], ['PA-4215', 10, 89.6, 448]], 1816, [20416, 'U02']],
     ['715307', 'C-1015', '001', 1, 'sem', [['PA-7006', 5, 318, 0], ['PA-3102', 4, 157.3, 0]], 0, null],
-    ['715305', 'C-1022', '001', 2, 'simulado', [['PA-4008', 2, 1340, 2729.3], ['PA-5120', 10, 74.2, 755.65], ['PA-2117', 30, 18.4, 562.15]], 4047.1, [61243, 'U01']],
-    ['715303', 'C-1029', '002', 2, 'conferir', [['PA-6033', 2, 119.9, 2365.46], ['PA-2117', 10, 18.4, 1815.04]], 4180.5, [20417, 'U02']],
+    ['715305', 'C-1022', '001', 2, 'apto', [['PA-4008', 2, 1340, 2787.2], ['PA-5120', 10, 74.2, 771.68], ['PA-2117', 30, 18.4, 574.08]], 4132.96, [61243, 'U01'], 'pg1'],
+    ['715303', 'C-1029', '002', 2, 'naobate', [['PA-6033', 2, 119.9, 0], ['PA-2117', 10, 18.4, 0]], 4180.5, null],
     ['715301', 'C-1036', '001', 3, 'criada', [['PA-3050', 3, 236, 743.4], ['PA-5001', 8, 52.75, 443.1]], 1186.5, [61241, 'U01']],
     ['715298', 'C-1043', '001', 4, 'emitida', [['PA-1010', 2, 428.5, 886.42], ['PA-4215', 5, 89.6, 463.38]], 1349.8, [61238, 'U01']],
-    ['715296', 'C-1050', '002', 6, 'apto', [['PA-1024', 1, 912, 950.81], ['PA-3102', 6, 157.3, 983.97], ['PA-2003', 10, 64.9, 676.62]], 2611.4, [20418, 'U02']],
+    ['715296', 'C-1022', '002', 6, 'apto', [['PA-1024', 1, 912, 948.48], ['PA-3102', 6, 157.3, 981.55], ['PA-2003', 10, 64.9, 674.96]], 2604.99, [20418, 'U02'], 'pg1'],
   ];
   const SEM_PEDIDO = [['C-1057', 30, 950], ['C-1064', 64, 12600]];
 
   function semear(api) {
     db = {
-      pedidos: PEDIDOS.map(([num, cli, un, dias, sit, itens, adiant, nf], k) => ({
-        num, cli, un, itens, adiant, pronta: nf, dt: api.data(-dias, (9 + k) + ':' + (15 + k * 4)),
-        sit: sit === 'simulado' ? 'apto' : sit, simulada: sit === 'simulado',
+      pedidos: PEDIDOS.map(([num, cli, un, dias, sit, itens, adiant, nf, pag], k) => ({
+        num, cli, un, itens, adiant, pronta: nf, pag, dt: api.data(-dias, (9 + k) + ':' + (15 + k * 4)),
+        sit, simulada: false,
         nota: sit === 'criada' || sit === 'emitida' ? { nf: nf[0], serie: nf[1], emissao: api.data(-dias, '16:20') } : null,
       })),
       semPedido: SEM_PEDIDO.map(([cli, dias, valor]) => ({ cli, valor, data: api.data(-dias, '15:30') })),
@@ -64,9 +66,10 @@
       pt: {
         destaque: 'O módulo cria e emite a Nota de Débito a partir do pedido, vincula a nota ao pedido e garante que a venda cite a nota, como a Reforma Tributária pede. Antes, o ERP não fazia nada disso e cada nota era digitada à mão. Em 9 dias entreguei a automação, e desde agosto de 2026 a empresa emite e vincula sem digitação, logo no início da exigência.',
         oque: 'O que é. Um módulo do ProjectHub, a camada inteligente sobre o ERP, que cuida da Nota de Débito de pagamento antecipado do começo ao fim. Quando o cliente paga antes de receber a mercadoria, a Reforma Tributária pede uma nota de débito com os mesmos itens da venda futura, e depois a nota de venda precisa citar essa nota dentro do arquivo enviado à SEFAZ.\n\nO problema. O processo era manual e passava por uma pessoa: ler o relatório de adiantamentos, abrir o pedido, digitar a nota item a item, dividir o valor na calculadora e avisar a Expedição para que a venda citasse a nota. O ponto mais frágil era invisível: nenhuma tela mostrava quando a referência faltava.\n\nO que faz. Cria a nota de débito a partir do pedido pago antecipadamente, divide o valor entre os itens ao centavo, envia à SEFAZ e garante que a venda cite a nota dentro do XML.\n\nNesta demonstração pública, a tela de Emissão funciona com dados fictícios; as outras áreas aparecem no vídeo da versão completa.',
-        finalidade: 'Tirar da área Fiscal a digitação e a coordenação por fora, e tornar visível o vínculo que antes só existia dentro do XML. As pessoas continuam com o que exige decisão: marcar o pedido, lançar o adiantamento, tratar exceções e ligar ou desligar a automação.\n\nSegurança. O módulo nasceu em modo sombra, passou por base de teste e tem um interruptor geral. O pedido só avança com a autorização da SEFAZ, e valor fora do padrão passa por conferência humana.\n\nResultados. 9 dias do pedido da área Fiscal até a primeira nota autorizada pela SEFAZ. A tela de conferência passou de 25 s para 165 ms.\n\nProjetado e construído por Ruan Siqueira: telas, serviços, banco de dados e robô. As regras fiscais foram validadas com a área Fiscal da empresa.',
+        finalidade: 'Tirar da área Fiscal a digitação e a coordenação por fora, e tornar visível o vínculo que antes só existia dentro do XML. As pessoas continuam com o que exige decisão: marcar o pedido, lançar o adiantamento, tratar exceções e ligar ou desligar a automação.\n\nSegurança. O módulo nasceu em modo sombra, passou por base de teste e tem um interruptor geral. O pedido só avança com a autorização da SEFAZ, e pagamento que não bate com o pedido não vira nota: a equipe recebe um aviso.\n\nResultados. 9 dias do pedido da área Fiscal até a primeira nota autorizada pela SEFAZ. A tela de conferência passou de 25 s para 165 ms.\n\nProjetado e construído por Ruan Siqueira: telas, serviços, banco de dados e robô. As regras fiscais foram validadas com a área Fiscal da empresa.',
         alcance: [
           'Emissão: antecipações aguardando nota, fila de pedidos pagos antecipadamente e a nota pronta, com as validações e o valor dividido por item.',
+          'Um pagamento para vários pedidos do mesmo cliente: o valor é repartido na proporção de cada pedido; o pagamento que não bate com nada não vira nota.',
           'Envio à SEFAZ por um robô que opera o ERP, com a tela dele acompanhada ao vivo.',
           'Acompanhamento do vínculo com a venda, nota a nota: vinculadas, aguardando e atrasadas.',
           'Histórico de decisões e avisos por e-mail para a equipe.',
@@ -76,9 +79,10 @@
       en: {
         destaque: 'The module creates and issues the Debit Note from the sales order, links it to the order and makes sure the sale references the note, as Brazil\'s tax reform requires. Before, the ERP did none of this and every note was typed by hand. I delivered the automation in 9 days, and since August 2026 the company has issued and linked notes with no typing, right at the start of the requirement.',
         oque: 'What it is. A module of ProjectHub, the intelligent layer on top of the ERP, that handles the advance-payment Debit Note from start to finish. When a customer pays before receiving the goods, Brazil\'s tax reform requires a debit note listing the same items as the future sale, and later the sales invoice must reference that note inside the file sent to SEFAZ, the state tax authority.\n\nThe problem. The process was manual and depended on one person: read the advances report, open the order, type the note item by item, split the amount on a calculator and warn Shipping so the sale would reference the note. The weakest point was invisible: no screen showed when the reference was missing.\n\nWhat it does. It creates the debit note from the order paid in advance, splits the amount across the items to the cent, sends it to SEFAZ and makes sure the sale references the note inside the XML.\n\nIn this public demo, the Issuing screen works on fictitious data; the other areas appear in the video of the full version.',
-        finalidade: 'To take typing and side-channel coordination off the tax team, and to make visible a link that used to exist only inside the XML. People keep what needs a decision: flagging the order, posting the advance, handling exceptions and switching the automation on or off.\n\nSafeguards. The module was born in shadow mode, went through a test database and has a main switch. The order only moves on with SEFAZ authorisation, and an out-of-range amount goes through human review.\n\nResults. 9 days from the tax team\'s request to the first note authorised by SEFAZ. The check screen went from 25 s to 165 ms.\n\nDesigned and built by Ruan Siqueira: screens, services, database and robot. The tax rules were validated with the company tax team.',
+        finalidade: 'To take typing and side-channel coordination off the tax team, and to make visible a link that used to exist only inside the XML. People keep what needs a decision: flagging the order, posting the advance, handling exceptions and switching the automation on or off.\n\nSafeguards. The module was born in shadow mode, went through a test database and has a main switch. The order only moves on with SEFAZ authorisation, and a payment that does not match the order never becomes a note: the team gets a notice.\n\nResults. 9 days from the tax team\'s request to the first note authorised by SEFAZ. The check screen went from 25 s to 165 ms.\n\nDesigned and built by Ruan Siqueira: screens, services, database and robot. The tax rules were validated with the company tax team.',
         alcance: [
           'Issuing: advances awaiting a note, the queue of orders paid in advance and the ready note, with the checks and the amount split per item.',
+          'One payment for several orders of the same customer: the amount is split in proportion to each order; a payment that matches nothing never becomes a note.',
           'Sending to SEFAZ by a robot that operates the ERP, with its screen followed live.',
           'Follow-up of the link to the sale, note by note: linked, waiting and late.',
           'Decision history and e-mail notices for the team.',
@@ -95,8 +99,8 @@
         texto: P('Antecipações aguardando nota, as prontas para emitir e as que ainda não têm pedido, cada grupo com o seu valor.',
           'Advances awaiting a note, the ones ready to issue and the ones still without an order, each group with its amount.') },
       { alvo: '.nd-real .nd-scroll', titulo: P('Pedidos que viram nota', 'Orders that become notes'),
-        texto: P('Todo pedido marcado como Pagamento Antecipado entra aqui sozinho, com o saldo do cliente. Clique em um e a nota vem pronta, com o valor dividido entre os itens ao centavo.',
-          'Every order flagged as Advance Payment shows up here by itself, with the customer balance. Click one and the note comes ready, with the amount split across the items to the cent.') },
+        texto: P('Todo pedido marcado como Pagamento Antecipado entra aqui sozinho, com o saldo do cliente. Clique em um e a nota vem pronta, com o valor dividido entre os itens ao centavo. Um pagamento que cobre vários pedidos é repartido entre eles; o que não bate com nada não vira nota.',
+          'Every order flagged as Advance Payment shows up here by itself, with the customer balance. Click one and the note comes ready, with the amount split across the items to the cent. A payment covering several orders is split among them; one that matches nothing never becomes a note.') },
       { alvo: '.nd-real .nd-filtros', titulo: P('Ache qualquer pedido', 'Find any order'),
         texto: P('Escolha o período ou digite o número do pedido para abrir a emissão direto.', 'Pick the period or type the order number to open issuing straight away.') },
       { alvo: '.nd-real [data-f="area-acomp"]', acao: 'clicar', titulo: P('A venda cita a nota', 'The sale references the note'),
@@ -194,30 +198,33 @@
 
   /* ================= Emissão: antecipações, fila de pedidos e a nota pronta ================= */
   const SIT = {
-    apto: [P('APTO PARA EMISSÃO', 'READY TO ISSUE'), 'ok'], conferir: [P('APTO PARA EMISSÃO', 'READY TO ISSUE'), 'ok'],
+    apto: [P('APTO PARA EMISSÃO', 'READY TO ISSUE'), 'ok'], naobate: [P('CONFERIR: PAGAMENTO NÃO BATE', 'CHECK: PAYMENT DOES NOT MATCH'), 'alerta'],
     parcial: [P('SALDO PARCIAL', 'PARTIAL BALANCE'), 'alerta'], sem: [P('SEM SALDO DISPONÍVEL', 'NO BALANCE AVAILABLE'), 'erro'],
     criada: [P('ND CRIADA · AGUARDANDO SEFAZ', 'DN CREATED · AWAITING SEFAZ'), 'alerta'],
   };
   const sitChip = p => (p.sit === 'emitida' ? chip((A.lang === 'en' ? 'DN ' : 'ND ') + p.nota.nf + (A.lang === 'en' ? ' ISSUED' : ' EMITIDA'), 'info')
-    : p.simulada && p.sit === 'apto' ? chip(P('APTO · SIMULADO', 'READY · SIMULATED'), 'ok') : chip(SIT[p.sit][0], SIT[p.sit][1]));
+    : p.simulada && p.sit === 'apto' ? chip(P('APTO · SIMULADO', 'READY · SIMULATED'), 'ok') : p.pag && p.sit === 'apto' ? chip(P('APTO · PAGAMENTO REPARTIDO', 'READY · SPLIT PAYMENT'), 'ok') : chip(SIT[p.sit][0], SIT[p.sit][1]));
   const PERIODOS = [['dia', P('Hoje', 'Today')], ['mes', P('Mês atual', 'This month')], ['30', P('30 dias', '30 days')], ['90', P('90 dias', '90 days')], ['todos', P('Tudo', 'All')]];
   const dentro = (d, per) => { const a = new Date(); return per === 'todos' || (per === 'dia' ? d.toDateString() === a.toDateString() : per === 'mes' ? d.getMonth() === a.getMonth() && d.getFullYear() === a.getFullYear() : a - d <= Number(per) * 864e5); };
 
   function telao() {
     const est = A.estado;
-    const feed = db.pedidos.filter(p => p.adiant > 0 && !p.nota).map(p => ({ data: p.dt, cli: p.cli, valor: p.adiant, p }))
-      .concat(db.semPedido.map(x => ({ ...x, p: null }))).sort((x, y) => y.data - x.data);
+    /* um pagamento repartido entre pedidos aparece uma vez, com os pedidos dele; o que não bate não está pronto para emitir */
+    const grupos = {};
+    db.pedidos.filter(p => p.adiant > 0 && !p.nota).forEach(p => { const g = grupos[p.pag || p.num] || (grupos[p.pag || p.num] = { data: p.dt, cli: p.cli, valor: 0, ps: [] }); g.valor = r2(g.valor + p.adiant); g.ps.push(p); });
+    const feed = Object.values(grupos).map(g => ({ ...g, pronta: g.ps.some(p => p.sit !== 'naobate') }))
+      .concat(db.semPedido.map(x => ({ ...x, ps: [], pronta: false }))).sort((x, y) => y.data - x.data);
     const tot = f => soma(feed.filter(f), x => x.valor), qt = f => feed.filter(f).length;
     const K = (rot, n) => t(rot) + ' · ' + n;
     const corpo = est.tvAberto && ui.cartao({ classe: 'ndtv-corpo', titulo: [e('span', 'ndtv-dot'), P('Antecipações e seus pedidos em aberto', 'Advances and their open orders')],
       conteudo: [h('div', { class: 'ndtv-feed', tabindex: '0', role: 'group', 'aria-label': P('Antecipações aguardando nota', 'Advances awaiting a note') }, feed.map(f => h('div', { class: 'ndtv-item' },
         e('span', 'd', fmt.data(f.data)), h('span', { class: 'c', title: cliNome(f.cli) + ' (' + f.cli + ')' }, cliNome(f.cli)),
-        h('span', { class: 'ps' }, f.p ? btn(f.p.num, () => abrirPedido(f.p.num), { tom: 'ok', ic: 'check', classe: 'ndtv-ped', titulo: t(P('Pedido ', 'Order ')) + f.p.num + ' · ' + brl(totalItens(f.p)) + t(P(': clique para abrir', ': click to open')) }) : e('span', 'sp', P('sem pedido', 'no order'))),
+        h('span', { class: 'ps' }, f.ps.length ? f.ps.map(p => btn(p.num, () => abrirPedido(p.num), { tom: f.pronta ? 'ok' : null, ic: f.pronta ? 'check' : null, classe: 'ndtv-ped', titulo: t(P('Pedido ', 'Order ')) + p.num + ' · ' + brl(totalItens(p)) + t(P(': clique para abrir', ': click to open')) })) : e('span', 'sp', P('sem pedido', 'no order'))),
         e('span', 'v', '+' + brl(f.valor))))),
       e('p', 'ndtv-nota', P('Pedido com o sinal de visto está marcado como Pagamento Antecipado, pronto para virar nota. Clique para abrir a emissão.', 'An order with a check mark is flagged as Advance Payment, ready to become a note. Click it to open issuing.'))] });
     return h('section', { class: 'ndtv', 'aria-label': P('Antecipações aguardando nota', 'Advances awaiting a note') },
       h('div', { class: 'ndtv-topo' },
-        indicadores('ndtv-k', [[K(P('aguardando nota', 'awaiting note'), feed.length), brl(tot(() => true)), 'info'], [K(P('prontas p/ emitir', 'ready to issue'), qt(f => f.p)), brl(tot(f => f.p)), 'ok'], [K(P('sem pedido', 'no order'), qt(f => !f.p)), brl(tot(f => !f.p)), 'alerta']]),
+        indicadores('ndtv-k', [[K(P('aguardando nota', 'awaiting note'), feed.length), brl(tot(() => true)), 'info'], [K(P('prontas p/ emitir', 'ready to issue'), qt(f => f.pronta)), brl(tot(f => f.pronta)), 'ok'], [K(P('sem pedido', 'no order'), qt(f => !f.ps.length)), brl(tot(f => !f.ps.length)), 'alerta']]),
         btn(est.tvAberto ? P('Ocultar antecipações', 'Hide advances') : P('Ver antecipações e pedidos', 'Show advances and orders'), () => { est.tvAberto = !est.tvAberto; refrescar('tv'); }, { ic: est.tvAberto ? 'chevu' : 'chevd', foco: 'tv', expandido: !!est.tvAberto })),
       corpo);
   }
@@ -230,7 +237,7 @@
         linhas().map(p => h('tr', { class: 'nd-row clic' + (est.pedidoSel === p.num ? ' sel' : ''), onclick: () => abrirPedido(p.num) },
           h('td', { class: 'num azul ped' }, h('button', { type: 'button', class: 'nd-lk', 'aria-label': t(P('Abrir a emissão do pedido ', 'Open issuing for order ')) + p.num }, p.num)),
           td('cli', cliNome(p.cli)), td('num', p.un), td('num', fmt.data(p.dt)), td('num', p.itens.length), td('num', brl(totalItens(p))),
-          td('num b ' + (saldo(p) > 0 ? 't-ok' : 't-erro'), brl(saldo(p))), td('num', saldo(p) > 0 ? brl(p.adiant) : '-'), td('sit', sitChip(p)))),
+          td('num b ' + (saldo(p) > 0 ? 't-ok' : 't-erro'), brl(saldo(p))), td('num', saldo(p) > 0 && p.sit !== 'naobate' ? brl(p.adiant) : '-'), td('sit', sitChip(p)))),
         P('Nenhum pedido no período.', 'No order in the period.'))));
     const atualizar = () => ui.backend({ titulo: P('Atualizar a fila', 'Refresh the queue'), velocidade: 1.6,
       passos: [S('api', P('Recebe a consulta da fila', 'Receives the queue lookup'), 40), S('erp', P('Lê os pedidos marcados como Pagamento Antecipado', 'Reads the orders flagged as Advance Payment'), 260), S('erp', P('Consulta o adiantamento de cada cliente, só leitura', 'Reads each customer advance, read-only'), 210)],
@@ -247,8 +254,8 @@
           '<b>1. Where the list comes from:</b> sales orders someone flagged as <b>Advance Payment</b> in the ERP show up here by themselves. Flagging the order is the way to say: "this order has an advance and needs a debit note".'),
         par('<b>2. O saldo de adiantamento:</b> para cada pedido, o sistema consulta no financeiro do ERP quanto o cliente tem de adiantamento disponível. É só consulta: nada é alterado no financeiro.',
           '<b>2. The advance balance:</b> for each order, the system reads in ERP finance how much advance the customer has available. Read-only: nothing is changed in finance.'),
-        par('<b>3. A nota pronta:</b> ao clicar em um pedido, o sistema preenche a nota com os mesmos itens do pedido e o valor do adiantamento dividido entre eles, ao centavo, e mostra as validações para emissão. Valor muito acima do pedido gera aviso para conferência humana.',
-          '<b>3. The ready note:</b> when you click an order, the system fills in the note with the same items as the order and the advance amount split across them, to the cent, and shows the issuing checks. An amount far above the order raises a notice for human review.'),
+        par('<b>3. A nota pronta:</b> ao clicar em um pedido, o sistema preenche a nota com os mesmos itens do pedido e o valor do adiantamento dividido entre eles, ao centavo, e mostra as validações para emissão. Quando um único pagamento cobre vários pedidos do cliente, o valor é repartido na proporção de cada pedido; quando não bate com nada, a nota não é criada e a equipe recebe um aviso.',
+          '<b>3. The ready note:</b> when you click an order, the system fills in the note with the same items as the order and the advance amount split across them, to the cent, and shows the issuing checks. When a single payment covers several orders of the customer, the amount is split in proportion to each order; when it matches nothing, the note is not created and the team gets a notice.'),
         par('<b>4. Simular e emitir:</b> <b>Registrar simulação</b> guarda o resultado sem tocar no ERP, e <b>Emitir nota de débito</b> cria a nota, que o robô envia à SEFAZ.',
           '<b>4. Simulate and issue:</b> <b>Log simulation</b> stores the result without touching the ERP, and <b>Issue debit note</b> creates the note, which the robot sends to SEFAZ.')),
       telao(),
@@ -273,16 +280,19 @@
   function validacoes(p) {
     if (p.nota) return [V(null, 'Este pedido já tem a nota de débito ' + ident(p) + '.', 'This order already has debit note ' + ident(p) + '.'),
       V(null, 'A antecipação do cliente já virou nota de débito: o próximo passo é o faturamento da venda no ERP.', 'The customer advance has already become a debit note: the next step is invoicing the sale in the ERP.')];
-    const tem = p.sit !== 'sem';
+    const tem = p.sit !== 'sem', bate = p.sit !== 'naobate', grupo = p.pag ? db.pedidos.filter(x => x.pag === p.pag) : [];
+    const outros = grupo.filter(x => x !== p).map(x => x.num).join(', '), pago = brl(soma(grupo, x => x.adiant));
     return [
       V(true, 'Pedido marcado como Pagamento Antecipado', 'Order flagged as Advance Payment'),
       V(true, 'Pedido ativo e ainda não faturado', 'Active order, not invoiced yet'),
       V(true, 'Pedido sem nota de débito anterior', 'Order with no previous debit note'),
       tem ? V(true, 'Adiantamento disponível para o cliente', 'Advance available for the customer') : V(false, 'Cliente ainda sem adiantamento disponível', 'Customer has no advance available yet'),
-      p.sit === 'conferir' ? V(true, 'CONFIRA: valor muito acima do pedido. A nota pode ser criada, mas passa por conferência humana antes do envio.', 'CHECK: amount far above the order. The note can be created, but it goes through human review before sending.')
-        : V(tem, 'Valor compatível com o pedido', 'Amount compatible with the order'),
-      V(tem, 'Itens válidos e soma do rateio exata ao centavo', 'Valid items and apportionment exact to the cent'),
-    ];
+      grupo.length > 1 && V(true, 'Um único pagamento do cliente (' + pago + ') cobre este pedido e o ' + outros + ': o valor foi repartido na proporção de cada pedido. A parte deste pedido é ' + brl(p.adiant) + '.',
+        'A single customer payment (' + pago + ') covers this order and order ' + outros + ': the amount was split in proportion to each order. This order share is ' + brl(p.adiant) + '.'),
+      bate ? V(tem, 'Valor compatível com o pedido', 'Amount compatible with the order')
+        : V(false, 'O pagamento do cliente não bate com este pedido nem com a soma dos pedidos dele na fila: a nota não é criada. A equipe recebe um aviso por e-mail e a fila segue.', 'The customer payment matches neither this order nor the sum of their queued orders: the note is not created. The team gets an e-mail notice and the queue moves on.'),
+      bate && V(tem, 'Itens válidos e soma do rateio exata ao centavo', 'Valid items and apportionment exact to the cent'),
+    ].filter(Boolean);
   }
 
   function janela(p) {
@@ -313,7 +323,7 @@
           e('span', 'ctx', cliNome(p.cli) + ' (' + p.cli + ') · UF ' + CLI[p.cli][1] + ' · UN ' + p.un),
           p.nota && h('span', { class: 'nds' }, chip('ND ' + ident(p) + ' · ' + brl(p.adiant), 'info'))),
         painel('np-resumo',
-          indicadores('np-k', [[P('Valor do pedido (itens)', 'Order amount (items)'), brl(total), 'azul'], [P('Antecipação disponível', 'Advance available'), brl(saldo(p)), saldo(p) > 0 ? 'ok' : 'erro'], [P('Valor da nota de débito', 'Debit note amount'), brl(p.adiant), 'info']]),
+          indicadores('np-k', [[P('Valor do pedido (itens)', 'Order amount (items)'), brl(total), 'azul'], [P('Antecipação disponível', 'Advance available'), brl(saldo(p)), saldo(p) > 0 ? 'ok' : 'erro'], [P('Valor da nota de débito', 'Debit note amount'), brl(p.sit === 'naobate' ? 0 : p.adiant), 'info']]),
           h('div', { class: 'np-linha' }, h('div', { class: 'np-acoes' },
             btn(P('Registrar simulação', 'Log simulation'), simular, { ic: 'play', grande: true, desabilitado: travado }),
             btn(P('Emitir nota de débito', 'Issue debit note'), emitir, { primario: true, ic: 'send', grande: true, desabilitado: travado }),
