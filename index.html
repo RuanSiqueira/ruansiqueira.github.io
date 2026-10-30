@@ -883,7 +883,7 @@ html:not(.motion) .stack-btn{display:none}
               <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Sistema</span><span class="rivet"></span></div>
               <p class="tag-area" data-i18n="ar_fc">Fiscal · Compras</p>
               <h3 class="tag-name"><a href="#p-nf-autonoma" data-i18n="p1n">NF Autônoma</a></h3>
-              <p class="tag-measure" data-i18n="p1m">Lê o XML, decide e lança sozinha no ERP as notas fiscais de entrada e os CT-es da empresa. Ligou o automático, a digitação acabou.</p>
+              <p class="tag-measure" data-i18n="p1m">Lê o XML, decide e lança no ERP as notas fiscais de entrada e os CT-es da empresa, sem digitação e 10 vezes mais rápido que à mão.</p>
               <p class="tag-state"><span class="st st-idle" data-i18n="st_idle">Aguardando leitura</span><span class="st st-read" data-i18n="st_read">Conferindo</span><span class="st st-prod" data-i18n="st_prod">Em produção</span></p>
             </li>
             <li class="tag" data-state="prod">
@@ -1173,14 +1173,14 @@ html:not(.motion) .stack-btn{display:none}
               <p class="ficha-line" data-i18n="p1l">A inteligência que lança no ERP as notas fiscais de entrada e os CT-es da empresa, do XML às contas a pagar. Ela decide em camadas, simula antes de gravar, mede o próprio acerto e, com o modo automático ligado, faz tudo sozinha.</p>
             </header>
             <div>
-              <h4 class="mini-h impacto-h" data-i18n="lbl_impacto">Resultado para a área</h4>
+              <h4 class="mini-h impacto-h" data-i18n="lbl_impacto">O que a empresa ganhou</h4>
               <div class="impacto">
-                <div><b data-i18n="n1_i1n">30 s</b><span data-i18n="n1_i1l">para lançar uma nota de compra ou um frete pelo hub; à mão, a média era de 5 minutos</span></div>
-                <div><b data-i18n="n1_i2n">+160 h</b><span data-i18n="n1_i2l">de digitação poupadas em mais de 2.200 lançamentos no ERP</span></div>
-                <div><b data-i18n="n1_i3n">95%</b><span data-i18n="n1_i3l">dos fretes lançados sem precisar de correção depois</span></div>
-                <div><b data-i18n="n1_i4n">+100</b><span data-i18n="n1_i4l">notas que não fechavam devolvidas à equipe com o motivo, em vez de entrarem erradas</span></div>
+                <div><b data-i18n="n1_i1n">+2.200</b><span data-i18n="n1_i1l">lançamentos de notas de entrada e fretes pelo hub desde agosto de 2026</span></div>
+                <div><b data-i18n="n1_i2n">+160 h</b><span data-i18n="n1_i2l">de digitação poupadas nesses lançamentos: 5 min por nota à mão contra 30 s pelo hub</span></div>
+                <div><b data-i18n="n1_i3n">95%</b><span data-i18n="n1_i3l">dos fretes lançados pelo hub não precisaram de nenhuma correção depois</span></div>
+                <div><b data-i18n="n1_i4n">+100</b><span data-i18n="n1_i4l">notas fora do padrão seguradas pelo robô, com o motivo por escrito</span></div>
               </div>
-              <p class="impacto-frase" data-i18n="n1_if">Ganho para a empresa: lançamento 10 vezes mais rápido, mais de 160 horas devolvidas à equipe, menos erro e um processo que não depende mais de uma única pessoa: o que ela sabia virou regra do sistema. O objetivo final é ninguém precisar se preocupar com lançamento.</p>
+              <p class="impacto-frase" data-i18n="n1_if">Ganho para a empresa: sem digitação, notas e fretes passaram a entrar no ERP, em média, 10 vezes mais rápido. O que se sabia sobre lançar cada fornecedor virou regra escrita do sistema, em vez de depender de quem sabia fazer. O objetivo final é ninguém precisar se preocupar com lançamento.</p>
             </div>
             <div>
               <h4 class="mini-h" data-i18n="lbl_cycle">Ciclo completo</h4>
@@ -1194,33 +1194,31 @@ html:not(.motion) .stack-btn{display:none}
               </ol>
             </div>
             <dl class="spec">
-              <div><dt data-i18n="lbl_sit">Situação</dt><dd data-i18n="n1_sit">Lançar uma nota de entrada mexe ao mesmo tempo em estoque, impostos, livro fiscal, contas a pagar, ordem de compra e orçamento, e cada fornecedor tem o seu padrão de classificação e de prazo. Esse conhecimento ficava com quem digitava, não em regra de sistema. É o projeto mais difícil que já conduzi: automatizar sem tirar o controle da equipe.</dd></div>
+              <div><dt data-i18n="lbl_sit">Situação</dt><dd data-i18n="n1_sit">Lançar uma nota de entrada mexe ao mesmo tempo em estoque, impostos, livro fiscal, contas a pagar, ordem de compra e orçamento, e cada fornecedor tem o seu padrão de classificação e de prazo. Esse conhecimento ficava com quem digitava, não em regra de sistema. É o projeto mais difícil que já conduzi: automatizar sem perder o controle.</dd></div>
               <div><dt data-i18n="lbl_did">O que fiz</dt><dd><ol class="did">
                 <li data-i18n="n1_d1">Levantei os requisitos com as áreas Fiscal e de Compras e transformei as respostas da área fiscal em regras escritas. Cada regra foi medida contra o lançamento da equipe antes de ir para o código.</li>
                 <li data-i18n="n1_d2">Fiz o robô ler o XML da nota e do frete junto com a ordem de compra e montar o caso inteiro antes de decidir.</li>
                 <li data-i18n="n1_d3">Criei a simulação: o plano completo do lançamento, com cada bloqueio explicado, sem gravar nada.</li>
                 <li data-i18n="n1_d4">Desenvolvi a gravação no ERP no modelo tudo ou nada: o lançamento completo entra de uma vez e, se um passo falha, nada é gravado.</li>
-                <li data-i18n="n1_d5">Criei o acompanhamento depois do lançamento: o que a equipe corrige volta para o sistema, e as regras melhoram com o uso.</li>
-                <li><span data-i18n="n1_d7">Criei a conferência pós-lançamento: cada nota que o robô lançou com ordem de compra é comparada com a ordem como foi aprovada, e o que sai da conta aparece para revisão.</span></li>
-                <li data-i18n="n1_d6">Implantei de forma gradual, validando cada etapa contra o trabalho da equipe antes de liberar a gravação.</li>
+                <li data-i18n="n1_d5">Criei o acompanhamento depois do lançamento: cada correção feita na nota fica registrada e, desde 28/10/2026, o placar de produção promove ou suspende as regras pelo acerto medido.</li>
+                <li><span data-i18n="n1_d7">Criei a conferência pós-lançamento: cada nota lançada pelo hub com ordem de compra é comparada com a ordem como foi aprovada, e o que sai da conta aparece destacado.</span></li>
               </ol></dd></div>
-              <div><dt data-i18n="lbl_layers">Decisão em camadas</dt><dd data-i18n="n1_layers">Primeiro valem as regras definidas pela área fiscal, decididas por código. A IA generativa só entra onde a regra não alcança, e sempre é conferida antes de valer. Na dúvida, o robô não lança: a nota vai para a fila da equipe com o motivo escrito.</dd></div>
-              <div><dt data-i18n="lbl_engine">Motor de regras</dt><dd data-i18n="n1_engine">O motor de regras é reaproveitável e aprende com as correções da equipe. São centenas de regras testadas em campo, e a demonstração mostra algumas genéricas.</dd></div>
+              <div><dt data-i18n="lbl_layers">Decisão em camadas</dt><dd data-i18n="n1_layers">Primeiro valem as regras definidas pela área fiscal, decididas por código. Onde a regra não alcança, entra a IA generativa, e a gravação continua passando pela simulação e pelas travas fiscais. Na dúvida, o robô não lança e registra o motivo por escrito.</dd></div>
+              <div><dt data-i18n="lbl_aictl">IA sob controle</dt><dd data-i18n="n1_aictl">A IA que decide não acessa o ERP, não tem ferramentas e responde num formato fechado. Quem grava é o sistema, com um usuário próprio, só nas operações liberadas uma a uma, e sem alterar o que o Compras registrou. Os fretes não usam IA; nas notas de compra, a parte fixa das instruções vai em cache, e um teto diário de gasto suspende as chamadas.</dd></div>
+              <div><dt data-i18n="lbl_engine">Motor de regras</dt><dd data-i18n="n1_engine">O motor de regras é reaproveitável: são centenas de regras escritas, medidas contra lançamentos reais, e a demonstração mostra algumas genéricas.</dd></div>
               <div><dt data-i18n="lbl_modes">Modos de operação</dt><dd><ol class="did">
-                <li><strong data-i18n="n1_o1k">Assistido.</strong> <span data-i18n="n1_o1">O robô decide, simula e prepara o lançamento, e uma pessoa confirma.</span></li>
-                <li><strong data-i18n="n1_o2k">Automático com limites.</strong> <span data-i18n="n1_o2">O robô lança sozinho o que passa em todas as travas, dentro dos limites que a empresa define. O interruptor do modo é auditado.</span></li>
-              </ol><p class="dd-p" data-i18n="n1_o3">Uma implantação começa no modo assistido e passa ao automático conforme a confiança medida cresce.</p></dd></div>
-              <div><dt data-i18n="lbl_how">Como medi</dt><dd data-i18n="n1_how">Medi cada percentual comparando a decisão do robô com o lançamento feito por uma pessoa, em notas que ele não tinha visto.</dd></div>
-              <div><dt data-i18n="lbl_res">Resultado</dt><dd class="res" data-i18n="n1_res">Em produção: com o automático ligado, ela lança sozinha o que passa limpo, e só o que não passa nas travas vai para a fila da equipe, com a explicação em linguagem simples. Nas decisões tomadas por regra, que são a maior parte do volume, o acerto medido ficou acima de 97%.</dd></div>
+                <li><strong data-i18n="n1_o1k">Assistido.</strong> <span data-i18n="n1_o1">O robô decide, simula e prepara o lançamento, e uma pessoa confirma. É o modo em produção desde agosto de 2026.</span></li>
+                <li><strong data-i18n="n1_o2k">Automático com limites.</strong> <span data-i18n="n1_o2">Com o modo ligado, o robô lança sozinho o que passa em todas as travas, dentro dos limites que a empresa define. O interruptor do modo é auditado.</span></li>
+              </ol></dd></div>
+              <div><dt data-i18n="lbl_rollout">Liberação</dt><dd data-i18n="n1_rollout">Implantei de forma gradual. Antes de gravar em produção, o robô rodou em modo sombra, decidindo sem gravar, e cada decisão foi comparada com o lançamento da equipe. Desde agosto de 2026 roda no modo assistido: o robô prepara e confere cada lançamento, e uma pessoa confirma. O modo automático já está construído e auditado e entra por tipo de nota quando o acerto medido atinge a régua de liberação.</dd></div>
+              <div><dt data-i18n="lbl_how">Como medi</dt><dd data-i18n="n1_how">Lançamentos: registro do hub, de 20/08 a 28/10/2026, sem as notas excluídas depois. Tempo: à mão, média cronometrada de 5 min por nota ou frete; pelo hub, 30 s, segundo o registro do sistema; 2.261 lançamentos × 4,5 min ≈ 170 h. Fretes sem correção: entre os fretes do hub no mesmo período já reconferidos no ERP, os que não tiveram nenhuma correção. Notas seguradas: as que o robô bloqueou com o motivo por escrito, no mesmo período; risco evitado, contado à parte. Medições: decisão do robô contra o lançamento da equipe, com período e base ao lado do número. Conferido no banco em 28/10 e 30/10/2026.</dd></div>
+              <div><dt data-i18n="lbl_res">Resultado</dt><dd class="res" data-i18n="n1_res">Em produção desde agosto de 2026, no modo assistido, com mais de 2.200 lançamentos pelo hub, em média 10 vezes mais rápidos que à mão. O que não passa nas travas fica segurado, com a explicação em linguagem simples.</dd></div>
             </dl>
             <div>
               <h4 class="mini-h" data-i18n="lbl_meas">Medições</h4>
               <dl class="spec spec--num">
-                <div><dt data-i18n="n1_m1v">97,9%</dt><dd data-i18n="n1_m1">de acerto nas decisões tomadas por regra, que são a maior parte do volume. Medição de 30 dias.</dd></div>
-                <div><dt data-i18n="n1_m2v">99,3%</dt><dd data-i18n="n1_m2">de acerto nos fornecedores com histórico consolidado.</dd></div>
-                <div><dt data-i18n="n1_m3v">98,1%</dt><dd data-i18n="n1_m3">de acerto em validação com notas que o robô não tinha visto.</dd></div>
-                <div><dt data-i18n="n1_m4v">97 a 98%</dt><dd data-i18n="n1_m4">de acerto nos fretes em que o sistema decide, medido antes da entrada em produção.</dd></div>
-                <div><dt data-i18n="n1_m5v">38 dias</dt><dd data-i18n="n1_m5">do início do projeto ao primeiro lançamento em produção.</dd></div>
+                <div><dt data-i18n="n1_m1v">97,9%</dt><dd data-i18n="n1_m1">de acerto nas decisões feitas por código, sem IA, comparadas com o lançamento da equipe em modo sombra e teste retroativo, de 26/07 a 25/08/2026 (n = 1.293, 82% delas fretes).</dd></div>
+                <div><dt data-i18n="n1_m5v">38 dias</dt><dd data-i18n="n1_m5">do início do projeto, em 13/07/2026, ao primeiro lançamento em produção, em 20/08/2026.</dd></div>
               </dl>
             </div>
             <div>
@@ -1254,36 +1252,36 @@ html:not(.motion) .stack-btn{display:none}
           <div class="ficha-body">
             <header>
               <h3 class="ficha-title" id="p2-h" data-i18n="p2n">Nota de Débito</h3>
-              <p class="ficha-line" data-i18n="p2l">O ERP não emitia a Nota de Débito a partir do pedido nem a vinculava à nota de venda: cada nota era digitada à mão. Em 9 dias entreguei a automação, e desde agosto de 2026 a empresa emite e vincula sem digitação, logo no início da exigência da Reforma Tributária.</p>
+              <p class="ficha-line" data-i18n="p2l">A Reforma Tributária passou a exigir a Nota de Débito no pagamento antecipado, e o ERP ainda não oferecia uma solução que não travasse a venda. Nove dias depois do pedido da área fiscal, a primeira nota do sistema foi autorizada pela SEFAZ, e desde agosto de 2026 a nota nasce do pedido e é emitida e vinculada à venda pelo próprio sistema.</p>
             </header>
             <div>
-              <h4 class="mini-h impacto-h" data-i18n="lbl_impacto">Resultado para a área</h4>
+              <h4 class="mini-h impacto-h" data-i18n="lbl_impacto">O que a empresa ganhou</h4>
               <div class="impacto">
-                <div><b data-i18n="n2_i1n">+450</b><span data-i18n="n2_i1l">Notas de Débito criadas pelo hub desde agosto, sem digitação</span></div>
-                <div><b data-i18n="n2_i2n">+390</b><span data-i18n="n2_i2l">vinculadas sozinhas à nota de venda</span></div>
-                <div><b data-i18n="n2_i3n">3 min</b><span data-i18n="n2_i3l">da criação à autorização na SEFAZ (mediana de outubro)</span></div>
-                <div><b data-i18n="n2_i4n">9 dias</b><span data-i18n="n2_i4l">do pedido da área fiscal à primeira nota autorizada</span></div>
+                <div><b data-i18n="n2_i1n">Antes do ERP</b><span data-i18n="n2_i1l">solução própria, sem custo de customização, antes de o ERP oferecer uma que não travasse a venda</span></div>
+                <div><b data-i18n="n2_i2n">3 min</b><span data-i18n="n2_i2l">da criação da nota à autorização da SEFAZ (mediana de outubro de 2026)</span></div>
+                <div><b data-i18n="n2_i3n">+450</b><span data-i18n="n2_i3l">Notas de Débito autorizadas pela SEFAZ desde 13/08/2026</span></div>
+                <div><b data-i18n="n2_i4n">+400</b><span data-i18n="n2_i4l">vinculadas sozinhas à nota de venda, sem depender de alguém lembrar</span></div>
               </div>
-              <p class="impacto-frase" data-i18n="n2_if">Ganho para a empresa: a exigência da Reforma Tributária foi cumprida sem esperar o fornecedor do ERP, e a venda com pagamento antecipado não travou. Emissão e vínculo saem sozinhos, pelo servidor ou pelo robô em máquina própria, sem digitação e sem risco de esquecer de citar a ND na nota de venda.</p>
+              <p class="impacto-frase" data-i18n="n2_if">Ganho para a empresa: cumpriu a exigência da Reforma Tributária com uma solução própria, sem pagar customização ao fornecedor do ERP. Emissão e vínculo saem pelo próprio sistema, e o painel mostra, nota a nota, o que a venda já citou e o que ainda espera.</p>
             </div>
             <dl class="spec spec--split">
-              <div class="sp-sit"><dt data-i18n="lbl_sit">Situação</dt><dd data-i18n="n2_sit">Com a Reforma Tributária, cada pagamento antecipado de cliente passou a exigir uma Nota de Débito com os itens do pedido, citada pela nota de venda antes da transmissão à SEFAZ. A nota era digitada item a item e o vínculo com a venda era informado à mão. A automação envolvia Fiscal, Financeiro e Expedição e precisava rodar dentro do ERP em produção, sem atrapalhar o faturamento.</dd></div>
+              <div class="sp-sit"><dt data-i18n="lbl_sit">Situação</dt><dd data-i18n="n2_sit">Com a Reforma Tributária, cada pagamento antecipado de cliente passou a exigir uma Nota de Débito com os itens do pedido, citada pela nota de venda antes da transmissão à SEFAZ. A automação envolvia Fiscal, Financeiro e Expedição e precisava rodar dentro do ERP em produção, sem atrapalhar o faturamento.</dd></div>
               <div class="sp-did"><dt data-i18n="lbl_did">O que fiz</dt><dd><ol class="did">
                 <li data-i18n="n2_d1">Levantei os requisitos com Fiscal, Financeiro e Expedição e construí a automação.</li>
                 <li data-i18n="n2_d2">Fiz o fluxo montar a Nota de Débito a partir do pedido e do adiantamento do cliente, já com a numeração oficial do ERP.</li>
                 <li data-i18n="n2_d3">Automatizei o envio à SEFAZ pelo próprio ERP, que continua assinando e transmitindo. O pedido só avança depois da autorização.</li>
                 <li data-i18n="n2_d4">Fiz o vínculo com a nota de venda ser gravado sozinho, a tempo da transmissão.</li>
-                <li data-i18n="n2_d7">Ensinei o fluxo a repartir um adiantamento que cobre vários pedidos: cada pedido recebe a parte proporcional ao seu valor e ganha a sua Nota de Débito. Quando o pagamento não bate com os pedidos, nenhuma nota é criada e o caso vai para a conferência da equipe, com aviso por e-mail.</li>
+                <li data-i18n="n2_d7">Ensinei o fluxo a repartir um adiantamento que cobre vários pedidos: cada pedido recebe a parte proporcional ao seu valor e ganha a sua Nota de Débito. Quando o pagamento não bate com os pedidos, nenhuma nota é criada e o sistema avisa por e-mail.</li>
                 <li data-i18n="n2_d5">Validei tudo antes de ligar e deixei uma chave para desligar a automação sem precisar de versão nova.</li>
-                <li data-i18n="n2_d6">Montei a conferência nota a nota e os avisos por e-mail, e reescrevi as consultas: a tela de conferência foi de 25 s para 165 ms, e a rotina do vínculo passou a fazer cerca de 18 vezes menos leituras no banco.</li>
+                <li data-i18n="n2_d6">Montei o painel nota a nota e os avisos por e-mail, e reescrevi as consultas: na reescrita, a abertura do painel caiu de 13 s para 0,1 s (mediana dos acessos reais, ago/2026), e a rotina do vínculo passou a fazer mais de 10 vezes menos leituras no banco (de 5,2 mi por execução em setembro para 0,39 mi em outubro de 2026).</li>
               </ol></dd></div>
-              <div class="sp-how"><dt data-i18n="lbl_how">Como medi</dt><dd data-i18n="n2_how">A tela de conferência mostra, nota por nota, o que está vinculado, o que aguarda a venda e o que atrasou. Medi o tempo dessa tela e as leituras da rotina do vínculo antes e depois da reescrita. Antes de aplicar a consulta nova, provei em modo só leitura que ela devolvia exatamente as mesmas linhas da antiga.</dd></div>
-              <div class="sp-res"><dt data-i18n="lbl_res">Resultado</dt><dd class="res" data-i18n="n2_res">Foram 9 dias do pedido da área fiscal à primeira nota autorizada pela SEFAZ. Desde agosto de 2026 a empresa emite e vincula sem digitação: a equipe confere em vez de digitar, e as exceções continuam com as pessoas.</dd></div>
+              <div class="sp-how"><dt data-i18n="lbl_how">Como medi</dt><dd data-i18n="n2_how">Notas autorizadas e vinculadas: registro do módulo e retorno da SEFAZ, de 13/08 a 30/10/2026; vínculo é a referência à Nota de Débito que o próprio sistema gravou na nota de venda. Tempo até a autorização: mediana de outubro de 2026, da criação da nota ao retorno da SEFAZ. Painel e rotina do vínculo: medidos antes e depois da reescrita, com prova em modo só leitura de que a consulta nova devolvia as mesmas linhas. Números conferidos em 30/10/2026, no banco e no registro de acessos do sistema.</dd></div>
+              <div class="sp-res"><dt data-i18n="lbl_res">Resultado</dt><dd class="res" data-i18n="n2_res">Do pedido da área fiscal à primeira nota autorizada pela SEFAZ foram 9 dias, de 4 a 13 de agosto de 2026. Hoje, emissão e vínculo saem pelo próprio sistema, e o painel mostra a situação de cada nota.</dd></div>
             </dl>
             <div>
               <h4 class="mini-h" data-i18n="lbl_ba">Antes e depois</h4>
               <div class="ba">
-                <div class="ba-item"><p class="ba-k" data-i18n="n2_b1k">Abertura da tela de conferência</p><p class="ba-v"><del><span class="vh" data-i18n="ba_before">Antes:</span> 25 s</del> <ins><span class="vh" data-i18n="ba_after">Depois:</span> 165 ms</ins></p></div>
+                <div class="ba-item"><p class="ba-k" data-i18n="n2_b1k">Abertura do painel nota a nota, na reescrita (mediana dos acessos reais, ago/2026)</p><p class="ba-v"><del><span class="vh" data-i18n="ba_before">Antes:</span> <span data-i18n="n2_b1a">13 s</span></del> <ins><span class="vh" data-i18n="ba_after">Depois:</span> <span data-i18n="n2_b1n">0,1 s</span></ins></p></div>
               </div>
             </div>
             <div>
@@ -1294,7 +1292,7 @@ html:not(.motion) .stack-btn{display:none}
                 <li><span class="flow-n" aria-hidden="true">03</span><span data-i18n="n2_f3">Envio e autorização da SEFAZ</span></li>
                 <li><span class="flow-n" aria-hidden="true">04</span><span data-i18n="n2_f4">Pedido avança</span></li>
                 <li><span class="flow-n" aria-hidden="true">05</span><span data-i18n="n2_f5">Vínculo com a nota de venda</span></li>
-                <li><span class="flow-n" aria-hidden="true">06</span><span data-i18n="n2_f6">Conferência nota a nota</span></li>
+                <li><span class="flow-n" aria-hidden="true">06</span><span data-i18n="n2_f6">Painel nota a nota</span></li>
               </ol>
             </div>
             <div>
@@ -1902,7 +1900,7 @@ html:not(.motion) .stack-btn{display:none}
   /* Idioma: o português vem do próprio HTML (lido uma vez); o inglês fica aqui. */
   const EN = {
     title: 'Ruan Siqueira · End-to-end IT',
-    desc: 'Ruan Siqueira, software engineer in Marau, Brazil. From infrastructure to ERP integration and AI: a 17-system hub on top of the ERP, designed and built on his own, with nine projects in detail, from the invoice-posting robot to import planning.',
+    desc: 'Ruan Siqueira, software engineer in Marau, Brazil. From infrastructure to ERP integration and AI: a hub with 16 systems in production on top of the ERP, designed and built by him, with nine projects in detail, from the invoice-posting robot to import planning.',
     skip: 'Skip to content', nav_label: 'Sections', nav_about: 'About', nav_projects: 'Projects', nav_eco: 'Ecosystem', nav_contact: 'Contact',
     demo_long: 'Demo hub', lang_label: 'Language',
     t_tag: 'End-to-end IT',
@@ -1910,7 +1908,7 @@ html:not(.motion) .stack-btn{display:none}
     apoio: 'I’m a software engineer working in IT at Robustec, where I designed and built an internal portal with 16 systems in production, many of them integrated with the ERP.',
     cta: 'See projects', cta2: 'Enter the demo hub',
     projects_h2: 'Projects in production and rolling out', asset: 'System',
-    p1n: 'Autonomous Invoice Posting', p1m: 'Reads the XML, decides and posts the company’s inbound invoices and freight documents into the ERP on its own. Switch on automatic mode and the typing is over.',
+    p1n: 'Autonomous Invoice Posting', p1m: 'Reads the XML, decides and posts the company’s inbound invoices and freight documents into the ERP, with no typing and 10 times faster than by hand.',
     p2n: 'Debit Note', p2m: 'Creates and issues the note from the order, links everything on its own and, at the sale, finds the trigger to deliver it to the customer, as Brazil’s tax reform requires.',
     p3n: 'AUTO CRM', p3m: 'The CRM managers build themselves: funnel, goals and cadences on screen, accounts and prospecting in one place, ready for any team.',
     p4n: 'Customer Engine', p4m: 'Finds who stopped buying, brings them back over WhatsApp and even finds new customers in the public company registry.',
@@ -1981,47 +1979,44 @@ html:not(.motion) .stack-btn{display:none}
     lbl_sit: 'Context', lbl_did: 'What I did', lbl_how: 'How I measured', lbl_res: 'Result',
     lbl_ba: 'Before and after', lbl_flow: 'Flow', lbl_tech: 'Technologies',
     lbl_cycle: 'Full cycle', lbl_layers: 'Layered decision', lbl_modes: 'Operating modes', lbl_engine: 'Rules engine',
-    n1_engine: 'The rules engine is reusable and learns from the team’s corrections. There are hundreds of field-tested rules, and the demo shows a few generic ones.', lbl_meas: 'Measurements',
+    n1_engine: 'The rules engine is reusable: hundreds of written rules, measured against real postings; the demo shows a few generic ones.', lbl_meas: 'Measurements',
     lbl_has: 'What it includes', lbl_size: 'Size', st_impl: 'Rolling out',
     ba_before: 'Before:', ba_after: 'After:',
     open_sys: 'Open the system', read_manual: 'Read the manual', vid_cap: 'The full system in 20 seconds',
 
     p1l: 'The intelligence that posts the company’s inbound invoices and freight documents into the ERP, from the XML to accounts payable. It decides in layers, simulates before writing, measures its own accuracy and, with automatic mode on, does it all by itself.',
     n1_f1: 'Invoice and freight XML', n1_f2: 'Layered decision', n1_f3: 'Simulation, nothing written', n1_f4: 'Budget and purchase order', n1_f5: 'Posting into the ERP', n1_f6: 'Accuracy scorecard',
-    n1_sit: 'Posting an inbound invoice touches inventory, taxes, the tax ledger, accounts payable, the purchase order and the budget all at once, and every supplier has its own classification and payment-term pattern. That knowledge lived with whoever keyed the invoice in, not in a system rule. It is the hardest project I have led: automating this without taking control away from the team.',
+    n1_sit: 'Posting an inbound invoice touches inventory, taxes, the tax ledger, accounts payable, the purchase order and the budget all at once, and every supplier has its own classification and payment-term pattern. That knowledge lived with whoever keyed the invoice in, not in a system rule. It is the hardest project I have led: automating this without losing control.',
     n1_d1: 'Gathered requirements with the Tax and Purchasing teams and turned the Tax team’s answers into written rules. Each rule was measured against the team’s own postings before it went into code.',
     n1_d2: 'Had the robot read the invoice and freight XML together with the purchase order and assemble the whole case before deciding.',
     n1_d3: 'Built the simulation: the full posting plan, with every blocker explained and nothing written.',
     n1_d4: 'Built the ERP posting as all or nothing: the complete posting goes in at once and, if any step fails, nothing is written.',
-    n1_d5: 'Built the follow-up after posting: whatever the team corrects flows back into the system, and the rules improve with use.',
-    n1_d6: 'Rolled it out gradually, validating each stage against the team’s work before allowing it to write.',
-    n1_d7: 'Built the post-posting audit: every invoice the robot posted against a purchase order is compared with the order as approved, and anything outside the numbers shows up for review.',
-    n1_layers: 'The rules set by the Tax team come first, decided in code. Generative AI steps in only where the rules don’t reach, and it is always checked before it counts. When in doubt, the robot doesn’t post: the invoice goes to the team’s queue with the reason written out.',
-    n1_o1k: 'Assisted.', n1_o1: 'The robot decides, simulates and prepares the posting, and a person confirms it.',
-    n1_o2k: 'Automatic, within limits.', n1_o2: 'The robot posts on its own whatever passes every safeguard, within the limits the company sets. The mode switch is audited.',
-    n1_o3: 'A rollout starts in assisted mode and moves to automatic as measured confidence grows.',
-    n1_how: 'I measured every percentage by comparing the robot’s decision with the posting made by a person, on invoices it had not seen.',
-    n1_res: 'In production: with automatic mode on, it posts on its own whatever comes out clean, and only what fails the guardrails lands in the team’s queue, with a plain-language explanation. On rule-based decisions, which are most of the volume, measured accuracy came in above 97%.',
-    n1_m1v: '97.9%', n1_m1: 'accuracy on rule-based decisions, which are most of the volume. Measured over 30 days.',
-    n1_m2v: '99.3%', n1_m2: 'accuracy for suppliers with an established history.',
-    n1_m3v: '98.1%', n1_m3: 'accuracy in validation on invoices the robot had not seen.',
-    n1_m4v: '97 to 98%', n1_m4: 'accuracy on freight when the system decides, measured before go-live.',
-    n1_m5v: '38 days', n1_m5: 'from the start of the project to the first posting in production.',
+    n1_d5: 'Built the follow-up after posting: every correction made to an invoice is recorded and, since Oct 28, 2026, the production scorecard promotes or suspends rules by their measured accuracy.',
+    n1_d7: 'Built the post-posting audit: every invoice the hub posted against a purchase order is compared with the order as approved, and anything outside the numbers is flagged.',
+    n1_layers: 'The rules set by the Tax team come first, decided in code. Where the rules don’t reach, generative AI steps in, and posting still has to pass the simulation and the tax safeguards. When in doubt, the robot doesn’t post and records the reason in writing.',
+    n1_o1k: 'Assisted.', n1_o1: 'The robot decides, simulates and prepares the posting, and a person confirms it. It has been the production mode since August 2026.',
+    n1_o2k: 'Automatic, within limits.', n1_o2: 'With the mode on, the robot posts on its own whatever passes every safeguard, within the limits the company sets. The mode switch is audited.',
+    lbl_aictl: 'AI under control', n1_aictl: 'The deciding AI has no access to the ERP, has no tools and answers in a closed format. The system does the writing, with its own user, only for operations approved one by one, and never changes what Purchasing recorded. Freight bills use no AI; for purchase invoices, the fixed part of the instructions is cached, and a daily spending cap suspends calls.',
+    lbl_rollout: 'Rollout', n1_rollout: 'Rolled it out gradually. Before writing to production, the robot ran in shadow mode, deciding without writing, and every decision was compared with the team’s posting. Since August 2026 it has run in assisted mode: the robot prepares and checks every posting, and a person confirms it. Automatic mode is already built and audited, and it is switched on by invoice type once measured accuracy reaches the release bar.',
+    n1_how: 'Postings: the hub’s log, Aug 20 to Oct 28, 2026, excluding invoices deleted later. Time: by hand, a timed average of 5 min per invoice or freight bill; through the hub, 30 s, from the system’s log; 2,261 postings × 4.5 min ≈ 170 h. Freight with no correction: among the hub’s freight bills in the same period already rechecked against the ERP, those with no correction at all. Held invoices: those the robot blocked with the reason in writing, in the same period; risk avoided, counted separately. Measurements: the robot’s decision against the team’s posting, with period and base next to the figure. Checked against the database on Oct 28 and Oct 30, 2026.',
+    n1_res: 'In production since August 2026, in assisted mode, with more than 2,200 postings through the hub, on average 10 times faster than by hand. Whatever fails the safeguards is held back, with a plain-language explanation.',
+    n1_m1v: '97.9%', n1_m1: 'accuracy on decisions made by code, without AI, checked against the team’s postings in shadow mode and backtesting, Jul 26 to Aug 25, 2026 (n = 1,293, 82% of them freight bills).',
+    n1_m5v: '38 days', n1_m5: 'from project start, on Jul 13, 2026, to the first production posting, on Aug 20, 2026.',
     n1_t2: 'ASP.NET Core (background services)', n1_t3: 'SQL Server / T-SQL (transactions)', n1_t4: 'Generative AI API', n1_t6: 'NF-e and CT-e XML (Brazilian e-invoice and freight bill)',
 
-    p2l: 'The ERP did not issue the Debit Note from the sales order, nor did it link it to the sales invoice: every note was typed by hand. I delivered the automation in 9 days, and since August 2026 the company has issued and linked its notes with no typing, right at the start of Brazil’s tax reform requirement.',
-    n2_sit: 'Under Brazil’s tax reform, every customer prepayment now requires a debit note listing the order items, and the sales invoice has to reference it before it is transmitted to SEFAZ, the state tax authority. The note was typed item by item and the link to the sale was entered by hand. The automation spanned the Tax, Finance and Shipping teams and had to run inside the production ERP without disrupting invoicing.',
+    p2l: 'Brazil’s tax reform started requiring a debit note on prepayments, and the ERP did not yet offer a solution that would not hold up the sale. Nine days after the Tax team’s request, the system’s first note was authorized by SEFAZ, and since August 2026 the note has been built from the sales order and issued and linked to the sale by the system itself.',
+    n2_sit: 'Under Brazil’s tax reform, every customer prepayment now requires a debit note listing the order items, and the sales invoice has to reference it before it is transmitted to SEFAZ, the state tax authority. The automation spanned the Tax, Finance and Shipping teams and had to run inside the production ERP without disrupting invoicing.',
     n2_d1: 'Gathered requirements with the Tax, Finance and Shipping teams and built the automation.',
     n2_d2: 'Made the flow build the Debit Note from the order and the customer’s prepayment, already carrying the ERP’s official numbering.',
     n2_d3: 'Automated the submission to SEFAZ through the ERP itself, which still signs and transmits. The order only moves forward after authorization.',
     n2_d4: 'Had the link to the sales invoice written automatically, in time for transmission.',
-    n2_d7: 'Taught the flow to split one prepayment that covers several orders: each order gets the share proportional to its value and its own Debit Note. When the payment does not match the orders, no note is created and the case goes to the team’s review, with an email alert.',
+    n2_d7: 'Taught the flow to split one prepayment that covers several orders: each order gets the share proportional to its value and its own Debit Note. When the payment does not match the orders, no note is created and the system sends an email alert.',
     n2_d5: 'Validated everything before switching it on and left a switch to turn the automation off without a new release.',
-    n2_d6: 'Built the note-by-note check and the email alerts, and rewrote the queries: the review screen went from 25 s to 165 ms, and the linking routine now does about 18 times fewer database reads.',
-    n2_how: 'The review screen shows, note by note, what is linked, what is waiting for the sale and what is overdue. I measured that screen’s load time and the linking routine’s reads before and after the rewrite. Before applying the new query, I proved in read-only mode that it returned exactly the same rows as the old one.',
-    n2_res: 'It took 9 days from the Tax team’s request to the first note authorized by SEFAZ. Since August 2026 the company has issued and linked its notes with no typing: the team reviews instead of keying in, and exceptions stay with people.',
-    n2_b1k: 'Review screen load time',
-    n2_f1: 'Customer prepays the order', n2_f2: 'Debit note created in the ERP', n2_f3: 'Submission and SEFAZ authorization', n2_f4: 'Order moves forward', n2_f5: 'Link to the sales invoice', n2_f6: 'Note-by-note check',
+    n2_d6: 'Built the note-by-note dashboard and the email alerts, and rewrote the queries: with the rewrite, the dashboard load time dropped from 13 s to 0.1 s (median of real loads, Aug 2026), and the linking routine now does over 10 times fewer database reads (from 5.2M per run in September to 0.39M in October 2026).',
+    n2_how: 'Authorized and linked notes: the module’s log and SEFAZ’s response, Aug 13 to Oct 30, 2026; a link is a debit note reference that the system itself wrote into the sales invoice. Time to authorization: October 2026 median, from note creation to SEFAZ’s response. Dashboard and linking routine: measured before and after the rewrite, with read-only proof that the new query returned the same rows. Figures checked on Oct 30, 2026, against the database and the system’s access log.',
+    n2_res: 'It took 9 days from the Tax team’s request to the first note authorized by SEFAZ, from Aug 4 to Aug 13, 2026. Today, issuing and linking are done by the system itself, and the dashboard shows the status of every note.',
+    n2_b1k: 'Note-by-note dashboard load time, at the rewrite (median of real loads, Aug 2026)', n2_b1a: '13 s', n2_b1n: '0.1 s',
+    n2_f1: 'Customer prepays the order', n2_f2: 'Debit note created in the ERP', n2_f3: 'Submission and SEFAZ authorization', n2_f4: 'Order moves forward', n2_f5: 'Link to the sales invoice', n2_f6: 'Note-by-note dashboard',
     n2_t1: 'C# / .NET (background services)', n2_t2: 'SQL Server (T-SQL, stored procedures, SQL Agent)', n2_t3: 'ERP integration', n2_t5: 'ERP routine automation', n2_t6: 'HTML email',
 
     p3l: 'A complete CRM for companies, ready for multiple sales teams, that managers configure themselves: pipeline, cadences and goals are set up on screen, with no coding. Accounts, prospecting and bulk messaging live in one system, connected to the ERP, email and WhatsApp.',
@@ -2133,7 +2128,7 @@ html:not(.motion) .stack-btn{display:none}
     n9_d6: 'Kept the ERP read-only and email sending switched off by default, and every change records who, when and what.',
     n9_how: 'The initial load came from the Sales spreadsheet, which is the reference: the calculation rule is checked against it, item by item, before the system replaces the spreadsheet.',
     n9_res: 'Rolling out: the system is built and being connected to the ERP. In production, the purchase queue will tell what to buy, how much and by when, and the per-family spreadsheet steps aside.',
-    lbl_impacto: 'Impact for the business area', n2_i1n: '450+', n2_i1l: 'debit notes created by the hub since August, with no typing', n2_i2n: '390+', n2_i2l: 'linked to the sales invoice automatically', n2_i3n: '3 min', n2_i3l: 'from creation to SEFAZ authorization (October median)', n2_i4n: '9 days', n2_i4l: 'from the Tax team’s request to the first authorized note', n2_if: 'Gain for the company: the tax reform requirement was met without waiting for the ERP vendor, and prepaid sales never stalled. Issuing and linking happen on their own, on the server or through the robot on its own machine, with no typing and no risk of forgetting to cite the debit note on the sales invoice.', n1_i1n: '30 s', n1_i1l: 'to post a purchase invoice or a freight document through the hub; by hand it took 5 minutes on average', n1_i2n: '160+ h', n1_i2l: 'of typing saved across more than 2,200 ERP postings', n1_i3n: '95%', n1_i3l: 'of freight documents posted with no correction needed afterwards', n1_i4n: '100+', n1_i4l: 'invoices that did not add up handed back to the team with the reason, instead of being posted wrong', n1_if: 'Gain for the company: posting 10 times faster, 160+ hours given back to the team, fewer errors, and a process that no longer depends on a single person: what that person knew became system rules. The end goal: no one has to worry about posting.',
+    lbl_impacto: 'What the company gained', n2_i1n: 'Ahead of the ERP', n2_i1l: 'an in-house solution, with no customization cost, before the ERP offered one that would not hold up the sale', n2_i2n: '3 min', n2_i2l: 'from note creation to SEFAZ authorization (October 2026 median)', n2_i3n: '450+', n2_i3l: 'debit notes authorized by SEFAZ since Aug 13, 2026', n2_i4n: '400+', n2_i4l: 'linked to the sales invoice automatically, without anyone having to remember', n2_if: 'Gain for the company: it met the tax reform requirement with an in-house solution, with no customization paid to the ERP vendor. Issuing and linking are done by the system itself, and the dashboard shows, note by note, what the sale has already referenced and what is still pending.', n1_i1n: '2,200+', n1_i1l: 'inbound invoice and freight postings through the hub since August 2026', n1_i2n: '160+ h', n1_i2l: 'of typing saved on those postings: 5 min per invoice by hand vs. 30 s through the hub', n1_i3n: '95%', n1_i3l: 'of freight bills posted through the hub needed no correction afterwards', n1_i4n: '100+', n1_i4l: 'off-standard invoices held back by the robot, with the reason in writing', n1_if: 'Gain for the company: with no typing, invoices and freight bills now reach the ERP 10 times faster on average. What was known about posting each supplier became written system rules instead of depending on whoever knew how. The end goal: no one has to worry about posting.',
 
     eco_h: 'My working ecosystem',
     eco_lede: 'Every project left something behind for the next one: a memory, a rule, an assistant, a tool. I organized it the way I organize a system, and that is how each project became part of the ecosystem that supports the hub today.',

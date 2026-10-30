@@ -48,7 +48,9 @@
   };
   const ROT_MOTOR = { regra: [P('Regra da casa', 'House rule'), 'teal'], padrao: [P('Padrão do fornecedor', 'Supplier pattern'), 'cyan'], ia: [P('IA (caso ambíguo)', 'AI (ambiguous case)'), 'violet'] };
   const VISITANTE = P('Visitante (demonstração)', 'Visitor (demo)');
-  const QUEM = [P('robô (automático)', 'robot (automatic)'), P('Analista fiscal', 'Tax analyst'), P('Gestor do departamento', 'Department manager'), P('robô (só análise)', 'robot (analysis only)')];
+  const QUEM = [P('Analista fiscal (assistido pelo robô)', 'Tax analyst (assisted by the robot)'), P('Assistente fiscal (assistido pelo robô)', 'Tax assistant (assisted by the robot)'), P('Gestor do departamento (assistido pelo robô)', 'Department manager (assisted by the robot)'), P('robô (só análise)', 'robot (analysis only)')];
+  /* a produção roda no modo assistido: o robô prepara e confere, uma pessoa confirma; "robô (automático)" só aparece quando o visitante liga o automático */
+  const ROBO_AUTO = P('robô (automático)', 'robot (automatic)');
   const PADRAO = P('Fornecedor de padrão estável: o mesmo tipo e a mesma conta nas entradas recentes. Decidido por regra, sem IA.', 'Stable supplier pattern: the same type and account in recent entries. Decided by rule, no AI.');
   const PADRAO_CTE = P('Transportadora de padrão estável: decidido por regra, sem IA.', 'Carrier with a stable pattern: decided by rule, no AI.');
   /* lançamentos dos últimos 10 dias: [limpas, intactas até agora, corrigidas por uma pessoa] */
@@ -97,7 +99,7 @@
       ['F-0108', [80, 60], 'E10-A', 'G-2101', '28', -5, '09:20', 0],
     ].map(([cod, q, tp, conta, cond, dias, hora, quem, v]) => feita(nota(cod, q, tp, conta, cond, () => ({ analise: an('passou', 'padrao', [], PADRAO) })), dias, hora, quem, v));
     [['T-0201', 312.4, false, 0, '07:30'], ['T-0202', 845.1, false, -1, '08:10'], ['T-0203', 655.9, true, -2, '16:00']].forEach(([cod, valor, saida, dias, hora]) => feitas.push(feita(cte(cod, valor, saida, 0), dias, hora, 0)));
-    db = { notas: fila.concat(feitas), motor: { ligado: false, quem: QUEM[2], quando: A.data(-12, '13:52') },
+    db = { notas: fila.concat(feitas), motor: { ligado: false, quem: P('Gestor do departamento', 'Department manager'), quando: A.data(-12, '13:52') },
       atividade: P('produção em dia, vigiando pré-notas liberadas', 'production up to date, watching released pre-invoices') };
   }
   function feita(n, dias, hora, quem, veredito) {
@@ -121,30 +123,26 @@
       'The intelligent layer on top of the ERP that posts the company\'s inbound invoices and CT-es (freight bills): it decides, simulates before writing and, with automatic mode on, posts everything on its own.'),
     manual: {
       pt: {
-        destaque: 'A NF Autônoma é a camada inteligente sobre o ERP que lança as notas fiscais de entrada e os CT-es (fretes) da empresa. Com o modo automático ligado, a nota chega, é classificada e lançada sem ninguém digitar.',
-        oque: 'O problema. Lançar uma nota de entrada mexe em estoque, custo, impostos, livro fiscal, contas a pagar, ordem de compra e orçamento. Cada fornecedor tem um padrão próprio de tipo de operação, conta e condição de pagamento, e esse conhecimento ficava com quem digitava, não em regra de sistema. Duas áreas passavam pela mesma nota e parte dos fretes ficava sem vínculo com a mercadoria transportada.\n\nO que faz. Lê cada nota de entrada e cada CT-e, decide a classificação fiscal por regras e, no caso ambíguo, por IA, simula o lançamento e grava tudo em uma transação. Com o automático ligado, lança sozinha.\n\nNesta demonstração pública, o painel de lançamentos funciona com dados fictícios; as outras áreas aparecem no vídeo da versão completa.',
+        destaque: 'A NF Autônoma é a camada inteligente sobre o ERP que lança as notas fiscais de entrada e os CT-es (fretes) da empresa. Em produção desde agosto de 2026 no modo assistido, o robô prepara e confere cada lançamento, e uma pessoa confirma; com o modo automático ligado, a nota chega, é classificada e lançada sem ninguém digitar.',
+        oque: 'O problema. Lançar uma nota de entrada mexe em estoque, custo, impostos, livro fiscal, contas a pagar, ordem de compra e orçamento. Cada fornecedor tem um padrão próprio de tipo de operação, conta e condição de pagamento, e esse conhecimento ficava com quem digitava, não em regra de sistema. Duas áreas passavam pela mesma nota e parte dos fretes ficava sem vínculo com a mercadoria transportada.\n\nO que faz. Lê cada nota de entrada e cada CT-e, decide a classificação fiscal por regras e, no caso ambíguo, por IA, simula o lançamento e grava tudo em uma transação. O modo automático, em que ela lança sozinha, já está construído e auditado e entra por tipo de nota quando o acerto medido atinge a régua de liberação.\n\nNesta demonstração pública, o painel de lançamentos funciona com dados fictícios; as outras áreas aparecem no vídeo da versão completa.',
         finalidade: 'Segurança. Nada grava sem simulação limpa; na dúvida ele não lança e explica o motivo. Cada lançamento registra quem lançou, quando e por quê, e a verba nunca é contada duas vezes.\n\nO propósito é tirar da equipe fiscal a digitação repetitiva e deixá-la livre para o que exige julgamento.',
         alcance: [
-          'Resultado medido: acima de 97% de acerto nas decisões tomadas por regra, que são a maior parte do volume.',
-          'Resultado medido: 98,1% de acerto para fornecedores de padrão estável.',
-          'Resultado medido: 97% a 98% de acerto no frete, nos casos em que o sistema decide.',
-          'Cada número compara a decisão do sistema com o lançamento feito por uma pessoa.',
-          'Primeiro lançamento em produção 38 dias depois do início do projeto.',
-          'Conferência pós-lançamento: auditoria permanente, só de leitura, que compara cada nota lançada pelo robô com a ordem de compra como foi aprovada.',
+          'Em produção desde agosto de 2026, no modo assistido: mais de 2.200 lançamentos pelo hub até 28/10/2026, em média 10 vezes mais rápidos que à mão, e 95% dos fretes sem nenhuma correção depois.',
+          'Medido em modo sombra e teste retroativo, de 26/07 a 25/08/2026: 97,9% de acerto nas decisões feitas por código, sem IA, contra o lançamento da equipe (n = 1.293, 82% delas fretes).',
+          'Primeiro lançamento em produção em 20/08/2026, 38 dias depois do início do projeto.',
+          'Conferência pós-lançamento: auditoria permanente, só de leitura, que compara cada nota lançada pelo hub com a ordem de compra como foi aprovada.',
         ],
         tecnologias: ['C# / .NET', 'SQL Server', 'API de IA generativa', 'Next.js / React', 'XML de NF-e e CT-e'],
       },
       en: {
-        destaque: 'NF Autônoma is the intelligent layer on top of the ERP that posts the company\'s inbound invoices and CT-es (freight bills). With automatic mode on, the invoice arrives, is classified and posted with no one typing.',
-        oque: 'The problem. Posting an inbound invoice touches stock, cost, taxes, the fiscal book, accounts payable, the purchase order and the budget. Each supplier has its own pattern of operation type, account and payment terms, and that knowledge lived with whoever typed the invoice, not in a system rule. Two departments handled the same invoice and part of the freight had no link to the goods it carried.\n\nWhat it does. It reads every inbound invoice and every CT-e, decides the tax classification by rules and, in the ambiguous case, by AI, simulates the posting and writes everything in one transaction. With automatic mode on, it posts on its own.\n\nIn this public demo, the posting board works on fictitious data; the other areas appear in the video of the full version.',
+        destaque: 'NF Autônoma is the intelligent layer on top of the ERP that posts the company\'s inbound invoices and CT-es (freight bills). In production since August 2026 in assisted mode, the robot prepares and checks every posting and a person confirms it; with automatic mode on, the invoice arrives, is classified and posted with no one typing.',
+        oque: 'The problem. Posting an inbound invoice touches stock, cost, taxes, the fiscal book, accounts payable, the purchase order and the budget. Each supplier has its own pattern of operation type, account and payment terms, and that knowledge lived with whoever typed the invoice, not in a system rule. Two departments handled the same invoice and part of the freight had no link to the goods it carried.\n\nWhat it does. It reads every inbound invoice and every CT-e, decides the tax classification by rules and, in the ambiguous case, by AI, simulates the posting and writes everything in one transaction. Automatic mode, in which it posts on its own, is already built and audited, and it is switched on by invoice type once measured accuracy reaches the release bar.\n\nIn this public demo, the posting board works on fictitious data; the other areas appear in the video of the full version.',
         finalidade: 'Safety. Nothing is written without a clean simulation; when in doubt it does not post and explains why. Every posting records who posted, when and why, and the budget is never counted twice.\n\nThe purpose is to take repetitive typing off the tax team and leave it free for what needs judgment.',
         alcance: [
-          'Measured result: above 97% accuracy in rule-based decisions, which are most of the volume.',
-          'Measured result: 98.1% accuracy for suppliers with a stable pattern.',
-          'Measured result: 97% to 98% accuracy on freight, in the cases where the system decides.',
-          'Each figure compares the system decision with the posting made by a person.',
-          'First posting in production 38 days after the project started.',
-          'Post-posting check: a permanent, read-only audit that compares every invoice the robot posted with the purchase order as it was approved.',
+          'In production since August 2026, in assisted mode: more than 2,200 postings through the hub up to Oct 28, 2026, on average 10 times faster than by hand, and 95% of freight bills with no correction afterwards.',
+          'Measured in shadow mode and backtesting, Jul 26 to Aug 25, 2026: 97.9% accuracy on decisions made by code, without AI, against the team’s postings (n = 1,293, 82% of them freight bills).',
+          'First posting in production on Aug 20, 2026, 38 days after the project started.',
+          'Post-posting check: a permanent, read-only audit that compares every invoice the hub posted with the purchase order as it was approved.',
         ],
         tecnologias: ['C# / .NET', 'SQL Server', 'Generative AI API', 'Next.js / React', 'NF-e and CT-e XML'],
       },
@@ -160,12 +158,12 @@
       { alvo: '.nfa-real .n-gb .n-robo', titulo: P('Cada nota diz o que precisa', 'Every invoice says what it needs'),
         texto: P('Simulação limpa vira o botão Lançar. Se algo não bate, aparece Conferir com o motivo já escrito. Nada é gravado sem simulação limpa.',
           'A clean simulation becomes the Post button. If something does not match, Check appears with the reason already written. Nothing is written without a clean simulation.') },
-      { alvo: '.nfa-real [data-f="motor"]', titulo: P('O piloto automático', 'The autopilot'),
-        texto: P('Com o modo automático ligado, o robô lança sozinho tudo o que passar limpo. Quem ligou ou desligou fica registrado, com dia e hora.',
-          'With automatic mode on, the robot posts on its own everything that passes clean. Whoever turned it on or off is recorded, with date and time.') },
+      { alvo: '.nfa-real [data-f="motor"]', titulo: P('Assistido ou automático', 'Assisted or automatic'),
+        texto: P('Com o modo automático ligado, o robô lança sozinho tudo o que passar limpo. Desligado, vale o modo assistido, o que roda hoje na produção: o robô prepara e uma pessoa confirma. Quem ligou ou desligou fica registrado, com dia e hora.',
+          'With automatic mode on, the robot posts on its own everything that passes clean. When it is off, assisted mode applies, the one running in production today: the robot prepares and a person confirms. Whoever turned it on or off is recorded, with date and time.') },
       { alvo: '.nfa-real [data-f="aba-motor"]', acao: 'clicar', titulo: P('Regras, IA e custo', 'Rules, AI and cost'),
-        texto: P('O motor de regras da casa, o custo da IA, o assistente, os avisos por e-mail e a conferência pós-lançamento, que audita o que o robô gravou, moram nas outras áreas.',
-          'The house rules engine, the AI cost, the assistant, the email notices and the post-posting check, which audits what the robot wrote, live in the other areas.') },
+        texto: P('O motor de regras da casa, o custo da IA, o assistente, os avisos por e-mail e a conferência pós-lançamento, que audita o que o hub gravou, moram nas outras áreas.',
+          'The house rules engine, the AI cost, the assistant, the email notices and the post-posting check, which audits what the hub wrote, live in the other areas.') },
       { alvo: '.nfa-real .ph-fora', titulo: P('O resto está na versão completa', 'The rest is in the full version'),
         texto: P('No vídeo, o sistema completo em ação. Quer ver tudo funcionando de verdade? É só me chamar por aqui.',
           'The video shows the full system in action. Want to see it all running for real? Just reach me from here.') },
@@ -334,7 +332,7 @@
       aoConcluir: () => {
         alvo.forEach(n => { n.analise = { ...(n.ciclo || n.analise), estado: 'passou', quando: new Date() }; delete n.ciclo; });
         const auto = lig ? fila().filter(n => n.analise && n.analise.estado === 'passou' && n.doc === 'nfe') : [];
-        auto.forEach(n => marcarLancada(n, QUEM[0]));
+        auto.forEach(n => marcarLancada(n, ROBO_AUTO));
         db.atividade = PP(l => alvo.length + (l === 'pt' ? ' pré-nota(s) analisada(s) neste ciclo' : ' pre-invoice(s) analyzed in this cycle') + (auto.length ? (l === 'pt' ? ', ' + auto.length + ' lançada(s) pelo robô' : ', ' + auto.length + ' posted by the robot') : ''));
         pintar();
         ui.toast(PP(l => alvo.length + (l === 'pt' ? ' nota(s) analisada(s)' : ' invoice(s) analyzed')), 'ok');
@@ -380,7 +378,7 @@
     const leg = (k, txt) => h('span', { class: 'n-leg', style: { '--c': COR[k] } }, h('i', { style: 'opacity:' + OP[k] }), txt);
     return painel('p16',
       h('h3', { class: 'ph-h3' }, P('Lançamentos reais na produção, dia a dia', 'Real postings to production, day by day')),
-      h('p', { class: 'f105 t-dim', style: 'margin:2px 0 8px' }, P('o que o robô gravou no ERP e o que a conferência disse depois', 'what the robot wrote to the ERP and what the check said afterwards')),
+      h('p', { class: 'f105 t-dim', style: 'margin:2px 0 8px' }, P('o que o hub gravou no ERP e o que a conferência disse depois', 'what the hub wrote to the ERP and what the check said afterwards')),
       h('div', { class: 'rx' }, h('div', { class: 'n-curva', role: 'img', 'aria-label': P('Lançamentos por dia', 'Postings per day'), html: '<svg width="' + W + '" height="122" style="display:block">' + svg + '</svg>' })),
       h('div', { class: 'row', style: 'gap:14px;margin-top:8px' }, leg(0, P('conferida sem correção', 'checked, no correction')), leg(1, P('intacta até agora', 'untouched so far')), leg(2, P('uma pessoa corrigiu', 'a person corrected it'))));
   }
