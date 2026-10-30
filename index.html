@@ -673,6 +673,16 @@ html:not(.motion) .stack-btn{display:none}
   .stack-btn{display:none}
   .laser{display:none}
 }
+/* Resultado para a área: no topo da ficha, 2 a 4 cartões numa linha (4 viram 2x2 abaixo de 1280px; 1 coluna no celular) */
+.impacto-h{margin:22px 0 10px}
+.impacto{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:12px}
+.impacto > div{background:var(--ink);border:1px solid var(--line);border-left:4px solid var(--tape);padding:14px 16px 13px}
+.impacto b{display:block;font:800 clamp(2rem,3.4vw,2.9rem)/1 var(--f-d);letter-spacing:.01em;color:var(--tape);text-wrap:balance;overflow-wrap:break-word}
+.impacto:has(> :nth-child(4)) b{font-size:clamp(2rem,2.7vw,2.4rem)}
+.impacto span{display:block;margin-top:8px;font-size:1rem;line-height:1.4;color:var(--text)}
+.impacto-frase{margin:12px 0 0;max-width:62ch;font-size:1.0625rem;line-height:1.5;color:var(--paper)}
+@media (max-width:1279px){.impacto:has(> :nth-child(4)){grid-auto-flow:row;grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.impacto,.impacto:has(> :nth-child(4)){grid-auto-flow:row;grid-template-columns:minmax(0,1fr)}}
 </style>
 </head>
 <body id="top">
@@ -1011,7 +1021,7 @@ html:not(.motion) .stack-btn{display:none}
       <div class="hub-copy">
         <p data-i18n="hub_p1">Uma camada inteligente sobre o ERP: o cérebro que conecta fiscal, financeiro, comercial e RH, e automatiza o que o ERP sozinho não faz. Projetei e construí este portal interno na Robustec, onde antes os controles de cada área ficavam em planilhas e ferramentas separadas.</p>
         <p data-i18n="hub_p1b">Ele se integra ao ERP que a empresa já usa, mas não depende dele para existir: cadastros, regras, permissões, auditoria e rotinas moram no próprio hub. Se a empresa precisar, ele cresce para fazer o papel do ERP.</p>
-        <p data-i18n="hub_p2">Quase tudo conversa por ele. Cada sistema entra como um módulo, com um login só, 3 níveis de acesso, permissão por projeto e registro das ações críticas. Os nove projetos desta página vivem aqui dentro, e cada um dos 17 sistemas abre na demonstração.</p>
+        <p data-i18n="hub_p2">Quase tudo conversa por ele. Cada sistema entra como um módulo, com um login só, uma política de senha única que recusa senhas óbvias, 3 níveis de acesso, permissão por projeto e registro das ações críticas. Os nove projetos desta página vivem aqui dentro, e cada um dos 17 sistemas abre na demonstração.</p>
         <p data-i18n="hub_p3">Por trás, há 26 rotinas automáticas registradas em segundo plano, e parte delas integra o hub ao ERP. Como o banco do ERP é compartilhado com a empresa inteira, a primeira consulta que otimizo é a minha, e toda automação nasce com regras de consumo para não pesar no trabalho de ninguém.</p>
         <p data-i18n="hub_p4">O hub de demonstração tem um motor de temas no próprio código: três visuais únicos, cada um com um conceito, que trocam a interface inteira na hora. A Plaqueta, de etiqueta de patrimônio, o Rack de servidores e o Crachá de acesso, além de um modo de alto contraste para acessibilidade. Os sistemas seguem o mesmo visual do hub, dentro de uma moldura própria.</p>
       </div>
@@ -1163,6 +1173,16 @@ html:not(.motion) .stack-btn{display:none}
               <p class="ficha-line" data-i18n="p1l">A inteligência que lança no ERP as notas fiscais de entrada e os CT-es da empresa, do XML às contas a pagar. Ela decide em camadas, simula antes de gravar, mede o próprio acerto e, com o modo automático ligado, faz tudo sozinha.</p>
             </header>
             <div>
+              <h4 class="mini-h impacto-h" data-i18n="lbl_impacto">Resultado para a área</h4>
+              <div class="impacto">
+                <div><b data-i18n="n1_i1n">30 s</b><span data-i18n="n1_i1l">para lançar uma nota de compra ou um frete pelo hub; à mão, a média era de 5 minutos</span></div>
+                <div><b data-i18n="n1_i2n">+160 h</b><span data-i18n="n1_i2l">de digitação poupadas em mais de 2.200 lançamentos no ERP</span></div>
+                <div><b data-i18n="n1_i3n">95%</b><span data-i18n="n1_i3l">dos fretes lançados sem precisar de correção depois</span></div>
+                <div><b data-i18n="n1_i4n">+100</b><span data-i18n="n1_i4l">notas que não fechavam devolvidas à equipe com o motivo, em vez de entrarem erradas</span></div>
+              </div>
+              <p class="impacto-frase" data-i18n="n1_if">Ganho para a empresa: lançamento 10 vezes mais rápido, mais de 160 horas devolvidas à equipe, menos erro e um processo que não depende mais de uma única pessoa: o que ela sabia virou regra do sistema. O objetivo final é ninguém precisar se preocupar com lançamento.</p>
+            </div>
+            <div>
               <h4 class="mini-h" data-i18n="lbl_cycle">Ciclo completo</h4>
               <ol class="flow flow--lg">
                 <li><span class="flow-n" aria-hidden="true">01</span><span data-i18n="n1_f1">XML da nota e do frete</span></li>
@@ -1236,6 +1256,16 @@ html:not(.motion) .stack-btn{display:none}
               <h3 class="ficha-title" id="p2-h" data-i18n="p2n">Nota de Débito</h3>
               <p class="ficha-line" data-i18n="p2l">O ERP não emitia a Nota de Débito a partir do pedido nem a vinculava à nota de venda: cada nota era digitada à mão. Em 9 dias entreguei a automação, e desde agosto de 2026 a empresa emite e vincula sem digitação, logo no início da exigência da Reforma Tributária.</p>
             </header>
+            <div>
+              <h4 class="mini-h impacto-h" data-i18n="lbl_impacto">Resultado para a área</h4>
+              <div class="impacto">
+                <div><b data-i18n="n2_i1n">+450</b><span data-i18n="n2_i1l">Notas de Débito criadas pelo hub desde agosto, sem digitação</span></div>
+                <div><b data-i18n="n2_i2n">+390</b><span data-i18n="n2_i2l">vinculadas sozinhas à nota de venda</span></div>
+                <div><b data-i18n="n2_i3n">3 min</b><span data-i18n="n2_i3l">da criação à autorização na SEFAZ (mediana de outubro)</span></div>
+                <div><b data-i18n="n2_i4n">9 dias</b><span data-i18n="n2_i4l">do pedido da área fiscal à primeira nota autorizada</span></div>
+              </div>
+              <p class="impacto-frase" data-i18n="n2_if">Ganho para a empresa: a exigência da Reforma Tributária foi cumprida sem esperar o fornecedor do ERP, e a venda com pagamento antecipado não travou. Emissão e vínculo saem sozinhos, pelo servidor ou pelo robô em máquina própria, sem digitação e sem risco de esquecer de citar a ND na nota de venda.</p>
+            </div>
             <dl class="spec spec--split">
               <div class="sp-sit"><dt data-i18n="lbl_sit">Situação</dt><dd data-i18n="n2_sit">Com a Reforma Tributária, cada pagamento antecipado de cliente passou a exigir uma Nota de Débito com os itens do pedido, citada pela nota de venda antes da transmissão à SEFAZ. A nota era digitada item a item e o vínculo com a venda era informado à mão. A automação envolvia Fiscal, Financeiro e Expedição e precisava rodar dentro do ERP em produção, sem atrapalhar o faturamento.</dd></div>
               <div class="sp-did"><dt data-i18n="lbl_did">O que fiz</dt><dd><ol class="did">
@@ -1306,7 +1336,7 @@ html:not(.motion) .stack-btn{display:none}
                 <div><dt data-i18n="n3_k1">Kanban</dt><dd data-i18n="n3_v1">Cada vendedor tem o seu funil, com colunas e metas que a gestão configura.</dd></div>
                 <div><dt data-i18n="n3_k2">Cadências</dt><dd data-i18n="n3_v2">Réguas editáveis de prospecção e de recompra; as tarefas do dia aparecem prontas para cada vendedor.</dd></div>
                 <div><dt data-i18n="n3_k3">Prospects e nutrição</dt><dd data-i18n="n3_v3">O lead novo entra na régua de prospecção, e quem ainda não está pronto para comprar segue em nutrição.</dd></div>
-                <div><dt data-i18n="n3_k4">Disparo em massa</dt><dd data-i18n="n3_v4">E-mail e WhatsApp para vários contatos de uma vez, com modelos de mensagem e histórico registrado.</dd></div>
+                <div><dt data-i18n="n3_k4">Disparo em massa</dt><dd data-i18n="n3_v4">E-mail e WhatsApp para vários contatos de uma vez, com modelos de mensagem e histórico registrado. Cada contato recebe uma mensagem por envio, o número sai com o código do país do cadastro e o que não pode sair fica bloqueado, com o motivo à vista.</dd></div>
                 <div><dt data-i18n="n3_k5">Metas</dt><dd data-i18n="n3_v5">Metas por pessoa medidas no próprio sistema, ao lado do espelho dos números do ERP, com a origem de cada indicador à vista.</dd></div>
                 <div><dt data-i18n="n3_k6">IA generativa</dt><dd data-i18n="n3_v6">Escreve resumos do cliente e mensagens de acompanhamento em três idiomas.</dd></div>
                 <div><dt data-i18n="n3_k7">Mapa por país</dt><dd data-i18n="n3_v7">Um globo navegável mostra cada mercado, com as linhas de produto, os clientes e os prospects do país.</dd></div>
@@ -1379,8 +1409,8 @@ html:not(.motion) .stack-btn{display:none}
             <dl class="spec">
               <div><dt data-i18n="lbl_sit">Situação</dt><dd data-i18n="n4_sit">A reativação de clientes pelo WhatsApp dependia de uma ferramenta terceirizada, com a regra de quem recebia a mensagem fechada dentro dela e sem medir o retorno: quem respondeu, quem orçou, quem comprou. Projetei e construí um motor próprio dentro do hub, com a regra sob controle da empresa.</dd></div>
               <div><dt data-i18n="n4_k1">Análise da base</dt><dd data-i18n="n4_v1">Todo dia, o motor analisa a base de clientes do ERP e monta a fila de quem chamar de volta, por ordem de prioridade. O critério é da empresa, fica documentado e pode ser ajustado na tela, sem IA nessa etapa.</dd></div>
-              <div><dt data-i18n="n4_k2">Disparo e retorno</dt><dd data-i18n="n4_v2">A mensagem sai pelo WhatsApp oficial e a resposta volta para o hub. Orçamento, compra e perda são medidos contra o ERP, e a negociação segue com o vendedor da carteira.</dd></div>
-              <div><dt data-i18n="n4_k3">Prospecção</dt><dd><span data-i18n="n4_v3">Para quem ainda não é cliente, o motor busca prospects nos dados abertos de CNPJ da Receita Federal, com mais de 28 milhões de empresas ativas, filtrados pelo perfil de cliente que a empresa procura.</span> <span class="stamp" data-i18n="st_impl">Em implantação</span></dd></div>
+              <div><dt data-i18n="n4_k2">Disparo e retorno</dt><dd data-i18n="n4_v2">A mensagem sai pelo WhatsApp oficial e a resposta volta para o hub. Orçamento, compra e perda são medidos contra o ERP, e a negociação segue com o vendedor da carteira. No painel, os resultados da reativação e do atendimento com IA podem ser filtrados por linha comercial.</dd></div>
+              <div><dt data-i18n="n4_k3">Prospecção</dt><dd><span data-i18n="n4_v3">Para quem ainda não é cliente, o motor busca prospects nos dados abertos de CNPJ da Receita Federal, com mais de 28 milhões de empresas ativas, filtrados pelo perfil de cliente que a empresa procura. O retorno da prospecção tem aba própria nos resultados, contado pelo mês do disparo.</span> <span class="stamp" data-i18n="st_impl">Em implantação</span></dd></div>
               <div><dt data-i18n="n4_k4">Atendimento com IA</dt><dd data-i18n="n4_v4">Na integração de atendimento com IA, que já existia e passei a manter, criei uma trava que percebe quando a IA entra em loop e passa a conversa para uma pessoa. Na reexecução de um incidente real, as chamadas à IA caíram de 460 para 31. Também levei para uma tela do hub a lista que liga cada vendedor ao seu atendente.</dd></div>
               <div><dt data-i18n="p3n">AUTO CRM</dt><dd data-i18n="n4_talk">São sistemas separados que conversam: o lead de campanha captado pelo motor cai na caixa de leads novos do AUTO CRM, e o cliente reativado volta para o vendedor da carteira.</dd></div>
               <div><dt data-i18n="lbl_how">Como medi</dt><dd data-i18n="n4_how">Antes de desligar a ferramenta antiga, rodei o motor ao lado dela e comparei os clientes escolhidos, um a um. No painel, medi a etapa mais pesada antes e depois da reescrita e conferi que o resultado era idêntico. A trava anti-loop foi calibrada reexecutando o histórico real de conversas.</dd></div>
@@ -1434,14 +1464,14 @@ html:not(.motion) .stack-btn{display:none}
               <div class="sp-sit"><dt data-i18n="lbl_sit">Situação</dt><dd data-i18n="n5_sit">A pesquisa de clima vivia em formulário externo e planilha, e a apresentação à diretoria era montada à mão. Pesquisa com cliente não dizia quem tinha respondido. Projetei e construí um módulo com duas metades de regras opostas: a pesquisa da equipe é anônima, a de clientes é identificada.</dd></div>
               <div><dt data-i18n="n5_k1">Pesquisas, com respostas anônimas</dt><dd><ul class="feat">
                 <li data-i18n="n5_a1">Questionário montado pelo próprio setor, com seções, escala, matriz, múltipla escolha e texto livre.</li>
-                <li data-i18n="n5_a2">Distribuição por disparo pela plataforma de WhatsApp ou por link público. A resposta não fica ligada ao nome de quem respondeu.</li>
+                <li data-i18n="n5_a2">Distribuição por disparo pela plataforma de WhatsApp ou por link público. No disparo, o setor escolhe um dos seus próprios modelos de mensagem ao confirmar, e o envio corre em segundo plano. A resposta não fica ligada ao nome de quem respondeu.</li>
                 <li data-i18n="n5_a3">Relatório pronto, com favorabilidade por dimensão, eNPS e comparação com pesquisas anteriores.</li>
                 <li data-i18n="n5_a4">Apresentação montada a partir do resultado e exibida no próprio portal, ocultando perguntas e escolhendo os comentários que entram.</li>
                 <li data-i18n="n5_a5">Análise do texto livre com IA generativa, sem identificar quem respondeu.</li>
               </ul></dd></div>
               <div><dt data-i18n="n5_k2">Pesquisa identificada, para clientes</dt><dd><ul class="feat">
                 <li data-i18n="n5_i1">Link próprio de uso único para cada contato, e a lista de destinatários mostra quem já respondeu.</li>
-                <li data-i18n="n5_i2">Escala de 0 a 10 com NPS, e o link geral continua aceitando respostas sem identificação.</li>
+                <li data-i18n="n5_i2">Escala de 0 a 10 com NPS, com o convite e o formulário também em espanhol.</li>
                 <li data-i18n="n5_i3">Respostas por contato só no relatório interno, com exportação em CSV. Elas nunca vão para o link público dos resultados nem para a análise por IA.</li>
                 <li data-i18n="n5_i4">No setor de RH a pesquisa é sempre anônima: a identificação nem aparece como opção.</li>
                 <li><span data-i18n="n5_i5">As entrevistas de desligamento e as conversas de 30 e 90 dias, que nasceram aqui, hoje têm sistema próprio:</span> <a href="#p-gestao-pessoas" data-i18n="p8n">Gestão de Pessoas</a></li>
@@ -1515,9 +1545,9 @@ html:not(.motion) .stack-btn{display:none}
               <div class="sp-did"><dt data-i18n="lbl_did">O que fiz</dt><dd><ol class="did">
                   <li data-i18n="n8_d1">Levantei com o RH o caminho de cada conversa e projetei e construí o sistema, separado da Pesquisa de Clima: a pesquisa continua anônima, e aqui fica o que é registrado por pessoa.</li>
                   <li data-i18n="n8_d2">Criei a rotina que lê a folha a cada 4 horas, só para leitura: rescisão nova vira entrevista a preencher, admissão nova vira as conversas de 30 e 90 dias, e um índice único impede criar em dobro.</li>
-                  <li data-i18n="n8_d3">Montei os feedbacks semestrais por equipe, com a equipe vinda da folha e o gestor vindo do portal do colaborador. O próximo nasce agendado seis meses depois, e os avisos por e-mail nascem desligados.</li>
+                  <li data-i18n="n8_d3">Montei os feedbacks semestrais por equipe, com a equipe vinda da folha e o gestor vindo do portal do colaborador. O próximo nasce agendado seis meses depois, com as datas distribuídas no semestre, e os lembretes por e-mail nascem desligados e, quando ligados, saem só em dia útil.</li>
                   <li data-i18n="n8_d4">Fiz o perfil de permanência de cada cargo só com fatores ligados à função. A aderência ajuda a conversa e não elimina candidato, e atributos pessoais protegidos por lei não existem no sistema.</li>
-                  <li data-i18n="n8_d5">Criei um assistente do RH só de leitura, com uma lista fechada de consultas, recusa fixa para o que não é de RH e auditoria de cada pergunta. As análises por IA recebem só o agregado, sem nomes.</li>
+                  <li data-i18n="n8_d5">Criei um assistente do RH só de leitura, com conversas separadas que guardam o próprio contexto, uma lista fechada de consultas, recusa fixa para o que não é de RH e auditoria de cada pergunta. As análises por IA recebem só o agregado, sem nomes.</li>
                   <li data-i18n="n8_d6">Liguei o acesso à regra do hub: entra quem é do departamento dono, membro do projeto ou super administrador, conferido no servidor.</li>
                 </ol></dd></div>
               <div class="sp-how"><dt data-i18n="lbl_how">Como medi</dt><dd data-i18n="n8_how">Conferi a cobertura contra a própria folha: cada desligamento tem a sua entrevista, respondida ou marcada como não respondida, e a contagem do sistema bate com a da folha.</dd></div>
@@ -1906,7 +1936,7 @@ html:not(.motion) .stack-btn{display:none}
     hub_h: 'ProjectHub: the brain on top of the ERP',
     hub_p1: 'A smart layer on top of the ERP: the brain that connects tax, finance, sales and HR, and automates what the ERP alone does not do. I designed and built this internal portal at Robustec, where each department used to keep its controls in spreadsheets and separate tools.',
     hub_p1b: 'It integrates with the ERP the company already uses, but does not depend on it to exist: master data, rules, permissions, audit trail and routines live in the hub itself. If the company needs it, it can grow to take on the role of the ERP.',
-    hub_p2: 'Almost everything talks through it. Every system plugs in as a module, with a single login, 3 access levels, per-project permissions and an audit trail of critical actions. The nine projects on this page live inside it, and each of the 17 systems opens in the demo.',
+    hub_p2: 'Almost everything talks through it. Every system plugs in as a module, with a single login, one password policy that rejects obvious passwords, 3 access levels, per-project permissions and an audit trail of critical actions. The nine projects on this page live inside it, and each of the 17 systems opens in the demo.',
     hub_p3: 'Behind it are 26 registered background jobs, and some of them integrate the hub with the ERP. Since the ERP database is shared with the whole company, the first query I tune is my own, and every automation starts with usage rules so it never weighs on anyone’s work.',
     hub_p4: 'The demo hub has a theme engine built into its own code: three unique visuals, each with a concept, that switch the whole interface instantly. Asset tag, Server rack and Access badge, plus a high-contrast mode for accessibility. The systems follow the same visual as the hub, inside a frame of their own.',
     conv_h: 'How the systems talk to each other',
@@ -1998,7 +2028,7 @@ html:not(.motion) .stack-btn{display:none}
     n3_k1: 'Kanban', n3_v1: 'Each sales rep has their own pipeline, with columns and goals configured by management.',
     n3_k2: 'Cadences', n3_v2: 'Editable prospecting and repurchase cadences; the day’s tasks appear ready for each sales rep.',
     n3_k3: 'Prospects and nurturing', n3_v3: 'A new lead enters the prospecting cadence, and anyone not ready to buy yet stays in nurturing.',
-    n3_k4: 'Bulk messaging', n3_v4: 'Email and WhatsApp to many contacts at once, with message templates and a recorded history.',
+    n3_k4: 'Bulk messaging', n3_v4: 'Email and WhatsApp to many contacts at once, with message templates and a recorded history. Each contact gets one message per send, the number goes out with the country code from the record, and anything that cannot go out is blocked, with the reason shown.',
     n3_k5: 'Goals', n3_v5: 'Per-person goals measured in the system itself, next to a mirror of the ERP’s numbers, with the source of every indicator in plain sight.',
     n3_k6: 'Generative AI', n3_v6: 'Writes customer summaries and follow-up messages in three languages.',
     n3_k7: 'Map by country', n3_v7: 'A navigable globe shows each market, with the country’s product lines, customers and prospects.',
@@ -2019,8 +2049,8 @@ html:not(.motion) .stack-btn{display:none}
     n4_b2k: 'AI calls when replaying an incident',
     n4_sit: 'Re-engaging past customers over WhatsApp depended on a third-party tool, with the rule for who got a message locked inside it and no way to measure the return: who replied, who asked for a quote, who bought. I designed and built an in-house engine inside the hub, with the rule under the company’s control.',
     n4_k1: 'Base analysis', n4_v1: 'Every day, the engine analyzes the ERP’s customer base and builds the queue of who to call back, in priority order. The criteria belong to the company, are documented and can be adjusted on screen, with no AI at this stage.',
-    n4_k2: 'Sending and tracking', n4_v2: 'The message goes out through official WhatsApp and the reply comes back to the hub. Quotes, purchases and losses are measured against the ERP, and the negotiation stays with the account’s sales rep.',
-    n4_k3: 'Prospecting', n4_v3: 'For companies that are not customers yet, the engine looks for prospects in the Federal Revenue Service’s open company registry (CNPJ), with more than 28 million active companies, filtered by the customer profile the company is looking for.',
+    n4_k2: 'Sending and tracking', n4_v2: 'The message goes out through official WhatsApp and the reply comes back to the hub. Quotes, purchases and losses are measured against the ERP, and the negotiation stays with the account’s sales rep. On the dashboard, reactivation and AI support results can be filtered by sales line.',
+    n4_k3: 'Prospecting', n4_v3: 'For companies that are not customers yet, the engine looks for prospects in the Federal Revenue Service’s open company registry (CNPJ), with more than 28 million active companies, filtered by the customer profile the company is looking for. Prospecting returns have their own results tab, counted by the month of the send.',
     n4_k4: 'AI customer service', n4_v4: 'In the AI customer service integration, which already existed and which I took over, I built a guard that notices when the AI gets stuck in a loop and hands the conversation to a person. When I replayed a real incident, AI calls dropped from 460 to 31. I also moved the list that maps each sales rep to their agent into a screen in the hub.',
     n4_talk: 'Separate systems that talk to each other: a campaign lead captured by the engine lands in AUTO CRM’s new-leads inbox, and a reactivated customer goes back to the account’s sales rep.',
     n4_how: 'Before switching the old tool off, I ran the engine alongside it and compared the selected customers one by one. On the dashboard, I timed the heaviest step before and after the rewrite and checked that the result was identical. The loop guard was tuned by replaying the real conversation history.',
@@ -2032,13 +2062,13 @@ html:not(.motion) .stack-btn{display:none}
     n5_sit: 'The climate survey lived in an external form and a spreadsheet, and the presentation to senior management was assembled by hand. Customer surveys did not tell who had answered. I designed and built a module with two halves that follow opposite rules: the team survey is anonymous, the customer survey is identified.',
     n5_k1: 'Surveys, with anonymous answers',
     n5_a1: 'A questionnaire built by the department itself, with sections, scales, matrices, multiple choice and free text.',
-    n5_a2: 'Distribution by bulk message through the WhatsApp platform or by public link. The answer is not tied to the name of the person who gave it.',
+    n5_a2: 'Distribution by bulk message through the WhatsApp platform or by public link. When sending, the department picks one of its own message templates as it confirms, and the send runs in the background. The answer is not tied to the name of the person who gave it.',
     n5_a3: 'A ready-made report, with favorability by dimension, eNPS and comparison with past surveys.',
     n5_a4: 'A presentation built from the results and shown right in the portal, hiding questions and choosing which comments go in.',
     n5_a5: 'Free-text analysis with generative AI, without identifying who answered.',
     n5_k2: 'Identified survey, for customers',
     n5_i1: 'A single-use link of their own for each contact, and the recipient list shows who has already answered.',
-    n5_i2: 'A 0 to 10 scale with NPS, and the general link still accepts answers without identification.',
+    n5_i2: 'A 0 to 10 scale with NPS, with the invitation and the form also in Spanish.',
     n5_i3: 'Answers per contact only in the internal report, with CSV export. They never go to the public results link or to the AI analysis.',
     n5_i4: 'In the HR department the survey is always anonymous: identification is not even offered.',
     n5_i5: 'Exit interviews and 30 and 90-day conversations, which started here, now have a system of their own:',
@@ -2084,9 +2114,9 @@ html:not(.motion) .stack-btn{display:none}
     n8_sit: 'Exit interviews were done on paper and typed into a spreadsheet later. The 30 and 90-day conversations depended on remembering each hire date, the semiannual feedback lived in a spreadsheet per manager, and simple questions, such as who has vacation coming due, turned into report requests.',
     n8_d1: 'Mapped the path of each conversation with HR and designed and built the system, separate from the Climate Survey: the survey stays anonymous, and this is where what is recorded per person lives.',
     n8_d2: 'Built the routine that reads payroll every 4 hours, read-only: a new termination becomes an interview to fill in, a new hire becomes the 30 and 90-day conversations, and a unique index prevents duplicates.',
-    n8_d3: 'Built the semiannual feedback by team, with the team coming from payroll and the manager from the employee portal. The next one is scheduled six months later on its own, and the email reminders start switched off.',
+    n8_d3: 'Built the semiannual feedback by team, with the team coming from payroll and the manager from the employee portal. The next one is scheduled six months later on its own, with the dates spread across the semester, and the email reminders start switched off and, once on, go out only on business days.',
     n8_d4: 'Built the retention profile of each role only with factors tied to the job. The match helps the conversation and never rules a candidate out, and personal attributes protected by law do not exist in the system.',
-    n8_d5: 'Built a read-only HR assistant, with a closed list of lookups, a fixed refusal for anything outside HR and an audit trail of every question. The AI analyses receive only the aggregate, with no names.',
+    n8_d5: 'Built a read-only HR assistant, with separate conversations that keep their own context, a closed list of lookups, a fixed refusal for anything outside HR and an audit trail of every question. The AI analyses receive only the aggregate, with no names.',
     n8_d6: 'Tied access to the hub rule: the owning department, project members or a super admin get in, checked on the server.',
     n8_how: 'I checked coverage against payroll itself: every termination has its interview, answered or marked as not answered, and the system count matches the payroll count.',
     n8_res: 'In production: interviews and conversations are born from payroll, HR starts the day from the list of pending items by deadline and records instead of tracking dates, and every lookup and every write goes to the audit trail. The interview templates and follow-up criteria came from HR.',
@@ -2103,6 +2133,7 @@ html:not(.motion) .stack-btn{display:none}
     n9_d6: 'Kept the ERP read-only and email sending switched off by default, and every change records who, when and what.',
     n9_how: 'The initial load came from the Sales spreadsheet, which is the reference: the calculation rule is checked against it, item by item, before the system replaces the spreadsheet.',
     n9_res: 'Rolling out: the system is built and being connected to the ERP. In production, the purchase queue will tell what to buy, how much and by when, and the per-family spreadsheet steps aside.',
+    lbl_impacto: 'Impact for the business area', n2_i1n: '450+', n2_i1l: 'debit notes created by the hub since August, with no typing', n2_i2n: '390+', n2_i2l: 'linked to the sales invoice automatically', n2_i3n: '3 min', n2_i3l: 'from creation to SEFAZ authorization (October median)', n2_i4n: '9 days', n2_i4l: 'from the Tax team’s request to the first authorized note', n2_if: 'Gain for the company: the tax reform requirement was met without waiting for the ERP vendor, and prepaid sales never stalled. Issuing and linking happen on their own, on the server or through the robot on its own machine, with no typing and no risk of forgetting to cite the debit note on the sales invoice.', n1_i1n: '30 s', n1_i1l: 'to post a purchase invoice or a freight document through the hub; by hand it took 5 minutes on average', n1_i2n: '160+ h', n1_i2l: 'of typing saved across more than 2,200 ERP postings', n1_i3n: '95%', n1_i3l: 'of freight documents posted with no correction needed afterwards', n1_i4n: '100+', n1_i4l: 'invoices that did not add up handed back to the team with the reason, instead of being posted wrong', n1_if: 'Gain for the company: posting 10 times faster, 160+ hours given back to the team, fewer errors, and a process that no longer depends on a single person: what that person knew became system rules. The end goal: no one has to worry about posting.',
 
     eco_h: 'My working ecosystem',
     eco_lede: 'Every project left something behind for the next one: a memory, a rule, an assistant, a tool. I organized it the way I organize a system, and that is how each project became part of the ecosystem that supports the hub today.',

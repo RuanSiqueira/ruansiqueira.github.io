@@ -1,5 +1,5 @@
 /* Raio-X do cliente · versão pública curta do módulo de demonstração (id raio_x).
-   Busca por CNPJ ou CPF e mural de dez adesivos com o resumo do cliente pronto para a ligação. O sistema tem uma tela só, toda navegável,
+   Busca por CNPJ ou CPF e mural de onze adesivos com o resumo do cliente pronto para a ligação. O sistema tem uma tela só, toda navegável,
    sobre cinco clientes fictícios com resultados prontos (score, insights, próxima ação, resumo e script). Visual do kit do hub,
    nenhuma chamada de rede. Projetado e construído por Ruan Siqueira. */
 (() => {
@@ -27,7 +27,16 @@
     P('Câmbio pressionando o custo das matérias-primas', 'Exchange rate pushing up raw material costs'),
     P('Reposição e padronização são estratégicas', 'Restocking and standardization are strategic'),
   ];
-  const ORDEM_PADRAO = ['cliente', 'score', 'notas', 'financeiro', 'insights', 'proximaAcao', 'produtos', 'cenario', 'emDia', 'resumoIA'];
+  const ORDEM_PADRAO = ['cliente', 'score', 'notas', 'financeiro', 'insights', 'proximaAcao', 'produtos', 'cenario', 'emDia', 'resumoIA', 'situacao'];
+  /* situação do cliente (fase 0 = ativo; 1 a 3 = fases do churn), prioridade e último motivo registrado: fictícios, prontos por cliente */
+  const MOTIVO = {
+    fiel: P('Reposição combinada para o próximo mês', 'Restock agreed for next month'),
+    risco: P('Estoque ainda alto, pediu retorno em 30 dias', 'Stock still high, asked for a call back in 30 days'),
+    inadimplente: P('Aguardando a regularização dos títulos', 'Waiting for the receivables to be settled'),
+    sazonal: P('Compra concentrada no período de safra', 'Purchases concentrated in the harvest season'),
+    inativo: P('Sem necessidade no momento', 'No need at the moment'),
+  };
+  const PRIO = { alta: P('Alta', 'High'), media: P('Média', 'Medium'), baixa: P('Baixa', 'Low') };
   const NAO_CADASTRADO = '99999999000199';
   const FIN_OK = P('Situação financeira em dia, sem restrições para novas vendas', 'Finances up to date, no restrictions on new sales');
   const RECORRENTE = P('Padrão de recompra recorrente identificado', 'Recurring repurchase pattern identified');
@@ -38,7 +47,7 @@
   /* Clientes de exemplo com o resumo já pronto. dias = dias desde a última nota; notas: [dias atrás, valor]; lanc: títulos em aberto
      [vencimento em dias a partir de hoje, saldo]; prod: [produto, quantidade, total]. Nos textos, {nome}, {data} e {ticket} só recebem a formatação. */
   const CLIENTES = [
-    { cod: '000101', doc: '11111111000111', nome: 'Cliente Alfa Comércio Ltda', cidade: 'Porto Exemplo/RS', perfil: 'fiel', vend: 'Carlos Lima', dias: 9, ativo: true,
+    { cod: '000101', doc: '11111111000111', nome: 'Cliente Alfa Comércio Ltda', cidade: 'Porto Exemplo/RS', perfil: 'fiel', vend: 'Carlos Lima', dias: 9, ativo: true, fase: 0, prio: 'baixa',
       totalNotas: 12, total: 208150, ticket: 17345.83, score: 82, rotulo: 'otima', limiteOk: true, atraso: false,
       notas: [[9, 18412.36], [38, 17248.9], [69, 19095.12], [98, 16803.44], [130, 18897.6]], lanc: [],
       prod: [['kit', 604, 98400], ['desg', 314, 61300], ['ins', 496, 28800], ['fix', 396, 19650]],
@@ -47,7 +56,7 @@
       resumo: P('Cliente ativo e comprando regularmente. Ticket médio {ticket}. Situação financeira em dia. Foco em reposição de Kit padrão A.', 'Customer active and buying regularly. Average order {ticket}. Finances up to date. Focus on restocking Standard kit A.'),
       script: P('Olá, aqui é da Empresa Demo. Tudo bem? Vi que a {nome} comprou conosco em {data} e que o item que mais gira é o kit padrão A. Queria entender a necessidade atual de reposição e se posso ajudar a completar o pedido. Pode ser?',
         'Hello, I am calling from Demo Company. How are you? I saw that {nome} last ordered from us on {data} and that the item that moves the most is standard kit A. I would like to understand your current restocking need and whether I can help complete the order. Would that work?') },
-    { cod: '000103', doc: '33333333000133', nome: 'Cliente Gama Distribuidora Ltda', cidade: 'Serra Fictícia/SC', perfil: 'risco', vend: 'Carlos Lima', dias: 135, ativo: true,
+    { cod: '000103', doc: '33333333000133', nome: 'Cliente Gama Distribuidora Ltda', cidade: 'Serra Fictícia/SC', perfil: 'risco', vend: 'Carlos Lima', dias: 135, ativo: true, fase: 0, prio: 'media',
       totalNotas: 6, total: 85700, ticket: 14283.33, score: 52, rotulo: 'moderada', limiteOk: true, atraso: false,
       notas: [[135, 12388.2], [178, 14806.75], [219, 15297.1], [262, 13912.4], [301, 15094.55]], lanc: [],
       prod: [['desg', 268, 52100], ['fix', 438, 21700], ['ins', 205, 11900]],
@@ -56,7 +65,7 @@
       resumo: P('Cliente ativo com oportunidade de recompra. Ticket médio {ticket}. Situação financeira em dia. Foco em reposição de Peça de desgaste.', 'Customer active with a repurchase opportunity. Average order {ticket}. Finances up to date. Focus on restocking Wear part.'),
       script: P('Olá, aqui é da Empresa Demo. Tudo bem? Faz um tempo desde o último pedido da {nome}, em {data}, e queria saber como está o estoque de peça de desgaste. Posso preparar uma proposta de reposição?',
         'Hello, I am calling from Demo Company. How are you? It has been a while since the last order from {nome}, on {data}, and I wanted to check how your stock of wear parts is doing. Can I put together a restocking proposal?') },
-    { cod: '000104', doc: '44444444000144', nome: 'Cliente Delta Serviços Ltda', cidade: 'Vale Demonstração/SP', perfil: 'inadimplente', vend: 'Marcos Teixeira', dias: 75, ativo: true,
+    { cod: '000104', doc: '44444444000144', nome: 'Cliente Delta Serviços Ltda', cidade: 'Vale Demonstração/SP', perfil: 'inadimplente', vend: 'Marcos Teixeira', dias: 75, ativo: true, fase: 0, prio: 'media',
       totalNotas: 5, total: 53000, ticket: 10600, score: 41, rotulo: 'moderada', limiteOk: false, atraso: true,
       notas: [[75, 9812.3], [121, 11196.84], [166, 10405.12], [214, 12087.66], [259, 9498.08]], lanc: [[-45, 3270.77], [-15, 3270.77], [15, 3270.76]],
       prod: [['seg', 257, 24700], ['kit', 106, 17200], ['ins', 191, 11100]],
@@ -65,7 +74,7 @@
       resumo: P('Cliente ativo e comprando regularmente. Ticket médio {ticket}. Atenção para 2 títulos em atraso. Foco em reposição de Acessório de segurança.', 'Customer active and buying regularly. Average order {ticket}. Mind the 2 overdue receivables. Focus on restocking Safety accessory.'),
       script: P('Olá, aqui é da Empresa Demo. Tudo bem? Estava olhando o histórico da {nome}, a última compra foi em {data}. Antes de falarmos de reposição, queria alinhar com você os títulos em aberto. Podemos ver isso juntos?',
         'Hello, I am calling from Demo Company. How are you? I was looking at the history of {nome}, the last order was on {data}. Before we talk about restocking, I would like to go over the open receivables with you. Can we look at that together?') },
-    { cod: '000106', doc: '66666666000166', nome: 'Cliente Zeta Logística Ltda', cidade: 'Barra Exemplo/BA', perfil: 'inativo', vend: 'Marcos Teixeira', dias: 240, ativo: false,
+    { cod: '000106', doc: '66666666000166', nome: 'Cliente Zeta Logística Ltda', cidade: 'Barra Exemplo/BA', perfil: 'inativo', vend: 'Marcos Teixeira', dias: 240, ativo: false, fase: 1, prio: 'alta',
       totalNotas: 4, total: 32000, ticket: 8000, score: 28, rotulo: 'atencao', limiteOk: true, atraso: false,
       notas: [[240, 7604.5], [292, 8093.2], [351, 7911.8], [410, 8390.5]], lanc: [],
       prod: [['seg', 206, 19800], ['ins', 143, 8300], ['kit', 24, 3900]],
@@ -74,7 +83,7 @@
       resumo: P('Cliente inativo, necessita reativação. Ticket médio {ticket}. Situação financeira em dia. Foco em reposição de Acessório de segurança.', 'Customer inactive, needs to be won back. Average order {ticket}. Finances up to date. Focus on restocking Safety accessory.'),
       script: P('Olá, aqui é da Empresa Demo. Tudo bem? Faz alguns meses desde o último pedido da {nome}, em {data}. Preparamos uma condição especial para a volta, começando pelo acessório de segurança que vocês mais compravam. Posso te contar?',
         'Hello, I am calling from Demo Company. How are you? It has been a few months since the last order from {nome}, on {data}. We have a special deal for your return, starting with the safety accessory you used to buy the most. Can I tell you about it?') },
-    { cod: '000112', doc: '11122233300', nome: 'Produtor Sigma (pessoa física)', cidade: 'Campo Demonstração/RS', perfil: 'sazonal', vend: 'Paula Ribeiro', dias: 95, ativo: true,
+    { cod: '000112', doc: '11122233300', nome: 'Produtor Sigma (pessoa física)', cidade: 'Campo Demonstração/RS', perfil: 'sazonal', vend: 'Paula Ribeiro', dias: 95, ativo: true, fase: 0, prio: 'media',
       totalNotas: 3, total: 13000, ticket: 4333.33, score: 33, rotulo: 'atencao', limiteOk: false, atraso: true,
       notas: [[95, 4806.1], [452, 4297.35], [831, 3896.55]], lanc: [[-50, 2403.05]],
       prod: [['kit', 37, 6100], ['ins', 79, 4700], ['seg', 22, 2200]],
@@ -110,12 +119,13 @@
     manual: {
       pt: {
         destaque: 'O Raio-X do cliente é o resumo pronto para a ligação: o vendedor digita o CNPJ ou o CPF e recebe, em uma tela, o que precisa saber antes de pegar o telefone, com o script da abordagem a um clique. É uma tela do hub, a camada inteligente sobre o ERP.',
-        oque: 'O que é. Uma tela do hub em que o vendedor digita o CNPJ ou o CPF do cliente e recebe um mural de dez adesivos: cliente em destaque, score de oportunidade de 0 a 100, últimas notas fiscais, financeiro, insights rápidos, próxima ação recomendada, produtos mais comprados, leitura de cenário externo, títulos em aberto e o resumo. O botão "Iniciar abordagem" abre o script da ligação, pronto para copiar. Os adesivos podem ser arrastados para trocar de lugar.\n\nO problema. Preparar uma ligação exigia abrir várias telas do ERP: notas, itens, títulos e cadastro. Sem tempo para juntar tudo, o vendedor ligava sem saber há quantos dias o cliente não comprava, qual item mais girava ou se havia título vencido a resolver antes de oferecer algo novo.\n\nRegras, não IA generativa. Os textos da tela saem de regras explicáveis: o resultado sai na hora, não tem custo por consulta e nenhum dado de cliente vai para um serviço externo de IA.\n\nNesta demonstração. A tela funciona com cinco clientes fictícios de perfis diferentes e resultados prontos. Um rastro resumido mostra as etapas da consulta e uma janela de ERP simulado mostra o cliente e os itens faturados.',
+        oque: 'O que é. Uma tela do hub em que o vendedor digita o CNPJ ou o CPF do cliente e recebe um mural de onze adesivos: cliente em destaque, score de oportunidade de 0 a 100, últimas notas fiscais, financeiro, insights rápidos, próxima ação recomendada, produtos mais comprados, leitura de cenário externo, títulos em aberto, o resumo e a situação do cliente: ativo ou em churn por fase, com a prioridade e o último motivo registrado. O botão "Iniciar abordagem" abre o script da ligação, pronto para copiar. Os adesivos podem ser arrastados para trocar de lugar.\n\nO problema. Preparar uma ligação exigia abrir várias telas do ERP: notas, itens, títulos e cadastro. Sem tempo para juntar tudo, o vendedor ligava sem saber há quantos dias o cliente não comprava, qual item mais girava ou se havia título vencido a resolver antes de oferecer algo novo.\n\nRegras, não IA generativa. Os textos da tela saem de regras explicáveis: o resultado sai na hora, não tem custo por consulta e nenhum dado de cliente vai para um serviço externo de IA.\n\nNesta demonstração. A tela funciona com cinco clientes fictícios de perfis diferentes e resultados prontos. Um rastro resumido mostra as etapas da consulta e uma janela de ERP simulado mostra o cliente e os itens faturados.',
         finalidade: 'Para que serve. Fazer o vendedor chegar à conversa sabendo o que o cliente compra, há quanto tempo não compra e o que precisa ser resolvido antes de oferecer algo novo, em uma tela lida em um minuto.\n\nO que muda na rotina. A preparação da ligação deixa de ser uma busca em várias telas do ERP e passa a ser uma consulta pelo documento. O score ordena a prioridade, a próxima ação indica o caminho e o script dá a primeira fala.\n\nCuidados. A consulta é somente leitura: nada é gravado no ERP. O texto é apoio: o vendedor revisa e decide a abordagem.',
         alcance: [
           'Busca por CNPJ ou CPF com máscara automática',
           'Score de oportunidade de 0 a 100 com mostrador',
-          'Últimas notas, financeiro, produtos mais comprados e títulos em aberto em um mural de dez adesivos reordenáveis',
+          'Últimas notas, financeiro, produtos mais comprados e títulos em aberto em um mural de onze adesivos reordenáveis',
+          'Situação do cliente: ativo ou em churn por fase, prioridade e último motivo registrado',
           'Insights, próxima ação, resumo e script de ligação escritos por regras explicáveis, sem IA generativa',
           'Somente leitura: nenhuma gravação no ERP',
         ],
@@ -123,12 +133,13 @@
       },
       en: {
         destaque: 'Customer X-ray is the customer summary, ready for the call: the sales rep types in the tax ID and gets, on one screen, what they need to know before picking up the phone, with the call script one click away. It is a screen of the hub, the intelligent layer on top of the ERP.',
-        oque: 'What it is. A hub screen where the sales rep types in the customer tax ID (company CNPJ or personal CPF) and gets a board of ten sticky notes: featured customer, an opportunity score from 0 to 100, latest invoices, finances, quick insights, recommended next action, top products, a reading of the external scenario, open receivables and the summary. The "Start outreach" button opens the call script, ready to copy. The notes can be dragged to swap places.\n\nThe problem. Preparing a call meant opening several ERP screens: invoices, items, receivables and the customer record. With no time to put it together, the rep called without knowing how many days it had been since the last order, which item moved the most or whether an overdue receivable had to be settled before offering anything new.\n\nRules, not generative AI. The texts on the screen come from explainable rules: the answer is immediate, has no cost per lookup and no customer data goes to an outside AI service.\n\nIn this demo. The screen runs on five made-up customers with different profiles and ready results. A short trace shows the stages of the lookup and a simulated ERP window shows the customer and the billed items.',
+        oque: 'What it is. A hub screen where the sales rep types in the customer tax ID (company CNPJ or personal CPF) and gets a board of eleven sticky notes: featured customer, an opportunity score from 0 to 100, latest invoices, finances, quick insights, recommended next action, top products, a reading of the external scenario, open receivables, the summary and the customer status: active or churning by stage, with the priority and the last reason on record. The "Start outreach" button opens the call script, ready to copy. The notes can be dragged to swap places.\n\nThe problem. Preparing a call meant opening several ERP screens: invoices, items, receivables and the customer record. With no time to put it together, the rep called without knowing how many days it had been since the last order, which item moved the most or whether an overdue receivable had to be settled before offering anything new.\n\nRules, not generative AI. The texts on the screen come from explainable rules: the answer is immediate, has no cost per lookup and no customer data goes to an outside AI service.\n\nIn this demo. The screen runs on five made-up customers with different profiles and ready results. A short trace shows the stages of the lookup and a simulated ERP window shows the customer and the billed items.',
         finalidade: 'What it is for. Getting the sales rep into the conversation knowing what the customer buys, how long it has been since the last order and what has to be settled before offering anything new, on one screen that reads in a minute.\n\nWhat changes in the routine. Preparing a call stops being a hunt across several ERP screens and becomes a lookup by tax ID. The score sets the priority, the next action points the way and the script gives the opening line.\n\nSafeguards. The lookup is read-only: nothing is written to the ERP. The text is support: the rep reviews it and decides the approach.',
         alcance: [
           'Search by company or personal tax ID with an automatic mask',
           'Opportunity score from 0 to 100 with a gauge',
-          'Latest invoices, finances, top products and open receivables on a board of ten sticky notes that can be reordered',
+          'Latest invoices, finances, top products and open receivables on a board of eleven sticky notes that can be reordered',
+          'Customer status: active or churning by stage, priority and last reason on record',
           'Insights, next action, summary and call script written by explainable rules, with no generative AI',
           'Read-only: nothing is written to the ERP',
         ],
@@ -315,6 +326,7 @@
 
         const cor = token => 'var(--ph-' + token + ')';
         const fin = (ok, txt) => h('div', { class: 'ly-fin' }, ic(ok ? 'okc' : 'xc', ok ? 'i-ok' : 'i-no'), h('span', null, txt));
+        const tomFase = c.fase > 1 ? 'erro' : c.fase ? 'alerta' : 'ok';
 
         const CARTOES = {
           cliente: { cor: cor('cor-ambar'), icone: 'star', nome: P('Cliente em destaque', 'Featured customer'), corpo: () => [
@@ -360,6 +372,10 @@
           ] : e('p', 'ly-nada', ic('check', 'i-ok'), P('Sem lançamentos em aberto', 'No open entries'))) },
           resumoIA: { cor: cor('cor-verde'), icone: 'sparkles', span: true, nome: P('Resumo do Raio-X', 'X-ray summary'),
             corpo: () => e('p', 'ly-resumo', texto(c.resumo, c)) },
+          situacao: { cor: cor(tomFase), icone: 'usuario', largo: true, nome: P('Situação do cliente', 'Customer status'), corpo: () => h('div', { class: 'ly-sit' },
+            ui.badge(c.fase ? P('Em churn · fase ' + c.fase, 'Churning · stage ' + c.fase) : P('Ativo', 'Active'), tomFase),
+            e('span', null, P('Prioridade: ', 'Priority: '), h('strong', null, PRIO[c.prio])),
+            e('span', null, P('Último motivo registrado: ', 'Last reason on record: '), h('strong', null, MOTIVO[c.perfil]))) },
         };
 
         /* troca dois adesivos de lugar; pelo teclado, o foco acompanha o adesivo movido */
@@ -389,7 +405,7 @@
           const cartao = ui.cartao({ classe: 'ly-adesivo k-' + id, icone: IC[k.icone] || k.icone, titulo: k.titulo ? k.titulo() : k.nome,
             acoes: [k.acoes && k.acoes(), alca], conteudo: h('div', { class: 'ly-corpo' }, k.corpo()) });
           cartao.style.setProperty('--cor', k.cor);
-          const item = h('div', { class: 'ly-item' + (k.span ? ' span2' : '') + (anima ? ' entra ph-entrada' : ''), draggable: 'true', style: { '--i': i } }, cartao);
+          const item = h('div', { class: 'ly-item' + (k.span ? ' span2' : '') + (k.largo ? ' largo' : '') + (anima ? ' entra ph-entrada' : ''), draggable: 'true', style: { '--i': i } }, cartao);
           item.addEventListener('dragstart', ev => { arrastando = id; item.classList.add('some'); try { ev.dataTransfer.setData('text/plain', id); ev.dataTransfer.effectAllowed = 'move'; } catch (er) { /* sem dataTransfer */ } });
           item.addEventListener('dragend', () => { arrastando = null; item.classList.remove('some'); });
           item.addEventListener('dragover', ev => { if (arrastando) ev.preventDefault(); });
@@ -515,6 +531,7 @@
 .raiox-real .ly-grade{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:start}
 .raiox-real .ly-item{min-width:0;cursor:grab}
 .raiox-real .ly-item.span2{grid-column:span 2}
+.raiox-real .ly-item.largo{grid-column:1/-1}
 .raiox-real .ly-item.some{opacity:.4}
 @container (max-width:960px){.raiox-real .ly-grade{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @container (max-width:560px){.raiox-real .ly-grade{grid-template-columns:minmax(0,1fr)}.raiox-real .ly-item.span2{grid-column:span 1}}
@@ -552,6 +569,7 @@
 .raiox-real .ly-nf .vl{margin-left:auto;font-weight:600;color:var(--ph-text);font-variant-numeric:tabular-nums}
 .raiox-real .ly-fin,.raiox-real .ly-ins,.raiox-real .ly-cen{display:flex;align-items:flex-start;gap:8px;font-size:12.5px;color:var(--ph-text-2)}
 .raiox-real .ly-fin .ph-ico,.raiox-real .ly-ins .ph-ico,.raiox-real .ly-cen .ph-ico{margin-top:2px}
+.raiox-real .ly-sit{display:flex;flex-wrap:wrap;align-items:center;gap:8px 24px;font-size:12.5px;color:var(--ph-text-2)}
 .raiox-real .ly-acao{font-size:12.5px;line-height:1.6;color:var(--ph-text-2);margin-bottom:6px}
 .raiox-real .ly-abordar,.raiox-real .ly-copiar{width:100%}
 
