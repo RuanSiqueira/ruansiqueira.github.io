@@ -1201,6 +1201,7 @@ html:not(.motion) .stack-btn{display:none}
                 <li data-i18n="n1_d3">Criei a simulação: o plano completo do lançamento, com cada bloqueio explicado, sem gravar nada.</li>
                 <li data-i18n="n1_d8">Montei o treino retroativo: o robô refez em simulação notas de compra já lançadas, sem gravar nada, e comparou cada uma com o lançamento real. Onde errava, a IA propunha uma correção, que entrava em validação.</li>
                 <li data-i18n="n1_d4">Desenvolvi a gravação no ERP no modelo tudo ou nada: o lançamento completo entra de uma vez e, se um passo falha, nada é gravado.</li>
+                <li data-i18n="n1_d9">Fiz cada lançamento seguir o cadastro do ERP: o tratamento de estoque vem do tipo de operação da nota, o livro fiscal acompanha o movimento e, quando a operação não dá crédito de impostos, o custo não os desconta e, no material de uso e consumo, soma o IPI não recuperável, conferido com o XML do item.</li>
                 <li data-i18n="n1_d5">Criei o acompanhamento depois do lançamento: cada correção feita na nota fica registrada e, desde 28/10/2026, o placar de produção promove ou suspende as regras pelo acerto medido.</li>
                 <li><span data-i18n="n1_d7">Criei a conferência pós-lançamento: cada nota lançada pelo hub com ordem de compra é comparada com a ordem como foi aprovada, e o que sai da conta aparece destacado.</span></li>
               </ol></dd></div>
@@ -1333,10 +1334,10 @@ html:not(.motion) .stack-btn{display:none}
               <h4 class="mini-h" data-i18n="lbl_has">O que tem</h4>
               <dl class="spec spec--split">
                 <div><dt data-i18n="n3_k1">Kanban</dt><dd data-i18n="n3_v1">Cada vendedor tem o seu funil, com colunas e metas que a gestão configura.</dd></div>
-                <div><dt data-i18n="n3_k2">Cadências</dt><dd data-i18n="n3_v2">Réguas editáveis de prospecção e de recompra; as tarefas do dia aparecem prontas para cada vendedor.</dd></div>
+                <div><dt data-i18n="n3_k2">Cadências</dt><dd data-i18n="n3_v2">Réguas editáveis de prospecção e de recompra, com as tarefas de cada contato organizadas por data.</dd></div>
                 <div><dt data-i18n="n3_k3">Prospects e nutrição</dt><dd data-i18n="n3_v3">O lead novo entra na régua de prospecção, e quem ainda não está pronto para comprar segue em nutrição.</dd></div>
-                <div><dt data-i18n="n3_k4">Disparo em massa</dt><dd data-i18n="n3_v4">E-mail e WhatsApp para vários contatos de uma vez, com modelos de mensagem e histórico registrado. Cada contato recebe uma mensagem por envio, o número sai com o código do país do cadastro e o que não pode sair fica bloqueado, com o motivo à vista.</dd></div>
-                <div><dt data-i18n="n3_k5">Metas</dt><dd data-i18n="n3_v5">Metas por pessoa medidas no próprio sistema, ao lado do espelho dos números do ERP, com a origem de cada indicador à vista.</dd></div>
+                <div><dt data-i18n="n3_k4">Disparo em massa</dt><dd data-i18n="n3_v4">E-mail e WhatsApp para vários contatos de uma vez, com modelos de mensagem e histórico registrado. Cada contato recebe uma mensagem por envio, o número sai com o código do país do cadastro e o que não pode sair fica bloqueado.</dd></div>
+                <div><dt data-i18n="n3_k5">Metas</dt><dd data-i18n="n3_v5">Metas por pessoa medidas no próprio sistema, ao lado do espelho dos números do ERP, com a origem de cada indicador à vista. Uma pessoa pode reunir mais de um código de vendedor do ERP, a venda conta para o vendedor interno e para o externo sem dobrar o total do setor, e o histórico de um código que muda de dono continua no sistema.</dd></div>
                 <div><dt data-i18n="n3_k6">IA generativa</dt><dd data-i18n="n3_v6">Escreve resumos do cliente e mensagens de acompanhamento em três idiomas.</dd></div>
                 <div><dt data-i18n="n3_k7">Mapa por país</dt><dd data-i18n="n3_v7">Um globo navegável mostra cada mercado, com as linhas de produto, os clientes e os prospects do país.</dd></div>
               </dl>
@@ -1346,7 +1347,7 @@ html:not(.motion) .stack-btn{display:none}
               <div><dt data-i18n="lbl_did">O que fiz</dt><dd><ol class="did">
                 <li data-i18n="n3_d1">Levantei com a equipe comercial como a carteira e a prospecção funcionavam e projetei e construí o sistema, do banco de dados à tela.</li>
                 <li data-i18n="n3_d2">Deixei a gestão no controle: colunas, metas, cadências, etiquetas e modelos de mensagem são configurados na tela, sem programar.</li>
-                <li data-i18n="n3_d3">Troquei a memória por regra: o sistema lembra o próximo contato de cada cliente e não deixa ninguém esquecido.</li>
+                <li data-i18n="n3_d3">Troquei a memória por regra: cada contato registrado marca a data do próximo, e o cliente com retorno vencido volta para a fila do vendedor.</li>
                 <li data-i18n="n3_d4">Liguei o sistema ao ERP por um espelho local: ele lê vendas e metas por sincronização e nunca grava no ERP.</li>
                 <li data-i18n="n3_d5">Integrei o envio pelo e-mail de cada vendedor e pela plataforma de WhatsApp, e a IA generativa com roteiros editáveis na própria tela.</li>
               </ol></dd></div>
@@ -1536,18 +1537,20 @@ html:not(.motion) .stack-btn{display:none}
                   <li><span class="flow-n" aria-hidden="true">03</span><span data-i18n="n8_f3">Pendência no Início, por prazo</span></li>
                   <li><span class="flow-n" aria-hidden="true">04</span><span data-i18n="n8_f4">RH conversa e registra</span></li>
                   <li><span class="flow-n" aria-hidden="true">05</span><span data-i18n="n8_f5">Retorno ao gestor</span></li>
-                  <li><span class="flow-n" aria-hidden="true">06</span><span data-i18n="n8_f6">Indicadores e análises</span></li>
+                  <li><span class="flow-n" aria-hidden="true">06</span><span data-i18n="n8_f6">Painéis e análises</span></li>
                 </ol>
               </div>
             <dl class="spec spec--split">
               <div class="sp-sit"><dt data-i18n="lbl_sit">Situação</dt><dd data-i18n="n8_sit">As entrevistas de desligamento eram feitas no papel e digitadas depois numa planilha. As conversas de 30 e 90 dias dependiam de lembrar a data de cada admissão, os feedbacks semestrais ficavam numa planilha por gestor, e perguntas simples, como quem está com férias a vencer, viravam pedido de relatório.</dd></div>
               <div class="sp-did"><dt data-i18n="lbl_did">O que fiz</dt><dd><ol class="did">
                   <li data-i18n="n8_d1">Levantei com o RH o caminho de cada conversa e projetei e construí o sistema, separado da Pesquisa de Clima: a pesquisa continua anônima, e aqui fica o que é registrado por pessoa.</li>
-                  <li data-i18n="n8_d2">Criei a rotina que lê a folha a cada 4 horas, só para leitura: rescisão nova vira entrevista a preencher, admissão nova vira as conversas de 30 e 90 dias, e um índice único impede criar em dobro.</li>
+                  <li data-i18n="n8_d2">Criei a rotina que lê a folha a cada 4 horas, só para leitura: rescisão nova vira entrevista a preencher, quem é admitido em contrato de experiência entra na fila da conversa de 30 dias desde a admissão, e concluir a de 30 já abre a de 90. Um índice único impede criar em dobro.</li>
                   <li data-i18n="n8_d3">Montei os feedbacks semestrais por equipe, com a equipe vinda da folha e o gestor vindo do portal do colaborador. O próximo nasce agendado seis meses depois, com as datas distribuídas no semestre, e os lembretes por e-mail nascem desligados e, quando ligados, saem só em dia útil.</li>
                   <li data-i18n="n8_d4">Fiz o perfil de permanência de cada cargo só com fatores ligados à função. A aderência ajuda a conversa e não elimina candidato, e atributos pessoais protegidos por lei não existem no sistema.</li>
                   <li data-i18n="n8_d5">Criei um assistente do RH só de leitura, com conversas separadas que guardam o próprio contexto, uma lista fechada de consultas, recusa fixa para o que não é de RH e auditoria de cada pergunta. As análises por IA recebem só o agregado, sem nomes.</li>
                   <li data-i18n="n8_d6">Liguei o acesso à regra do hub: entra quem é do departamento dono, membro do projeto ou super administrador, conferido no servidor.</li>
+                  <li data-i18n="n8_d7">Redesenhei os painéis do RH para leitura rápida: os indicadores principais vêm comparados com o período anterior, e motivos, setores, cargos e tempo de casa aparecem em gráficos. Nos acompanhamentos, a fila filtra pelo marco de 30 ou 90 dias, e o relatório, pela classificação do último acompanhamento concluído.</li>
+                  <li data-i18n="n8_d8">Incluí a ajuda no próprio sistema: um tour guiado pelas telas, passo a passo, e manuais da rotina do RH, do que o sistema faz por conta própria, de quem pode o quê e de onde vem cada dado.</li>
                 </ol></dd></div>
               <div class="sp-how"><dt data-i18n="lbl_how">Como medi</dt><dd data-i18n="n8_how">Conferi a cobertura contra a própria folha: cada desligamento tem a sua entrevista, respondida ou marcada como não respondida, e a contagem do sistema bate com a da folha.</dd></div>
               <div class="sp-res"><dt data-i18n="lbl_res">Resultado</dt><dd class="res" data-i18n="n8_res">Em produção: as entrevistas e as conversas nascem da folha, o RH abre o dia pela lista de pendências por prazo e registra em vez de controlar datas, e cada consulta e cada escrita ficam na auditoria. Os modelos de entrevista e os critérios de acompanhamento vieram do RH.</dd></div>
@@ -1654,7 +1657,7 @@ html:not(.motion) .stack-btn{display:none}
             <div>
               <h4 class="mini-h" data-i18n="lbl_cycle">Ciclo completo</h4>
               <ol class="flow">
-                <li><span class="flow-n" aria-hidden="true">01</span><span data-i18n="n7_f1">Grade de contas vinda do ERP</span></li>
+                <li><span class="flow-n" aria-hidden="true">01</span><span data-i18n="n7_f1">Contas do ano liberadas na tela</span></li>
                 <li><span class="flow-n" aria-hidden="true">02</span><span data-i18n="n7_f2">Gestor preenche mês a mês</span></li>
                 <li><span class="flow-n" aria-hidden="true">03</span><span data-i18n="n7_f3">Envio para aprovação</span></li>
                 <li><span class="flow-n" aria-hidden="true">04</span><span data-i18n="n7_f4">Aprova, devolve ou reabre</span></li>
@@ -1670,7 +1673,8 @@ html:not(.motion) .stack-btn{display:none}
                 <li data-i18n="n7_d3">Poupei digitação: um valor se repete até dezembro com um clique, e o gestor abre na hora outra conta gerencial quando precisa.</li>
                 <li data-i18n="n7_d4">Criei o caminho da aprovação: o gestor envia, e quem cuida do orçamento aprova, devolve, ajusta ou reabre, com cada passo guardado no histórico daquele orçamento.</li>
                 <li data-i18n="n7_d5">Criei a solicitação de verba: um gestor pede para usar a conta de outro, o dono aprova ou recusa e acompanha o saldo da conta a cada pedido.</li>
-                <li data-i18n="n7_d6">Refiz a primeira versão do zero, mais simples, quando vi que ela pedia cadastros que ninguém precisava manter. O prazo virou um interruptor por ano.</li>
+                <li data-i18n="n7_d6">Refiz a primeira versão do zero, mais simples, quando vi que ela pedia cadastros que ninguém precisava manter. O prazo virou um interruptor por ano, e as contas viraram uma lista única por ano, igual para todos os gestores, com cada conta liberada ou bloqueada na tela.</li>
+                <li data-i18n="n7_d7">Agilizei o preenchimento: a busca localiza a conta pelo código, uma conta gerencial sai do orçamento pela lixeira e fica registrada no histórico, e a confirmação do salvamento automático, o total e o envio para aprovação ficam numa barra fixa no rodapé.</li>
               </ol></dd></div>
               <div class="sp-how"><dt data-i18n="lbl_how">Como medi</dt><dd data-i18n="n7_how">Antes de escolher de onde viria o realizado de referência, comparei a planilha de uma gestora com as fontes do ERP, célula por célula, e fiquei com a que batia ao centavo. A mesma comparação mostrou que a planilha mudava de critério no meio do ano; no sistema, o critério é um só.</dd></div>
               <div class="sp-res"><dt data-i18n="lbl_res">Resultado</dt><dd class="res" data-i18n="n7_res">O orçamento do ano saiu da planilha e passou a viver no hub: cada gestor preenche e envia o seu, quem aprova acompanha todos num só lugar, e cada pedido de verba entre gestores fica registrado com quem pediu, quanto e quem decidiu. Nenhum e-mail é disparado e nada é escrito no ERP.</dd></div>
@@ -1993,6 +1997,7 @@ html:not(.motion) .stack-btn{display:none}
     n1_d3: 'Built the simulation: the full posting plan, with every blocker explained and nothing written.',
     n1_d8: 'Set up training on past invoices: the robot replayed already-posted purchase invoices in simulation, writing nothing, and compared each one with the actual posting. Where it got one wrong, the AI proposed a correction, which started under validation.',
     n1_d4: 'Built the ERP posting as all or nothing: the complete posting goes in at once and, if any step fails, nothing is written.',
+    n1_d9: 'Made every posting follow the ERP setup: stock handling comes from the invoice’s operation type, the tax ledger follows the stock movement and, when the operation carries no tax credit, cost does not deduct those taxes and, on goods for internal use, adds the non-recoverable IPI, checked against the item’s XML.',
     n1_d5: 'Built the follow-up after posting: every correction made to an invoice is recorded and, since Oct 28, 2026, the production scorecard promotes or suspends rules by their measured accuracy.',
     n1_d7: 'Built the post-posting audit: every invoice the hub posted against a purchase order is compared with the order as approved, and anything outside the numbers is flagged.',
     n1_layers: 'Rules decided in code, with no AI, come first. Where the rules don’t reach, generative AI steps in, and posting still has to pass the simulation and the tax safeguards. When in doubt, the robot doesn’t post and records the reason in writing.',
@@ -2023,16 +2028,16 @@ html:not(.motion) .stack-btn{display:none}
 
     p3l: 'A complete CRM for companies, ready for multiple sales teams, that managers configure themselves: pipeline, cadences and goals are set up on screen, with no coding. Accounts, prospecting and bulk messaging live in one system, connected to the ERP, email and WhatsApp.',
     n3_k1: 'Kanban', n3_v1: 'Each sales rep has their own pipeline, with columns and goals configured by management.',
-    n3_k2: 'Cadences', n3_v2: 'Editable prospecting and repurchase cadences; the day’s tasks appear ready for each sales rep.',
+    n3_k2: 'Cadences', n3_v2: 'Editable prospecting and repurchase cadences, with each contact’s tasks laid out by date.',
     n3_k3: 'Prospects and nurturing', n3_v3: 'A new lead enters the prospecting cadence, and anyone not ready to buy yet stays in nurturing.',
-    n3_k4: 'Bulk messaging', n3_v4: 'Email and WhatsApp to many contacts at once, with message templates and a recorded history. Each contact gets one message per send, the number goes out with the country code from the record, and anything that cannot go out is blocked, with the reason shown.',
-    n3_k5: 'Goals', n3_v5: 'Per-person goals measured in the system itself, next to a mirror of the ERP’s numbers, with the source of every indicator in plain sight.',
+    n3_k4: 'Bulk messaging', n3_v4: 'Email and WhatsApp to many contacts at once, with message templates and a recorded history. Each contact gets one message per send, the number goes out with the country code from the record, and anything that cannot go out is blocked.',
+    n3_k5: 'Goals', n3_v5: 'Per-person goals measured in the system itself, next to a mirror of the ERP’s numbers, with the source of every indicator in plain sight. One person can hold more than one ERP sales-rep code, a sale counts for both the inside and the outside rep without doubling the team total, and a code’s history stays in the system when it changes hands.',
     n3_k6: 'Generative AI', n3_v6: 'Writes customer summaries and follow-up messages in three languages.',
     n3_k7: 'Map by country', n3_v7: 'A navigable globe shows each market, with the country’s product lines, customers and prospects.',
     n3_sit: 'The account list, the contact history and the notes on each customer lived in spreadsheets, one per rep. There was no follow-up clock, and email and WhatsApp messages went out one at a time. The system started with the export team, which is why it speaks Portuguese, Spanish and English.',
     n3_d1: 'Worked with the sales team to map how accounts and prospecting ran, then designed and built the system, from the database to the screen.',
     n3_d2: 'Left management in control: columns, goals, cadences, tags and message templates are all set up on screen, with no coding.',
-    n3_d3: 'Traded memory for rules: the system remembers each customer’s next contact and lets no one fall through the cracks.',
+    n3_d3: 'Traded memory for rules: every logged contact sets the date of the next one, and a customer past their follow-up date goes back to the sales rep’s queue.',
     n3_d4: 'Connected it to the ERP through a local mirror: it reads sales and goals by sync and never writes to the ERP.',
     n3_d5: 'Integrated sending through each rep’s own email and through the WhatsApp platform, plus generative AI with prompts that can be edited on screen.',
     n3_talk: 'Separate systems that talk to each other: a campaign lead captured by the engine lands in AUTO CRM’s new-leads inbox, and a reactivated customer goes back to the account’s sales rep.',
@@ -2093,28 +2098,31 @@ html:not(.motion) .stack-btn{display:none}
     n6_t2: 'ASP.NET Core (background service)', n6_t5: 'JavaScript ES5 (TV page)', n6_t7: 'Windows in kiosk mode',
 
     p7l: 'The company’s annual budget, built with the managers inside the hub. Each one fills in their accounts month by month, with last year’s actuals as a reference, and submits it for approval. During the year, a manager can request budget from another’s account, and the account owner makes the call.',
-    n7_f1: 'Account grid from the ERP', n7_f2: 'Manager fills in month by month', n7_f3: 'Submitted for approval', n7_f4: 'Approve, return or reopen', n7_f5: 'Year’s budget approved', n7_f6: 'Budget requests between managers',
+    n7_f1: 'Year’s accounts released on screen', n7_f2: 'Manager fills in month by month', n7_f3: 'Submitted for approval', n7_f4: 'Approve, return or reopen', n7_f5: 'Year’s budget approved', n7_f6: 'Budget requests between managers',
     n7_sit: 'Each manager built the year’s budget in a spreadsheet of their own, with last year’s actuals copied alongside. The spreadsheets went around by email, came back for changes and were consolidated by hand, and there was no single place to see who had already sent theirs, what was approved and how much each account still had left to use.',
     n7_d1: 'Worked with Finance to map how the spreadsheet was put together, then designed and built the system, from the database to the screen.',
     n7_d2: 'Replaced the spreadsheet with an accounts-by-month grid inside the hub, with last year’s actuals alongside, read from the ERP without writing anything to it.',
     n7_d3: 'Cut down the typing: a value carries through to December in one click, and the manager can open another management account on the spot when needed.',
     n7_d4: 'Built the approval path: the manager submits, and whoever runs the budget approves, returns, adjusts or reopens it, with every step kept in that budget’s history.',
     n7_d5: 'Built budget requests: a manager asks to use another’s account, and the owner approves or declines and follows the account’s balance with every request.',
-    n7_d6: 'Rebuilt the first version from scratch, simpler, when I saw it asked for setup nobody needed to maintain. The deadline became one switch per year.',
+    n7_d6: 'Rebuilt the first version from scratch, simpler, when I saw it asked for setup nobody needed to maintain. The deadline became one switch per year, and the accounts became a single list per year, the same for every manager, with each account released or blocked on screen.',
+    n7_d7: 'Streamlined filling in: search finds an account by its code, a management account leaves the budget through the trash icon and stays in the history, and the autosave confirmation, the total and the submit-for-approval button sit in a fixed bar at the bottom.',
     n7_how: 'Before choosing where the reference actuals would come from, I compared one manager’s spreadsheet with the ERP’s sources, cell by cell, and kept the one that matched to the cent. The same comparison showed the spreadsheet changed its criteria mid-year; in the system, there is only one.',
     n7_res: 'The year’s budget left the spreadsheet and now lives in the hub: each manager fills in and submits their own, the approver follows them all in one place, and every budget request between managers is recorded with who asked, how much and who decided. No email is sent and nothing is written to the ERP.',
     n7_t3: 'SQL Server / T-SQL (transactions)', n7_t5: 'ERP integration (read-only)',
 
     ar_rhm: 'HR · Marketing',
     p8l: 'The HR system inside the hub. Payroll leads: when it shows a termination or a hire, the system creates the exit interview and the 30 and 90-day conversations on its own, and HR records what was said.',
-    n8_f1: 'Termination or hire in payroll', n8_f2: 'Routine creates the record', n8_f3: 'Pending item on the home screen, by deadline', n8_f4: 'HR talks and records', n8_f5: 'Feedback to the manager', n8_f6: 'Indicators and analyses',
+    n8_f1: 'Termination or hire in payroll', n8_f2: 'Routine creates the record', n8_f3: 'Pending item on the home screen, by deadline', n8_f4: 'HR talks and records', n8_f5: 'Feedback to the manager', n8_f6: 'Dashboards and analyses',
     n8_sit: 'Exit interviews were done on paper and typed into a spreadsheet later. The 30 and 90-day conversations depended on remembering each hire date, the semiannual feedback lived in a spreadsheet per manager, and simple questions, such as who has vacation coming due, turned into report requests.',
     n8_d1: 'Mapped the path of each conversation with HR and designed and built the system, separate from the Climate Survey: the survey stays anonymous, and this is where what is recorded per person lives.',
-    n8_d2: 'Built the routine that reads payroll every 4 hours, read-only: a new termination becomes an interview to fill in, a new hire becomes the 30 and 90-day conversations, and a unique index prevents duplicates.',
+    n8_d2: 'Built the routine that reads payroll every 4 hours, read-only: a new termination becomes an interview to fill in, anyone hired on a probationary contract enters the 30-day conversation queue from the hiring date, and closing the 30-day conversation opens the 90-day one right away. A unique index prevents duplicates.',
     n8_d3: 'Built the semiannual feedback by team, with the team coming from payroll and the manager from the employee portal. The next one is scheduled six months later on its own, with the dates spread across the semester, and the email reminders start switched off and, once on, go out only on business days.',
     n8_d4: 'Built the retention profile of each role only with factors tied to the job. The match helps the conversation and never rules a candidate out, and personal attributes protected by law do not exist in the system.',
     n8_d5: 'Built a read-only HR assistant, with separate conversations that keep their own context, a closed list of lookups, a fixed refusal for anything outside HR and an audit trail of every question. The AI analyses receive only the aggregate, with no names.',
     n8_d6: 'Tied access to the hub rule: the owning department, project members or a super admin get in, checked on the server.',
+    n8_d7: 'Redesigned the HR dashboards for quick reading: the main indicators are compared with the previous period, and reasons, departments, roles and length of service appear as charts. In the follow-ups, the queue filters by the 30 or 90-day milestone, and the report by the rating of the latest completed follow-up.',
+    n8_d8: 'Built help into the system: a step-by-step guided tour of the screens, plus manuals on the HR routine, on what the system does by itself, on who can do what and on where each piece of data comes from.',
     n8_how: 'I checked coverage against payroll itself: every termination has its interview, answered or marked as not answered, and the system count matches the payroll count.',
     n8_res: 'In production: interviews and conversations are born from payroll, HR starts the day from the list of pending items by deadline and records instead of tracking dates, and every lookup and every write goes to the audit trail. The interview templates and follow-up criteria came from HR.',
     n8_t5: 'Generative AI API with tools', n8_t6: 'Payroll reading',
