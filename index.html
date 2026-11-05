@@ -356,6 +356,8 @@ a.link-to{padding-right:36px}
 .ficha--r{grid-template-columns:minmax(0,1fr) 232px}
 .ficha--r .ficha-plate{order:2}
 .ficha-plate{position:sticky;top:calc(var(--bar-h) + var(--nav-h) + 28px);align-self:start}
+.selo-dados{margin:12px 0 0;padding:8px 10px;border:1px dashed color-mix(in srgb,var(--c1) 55%,transparent);border-radius:6px;color:var(--text);font:500 .75rem/1.45 var(--f-b);max-width:100%;box-sizing:border-box}
+.selo-dados::before{content:"\2248\00a0";color:var(--c1);font-weight:700}
 .pl{padding:14px 16px 0;border-radius:8px}
 .pl-name{margin-top:12px;padding-top:11px;border-top:1px solid color-mix(in srgb,var(--ink) 22%,transparent);font:800 1.625rem/1 var(--f-d);letter-spacing:.02em;text-transform:uppercase;text-wrap:balance}
 .pl .tag-state{margin:16px -16px 0;padding:11px 16px 12px}
@@ -923,7 +925,7 @@ html:not(.motion) .stack-btn{display:none}
             </li>
             <li class="tag" data-state="prod">
               <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Sistema</span><span class="rivet"></span></div>
-              <p class="tag-area" data-i18n="ar_all">Todos os setores</p>
+              <p class="tag-area" data-i18n="ar_comint">Comunicação Interna</p>
               <h3 class="tag-name"><a href="#p-carrossel-tv" data-i18n="p6n">Carrossel TV</a></h3>
               <p class="tag-measure" data-i18n="p6m">Cada TV da empresa com o recado certo para o seu setor, trocado em um clique de dentro do hub.</p>
               <p class="tag-state"><span class="st st-idle" data-i18n="st_idle">Aguardando leitura</span><span class="st st-read" data-i18n="st_read">Conferindo</span><span class="st st-prod" data-i18n="st_prod">Em produção</span></p>
@@ -939,7 +941,7 @@ html:not(.motion) .stack-btn{display:none}
               <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Sistema</span><span class="rivet"></span></div>
               <p class="tag-area" data-i18n="ar_com">Comercial</p>
               <h3 class="tag-name"><a href="#p-planejamento-importados" data-i18n="p9n">Planejamento de importados</a></h3>
-              <p class="tag-measure" data-i18n="p9m">Diz o que comprar de importados, quanto e até quando, pelo prazo de cada fornecedor. A planilha por família sai de cena.</p>
+              <p class="tag-measure" data-i18n="p9m">Vai dizer o que comprar de importados, quanto e até quando, pelo prazo de cada fornecedor, no lugar da planilha por família.</p>
               <p class="tag-state"><span class="st st-idle" data-i18n="st_idle">Aguardando leitura</span><span class="st st-read" data-i18n="st_read">Conferindo</span><span class="st st-impl" data-i18n="st_impl">Em implantação</span></p>
             </li>
           </ol>
@@ -1324,12 +1326,23 @@ html:not(.motion) .stack-btn{display:none}
               <p class="pl-name" aria-hidden="true" data-i18n="p3n">AUTO CRM</p>
               <p class="tag-state"><span data-i18n="st_prod">Em produção</span></p>
             </div>
+            <p class="selo-dados" data-i18n="selo_dados">Valores aproximados: arredondados a partir de medições reais, sem dados sensíveis da empresa.</p>
           </div>
           <div class="ficha-body">
             <header>
               <h3 class="ficha-title" id="p3-h" data-i18n="p3n">AUTO CRM</h3>
               <p class="ficha-line" data-i18n="p3l">Um CRM completo para empresas, gerenciável e preparado para vários setores: a gestão configura funil, cadências e metas na tela, sem programar. Carteira, prospecção e disparo em massa ficam num só sistema, ligado ao ERP, ao e-mail e ao WhatsApp.</p>
             </header>
+            <div>
+              <h4 class="mini-h impacto-h" data-i18n="lbl_impacto">O que a empresa ganhou</h4>
+              <div class="impacto">
+                <div><b data-i18n="n3_i1n">Por setor</b><span data-i18n="n3_i1l">cada equipe comercial pode montar na tela o próprio funil, cadências, metas e modelos, sem misturar dados entre setores</span></div>
+                <div><b data-i18n="n3_i2n">+R$ 2,5 mi</b><span data-i18n="n3_i2l">faturados para clientes da Exportação que já estavam na carteira do sistema, mais de 80% da venda da equipe em quatro meses</span></div>
+                <div><b data-i18n="n3_i3n">85 por mês</b><span data-i18n="n3_i3l">empresas novas entram no funil de prospecção da Exportação, entre campanhas e prospecção dos vendedores</span></div>
+                <div><b data-i18n="n3_i4n">+1.000</b><span data-i18n="n3_i4l">prospects da Exportação em nutrição no próprio sistema, em 51 países</span></div>
+              </div>
+              <p class="impacto-frase" data-i18n="n3_if">Ganho para a empresa: o AUTO CRM não é só da Exportação. É um CRM próprio, sem limite de setores, usuários ou contatos, que cada setor comercial configura na tela. A proposta é tirar a carteira e a prospecção das planilhas e da memória do vendedor: cada contato registrado já marca o próximo, e o histórico e as vendas do ERP de cada cliente ficam no mesmo lugar. Na Exportação, o primeiro setor, 93% da carteira ativa já tem o próximo contato agendado.</p>
+            </div>
             <div>
               <h4 class="mini-h" data-i18n="lbl_has">O que tem</h4>
               <dl class="spec spec--split">
@@ -1351,9 +1364,10 @@ html:not(.motion) .stack-btn{display:none}
                 <li data-i18n="n3_d4">Liguei o sistema ao ERP por um espelho local: ele lê vendas e metas por sincronização e nunca grava no ERP.</li>
                 <li data-i18n="n3_d5">Integrei o envio pelo e-mail de cada vendedor e pela plataforma de WhatsApp, e a IA generativa com roteiros editáveis na própria tela.</li>
               </ol></dd></div>
-              <div><dt data-i18n="p4n">Motor de clientes</dt><dd data-i18n="n3_talk">São sistemas separados que conversam: o lead de campanha captado pelo motor cai na caixa de leads novos do AUTO CRM, e o cliente reativado volta para o vendedor da carteira.</dd></div>
-              <div><dt data-i18n="lbl_size">Tamanho</dt><dd data-i18n="n3_size">137 rotas de API e 30 tabelas próprias.</dd></div>
-              <div><dt data-i18n="lbl_res">Resultado</dt><dd class="res" data-i18n="n3_res">Em produção: a carteira, o histórico e as tarefas do dia de cada vendedor ficam num só lugar, e a contagem de contatos e orçamentos da equipe passou a ser feita pelo próprio sistema.</dd></div>
+              <div><dt data-i18n="p4n">Motor de clientes</dt><dd data-i18n="n3_talk">São sistemas separados: o lead de campanha chega pela integração de leads e WhatsApp e cai na caixa de leads novos do AUTO CRM, e a reativação de clientes do motor não passa pelo CRM.</dd></div>
+              <div><dt data-i18n="lbl_size">Tamanho</dt><dd data-i18n="n3_size">144 rotas de API e 34 tabelas próprias.</dd></div>
+              <div><dt data-i18n="lbl_how">Como medi</dt><dd data-i18n="n3_how">Faturado: vendas faturadas da equipe de exportação de 01/07 a 29/10/2026, 26 clientes pelo código do ERP, cruzadas com a carteira do sistema pelo código e pelo nome. O valor em reais soma só os 18 clientes que já estavam na carteira na data da sua primeira nota do período, foi arredondado para baixo e é comparado com o faturado dos 26; ele mostra o que esses clientes compraram, não o que o sistema causou. Empresas novas: leads de campanha e da prospecção dos vendedores registrados de julho a outubro de 2026, sem as empresas que já estavam no sistema com o mesmo nome ou a mesma referência e sem cadastros de teste (339 empresas); a base de 1.049 empresas carregada em 29/06/2026 fica à parte. Nutrição: prospects ativos em nutrição em 04/11/2026, pelo país do cadastro. Próximo contato: clientes ativos da carteira com a data do próximo contato preenchida em 04/11/2026, sem cadastros de teste. Configuração por setor conferida no código do sistema; a Exportação é o primeiro setor em uso. Sem os registros da TI. Conferido no banco de dados do sistema e no ERP em 04/11/2026.</dd></div>
+              <div><dt data-i18n="lbl_res">Resultado</dt><dd class="res" data-i18n="n3_res">Em produção: a carteira, o histórico e as tarefas do dia de cada vendedor ficam num só lugar, e, desde 01/07/2026, a contagem de contatos e orçamentos da equipe é feita pelo próprio sistema.</dd></div>
             </dl>
             <div>
               <h4 class="mini-h" data-i18n="lbl_flow">Fluxo</h4>
@@ -1393,29 +1407,40 @@ html:not(.motion) .stack-btn{display:none}
               <p class="pl-name" aria-hidden="true" data-i18n="p4n">Motor de clientes</p>
               <p class="tag-state"><span data-i18n="st_prod">Em produção</span></p>
             </div>
+            <p class="selo-dados" data-i18n="selo_dados">Valores aproximados: arredondados a partir de medições reais, sem dados sensíveis da empresa.</p>
           </div>
           <div class="ficha-body">
             <header>
               <h3 class="ficha-title" id="p4-h" data-i18n="p4n">Motor de clientes</h3>
-              <p class="ficha-line" data-i18n="p4l">O motor que lê a base de clientes no ERP, decide quem chamar de volta, envia a mensagem pela plataforma de WhatsApp e mede resposta, orçamento e compra. Para quem ainda não é cliente, seleciona prospects na base pública de CNPJ.</p>
+              <p class="ficha-line" data-i18n="p4l">O motor que lê a base de clientes no ERP, decide quem chamar de volta, envia a mensagem pela plataforma de WhatsApp e mede orçamento e compra contra o ERP. Para quem ainda não é cliente, seleciona prospects na base pública de CNPJ.</p>
             </header>
             <div>
+              <h4 class="mini-h impacto-h" data-i18n="lbl_impacto">O que a empresa ganhou</h4>
+              <div class="impacto">
+                <div><b data-i18n="n4_i1n">+R$ 4 mi</b><span data-i18n="n4_i1l">em pedidos de clientes que estavam parados, acompanhados pelo sistema do disparo à compra</span></div>
+                <div><b data-i18n="n4_i2n">58%</b><span data-i18n="n4_i2l">dos clientes que abriram orçamento depois da mensagem fecharam pedido</span></div>
+                <div><b data-i18n="n4_i3n">9 em cada 10</b><span data-i18n="n4_i3l">clientes parados aptos a receber foram chamados em até dois meses, inclusive quem nunca tinha tido contato</span></div>
+                <div><b data-i18n="n4_i4n">7.032</b><span data-i18n="n4_i4l">empresas do ramo-alvo, que ainda não eram clientes, contatadas pela prospecção por CNAE em três semanas</span></div>
+              </div>
+              <p class="impacto-frase" data-i18n="n4_if">Ganho para a empresa: o motor não tem limite de quantidade. Ele confere a base inteira de clientes todo dia útil e acompanha cada mensagem até o orçamento, a compra ou a perda. O ganho acompanha o tamanho da base, e a base cresce com a prospecção por CNAE, que faz parte do mesmo sistema: cada empresa nova que vira cliente passa a ser acompanhada também. As regras de quem recebe e com qual mensagem são da empresa e mudam na tela.</p>
+            </div>
+            <dl class="spec">
+              <div><dt data-i18n="lbl_sit">Situação</dt><dd data-i18n="n4_sit">A reativação de clientes pelo WhatsApp dependia de uma ferramenta terceirizada, com a regra de quem recebia a mensagem fechada dentro dela. Projetei e construí um motor próprio dentro do hub, com a regra sob controle da empresa.</dd></div>
+              <div><dt data-i18n="n4_k1">Análise da base</dt><dd data-i18n="n4_v1">De segunda a sexta, o motor analisa a base de clientes do ERP e monta a fila de quem chamar de volta, por ordem de prioridade. O critério é da empresa, fica documentado e pode ser ajustado na tela, sem IA nessa etapa.</dd></div>
+              <div><dt data-i18n="n4_k2">Disparo e retorno</dt><dd data-i18n="n4_v2">A mensagem sai pelo WhatsApp oficial e a resposta volta para o hub. Orçamento, compra e perda são medidos contra o ERP, e a negociação segue com o vendedor da carteira. No painel, os resultados da reativação e do atendimento com IA podem ser filtrados por linha comercial.</dd></div>
+              <div><dt data-i18n="n4_k3">Prospecção</dt><dd><span data-i18n="n4_v3">Para quem ainda não é cliente, o motor busca prospects nos dados abertos de CNPJ da Receita Federal, com mais de 28 milhões de estabelecimentos ativos, filtrados pelo perfil de cliente que a empresa procura. O retorno da prospecção tem aba própria nos resultados, contado pelo mês do disparo.</span> <span class="stamp" data-i18n="st_impl">Em implantação</span></dd></div>
+              <div><dt data-i18n="n4_k4">Atendimento com IA</dt><dd data-i18n="n4_v4">Na integração de atendimento com IA, que já existia e passei a manter, criei uma trava que percebe quando a IA entra em loop e passa a conversa para uma pessoa. Na reexecução de um incidente real, as chamadas à IA caíram de 460 para 31. Também levei para uma tela do hub a lista que liga cada vendedor ao seu atendente.</dd></div>
+              <div><dt data-i18n="p3n">AUTO CRM</dt><dd data-i18n="n4_talk">São sistemas separados: a reativação do motor não passa pelo AUTO CRM e, nas carteiras de componentes e revenda, o cliente chamado entra como oportunidade no CRM do ERP, no funil do vendedor. O lead de campanha chega ao AUTO CRM pela integração de leads e WhatsApp, não pelo motor.</dd></div>
+              <div><dt data-i18n="lbl_how">Como medi</dt><dd data-i18n="n4_how">Valor acompanhado: pedidos faturados ou liberados no ERP que vieram de orçamento registrado para o cliente, por qualquer canal, em até 29 dias depois da mensagem, com o pedido no mesmo prazo; valor total do pedido no ERP em 04/11/2026, pelo mês da mensagem, só de mensagens a clientes sem pedido havia mais de 28 dias: 1.182 pedidos de 1.004 clientes de jun a out/2026, 716 depois de mensagens da ferramenta anterior, de jun a ago, acompanhadas pelo painel do hub, e 466 depois de mensagens do sistema próprio, em set e out. As janelas de outubro fecham em 28/11/2026. Pedido fechado: a mesma regra, nos envios automáticos de 03/09 a 06/10/2026; 184 dos 319 clientes com orçamento. Cobertura: clientes do ERP sem pedido de 06/08 a 07/10/2026, com WhatsApp válido e compra mínima na vida, 7.375 cadastros em 7.076 números; 6.637 cadastros (90%) e 6.517 números (92%) foram chamados de 02/09 a 04/11/2026, e dos 562 não chamados, nem pelo mesmo número, 553 ficaram de fora por regra da empresa: título vencido em aberto, registro de contato a menos de 28 dias em todos os dias da conferência ou compra abaixo do mínimo da época. Primeiro contato: dos clientes sem pedido de 01/02 a 02/09/2026, com WhatsApp válido e compra mínima na vida, que a ferramenta anterior não chamou nenhuma vez de 01/03 a 01/09/2026, o sistema próprio chamou 531 de 02/09 a 04/11/2026, dos quais 450 sem nenhum registro de contato no ERP antes de 03/09/2026. O motor conferiu a base inteira de clientes com pedido no ERP em 45 dos 45 dias de segunda a sexta de 03/09 a 04/11/2026. Prospecção: mensagens aceitas pela plataforma de WhatsApp de 29/09 a 19/10/2026, uma por telefone, sem empresas já cadastradas no ERP; dos 90 códigos de atividade mapeados em 24 ramos-alvo, 56, em 7 ramos, já têm empresas contatadas. Até 04/11/2026, 6 delas foram cadastradas no ERP e 2 receberam orçamento depois da mensagem; nenhuma comprou ainda. Os números contam o que veio depois da mensagem, não o que ela causou. Conferido no registro do hub e no ERP em 04/11/2026. Antes de desligar a ferramenta antiga, rodei o motor ao lado dela e comparei os clientes escolhidos, um a um. No painel, medi a etapa mais pesada antes e depois da reescrita e conferi que o resultado era idêntico. A trava anti-loop foi calibrada reexecutando o histórico real de conversas.</dd></div>
+              <div><dt data-i18n="lbl_res">Resultado</dt><dd class="res" data-i18n="n4_res">A ferramenta terceirizada foi desligada e a reativação passou a rodar dentro do hub, e a negociação continua com o vendedor da carteira. A etapa mais pesada do painel caiu de mais de 900 s para cerca de 18 s, com resultado idêntico.</dd></div>
+            </dl>
+            <div>
               <h4 class="mini-h" data-i18n="lbl_ba">Antes e depois</h4>
-              <div class="ba ba--lead">
+              <div class="ba">
                 <div class="ba-item"><p class="ba-k" data-i18n="n4_b1k">Etapa mais pesada do painel de resultados</p><p class="ba-v"><del><span class="vh" data-i18n="ba_before">Antes:</span> <span data-i18n="n4_b1a">mais de 900 s</span></del> <ins><span class="vh" data-i18n="ba_after">Depois:</span> <span data-i18n="n4_b1n">cerca de 18 s</span></ins></p></div>
                 <div class="ba-item"><p class="ba-k" data-i18n="n4_b2k">Chamadas à IA na reexecução de um incidente</p><p class="ba-v"><del><span class="vh" data-i18n="ba_before">Antes:</span> 460</del> <ins><span class="vh" data-i18n="ba_after">Depois:</span> 31</ins></p></div>
               </div>
             </div>
-            <dl class="spec">
-              <div><dt data-i18n="lbl_sit">Situação</dt><dd data-i18n="n4_sit">A reativação de clientes pelo WhatsApp dependia de uma ferramenta terceirizada, com a regra de quem recebia a mensagem fechada dentro dela e sem medir o retorno: quem respondeu, quem orçou, quem comprou. Projetei e construí um motor próprio dentro do hub, com a regra sob controle da empresa.</dd></div>
-              <div><dt data-i18n="n4_k1">Análise da base</dt><dd data-i18n="n4_v1">Todo dia, o motor analisa a base de clientes do ERP e monta a fila de quem chamar de volta, por ordem de prioridade. O critério é da empresa, fica documentado e pode ser ajustado na tela, sem IA nessa etapa.</dd></div>
-              <div><dt data-i18n="n4_k2">Disparo e retorno</dt><dd data-i18n="n4_v2">A mensagem sai pelo WhatsApp oficial e a resposta volta para o hub. Orçamento, compra e perda são medidos contra o ERP, e a negociação segue com o vendedor da carteira. No painel, os resultados da reativação e do atendimento com IA podem ser filtrados por linha comercial.</dd></div>
-              <div><dt data-i18n="n4_k3">Prospecção</dt><dd><span data-i18n="n4_v3">Para quem ainda não é cliente, o motor busca prospects nos dados abertos de CNPJ da Receita Federal, com mais de 28 milhões de empresas ativas, filtrados pelo perfil de cliente que a empresa procura. O retorno da prospecção tem aba própria nos resultados, contado pelo mês do disparo.</span> <span class="stamp" data-i18n="st_impl">Em implantação</span></dd></div>
-              <div><dt data-i18n="n4_k4">Atendimento com IA</dt><dd data-i18n="n4_v4">Na integração de atendimento com IA, que já existia e passei a manter, criei uma trava que percebe quando a IA entra em loop e passa a conversa para uma pessoa. Na reexecução de um incidente real, as chamadas à IA caíram de 460 para 31. Também levei para uma tela do hub a lista que liga cada vendedor ao seu atendente.</dd></div>
-              <div><dt data-i18n="p3n">AUTO CRM</dt><dd data-i18n="n4_talk">São sistemas separados que conversam: o lead de campanha captado pelo motor cai na caixa de leads novos do AUTO CRM, e o cliente reativado volta para o vendedor da carteira.</dd></div>
-              <div><dt data-i18n="lbl_how">Como medi</dt><dd data-i18n="n4_how">Antes de desligar a ferramenta antiga, rodei o motor ao lado dela e comparei os clientes escolhidos, um a um. No painel, medi a etapa mais pesada antes e depois da reescrita e conferi que o resultado era idêntico. A trava anti-loop foi calibrada reexecutando o histórico real de conversas.</dd></div>
-              <div><dt data-i18n="lbl_res">Resultado</dt><dd class="res" data-i18n="n4_res">A ferramenta terceirizada foi desligada e a reativação passou a rodar dentro do hub, e a negociação continua com o vendedor da carteira. O retorno deixou de ser estimado e passou a ser medido contra o ERP, e a etapa mais pesada do painel caiu de mais de 900 s para cerca de 18 s, com resultado idêntico.</dd></div>
-            </dl>
             <div>
               <h4 class="mini-h" data-i18n="lbl_flow">Fluxo</h4>
               <ol class="flow">
@@ -1460,23 +1485,33 @@ html:not(.motion) .stack-btn{display:none}
               <h3 class="ficha-title" id="p5-h" data-i18n="p5n">Pesquisa de Clima</h3>
               <p class="ficha-line" data-i18n="p5l">Pesquisas em que o setor monta o questionário, distribui por disparo ou link público e lê o resultado pronto. Com a equipe, as respostas são anônimas; com clientes, a pesquisa identificada dá a cada contato um link próprio.</p>
             </header>
+            <div>
+              <h4 class="mini-h impacto-h" data-i18n="lbl_impacto">O que a empresa ganhou</h4>
+              <div class="impacto">
+                <div><b data-i18n="n5_i1n">4 de 4</b><span data-i18n="n5_i1l">unidades que faziam a pesquisa de clima em formulário externo tiveram a de 2026 coletada e apurada no portal</span></div>
+                <div><b data-i18n="n5_i2n">+250</b><span data-i18n="n5_i2l">respostas de clientes ao NPS nas primeiras 24 horas, cada uma ligada ao cliente que respondeu (disparos de 03/11/2026)</span></div>
+                <div><b data-i18n="n5_i3n">64%</b><span data-i18n="n5_i3l">dos clientes que abriram o link concluíram a pesquisa, nas primeiras 24 horas (254 de 397, disparos de 03/11/2026)</span></div>
+                <div><b data-i18n="n5_i4n">3 de 4</b><span data-i18n="n5_i4l">disparos de NPS a clientes feitos pelo próprio Marketing, que escolhe o modelo da mensagem (03/11/2026)</span></div>
+              </div>
+              <p class="impacto-frase" data-i18n="n5_if">Ganho para a empresa: nas 4 unidades que faziam a pesquisa de clima em formulário externo e planilha, a coleta, a apuração e a apresentação passaram para o portal. Com clientes, a pesquisa passou a dizer quem respondeu: cada resposta chega ligada ao cliente, e o Marketing sabe quem está insatisfeito. Os setores montam as próprias pesquisas, e o Marketing faz os seus disparos.</p>
+            </div>
             <dl class="spec spec--split">
               <div class="sp-sit"><dt data-i18n="lbl_sit">Situação</dt><dd data-i18n="n5_sit">A pesquisa de clima vivia em formulário externo e planilha, e a apresentação à diretoria era montada à mão. Pesquisa com cliente não dizia quem tinha respondido. Projetei e construí um módulo com duas metades de regras opostas: a pesquisa da equipe é anônima, a de clientes é identificada.</dd></div>
               <div><dt data-i18n="n5_k1">Pesquisas, com respostas anônimas</dt><dd><ul class="feat">
                 <li data-i18n="n5_a1">Questionário montado pelo próprio setor, com seções, escala, matriz, múltipla escolha e texto livre.</li>
                 <li data-i18n="n5_a2">Distribuição por disparo pela plataforma de WhatsApp ou por link público. No disparo, o setor escolhe um dos seus próprios modelos de mensagem ao confirmar, e o envio corre em segundo plano. A resposta não fica ligada ao nome de quem respondeu.</li>
                 <li data-i18n="n5_a3">Relatório pronto, com favorabilidade por dimensão, eNPS e comparação com pesquisas anteriores.</li>
-                <li data-i18n="n5_a4">Apresentação montada a partir do resultado e exibida no próprio portal, ocultando perguntas e escolhendo os comentários que entram.</li>
+                <li data-i18n="n5_a4">Apresentação montada a partir do resultado e exibida no próprio portal; na tela, o setor oculta perguntas e escolhe os comentários que aparecem.</li>
                 <li data-i18n="n5_a5">Análise do texto livre com IA generativa, sem identificar quem respondeu.</li>
               </ul></dd></div>
               <div><dt data-i18n="n5_k2">Pesquisa identificada, para clientes</dt><dd><ul class="feat">
                 <li data-i18n="n5_i1">Link próprio de uso único para cada contato, e a lista de destinatários mostra quem já respondeu.</li>
                 <li data-i18n="n5_i2">Escala de 0 a 10 com NPS, com o convite e o formulário também em espanhol.</li>
-                <li data-i18n="n5_i3">Respostas por contato só no relatório interno, com exportação em CSV. Elas nunca vão para o link público dos resultados nem para a análise por IA.</li>
+                <li data-i18n="n5_i3">Respostas por contato só no relatório interno, com exportação em CSV. O vínculo com o contato não vai para o link público dos resultados nem entra no pedido à IA.</li>
                 <li data-i18n="n5_i4">No setor de RH a pesquisa é sempre anônima: a identificação nem aparece como opção.</li>
                 <li><span data-i18n="n5_i5">As entrevistas de desligamento e as conversas de 30 e 90 dias, que nasceram aqui, hoje têm sistema próprio:</span> <a href="#p-gestao-pessoas" data-i18n="p8n">Gestão de Pessoas</a></li>
               </ul></dd></div>
-              <div><dt data-i18n="lbl_how">Como medi</dt><dd data-i18n="n5_how">Medi o tempo da chamada de análise por IA antes e depois de enxugá-la. Depois passei a análise para segundo plano e gravei o resultado, para não repetir a chamada a cada abertura do relatório.</dd></div>
+              <div><dt data-i18n="lbl_how">Como medi</dt><dd data-i18n="n5_how">Contagens no registro do módulo e, para os links abertos, no registro de acesso, sem o robô de prévia do WhatsApp. Clima: 4 pesquisas de nov. e dez./2025, importadas do formulário externo, e 4 coletadas de 22 a 24/07/2026. NPS: 4 disparos a clientes em 03/11/2026, com respostas contadas até 10:57 de 04/11/2026; o autor de cada disparo vem do registro do módulo. Conferido pela TI em 04/11/2026. Medi o tempo da chamada de análise por IA antes e depois de enxugá-la. Depois passei a análise para segundo plano e gravei o resultado, para não repetir a chamada a cada abertura do relatório.</dd></div>
               <div><dt data-i18n="lbl_res">Resultado</dt><dd class="res" data-i18n="n5_res">Em produção: o setor monta a pesquisa, distribui e apresenta o resultado sem sair do portal e, com clientes, sabe quem respondeu o quê sem expor isso fora do setor. O conteúdo das perguntas veio das áreas que usam o módulo.</dd></div>
             </dl>
             <div>
@@ -1529,6 +1564,15 @@ html:not(.motion) .stack-btn{display:none}
               <h3 class="ficha-title" id="p8-h" data-i18n="p8n">Gestão de Pessoas</h3>
               <p class="ficha-line" data-i18n="p8l">O sistema do RH dentro do hub. A folha de pagamento manda: quando ela mostra uma rescisão ou uma admissão, o sistema cria sozinho a entrevista de desligamento e as conversas de 30 e 90 dias, e o RH registra o que foi conversado.</p>
             </header>
+            <div>
+              <h4 class="mini-h impacto-h" data-i18n="lbl_impacto">O que a empresa ganhou</h4>
+              <div class="impacto">
+                <div><b data-i18n="n8_i1n">100%</b><span data-i18n="n8_i1l">das rescisões de 2026 registradas no sistema do RH, contra 36% na planilha de antes</span></div>
+                <div><b data-i18n="n8_i2n">+50</b><span data-i18n="n8_i2l">entrevistas e conversas de 30 e 90 dias abertas pelo próprio sistema a partir da folha desde 15/10/2026, sem depender de alguém lembrar</span></div>
+                <div><b data-i18n="n8_i3n">+100</b><span data-i18n="n8_i3l">fichas em papel de quem saiu na experiência, de 2021 a 2026, carregadas no sistema e disponíveis para consulta</span></div>
+              </div>
+              <p class="impacto-frase" data-i18n="n8_if">Ganho para a empresa: o RH passou a ter todas as saídas do ano registradas num lugar só, e não só a parte que chegava à planilha. Entrevistas, conversas de 30 e 90 dias e lembretes do feedback semestral saem pelo próprio sistema, e cada admissão em experiência já entra no acompanhamento sem depender de alguém lembrar a data. As fichas em papel de quem saiu na experiência, desde 2021, estão no mesmo sistema, ao lado das conversas novas.</p>
+            </div>
               <div>
                 <h4 class="mini-h" data-i18n="lbl_cycle">Ciclo completo</h4>
                 <ol class="flow">
@@ -1541,19 +1585,19 @@ html:not(.motion) .stack-btn{display:none}
                 </ol>
               </div>
             <dl class="spec spec--split">
-              <div class="sp-sit"><dt data-i18n="lbl_sit">Situação</dt><dd data-i18n="n8_sit">As entrevistas de desligamento eram feitas no papel e digitadas depois numa planilha. As conversas de 30 e 90 dias dependiam de lembrar a data de cada admissão, os feedbacks semestrais ficavam numa planilha por gestor, e perguntas simples, como quem está com férias a vencer, viravam pedido de relatório.</dd></div>
+              <div class="sp-sit"><dt data-i18n="lbl_sit">Situação</dt><dd data-i18n="n8_sit">As entrevistas de desligamento eram feitas no papel e digitadas depois numa planilha. As conversas de 30 e 90 dias dependiam de lembrar a data de cada admissão, os feedbacks semestrais ficavam numa planilha única, dividida por gestor, e perguntas simples, como quem está com férias a vencer, viravam pedido de relatório.</dd></div>
               <div class="sp-did"><dt data-i18n="lbl_did">O que fiz</dt><dd><ol class="did">
                   <li data-i18n="n8_d1">Levantei com o RH o caminho de cada conversa e projetei e construí o sistema, separado da Pesquisa de Clima: a pesquisa continua anônima, e aqui fica o que é registrado por pessoa.</li>
                   <li data-i18n="n8_d2">Criei a rotina que lê a folha a cada 4 horas, só para leitura: rescisão nova vira entrevista a preencher, quem é admitido em contrato de experiência entra na fila da conversa de 30 dias desde a admissão, e concluir a de 30 já abre a de 90. Um índice único impede criar em dobro.</li>
-                  <li data-i18n="n8_d3">Montei os feedbacks semestrais por equipe, com a equipe vinda da folha e o gestor vindo do portal do colaborador. O próximo nasce agendado seis meses depois, com as datas distribuídas no semestre, e os lembretes por e-mail nascem desligados e, quando ligados, saem só em dia útil.</li>
-                  <li data-i18n="n8_d4">Fiz o perfil de permanência de cada cargo só com fatores ligados à função. A aderência ajuda a conversa e não elimina candidato, e atributos pessoais protegidos por lei não existem no sistema.</li>
-                  <li data-i18n="n8_d5">Criei um assistente do RH só de leitura, com conversas separadas que guardam o próprio contexto, uma lista fechada de consultas, recusa fixa para o que não é de RH e auditoria de cada pergunta. As análises por IA recebem só o agregado, sem nomes.</li>
+                  <li data-i18n="n8_d3">Montei os feedbacks semestrais por equipe, com a equipe vinda da folha e o gestor vindo do portal do colaborador. O próximo nasce agendado seis meses depois, e os lembretes por e-mail nascem desligados e, quando ligados, saem só em dia útil.</li>
+                  <li data-i18n="n8_d4">Fiz o perfil de permanência de cada cargo só com fatores ligados à função. A aderência ajuda a conversa e não elimina candidato, e nenhum critério vedado pela Lei 9.029/95 entra no perfil.</li>
+                  <li data-i18n="n8_d5">Criei um assistente do RH só de leitura, com conversas separadas que guardam o próprio contexto, uma lista fechada de consultas e recusa fixa para o que não é de RH; cada pergunta fica registrada. As análises por IA recebem as respostas com setor, cargo e tempo de casa, sem nome, data ou identificador; no texto livre, o nome do colaborador, do entrevistador e do coordenador é trocado por um marcador.</li>
                   <li data-i18n="n8_d6">Liguei o acesso à regra do hub: entra quem é do departamento dono, membro do projeto ou super administrador, conferido no servidor.</li>
                   <li data-i18n="n8_d7">Redesenhei os painéis do RH para leitura rápida: os indicadores principais vêm comparados com o período anterior, e motivos, setores, cargos e tempo de casa aparecem em gráficos. Nos acompanhamentos, a fila filtra pelo marco de 30 ou 90 dias, e o relatório, pela classificação do último acompanhamento concluído.</li>
                   <li data-i18n="n8_d8">Incluí a ajuda no próprio sistema: um tour guiado pelas telas, passo a passo, e manuais da rotina do RH, do que o sistema faz por conta própria, de quem pode o quê e de onde vem cada dado.</li>
                 </ol></dd></div>
-              <div class="sp-how"><dt data-i18n="lbl_how">Como medi</dt><dd data-i18n="n8_how">Conferi a cobertura contra a própria folha: cada desligamento tem a sua entrevista, respondida ou marcada como não respondida, e a contagem do sistema bate com a da folha.</dd></div>
-              <div class="sp-res"><dt data-i18n="lbl_res">Resultado</dt><dd class="res" data-i18n="n8_res">Em produção: as entrevistas e as conversas nascem da folha, o RH abre o dia pela lista de pendências por prazo e registra em vez de controlar datas, e cada consulta e cada escrita ficam na auditoria. Os modelos de entrevista e os critérios de acompanhamento vieram do RH.</dd></div>
+              <div class="sp-how"><dt data-i18n="lbl_how">Como medi</dt><dd data-i18n="n8_how">Saídas: registro do sistema contra as rescisões de 2026 lidas da folha, de 01/01 a 04/11/2026; a contagem coincidiu com a do RH em 14/10/2026, e conta a saída registrada, com a entrevista respondida ou marcada como não feita. Antes: a planilha do RH em 09/09/2026, pela mesma lista. Abertos pelo sistema: entrevistas e conversas criadas a partir da folha de 15/10 a 04/11/2026, sem as cargas da planilha e das fichas. Fichas: carga única de 16/10/2026, de quem saiu com até 90 dias de casa. Conferido no banco em 04/11/2026.</dd></div>
+              <div class="sp-res"><dt data-i18n="lbl_res">Resultado</dt><dd class="res" data-i18n="n8_res">Em produção: as entrevistas e as conversas nascem da folha, e o RH registra o que foi conversado em vez de controlar datas. Os modelos de entrevista e os critérios de acompanhamento vieram do RH.</dd></div>
             </dl>
             <div>
               <h4 class="mini-h" data-i18n="lbl_tech">Tecnologias</h4>
@@ -1578,7 +1622,7 @@ html:not(.motion) .stack-btn{display:none}
           <div class="ficha-plate">
             <div class="pl">
               <div class="tag-top"><span class="rivet"></span><span data-i18n="asset">Sistema</span><span class="rivet"></span></div>
-              <p class="tag-area" data-i18n="ar_all">Todos os setores</p>
+              <p class="tag-area" data-i18n="ar_comint">Comunicação Interna</p>
               <p class="pl-name" aria-hidden="true" data-i18n="p6n">Carrossel TV</p>
               <p class="tag-state"><span data-i18n="st_prod">Em produção</span></p>
             </div>
@@ -1586,14 +1630,23 @@ html:not(.motion) .stack-btn{display:none}
           <div class="ficha-body">
             <header>
               <h3 class="ficha-title" id="p6-h" data-i18n="p6n">Carrossel TV</h3>
-              <p class="ficha-line" data-i18n="p6l">A comunicação interna nas TVs da empresa, administrada de dentro do hub. Cada TV toca sozinha o carrossel do seu setor e avisa quando sai do ar.</p>
+              <p class="ficha-line" data-i18n="p6l">A comunicação interna nas TVs da empresa, publicada e programada no hub pela própria área. Cada carrossel leva à TV o conteúdo do seu setor, e o sistema avisa quando uma tela perde o sinal.</p>
             </header>
+            <div>
+              <h4 class="mini-h impacto-h" data-i18n="lbl_impacto">O que a empresa ganhou</h4>
+              <div class="impacto">
+                <div><b data-i18n="n6_i1n">97%</b><span data-i18n="n6_i1l">das imagens novas das TVs publicadas pela própria Comunicação Interna, sem depender da TI, desde 24/09/2026</span></div>
+                <div><b data-i18n="n6_i2n">32</b><span data-i18n="n6_i2l">peças com data entraram e saíram dos carrosséis sozinhas, no dia programado, sem depender de alguém lembrar (set. a out./2026)</span></div>
+                <div><b data-i18n="n6_i3n">Até 6 semanas</b><span data-i18n="n6_i3l">de antecedência na programação das peças com data, deixada pronta pela área numa só sessão (out./2026)</span></div>
+              </div>
+              <p class="impacto-frase" data-i18n="n6_if">Ganho para a empresa: depois da implantação no hub, a própria Comunicação Interna publica e programa o que passa nas TVs, sem depender da TI. A peça com data entra e sai dos carrosséis no dia programado, sem ninguém precisar lembrar de publicar ou retirar, e semanas de programação podem ficar prontas numa só sessão.</p>
+            </div>
             <div>
               <h4 class="mini-h" data-i18n="lbl_meas">Medições</h4>
               <dl class="spec spec--num">
                 <div><dt data-i18n="n6_m1v">40 s</dt><dd data-i18n="n6_m1">de erros seguidos na alimentação da TV, em bancada, e o carrossel seguiu girando.</dd></div>
                 <div><dt data-i18n="n6_m2v">18 s</dt><dd data-i18n="n6_m2">para a TV aplicar sozinha uma lista nova, no mesmo teste.</dd></div>
-                <div><dt data-i18n="n6_m3v">6 versões</dt><dd data-i18n="n6_m3">em seis dias, da primeira versão no hub à versão com som nos vídeos.</dd></div>
+                <div><dt data-i18n="n6_m3v">6 versões</dt><dd data-i18n="n6_m3">em seis dias, da primeira versão no hub à versão com o cão de guarda no player.</dd></div>
               </dl>
             </div>
             <dl class="spec spec--split">
@@ -1601,14 +1654,14 @@ html:not(.motion) .stack-btn{display:none}
               <div class="sp-did"><dt data-i18n="lbl_did">O que fiz</dt><dd><ol class="did">
                 <li data-i18n="n6_d1">Reescrevi a solução dentro do hub, com o login e as permissões do portal.</li>
                 <li data-i18n="n6_d2">Criei a biblioteca de mídias: imagens e vídeos entram uma vez e servem a vários carrosséis, cada um com a sua ordem.</li>
-                <li data-i18n="n6_d3">Criei as mídias temporárias: o comunicado com prazo sai de todas as TVs e é apagado sozinho na data.</li>
+                <li data-i18n="n6_d3">Criei as mídias temporárias: a peça com data sai de todos os carrosséis no fim do prazo e é apagada sozinha em seguida.</li>
                 <li data-i18n="n6_d4">Adicionei a rádio on-line por carrossel, que pausa durante os vídeos e fora do horário.</li>
                 <li data-i18n="n6_d5">Criei o vigia: ele acompanha o sinal de vida de cada TV, confirma a falta de sinal antes de avisar por e-mail e avisa de novo quando a TV volta.</li>
                 <li data-i18n="n6_d6">Dei ao player um cão de guarda: se a alimentação falha ou um slide trava, o carrossel segue girando com o que já tem.</li>
-                <li data-i18n="n6_d7">Criei os players: um PC em modo quiosque e um aplicativo Android único, feito para abrir sozinho quando o aparelho liga.</li>
+                <li data-i18n="n6_d7">Criei o player para PC em modo quiosque e um aplicativo Android único, pronto para instalar e feito para abrir sozinho quando o aparelho liga.</li>
               </ol></dd></div>
-              <div class="sp-how"><dt data-i18n="lbl_how">Como medi</dt><dd data-i18n="n6_how">Montei uma bancada de teste: fiz a alimentação da TV responder com erro e acompanhei se o carrossel seguia girando com o que já tinha e quanto tempo levava para aplicar uma lista nova.</dd></div>
-              <div class="sp-res"><dt data-i18n="lbl_res">Resultado</dt><dd class="res" data-i18n="n6_res">O conteúdo de todas as TVs é administrado pelo portal, com período por item e desligamento fora do expediente. A TV aplica a mudança na virada da volta, sem cortar o que está na tela, e o responsável fica sabendo quando uma tela perde o sinal e quando ela volta.</dd></div>
+              <div class="sp-how"><dt data-i18n="lbl_how">Como medi</dt><dd data-i18n="n6_how">Imagens novas: registro do hub, de 24/09 a 04/11/2026, pelo perfil de quem publicou; 76 de 78 pela área. Peças com data e fim de 24/09 a 30/10/2026: contam as cadastradas até a véspera, já vinculadas a um carrossel antes do início e ainda nele no fim (32 de 36). Antecedência: 24 peças com data programadas em 26/10/2026, de 9 a 44 dias antes de entrar no ar. Conferido no banco em 04/11/2026. No player, montei uma bancada de teste: fiz a alimentação da TV responder com erro e acompanhei se o carrossel seguia girando com o que já tinha e quanto tempo levava para aplicar uma lista nova.</dd></div>
+              <div class="sp-res"><dt data-i18n="lbl_res">Resultado</dt><dd class="res" data-i18n="n6_res">O conteúdo de todos os carrosséis é administrado pelo portal, com prazo por peça e desligamento fora do expediente configurável em cada carrossel. A TV aplica a mudança na virada da volta, sem cortar o que está na tela, e o responsável fica sabendo quando uma tela perde o sinal e quando ela volta.</dd></div>
             </dl>
             <div>
               <h4 class="mini-h" data-i18n="lbl_flow">Fluxo</h4>
@@ -1655,6 +1708,14 @@ html:not(.motion) .stack-btn{display:none}
               <p class="ficha-line" data-i18n="p7l">O orçamento anual da empresa, montado com os gestores dentro do hub. Cada um preenche as suas contas mês a mês, com o realizado do ano anterior como referência, e envia para aprovação. Durante o ano, um gestor pode pedir verba da conta de outro, e quem decide é o dono da conta.</p>
             </header>
             <div>
+              <h4 class="mini-h impacto-h" data-i18n="lbl_impacto">O que a empresa ganhou</h4>
+              <div class="impacto">
+                <div><b data-i18n="n7_i1n">49%</b><span data-i18n="n7_i1l">dos valores do orçamento 2027 entraram pelo “repetir até dezembro”, sem digitar mês a mês (112 de 228, 06/10 a 04/11/2026)</span></div>
+                <div><b data-i18n="n7_i2n">30%</b><span data-i18n="n7_i2l">dos valores de referência de uma planilha do ciclo anterior somavam outras unidades, o que o hub evita (58 de 192, jan. a set. de 2025)</span></div>
+              </div>
+              <p class="impacto-frase" data-i18n="n7_if">Ganho para a empresa: o orçamento 2027 é o primeiro montado no hub, no lugar das planilhas trocadas por e-mail. O gestor parte do realizado do ano anterior já pronto, pelo mesmo critério de unidade para todos, e não precisa digitar mês a mês. Quem aprova vê o andamento e o total de cada gestor num só painel, com autor e data em cada valor e sem consolidar planilhas à mão.</p>
+            </div>
+            <div>
               <h4 class="mini-h" data-i18n="lbl_cycle">Ciclo completo</h4>
               <ol class="flow">
                 <li><span class="flow-n" aria-hidden="true">01</span><span data-i18n="n7_f1">Contas do ano liberadas na tela</span></li>
@@ -1676,8 +1737,8 @@ html:not(.motion) .stack-btn{display:none}
                 <li data-i18n="n7_d6">Refiz a primeira versão do zero, mais simples, quando vi que ela pedia cadastros que ninguém precisava manter. O prazo virou um interruptor por ano, e as contas viraram uma lista única por ano, igual para todos os gestores, com cada conta liberada ou bloqueada na tela.</li>
                 <li data-i18n="n7_d7">Agilizei o preenchimento: a busca localiza a conta pelo código, uma conta gerencial sai do orçamento pela lixeira e fica registrada no histórico, e a confirmação do salvamento automático, o total e o envio para aprovação ficam numa barra fixa no rodapé.</li>
               </ol></dd></div>
-              <div class="sp-how"><dt data-i18n="lbl_how">Como medi</dt><dd data-i18n="n7_how">Antes de escolher de onde viria o realizado de referência, comparei a planilha de uma gestora com as fontes do ERP, célula por célula, e fiquei com a que batia ao centavo. A mesma comparação mostrou que a planilha mudava de critério no meio do ano; no sistema, o critério é um só.</dd></div>
-              <div class="sp-res"><dt data-i18n="lbl_res">Resultado</dt><dd class="res" data-i18n="n7_res">O orçamento do ano saiu da planilha e passou a viver no hub: cada gestor preenche e envia o seu, quem aprova acompanha todos num só lugar, e cada pedido de verba entre gestores fica registrado com quem pediu, quanto e quem decidiu. Nenhum e-mail é disparado e nada é escrito no ERP.</dd></div>
+              <div class="sp-how"><dt data-i18n="lbl_how">Como medi</dt><dd data-i18n="n7_how">Orçamento 2027: registro e histórico do sistema, sobre os 228 valores mensais diferentes de zero, lançados de 06/10 a 04/11/2026, sem os lançamentos de teste de um usuário da TI. Repetido é o valor que só entrou pelo “repetir até dezembro”. Autor e data foram conferidos em todos os valores. Referência: em 24/09/2026, comparei 192 valores de uma planilha do ciclo anterior (jan. a set. de 2025) com o saldo contábil mensal por unidade; 58 somavam outras unidades e, em ago. e set., 30 de 30 bateram ao centavo. O 30% é risco evitado, contado à parte. Números do ciclo conferidos no banco em 04/11/2026.</dd></div>
+              <div class="sp-res"><dt data-i18n="lbl_res">Resultado</dt><dd class="res" data-i18n="n7_res">O orçamento 2027 está em preenchimento no hub: cada gestor lança os seus valores pelo próprio usuário. O envio e a aprovação já estão no ar e começam a ser usados quando os gestores terminarem de lançar; o pedido de verba entre gestores, ao longo de 2027. Nenhum e-mail é disparado e nada é escrito no ERP.</dd></div>
             </dl>
             <div>
               <h4 class="mini-h" data-i18n="lbl_tech">Tecnologias</h4>
@@ -1710,8 +1771,17 @@ html:not(.motion) .stack-btn{display:none}
           <div class="ficha-body">
             <header>
               <h3 class="ficha-title" id="p9-h"><span data-i18n="p9n">Planejamento de importados</span> <span class="stamp" data-i18n="st_impl">Em implantação</span></h3>
-              <p class="ficha-line" data-i18n="p9l">A compra de importados decidida no hub, e não mais na planilha: a programação de venda entra uma vez, por produto vendido, e o sistema diz para cada item em que mês falta, quanto comprar e até quando colocar a ordem de compra, pelo prazo de cada fornecedor.</p>
+              <p class="ficha-line" data-i18n="p9l">Feito para levar ao hub a compra de importados, que ainda se decide numa planilha: a programação de venda entra uma vez, por produto vendido, e o sistema calcula para cada item em que mês falta, quanto comprar e até quando colocar a ordem de compra, pelo prazo de cada fornecedor.</p>
             </header>
+            <div>
+              <h4 class="mini-h impacto-h" data-i18n="lbl_impacto">O que a empresa ganhou</h4>
+              <div class="impacto">
+                <div><b data-i18n="n9_i1n">256 de 258</b><span data-i18n="n9_i1l">itens em que a conta do sistema chega ao mesmo resultado da planilha, mês a mês (planilha de outubro de 2026, mesma entrada, de jun/2026 a dez/2027)</span></div>
+                <div><b data-i18n="n9_i2n">2.091</b><span data-i18n="n9_i2l">saídas mensais preenchidas à mão na planilha, que o sistema lê do ERP (jan a set/2026, planilha de outubro com 258 itens em 13 abas de família)</span></div>
+                <div><b data-i18n="n9_i3n">Todo dia</b><span data-i18n="n9_i3l">estoque, saída, estrutura e ordens de compra lidos do ERP, sem lançamento à mão (desde 23/10/2026, no registro de leitura do sistema)</span></div>
+              </div>
+              <p class="impacto-frase" data-i18n="n9_if">Ganho para a empresa: a regra de cálculo do sistema já reproduz a da planilha, e os dados de estoque, saída, estrutura e ordens de compra são lidos do ERP todos os dias, sem lançamento à mão. Com a entrada em produção, a planilha de 13 abas sai de cena e o Comercial passa a decidir pela fila do hub, que aponta o mês da falta, quanto comprar e até quando colocar a ordem de compra. O número de itens pode crescer sem que a conta precise ser refeita à mão.</p>
+            </div>
               <div>
                 <h4 class="mini-h" data-i18n="lbl_cycle">Ciclo completo</h4>
                 <ol class="flow">
@@ -1724,22 +1794,22 @@ html:not(.motion) .stack-btn{display:none}
                 </ol>
               </div>
             <dl class="spec spec--split">
-              <div class="sp-sit"><dt data-i18n="lbl_sit">Situação</dt><dd data-i18n="n9_sit">A compra de importados era decidida numa planilha com uma aba por família. A programação de venda era copiada à mão para cada item comprado e o saldo era refeito a cada mês. Para os componentes que entram em muitos produtos, era preciso abrir a estrutura de cada produto e somar peça por peça.</dd></div>
+              <div class="sp-sit"><dt data-i18n="lbl_sit">Situação</dt><dd data-i18n="n9_sit">A compra de importados ainda é decidida numa planilha com uma aba por família. A programação de venda é copiada à mão para cada item comprado, e o saldo é refeito a cada mês. Para somar pela estrutura os componentes que entram em muitos produtos, é preciso abrir a estrutura de cada produto, peça por peça.</dd></div>
               <div class="sp-did"><dt data-i18n="lbl_did">O que fiz</dt><dd><ol class="did">
                   <li data-i18n="n9_d1">Levantei com o Comercial como a planilha era montada e projetei e construí o sistema, do banco de dados à tela.</li>
                   <li data-i18n="n9_d2">Separei os dois tipos de item: o produto pronto, que chega importado e só troca de código, e o componente, cuja necessidade sai da explosão da estrutura de cada produto montado na fábrica.</li>
                   <li data-i18n="n9_d3">Escrevi a conta do mês numa regra só: saldo, ordens que chegam, estoque de segurança e compra no primeiro mês com falta, com a data limite contada para trás pelo tempo de produção do fornecedor e pela modalidade de frete.</li>
                   <li data-i18n="n9_d4">Criei o ciclo mensal: o Comercial valida o mês seguinte, o mês validado congela, e mudar depois abre uma nova versão sem apagar a anterior.</li>
-                  <li data-i18n="n9_d5">Fiz o acerto comparar a saída real com a programação validada, por item e por família. A IA explica o desvio e sugere um ajuste, sem alterar nada sozinha.</li>
-                  <li data-i18n="n9_d6">Deixei o ERP só para leitura e o envio de e-mail nascendo desligado, e toda alteração guarda quem, quando e o quê.</li>
+                  <li data-i18n="n9_d5">Fiz o acerto comparar a saída lida do ERP com a programação validada, por item e por família.</li>
+                  <li data-i18n="n9_d6">Deixei o ERP só para leitura, e toda alteração guarda quem, quando e o quê.</li>
                 </ol></dd></div>
-              <div class="sp-how"><dt data-i18n="lbl_how">Como medi</dt><dd data-i18n="n9_how">A carga inicial veio da planilha do Comercial, que é a referência: a regra de cálculo é conferida contra ela, item a item, antes de o sistema substituir a planilha.</dd></div>
-              <div class="sp-res"><dt data-i18n="lbl_res">Resultado</dt><dd class="res" data-i18n="n9_res">Em implantação: o sistema está construído e sendo ligado ao ERP. Em produção, a fila de compras passa a dizer o que comprar, quanto e até quando, e a planilha por família sai de cena.</dd></div>
+              <div class="sp-how"><dt data-i18n="lbl_how">Como medi</dt><dd data-i18n="n9_how">A conta da planilha de outubro de 2026 foi refeita com a regra publicada do sistema e a mesma entrada, item a item e mês a mês, de jun/2026 a dez/2027: 4.629 de 4.652 meses-item deram o mesmo resultado. Nos 2 itens restantes, a planilha troca o fator de estoque máximo no meio do período. As saídas preenchidas à mão foram contadas no arquivo da planilha, de jan a set/2026. A leitura do ERP vem do registro do sistema, de 23/10 a 04/11/2026, com a saída lida para os 252 itens que têm código no ERP. Conferido pela TI em 04/11/2026.</dd></div>
+              <div class="sp-res"><dt data-i18n="lbl_res">Resultado</dt><dd class="res" data-i18n="n9_res">Em implantação: a conta do sistema já reproduz a da planilha em 256 de 258 itens, e os dados do ERP são lidos todos os dias. Os próximos passos, com o Comercial, são completar o cadastro de fornecedor e de estrutura dos itens, conferir com a planilha os números lidos do ERP, definir o acompanhamento dos processos de importação e fechar no hub o primeiro ciclo mensal. A partir daí, a planilha sai de cena.</dd></div>
             </dl>
             <div>
               <h4 class="mini-h" data-i18n="lbl_tech">Tecnologias</h4>
               <ul class="cables">
-                <li>C# / .NET</li><li>ASP.NET Core</li><li>SQL Server</li><li>Next.js / React / TypeScript</li><li data-i18n="n7_t5">Integração com ERP (somente leitura)</li><li data-i18n="n1_t4">API de IA generativa</li>
+                <li>C# / .NET</li><li>ASP.NET Core</li><li>SQL Server</li><li>Next.js / React / TypeScript</li><li data-i18n="n7_t5">Integração com ERP (somente leitura)</li>
               </ul>
             </div>
             <figure class="reel">
@@ -1921,8 +1991,8 @@ html:not(.motion) .stack-btn{display:none}
     p8n: 'People management', p8m: 'Creates exit interviews and 30 and 90-day conversations on its own from payroll, and HR only records what was said.',
     p6n: 'TV Carousel', p6m: 'Every TV in the company with the right message for its department, changed in one click from inside the hub.',
     p7n: 'Budget planning', p7m: 'Each manager builds the year’s budget in the hub, with last year alongside, and submits it for approval. No more spreadsheets by email.',
-    p9n: 'Import planning', p9m: 'Tells what to buy from abroad, how much and by when, using each supplier’s lead time. The per-family spreadsheet steps aside.',
-    st_idle: 'Awaiting scan', st_read: 'Checking', st_prod: 'In production',
+    p9n: 'Import planning', p9m: 'Will tell what to buy from abroad, how much and by when, using each supplier’s lead time, in place of the per-family spreadsheet.',
+    st_idle: 'Awaiting scan', st_read: 'Checking', st_prod: 'In production', selo_dados: 'Approximate values: rounded from real measurements, with no sensitive company data.',
 
     about_h: 'About',
     about_p1: 'I started in 2021 at an internet service provider, configuring routers and MikroTik devices. Working in controllership at BRF, I learned that every number has a process behind it. At Transportadora Sana I was the only IT person for a group of about 500 employees: I handled servers, firewall, antivirus and email, plus purchasing, asset records and equipment loans, and later coordinated one more person on the IT team.',
@@ -2040,23 +2110,24 @@ html:not(.motion) .stack-btn{display:none}
     n3_d3: 'Traded memory for rules: every logged contact sets the date of the next one, and a customer past their follow-up date goes back to the sales rep’s queue.',
     n3_d4: 'Connected it to the ERP through a local mirror: it reads sales and goals by sync and never writes to the ERP.',
     n3_d5: 'Integrated sending through each rep’s own email and through the WhatsApp platform, plus generative AI with prompts that can be edited on screen.',
-    n3_talk: 'Separate systems that talk to each other: a campaign lead captured by the engine lands in AUTO CRM’s new-leads inbox, and a reactivated customer goes back to the account’s sales rep.',
-    n3_size: '137 API routes and 30 tables of its own.',
-    n3_res: 'In production: each rep’s accounts, history and daily tasks live in one place, and the team’s contact and quote counts now come from the system itself.',
+    n3_talk: 'Separate systems: campaign leads arrive through the leads and WhatsApp integration and land in AUTO CRM’s new-leads inbox, and the engine’s customer reactivation does not go through the CRM.',
+    n3_size: '144 API routes and 34 tables of its own.',
+    n3_how: 'Invoiced: the export team’s invoiced sales from Jul 1 to Oct 29, 2026, 26 customers by ERP code, matched against the system’s portfolio by code and by name. The BRL amount covers only the 18 customers who were already in the portfolio on the date of their first invoice in the period, is rounded down and is compared with the total invoiced to all 26; it shows what those customers bought, not what the system caused. New companies: campaign and rep-prospecting leads logged from July to October 2026, excluding companies already in the system under the same name or reference and test records (339 companies); the base of 1,049 companies loaded on Jun 29, 2026 is counted separately. Nurturing: active prospects in nurturing on Nov 4, 2026, by the country on record. Next contact: active portfolio customers with a next-contact date filled in on Nov 4, 2026, excluding test records. Department setup checked in the system’s code; the export team is the first department in use. IT entries excluded. Checked against the system’s database and the ERP on Nov 4, 2026.',
+    n3_res: 'In production: each rep’s accounts, history and daily tasks live in one place, and since Jul 1, 2026, the team’s contact and quote counts have come from the system itself.',
     n3_f1: 'New lead in the daily inbox', n3_f2: 'Prospecting with a cadence', n3_f3: 'Nurturing or conversion', n3_f4: 'Accounts and pipeline', n3_f5: 'Order closed', n3_f6: 'New repurchase cycle',
     n3_t7: 'WhatsApp platform API', n3_t8: 'Per-rep email (SMTP)', n3_t9: 'Generative AI API',
 
-    p4l: 'The engine that reads the customer base in the ERP, decides who to re-engage, sends the message through the WhatsApp platform and measures replies, quotes and purchases. For companies that are not customers yet, it selects prospects from the public company registry.',
+    p4l: 'The engine that reads the customer base in the ERP, decides who to re-engage, sends the message through the WhatsApp platform and measures quotes and purchases against the ERP. For companies that are not customers yet, it selects prospects from the public company registry.',
     n4_b1k: 'Heaviest step of the results dashboard', n4_b1a: 'over 900 s', n4_b1n: 'about 18 s',
     n4_b2k: 'AI calls when replaying an incident',
-    n4_sit: 'Re-engaging past customers over WhatsApp depended on a third-party tool, with the rule for who got a message locked inside it and no way to measure the return: who replied, who asked for a quote, who bought. I designed and built an in-house engine inside the hub, with the rule under the company’s control.',
-    n4_k1: 'Base analysis', n4_v1: 'Every day, the engine analyzes the ERP’s customer base and builds the queue of who to call back, in priority order. The criteria belong to the company, are documented and can be adjusted on screen, with no AI at this stage.',
+    n4_sit: 'Re-engaging past customers over WhatsApp depended on a third-party tool, with the rule for who got a message locked inside it. I designed and built an in-house engine inside the hub, with the rule under the company’s control.',
+    n4_k1: 'Base analysis', n4_v1: 'Monday to Friday, the engine analyzes the ERP’s customer base and builds the queue of who to call back, in priority order. The criteria belong to the company, are documented and can be adjusted on screen, with no AI at this stage.',
     n4_k2: 'Sending and tracking', n4_v2: 'The message goes out through official WhatsApp and the reply comes back to the hub. Quotes, purchases and losses are measured against the ERP, and the negotiation stays with the account’s sales rep. On the dashboard, reactivation and AI support results can be filtered by sales line.',
-    n4_k3: 'Prospecting', n4_v3: 'For companies that are not customers yet, the engine looks for prospects in the Federal Revenue Service’s open company registry (CNPJ), with more than 28 million active companies, filtered by the customer profile the company is looking for. Prospecting returns have their own results tab, counted by the month of the send.',
+    n4_k3: 'Prospecting', n4_v3: 'For companies that are not customers yet, the engine looks for prospects in the Federal Revenue Service’s open company registry (CNPJ), with more than 28 million active establishments, filtered by the customer profile the company is looking for. Prospecting returns have their own results tab, counted by the month of the send.',
     n4_k4: 'AI customer service', n4_v4: 'In the AI customer service integration, which already existed and which I took over, I built a guard that notices when the AI gets stuck in a loop and hands the conversation to a person. When I replayed a real incident, AI calls dropped from 460 to 31. I also moved the list that maps each sales rep to their agent into a screen in the hub.',
-    n4_talk: 'Separate systems that talk to each other: a campaign lead captured by the engine lands in AUTO CRM’s new-leads inbox, and a reactivated customer goes back to the account’s sales rep.',
-    n4_how: 'Before switching the old tool off, I ran the engine alongside it and compared the selected customers one by one. On the dashboard, I timed the heaviest step before and after the rewrite and checked that the result was identical. The loop guard was tuned by replaying the real conversation history.',
-    n4_res: 'The third-party tool was switched off and reactivation now runs inside the hub, and the negotiation stays with the account’s sales rep. The return went from estimated to measured against the ERP, and the dashboard’s heaviest step dropped from over 900 s to about 18 s, with an identical result.',
+    n4_talk: 'Separate systems: the engine’s reactivation does not go through AUTO CRM, and in the components and resale portfolios, the contacted customer enters the ERP’s CRM as an opportunity, in the sales rep’s pipeline. Campaign leads reach AUTO CRM through the leads and WhatsApp integration, not through the engine.',
+    n4_how: 'Tracked value: invoiced or released orders in the ERP that came from a quote recorded for the customer, through any channel, within 29 days after the message, with the order inside the same window; order total in the ERP on Nov 4, 2026, by message month, only for messages to customers with no order in over 28 days: 1,182 orders from 1,004 customers from Jun to Oct 2026, 716 after messages from the previous tool, from Jun to Aug, tracked by the hub dashboard, and 466 after messages from the in-house system, in Sep and Oct. October windows close on Nov 28, 2026. Order closed: the same rule, for automated sends from Sep 3 to Oct 6, 2026; 184 of the 319 customers with a quote. Coverage: ERP customers with no order from Aug 6 to Oct 7, 2026, with a valid WhatsApp number and the minimum lifetime purchase, 7,375 records across 7,076 numbers; 6,637 records (90%) and 6,517 numbers (92%) were contacted from Sep 2 to Nov 4, 2026, and of the 562 not contacted, not even through the same number, 553 were held back by company rules: an overdue invoice, a contact on record less than 28 days earlier on every day of the check, or purchases below the minimum in force at the time. First contact: of the customers with no order from Feb 1 to Sep 2, 2026, with a valid WhatsApp number and the minimum lifetime purchase, that the previous tool never contacted from Mar 1 to Sep 1, 2026, the in-house system contacted 531 from Sep 2 to Nov 4, 2026, 450 of whom had no contact on record in the ERP before Sep 3, 2026. The engine checked the entire base of customers with an order in the ERP on 45 of 45 weekdays from Sep 3 to Nov 4, 2026. Prospecting: messages accepted by the WhatsApp platform from Sep 29 to Oct 19, 2026, one per phone number, excluding companies already registered in the ERP; of the 90 activity codes mapped across 24 target industries, 56, in 7 industries, already have companies contacted. Through Nov 4, 2026, 6 of them were registered in the ERP and 2 received a quote after the message; none has bought yet. The figures count what came after the message, not what it caused. Checked against the hub’s log and the ERP on Nov 4, 2026. Before switching the old tool off, I ran the engine alongside it and compared the selected customers one by one. On the dashboard, I timed the heaviest step before and after the rewrite and checked that the result was identical. The loop guard was tuned by replaying the real conversation history.',
+    n4_res: 'The third-party tool was switched off and reactivation now runs inside the hub, and the negotiation stays with the account’s sales rep. The dashboard’s heaviest step dropped from over 900 s to about 18 s, with an identical result.',
     n4_f1: 'Customer base in the ERP', n4_f2: 'Qualification by priority', n4_f3: 'Daily queue', n4_f4: 'Sent through the WhatsApp platform', n4_f5: 'Reply by webhook', n4_f6: 'Quote, purchase or loss read from the ERP',
     n4_t1: 'C# / .NET (background services)', n4_t3: 'ERP integration', n4_t4: 'WhatsApp platform API', n4_t8: 'Brazilian Federal Revenue open data', n4_t9: 'Python (loop guard)',
 
@@ -2066,36 +2137,38 @@ html:not(.motion) .stack-btn{display:none}
     n5_a1: 'A questionnaire built by the department itself, with sections, scales, matrices, multiple choice and free text.',
     n5_a2: 'Distribution by bulk message through the WhatsApp platform or by public link. When sending, the department picks one of its own message templates as it confirms, and the send runs in the background. The answer is not tied to the name of the person who gave it.',
     n5_a3: 'A ready-made report, with favorability by dimension, eNPS and comparison with past surveys.',
-    n5_a4: 'A presentation built from the results and shown right in the portal, hiding questions and choosing which comments go in.',
+    n5_a4: 'A presentation built from the results and shown right in the portal; on screen, the department hides questions and picks which comments appear.',
     n5_a5: 'Free-text analysis with generative AI, without identifying who answered.',
     n5_k2: 'Identified survey, for customers',
     n5_i1: 'A single-use link of their own for each contact, and the recipient list shows who has already answered.',
     n5_i2: 'A 0 to 10 scale with NPS, with the invitation and the form also in Spanish.',
-    n5_i3: 'Answers per contact only in the internal report, with CSV export. They never go to the public results link or to the AI analysis.',
+    n5_i3: 'Answers per contact only in the internal report, with CSV export. The contact behind each answer does not go to the public results link or into the request to the AI.',
     n5_i4: 'In the HR department the survey is always anonymous: identification is not even offered.',
     n5_i5: 'Exit interviews and 30 and 90-day conversations, which started here, now have a system of their own:',
-    n5_how: 'I timed the AI analysis call before and after trimming the request. I then moved the analysis to the background and stored the result, so the call is not repeated every time the report is opened.',
+    n5_how: 'Counts from the module’s log and, for opened links, from the access log, excluding WhatsApp’s preview bot. Climate: 4 surveys from Nov and Dec 2025, imported from the external form, and 4 collected Jul 22 to 24, 2026. NPS: 4 customer sends on Nov 3, 2026, with answers counted until 10:57 on Nov 4, 2026; the author of each send comes from the module’s log. Checked by IT on Nov 4, 2026. I timed the AI analysis call before and after trimming the request. I then moved the analysis to the background and stored the result, so the call is not repeated every time the report is opened.',
     n5_res: 'In production: the department builds the survey, distributes it and presents the results without leaving the portal and, with customers, knows who answered what without exposing it outside the department. The questions came from the teams that use the module.',
     n5_b1k: 'AI analysis call', n5_b1a: '25 to 37 s', n5_b1n: 'under 15 s',
     n5_f1: 'Questionnaire in sections', n5_f2: 'Bulk message or public link', n5_f3: 'Anonymous answers', n5_f4: 'Report with eNPS', n5_f5: 'AI analysis', n5_f6: 'Presentation in the portal',
     n5_t6: 'Generative AI API', n5_t7: 'WhatsApp platform API', n5_t9: 'PowerPoint and Excel export',
+    n5_i1n: '4 of 4', n5_i1l: 'sites that ran the climate survey on an external form had the 2026 survey collected and scored in the portal', n5_i2n: '250+', n5_i2l: 'customer NPS answers in the first 24 hours, each tied to the customer who answered (Nov 3, 2026 sends)', n5_i3n: '64%', n5_i3l: 'of customers who opened the link completed the survey, in the first 24 hours (254 of 397, Nov 3, 2026 sends)', n5_i4n: '3 of 4', n5_i4l: 'customer NPS sends run by Marketing itself, which picks the message template (Nov 3, 2026)', n5_if: 'Gain for the company: at the 4 sites that ran the climate survey on an external form and a spreadsheet, collection, scoring and presentation moved into the portal. With customers, the survey now shows who answered: each answer arrives tied to the customer, and Marketing knows who is unhappy. Departments build their own surveys, and Marketing runs its own sends.',
 
-    p6l: 'Internal communication on the company’s TVs, run from inside the hub. Each TV plays its department’s carousel on its own and reports when it goes off the air.',
+    p6l: 'Internal communication on the company’s TVs, published and scheduled in the hub by the area itself. Each carousel takes its department’s content to the TV, and the system alerts when a screen loses signal.',
     n6_f1: 'Media library', n6_f2: 'A carousel for each TV', n6_f3: 'Schedules and hours', n6_f4: 'TV plays on its own', n6_f5: 'Heartbeat', n6_f6: 'Watcher alerts by email',
     n6_sit: 'The company’s TVs show its internal communication. I built the TV app and then brought it into the hub, getting the TVs ready to run with nobody around.',
     n6_d1: 'Rewrote the solution inside the hub, using the portal’s login and permissions.',
     n6_d2: 'Built the media library: images and videos are uploaded once and serve several carousels, each with its own order.',
-    n6_d3: 'Built temporary media: a notice with an end date leaves every TV and is deleted on its own that day.',
+    n6_d3: 'Built temporary media: a dated piece leaves every carousel at the end of its date range and is then deleted on its own.',
     n6_d4: 'Added an online radio per carousel, which pauses during videos and outside working hours.',
     n6_d5: 'Built the watcher: it tracks each TV’s heartbeat, confirms the signal is really gone before alerting by email, and alerts again when the TV comes back.',
     n6_d6: 'Gave the player a watchdog: if the feed fails or a slide hangs, the carousel keeps turning with what it already has.',
-    n6_d7: 'Built the players: a PC in kiosk mode and a single Android app made to open by itself when the device boots.',
-    n6_how: 'I set up a test bench: I made the feed that supplies the TV respond with errors and watched whether the carousel kept turning with what it already had, and how long it took to apply a new list.',
-    n6_res: 'Content for every TV is managed in the portal, with a date range per item and shutdown outside working hours. The TV applies changes at the end of the loop without cutting off what is on screen, and whoever is responsible knows when a screen loses signal and when it comes back.',
+    n6_d7: 'Built the PC player in kiosk mode and a single Android app, ready to install and made to open by itself when the device boots.',
+    n6_how: 'New images: the hub’s log, Sep 24 to Nov 4, 2026, by the profile of who published them; 76 of 78 by the area. Dated pieces ending Sep 24 to Oct 30, 2026: counted when created by the day before, already linked to a carousel before the start and still on it at the end (32 of 36). Lead time: 24 dated pieces scheduled on Oct 26, 2026, 9 to 44 days before going on air. Checked against the database on Nov 4, 2026. For the player, I set up a test bench: I made the feed that supplies the TV respond with errors and watched whether the carousel kept turning with what it already had, and how long it took to apply a new list.',
+    n6_res: 'Content for every carousel is managed in the portal, with a date range per piece and an after-hours shutdown that can be set for each carousel. The TV applies changes at the end of the loop without cutting off what is on screen, and whoever is responsible knows when a screen loses signal and when it comes back.',
     n6_m1v: '40 s', n6_m1: 'of consecutive errors in the TV’s feed, on the bench, and the carousel kept turning.',
     n6_m2v: '18 s', n6_m2: 'for the TV to apply a new list on its own, in the same test.',
-    n6_m3v: '6 versions', n6_m3: 'in six days, from the first version in the hub to the one with sound in videos.',
+    n6_m3v: '6 versions', n6_m3: 'in six days, from the first version in the hub to the one with the player’s watchdog.',
     n6_t2: 'ASP.NET Core (background service)', n6_t5: 'JavaScript ES5 (TV page)', n6_t7: 'Windows in kiosk mode',
+    n6_i1n: '97%', n6_i1l: 'of new TV images published by Internal Communications itself, without depending on IT, since Sep 24, 2026', n6_i2n: '32', n6_i2l: 'dated pieces went on and off the carousels on their own, on the scheduled day, without anyone having to remember (Sep to Oct 2026)', n6_i3n: 'Up to 6 weeks', n6_i3l: 'of lead time in scheduling dated pieces, set up by the area in a single session (Oct 2026)', n6_if: 'Gain for the company: since the hub rollout, Internal Communications itself publishes and schedules what runs on the TVs, without depending on IT. A dated piece goes on and off the carousels on the scheduled day, with no one having to remember to publish or remove it, and weeks of scheduling can be set up in a single session.', ar_comint: 'Internal Communications',
 
     p7l: 'The company’s annual budget, built with the managers inside the hub. Each one fills in their accounts month by month, with last year’s actuals as a reference, and submits it for approval. During the year, a manager can request budget from another’s account, and the account owner makes the call.',
     n7_f1: 'Year’s accounts released on screen', n7_f2: 'Manager fills in month by month', n7_f3: 'Submitted for approval', n7_f4: 'Approve, return or reopen', n7_f5: 'Year’s budget approved', n7_f6: 'Budget requests between managers',
@@ -2107,38 +2180,43 @@ html:not(.motion) .stack-btn{display:none}
     n7_d5: 'Built budget requests: a manager asks to use another’s account, and the owner approves or declines and follows the account’s balance with every request.',
     n7_d6: 'Rebuilt the first version from scratch, simpler, when I saw it asked for setup nobody needed to maintain. The deadline became one switch per year, and the accounts became a single list per year, the same for every manager, with each account released or blocked on screen.',
     n7_d7: 'Streamlined filling in: search finds an account by its code, a management account leaves the budget through the trash icon and stays in the history, and the autosave confirmation, the total and the submit-for-approval button sit in a fixed bar at the bottom.',
-    n7_how: 'Before choosing where the reference actuals would come from, I compared one manager’s spreadsheet with the ERP’s sources, cell by cell, and kept the one that matched to the cent. The same comparison showed the spreadsheet changed its criteria mid-year; in the system, there is only one.',
-    n7_res: 'The year’s budget left the spreadsheet and now lives in the hub: each manager fills in and submits their own, the approver follows them all in one place, and every budget request between managers is recorded with who asked, how much and who decided. No email is sent and nothing is written to the ERP.',
+    n7_how: '2027 budget: the system’s log and change history, over the 228 non-zero monthly values entered from Oct 6 to Nov 4, 2026, excluding test entries from one IT user. A carried value is one that came in only through “carry to December”. Author and date were checked on every value. Reference: on Sep 24, 2026, I compared 192 values from a previous-cycle spreadsheet (Jan to Sep 2025) with the monthly accounting balance by business unit; 58 also included other business units, and in Aug and Sep, 30 of 30 matched to the cent. The 30% is risk avoided, counted separately. Cycle figures checked in the database on Nov 4, 2026.',
+    n7_res: 'The 2027 budget is being filled in inside the hub: each manager enters their values under their own login. Submission and approval are already live and come into use once managers finish entering their budgets; budget requests between managers, during 2027. No email is sent and nothing is written to the ERP.',
     n7_t3: 'SQL Server / T-SQL (transactions)', n7_t5: 'ERP integration (read-only)',
+    n7_i1n: '49%', n7_i1l: 'of the 2027 budget values came in through “carry to December”, without typing month by month (112 of 228, Oct 6 to Nov 4, 2026)', n7_i2n: '30%', n7_i2l: 'of the reference values in a previous-cycle spreadsheet also included other business units, which the hub prevents (58 of 192, Jan to Sep 2025)', n7_if: 'Gain for the company: the 2027 budget is the first one built in the hub, replacing spreadsheets passed around by email. Managers start from last year’s actuals, already in place and on the same business-unit basis for everyone, and don’t have to type month by month. The approver sees each manager’s progress and total on a single dashboard, with author and date on every value and no spreadsheets to consolidate by hand.',
 
     ar_rhm: 'HR · Marketing',
     p8l: 'The HR system inside the hub. Payroll leads: when it shows a termination or a hire, the system creates the exit interview and the 30 and 90-day conversations on its own, and HR records what was said.',
     n8_f1: 'Termination or hire in payroll', n8_f2: 'Routine creates the record', n8_f3: 'Pending item on the home screen, by deadline', n8_f4: 'HR talks and records', n8_f5: 'Feedback to the manager', n8_f6: 'Dashboards and analyses',
-    n8_sit: 'Exit interviews were done on paper and typed into a spreadsheet later. The 30 and 90-day conversations depended on remembering each hire date, the semiannual feedback lived in a spreadsheet per manager, and simple questions, such as who has vacation coming due, turned into report requests.',
+    n8_sit: 'Exit interviews were done on paper and typed into a spreadsheet later. The 30 and 90-day conversations depended on remembering each hire date, the semiannual feedback lived in a single spreadsheet, split by manager, and simple questions, such as who has vacation coming due, turned into report requests.',
     n8_d1: 'Mapped the path of each conversation with HR and designed and built the system, separate from the Climate Survey: the survey stays anonymous, and this is where what is recorded per person lives.',
     n8_d2: 'Built the routine that reads payroll every 4 hours, read-only: a new termination becomes an interview to fill in, anyone hired on a probationary contract enters the 30-day conversation queue from the hiring date, and closing the 30-day conversation opens the 90-day one right away. A unique index prevents duplicates.',
-    n8_d3: 'Built the semiannual feedback by team, with the team coming from payroll and the manager from the employee portal. The next one is scheduled six months later on its own, with the dates spread across the semester, and the email reminders start switched off and, once on, go out only on business days.',
-    n8_d4: 'Built the retention profile of each role only with factors tied to the job. The match helps the conversation and never rules a candidate out, and personal attributes protected by law do not exist in the system.',
-    n8_d5: 'Built a read-only HR assistant, with separate conversations that keep their own context, a closed list of lookups, a fixed refusal for anything outside HR and an audit trail of every question. The AI analyses receive only the aggregate, with no names.',
+    n8_d3: 'Built the semiannual feedback by team, with the team coming from payroll and the manager from the employee portal. The next one is scheduled six months later on its own, and the email reminders start switched off and, once on, go out only on business days.',
+    n8_d4: 'Built the retention profile of each role only with factors tied to the job. The match helps the conversation and never rules a candidate out, and no criterion forbidden by Law 9,029/95 goes into the profile.',
+    n8_d5: 'Built a read-only HR assistant, with separate conversations that keep their own context, a closed list of lookups and a fixed refusal for anything outside HR; every question is logged. The AI analyses receive the answers with department, role and length of service, but no names, dates or identifiers; in free text, the names of the employee, the interviewer and the coordinator are replaced with a placeholder.',
     n8_d6: 'Tied access to the hub rule: the owning department, project members or a super admin get in, checked on the server.',
     n8_d7: 'Redesigned the HR dashboards for quick reading: the main indicators are compared with the previous period, and reasons, departments, roles and length of service appear as charts. In the follow-ups, the queue filters by the 30 or 90-day milestone, and the report by the rating of the latest completed follow-up.',
     n8_d8: 'Built help into the system: a step-by-step guided tour of the screens, plus manuals on the HR routine, on what the system does by itself, on who can do what and on where each piece of data comes from.',
-    n8_how: 'I checked coverage against payroll itself: every termination has its interview, answered or marked as not answered, and the system count matches the payroll count.',
-    n8_res: 'In production: interviews and conversations are born from payroll, HR starts the day from the list of pending items by deadline and records instead of tracking dates, and every lookup and every write goes to the audit trail. The interview templates and follow-up criteria came from HR.',
+    n8_how: 'Exits: the system’s records against the 2026 terminations read from payroll, Jan 1 to Nov 4, 2026; the count matched HR’s on Oct 14, 2026, and an exit counts when it is on record, with the interview answered or marked as not held. Before: HR’s spreadsheet on Sep 9, 2026, against the same list. Opened by the system: interviews and conversations created from payroll from Oct 15 to Nov 4, 2026, excluding the spreadsheet and form loads. Forms: one-time load on Oct 16, 2026, covering people who left within 90 days. Checked in the database on Nov 4, 2026.',
+    n8_res: 'In production: interviews and conversations are born from payroll, and HR records what was discussed instead of tracking dates. The interview templates and follow-up criteria came from HR.',
     n8_t5: 'Generative AI API with tools', n8_t6: 'Payroll reading',
+    n8_i1n: '100%', n8_i1l: 'of 2026 terminations on record in the HR system, against 36% in the old spreadsheet', n8_i2n: '50+', n8_i2l: 'interviews and 30 and 90-day conversations opened by the system itself from payroll since Oct 15, 2026, without anyone having to remember', n8_i3n: '100+', n8_i3l: 'paper forms of people who left during probation, 2021 to 2026, loaded into the system and available for reference', n8_if: 'Gain for the company: HR now has every exit of the year on record in one place, not just the share that made it to the spreadsheet. Interviews, 30 and 90-day conversations and semiannual feedback reminders come from the system itself, and every probationary hire joins the follow-up without anyone having to remember the date. The paper forms of people who left during probation, back to 2021, are in the same system, next to the new conversations.',
 
-    p9l: 'Import purchasing decided in the hub instead of a spreadsheet: the sales schedule goes in once, per product sold, and the system tells for each item which month runs short, how much to buy and by when to place the purchase order, using each supplier’s lead time.',
+    p9l: 'Built to bring import purchasing, still decided in a spreadsheet, into the hub: the sales schedule goes in once, per product sold, and the system works out for each item which month runs short, how much to buy and by when to place the purchase order, using each supplier’s lead time.',
     n9_f1: 'Schedule per product sold', n9_f2: 'Structure explosion', n9_f3: 'Monthly calculation', n9_f4: 'Queue by deadline', n9_f5: 'Import process', n9_f6: 'Monthly accuracy check',
-    n9_sit: 'Import purchasing was decided in a spreadsheet with one tab per product family. The sales schedule was copied by hand for each purchased item and the balance was redone every month. For components used in many products, someone had to open each product’s structure and add it up piece by piece.',
+    n9_sit: 'Import purchasing is still decided in a spreadsheet with one tab per product family. The sales schedule is copied by hand to each purchased item, and the balance is redone every month. To add up, by structure, the components used in many products, someone has to open each product’s structure, piece by piece.',
     n9_d1: 'Worked with Sales to map how the spreadsheet was put together, then designed and built the system, from the database to the screen.',
     n9_d2: 'Split the two kinds of item: the finished product, which arrives imported and only changes code, and the component, whose need comes from exploding the structure of each product assembled in the factory.',
     n9_d3: 'Wrote the monthly calculation as a single rule: balance, incoming orders, safety stock and the purchase in the first month that runs short, with the deadline counted backwards from the supplier’s production time and the freight mode.',
     n9_d4: 'Built the monthly cycle: Sales validates the next month, the validated month freezes, and any later change opens a new version without erasing the previous one.',
-    n9_d5: 'Had the accuracy check compare actual outflow with the validated schedule, by item and by family. The AI explains the gap and suggests an adjustment, without changing anything on its own.',
-    n9_d6: 'Kept the ERP read-only and email sending switched off by default, and every change records who, when and what.',
-    n9_how: 'The initial load came from the Sales spreadsheet, which is the reference: the calculation rule is checked against it, item by item, before the system replaces the spreadsheet.',
-    n9_res: 'Rolling out: the system is built and being connected to the ERP. In production, the purchase queue will tell what to buy, how much and by when, and the per-family spreadsheet steps aside.',
+    n9_d5: 'Had the accuracy check compare the outflow read from the ERP with the validated schedule, by item and by family.',
+    n9_d6: 'Kept the ERP read-only, and every change records who, when and what.',
+    n9_how: 'The October 2026 spreadsheet’s calculation was redone with the system’s published rule and the same input, item by item and month by month, from Jun 2026 to Dec 2027: 4,629 of 4,652 item-months reached the same result. In the other 2 items, the spreadsheet changes the maximum-stock factor mid-period. Hand-filled outflows were counted in the spreadsheet file, Jan to Sep 2026. ERP reads come from the system’s log, Oct 23 to Nov 4, 2026, with outflow read for the 252 items that have an ERP code. Checked by IT on Nov 4, 2026.',
+    n9_res: 'Rolling out: the system’s calculation already reproduces the spreadsheet’s for 256 of 258 items, and ERP data is read every day. Next steps, together with Sales: complete the supplier and product-structure records, reconcile the figures read from the ERP with the spreadsheet, define how import processes are tracked, and close the first monthly cycle in the hub. From then on, the spreadsheet steps aside.',
+    n9_i1n: '256 of 258', n9_i1l: 'items where the system’s calculation reaches the same result as the spreadsheet, month by month (October 2026 spreadsheet, same input, Jun 2026 to Dec 2027)', n9_i2n: '2,091', n9_i2l: 'monthly outflows filled in by hand in the spreadsheet, which the system reads from the ERP (Jan to Sep 2026, October spreadsheet with 258 items across 13 product-family tabs)', n9_i3n: 'Every day', n9_i3l: 'stock, outflow, product structure and purchase orders read from the ERP, with no manual entry (since Oct 23, 2026, per the system’s read log)', n9_if: 'Gain for the company: the system’s calculation rule already reproduces the spreadsheet’s, and stock, outflow, product structure and purchase-order data are read from the ERP every day, with no manual entry. Once in production, the 13-tab spreadsheet steps aside and Sales decides from the hub’s queue, which shows the month an item runs short, how much to buy and by when to place the purchase order. The number of items can grow without the math being redone by hand.',
     lbl_impacto: 'What the company gained', n2_i1n: 'Ahead of the ERP', n2_i1l: 'an in-house solution, with no customization cost, before the ERP offered one that would not hold up the sale', n2_i2n: '3 min', n2_i2l: 'from note creation to SEFAZ authorization (October 2026 median)', n2_i3n: '450+', n2_i3l: 'debit notes authorized by SEFAZ since Aug 13, 2026', n2_i4n: '400+', n2_i4l: 'linked to the sales invoice automatically, without anyone having to remember', n2_if: 'Gain for the company: it met the tax reform requirement with an in-house solution, with no customization paid to the ERP vendor. Issuing and linking are done by the system itself, and the dashboard shows, note by note, what the sale has already referenced and what is still pending.', n1_i1n: '2,200+', n1_i1l: 'inbound invoice and freight postings through the hub since August 2026', n1_i2n: '160+ h', n1_i2l: 'of typing saved on those postings: 5 min per invoice by hand vs. 30 s through the hub', n1_i3n: '95%', n1_i3l: 'of freight bills posted through the hub needed no correction afterwards', n1_i4n: '100+', n1_i4l: 'off-standard invoices held back by the robot, with the reason in writing', n1_if: 'Gain for the company: with no typing, invoices and freight bills now reach the ERP 10 times faster on average, and the hours saved became time for analysis. Invoice volume can grow without adding headcount. What used to live in the experience of whoever did the posting became more than 500 rules written into the system. The end goal: no one has to worry about posting.',
+    n3_i1n: 'Per team', n3_i1l: 'each sales team can set up its own pipeline, cadences, goals and templates on screen, without mixing data across teams', n3_i2n: 'BRL 2.5M+', n3_i2l: 'invoiced to Export customers already in the system’s portfolio, more than 80% of the team’s sales in four months', n3_i3n: '85 a month', n3_i3l: 'new companies enter the Export prospecting funnel, from campaigns and reps’ own prospecting', n3_i4n: '1,000+', n3_i4l: 'Export prospects in nurturing in the system itself, across 51 countries', n3_if: 'Gain for the company: AUTO CRM is not just for Export. It is an in-house CRM, with no limit on teams, users or contacts, that each sales team configures on screen. The goal is to take accounts and prospecting out of spreadsheets and out of each rep’s memory: every logged contact already sets the next one, and each customer’s history and ERP sales live in the same place. In Export, the first team, 93% of the active portfolio already has its next contact scheduled.',
+    n4_i1n: 'BRL 4M+', n4_i1l: 'in orders from lapsed customers, tracked by the system from message to purchase', n4_i2n: '58%', n4_i2l: 'of customers who opened a quote after the message closed an order', n4_i3n: '9 in 10', n4_i3l: 'eligible lapsed customers were contacted within two months, including those who had never been contacted', n4_i4n: '7,032', n4_i4l: 'target-industry companies that were not customers yet, contacted through CNAE prospecting in three weeks', n4_if: 'Gain for the company: the engine has no volume limit. It checks the entire customer base every business day and tracks each message through to the quote, the purchase or the loss. The gain grows with the size of the base, and the base grows through CNAE prospecting, part of the same system: every new company that becomes a customer is tracked too. The rules on who gets a message and with which template belong to the company and are changed on screen.',
 
     eco_h: 'My working ecosystem',
     eco_lede: 'Every project left something behind for the next one: a memory, a rule, an assistant, a tool. I organized it the way I organize a system, and that is how each project became part of the ecosystem that supports the hub today.',
@@ -2163,7 +2241,7 @@ html:not(.motion) .stack-btn{display:none}
     r4_t: 'Every mistake becomes a rule', r4_p: 'A build that failed with 8 compile errors, all caused by the same field name, became a checklist I run before every delivery.',
 
     skills_h: 'Skills',
-    ar_fc: 'Tax · Purchasing', ar_ff: 'Tax · Finance', ar_com: 'Sales', ar_rh: 'HR', ar_all: 'All departments', ar_ges: 'Managers',
+    ar_fc: 'Tax · Purchasing', ar_ff: 'Tax · Finance', ar_com: 'Sales', ar_rh: 'HR', ar_ges: 'Managers',
     sk1: 'Network', sk5: 'AI', sk5_t: 'Claude Code, AI APIs, Agents',
     stack_cap: 'End to end: from network to AI, in layers.', stack_pause: 'Pause animation', stack_play: 'Resume animation',
     g1: 'Infrastructure', g1_1: 'Networking', g1_3: 'Servers',

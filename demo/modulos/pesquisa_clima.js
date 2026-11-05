@@ -212,7 +212,7 @@
         return h('div', { class: 'lk' }, ic('link', 18), h('div', { class: 'f1' },
           h('p', { class: 'lk-t' }, P('Link de convite', 'Invitation link')),
           h('p', { class: 'lk-u' }, LINK + p.link),
-          h('p', { class: 'lk-d' }, p.identificada ? P('Pesquisa identificada: cada contato recebe o próprio link. Este link geral continua aceitando respostas, que entram como "Sem identificação".', 'Identified survey: each contact gets their own link. This general link still takes answers, which come in as "Not identified".')
+          h('p', { class: 'lk-d' }, p.identificada ? P('Pesquisa identificada: cada contato recebe o próprio link. O link geral fica desativado e não aceita respostas.', 'Identified survey: each contact gets their own link. The general link is switched off and does not take answers.')
             : P('O mesmo link para todos: WhatsApp, e-mail ou QR. Respostas anônimas.', 'The same link for everyone: WhatsApp, email or QR. Anonymous answers.')),
           h('div', { class: 'row' }, btn(P('Copiar link', 'Copy link'), () => copiar(LINK + p.link), { ic: 'copy' }))));
       }
