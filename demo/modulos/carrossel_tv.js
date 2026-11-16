@@ -191,15 +191,13 @@
         oque: 'O que é. O Carrossel TV alimenta as televisões espalhadas pela empresa (recepção, fábrica, refeitório, áreas administrativas) com imagens e vídeos de comunicação interna. É um módulo do ProjectHub, a camada inteligente sobre o ERP, e usa o login e as permissões do portal.\n\n'
           + 'Quem cuida do conteúdo monta no portal a grade de cada TV com imagens e vídeos, períodos, mídias temporárias, rádio online e horário de desligamento. A TV abre um endereço, se atualiza sozinha sem cortar o que está na tela e o responsável é avisado quando uma tela fica sem sinal e quando volta. Funciona em PC, TV Box Android ou smart TV; um aplicativo próprio mantém a TV Box no ar sem intervenção.\n\n'
           + 'Nesta versão pública, a tela Carrosséis está aberta com dados fictícios e uma TV simulada; as outras telas aparecem no vídeo da versão completa.',
-        finalidade: 'O problema. Comunicação interna em TV costuma depender de alguém ir até o aparelho. A tela travava e só voltava quando alguém reabria a página; uma TV parada passava horas sem ninguém perceber; um aviso com prazo continuava no ar depois de vencido; e um sistema separado, com login próprio, era mais uma coisa para hospedar, proteger e dar acesso.\n\n'
-          + 'O que mudou. A comunicação das TVs passou a rodar sem supervisão: cada setor cuida do próprio conteúdo no portal, a TV se atualiza e se defende sozinha, e o responsável fica sabendo quando uma tela fica sem sinal e quando ela volta, sem alarme falso por oscilação de rede.\n\n'
+        finalidade: 'O que resolve. Cada setor cuida do próprio conteúdo no portal, a TV se atualiza e se recupera sozinha, e o responsável é avisado quando uma tela fica sem sinal e quando volta.\n\n'
           + 'Projetado e construído por Ruan Siqueira, do primeiro aplicativo das TVs ao módulo dentro do portal: o painel, a API, o banco de dados, a página da TV, o player de PC e o aplicativo Android.',
         alcance: [
           'Telas: Carrosséis, com prévia animada e a situação de cada TV; editor da grade, com ordem por arraste, período por item, rádio online e desligamento agendado; Mídias; e Configurações.',
           'Biblioteca de mídias separada das grades: a mesma mídia entra em vários carrosséis, e as temporárias saem das TVs sozinhas quando vencem.',
           'Confiabilidade: a TV se recupera sozinha de travamentos e quedas de rede, e os avisos só saem em mudança real de estado.',
-          'Resultado medido em bancada: com o servidor respondendo erro por 40 s, o carrossel seguiu girando e aplicou a lista nova sozinho em 18 s.',
-          'Ritmo e tamanho: seis versões do módulo em seis dias; 29 rotas de API e 6 tabelas.',
+          'Resiliência: com o servidor fora do ar, o carrossel segue girando e aplica a lista nova sozinho quando ele volta.',
         ],
         tecnologias: ['React / Next.js', 'ASP.NET Core (.NET)', 'SQL Server', 'TypeScript', 'JavaScript', 'Android', 'Serviço em segundo plano'],
       },
@@ -208,15 +206,13 @@
         oque: 'What it is. TV Carousel feeds the televisions spread across the company (front desk, shop floor, cafeteria, offices) with internal communication images and videos. It is a module of the ProjectHub, the intelligent layer on top of the ERP, and it uses the portal login and permissions.\n\n'
           + 'Whoever looks after the content builds each TV grid in the portal with images and videos, periods, temporary media, online radio and switch-off hours. The TV opens an address, updates itself without cutting what is on screen, and the person in charge is notified when a screen loses signal and when it is back. It runs on a PC, an Android TV box or a smart TV; an app of its own keeps the TV box on air with no intervention.\n\n'
           + 'In this public version, the Carousels screen is open with fictitious data and a simulated TV; the other screens appear in the video of the full version.',
-        finalidade: 'The problem. Internal communication on TVs usually depends on someone walking up to the device. The screen froze and only came back when someone reopened the page; a stopped TV went hours unnoticed; a notice with a deadline stayed on air after it expired; and a separate system, with its own login, was one more thing to host, protect and grant access to.\n\n'
-          + 'What changed. TV communication now runs unattended: each department looks after its own content in the portal, the TV updates and defends itself, and the person in charge learns when a screen loses signal and when it is back, with no false alarm from a network hiccup.\n\n'
+        finalidade: 'What it solves. Each department runs its own content in the portal, the TV updates and recovers on its own, and the owner is notified when a screen loses signal and when it returns.\n\n'
           + 'Designed and built by Ruan Siqueira, from the first TV application to the module inside the portal: the panel, the API, the database, the TV page, the PC player and the Android app.',
         alcance: [
           'Screens: Carousels, with an animated preview and the status of each TV; the grid editor, with drag ordering, a period per item, online radio and scheduled switch-off; Media; and Settings.',
           'Media library separate from the grids: the same media goes into several carousels, and temporary media leave the TVs by themselves when they expire.',
           'Reliability: the TV recovers by itself from freezes and network drops, and notices only go out on a real change of state.',
-          'Bench-test result: with the server returning errors for 40 s, the carousel kept turning and applied the new list by itself in 18 s.',
-          'Pace and size: six versions of the module in six days; 29 API routes and 6 tables.',
+          'Resilience: with the server down, the carousel keeps playing and applies the new list on its own when it returns.',
         ],
         tecnologias: ['React / Next.js', 'ASP.NET Core (.NET)', 'SQL Server', 'TypeScript', 'JavaScript', 'Android', 'Background service'],
       },

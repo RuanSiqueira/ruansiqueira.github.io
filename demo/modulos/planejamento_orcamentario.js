@@ -135,7 +135,7 @@
     manual: {
       pt: {
         destaque: 'O Planejamento orçamentário leva o orçamento anual para dentro do hub: cada gestor preenche as próprias contas mês a mês, com o realizado do ano anterior ao lado, e envia para aprovação; o Financeiro aprova, devolve ou reabre na mesma tela. Durante o ano, quem precisa usar a conta de outro gestor pede a verba no sistema e o dono da conta decide.',
-        oque: 'O problema. O orçamento do ano seguinte nascia em planilhas: uma por gestor, enviadas por e-mail, preenchidas em versões diferentes e consolidadas à mão pelo Financeiro. Ninguém sabia quem já tinha enviado, o histórico de quem mudou o quê se perdia e, durante o ano, o uso da conta de outro gestor era combinado por conversa, sem registro.\n\nO que o sistema faz. Cada gestor abre Meu orçamento e encontra todas as contas liberadas do ano, as mesmas para todos os gestores, com uma coluna por mês e o realizado do ano anterior ao lado como referência. Cada célula é salva sozinha, "→ Dez" leva o valor de um mês até dezembro e o "+" abre outra conta gerencial. Pronto, o gestor envia para aprovação; o Financeiro aprova, devolve com motivo ou reabre, e tudo fica no histórico. O Painel mostra o orçado, o saldo e o realizado por mês, e a Solicitação de verba registra o pedido de uso da conta de outro gestor, que o dono aprova ou recusa. Nenhum e-mail é enviado e nada é gravado no ERP.\n\nNesta demonstração pública, a tela Meu orçamento funciona com dados fictícios; as outras telas ficam fora da demonstração.',
+        oque: 'O desafio. Reunir o orçamento de todos os gestores num fluxo único, com histórico de quem mudou o quê e registro do uso da conta de outro gestor.\n\nO que o sistema faz. Cada gestor abre Meu orçamento e encontra todas as contas liberadas do ano, as mesmas para todos os gestores, com uma coluna por mês e o realizado do ano anterior ao lado como referência. Cada célula é salva sozinha, "→ Dez" leva o valor de um mês até dezembro e o "+" abre outra conta gerencial. Pronto, o gestor envia para aprovação; o Financeiro aprova, devolve com motivo ou reabre, e tudo fica no histórico. O Painel mostra o orçado, o saldo e o realizado por mês, e a Solicitação de verba registra o pedido de uso da conta de outro gestor, que o dono aprova ou recusa. Nenhum e-mail é enviado e nada é gravado no ERP.\n\nNesta demonstração pública, a tela Meu orçamento funciona com dados fictícios; as outras telas ficam fora da demonstração.',
         finalidade: 'Trocar as planilhas por e-mail por um fluxo único de orçamento, com histórico, e dar a cada gestor, durante o ano, a visão de quanto ainda resta em cada conta.\n\nProjetado e construído por Ruan Siqueira.',
         alcance: [
           'Orçamento anual em grade conta x mês, com o realizado do ano anterior como referência',
@@ -145,13 +145,13 @@
           'Painel do gestor com orçado, saldo e realizado por mês',
           'Solicitação de verba entre gestores, decidida pelo dono da conta',
           'Lista única de contas do ano, igual para todos os gestores, com cada conta liberada ou bloqueada; o ERP só é lido',
-          'Validação: o realizado bateu com a planilha de orçamento em 30 de 30 valores, ao centavo',
+          'Realizado do ano anterior lido do ERP como referência, ao centavo',
         ],
         tecnologias: ['C# / .NET', 'SQL Server', 'Next.js / React', 'TypeScript'],
       },
       en: {
         destaque: 'Budget planning brings the yearly budget into the hub: each manager fills in their own accounts month by month, with last year’s actuals alongside, and submits for approval; Finance approves, returns or reopens it on the same screen. During the year, whoever needs to use another manager’s account requests the budget in the system and the account owner decides.',
-        oque: 'The problem. Next year’s budget was born in spreadsheets: one per manager, sent by email, filled in across different versions and consolidated by hand by Finance. Nobody knew who had already submitted, the history of who changed what got lost and, during the year, using another manager’s account was agreed in conversation, with no record.\n\nWhat the system does. Each manager opens My budget and finds every account released for the year, the same for every manager, with one column per month and last year’s actuals alongside as a reference. Each cell is saved by itself, "→ Dec" carries the amount of a month through December and the "+" opens another management account. When done, the manager submits for approval; Finance approves, returns it with a reason or reopens it, and everything stays in the history. The Dashboard shows the budget, the balance and the actuals by month, and Budget requests record the request to use another manager’s account, which the owner approves or rejects. No email is sent and nothing is written to the ERP.\n\nIn this public demo, the My budget screen works on fictitious data; the other screens are outside the demo.',
+        oque: 'The challenge. Bringing the budget of every manager into a single flow, with a history of who changed what and a record of using the account of another manager.\n\nWhat the system does. Each manager opens My budget and finds every account released for the year, the same for every manager, with one column per month and last year’s actuals alongside as a reference. Each cell is saved by itself, "→ Dec" carries the amount of a month through December and the "+" opens another management account. When done, the manager submits for approval; Finance approves, returns it with a reason or reopens it, and everything stays in the history. The Dashboard shows the budget, the balance and the actuals by month, and Budget requests record the request to use another manager’s account, which the owner approves or rejects. No email is sent and nothing is written to the ERP.\n\nIn this public demo, the My budget screen works on fictitious data; the other screens are outside the demo.',
         finalidade: 'Replace the spreadsheets sent by email with a single budget flow, with history, and give each manager, during the year, the view of how much is still left in each account.\n\nDesigned and built by Ruan Siqueira.',
         alcance: [
           'Yearly budget in an account x month grid, with last year’s actuals as a reference',
@@ -161,7 +161,7 @@
           'Manager dashboard with budget, balance and actuals by month',
           'Budget requests between managers, decided by the account owner',
           'A single list of accounts for the year, the same for every manager, with each account released or blocked; the ERP is only read',
-          'Validation: actuals matched the budget spreadsheet in 30 of 30 values, to the cent',
+          'Prior-year actuals read from the ERP as a reference, to the cent',
         ],
         tecnologias: ['C# / .NET', 'SQL Server', 'Next.js / React', 'TypeScript'],
       },
@@ -170,8 +170,8 @@
        orçamento (o tour termina numa aba fora da demonstração e o estado sobrevive). */
     tour: [
       { alvo: '.po [data-aba-id="meu"]', acao: 'clicar', titulo: P('Cada gestor no próprio orçamento', 'Each manager in their own budget'),
-        texto: P('Antes, o orçamento do ano seguinte era uma planilha por gestor, enviada por e-mail. Agora cada gestor abre Meu orçamento e já encontra todas as contas liberadas do ano.',
-          'Next year’s budget used to be one spreadsheet per manager, sent by email. Now each manager opens My budget and already finds every account released for the year.') },
+        texto: P('Cada gestor abre Meu orçamento e já encontra todas as contas liberadas do ano.',
+          'Each manager opens My budget and already finds every account released for the year.') },
       { alvo: '.po .strip', titulo: P('O ano em quatro números', 'The year in four numbers'),
         texto: P('Orçado, realizado do ano anterior, saldo depois da verba já aprovada e quantas linhas já foram preenchidas. Tudo muda ao vivo enquanto o gestor digita.',
           'Budget, last year’s actuals, balance after the requests already approved and how many lines are filled in. Everything updates live as the manager types.') },

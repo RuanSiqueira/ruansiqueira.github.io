@@ -94,15 +94,14 @@
       destaque: 'Pesquisas internas do começo ao fim no mesmo lugar: o setor monta o questionário, distribui pela plataforma de WhatsApp ou por um link público, lê o relatório pronto e apresenta à diretoria sem sair do portal. Para clientes, a pesquisa identificada dá a cada contato um link próprio.',
       oque: 'É um módulo do hub para pesquisas por setor. A pesquisa de clima é anônima: respondida por um link, vira relatório e apresentação. A pesquisa identificada, para clientes, liga cada resposta ao contato que a recebeu, com CNPJ na lista e NPS de 0 a 10; quem respondeu o quê nunca vai para o link público nem para a IA, e no setor RH tudo segue anônimo.'
         + '\n\nSão cinco áreas: Pesquisas, Resultados, Apresentação, Destinatários e Configurações. As entrevistas de desligamento e o acompanhamento de 30 e 90 dias moram no sistema Gestão de Pessoas. Nesta demonstração pública a lista de Pesquisas é a tela navegável: indicadores do setor, filtro, link de convite e as ações de ativar, encerrar, duplicar e excluir, sobre dados fictícios.',
-      finalidade: 'Antes, a pesquisa de clima vivia em formulário externo e planilha, o resultado era difícil de ler e a apresentação para a diretoria era montada à mão. Pesquisa com cliente não dizia quem tinha respondido.'
-        + '\n\nHoje a empresa mede com a mesma régua a cada edição, enxerga a evolução e leva o resultado pronto para a reunião; com clientes, sabe quem respondeu o quê sem expor isso fora do setor.'
+      finalidade: 'Permite medir com a mesma régua a cada edição, comparar a evolução e levar o resultado pronto para a reunião; com clientes, liga cada resposta ao contato sem expor isso fora do setor.'
         + '\n\nProjetado e construído por Ruan Siqueira. O conteúdo das perguntas veio das áreas que usam o módulo.',
       alcance: [
         'Pesquisas por setor, com questionário em sessões: escala (1 a 5, 1 a 10 ou 0 a 10), matriz, múltipla escolha e texto livre.',
         'Convite pela plataforma de WhatsApp ou por link público, com respostas anônimas.',
         'Pesquisa identificada para clientes: link próprio por contato, CNPJ na lista e NPS de 0 a 10, sem nada disso no link público nem na IA.',
         'Relatório com favorabilidade, eNPS ou NPS, comparação entre edições e análise com IA.',
-        'Apresentação em slides a partir do resultado, com link público somente de leitura. Tamanho: 57 rotas de API nas pesquisas.',
+        'Apresentação em slides a partir do resultado, com link público somente de leitura.',
       ],
       tecnologias: ['Next.js', 'React', 'TypeScript', 'ASP.NET Core', 'SQL Server', 'ECharts', 'IA generativa', 'API de WhatsApp'],
     },
@@ -110,15 +109,14 @@
       destaque: 'Internal surveys from start to finish in one place: the sector builds the questionnaire, distributes it through the WhatsApp platform or a public link, reads the finished report and presents it to the board without leaving the portal. For customers, the identified survey gives each contact their own link.',
       oque: 'It is a hub module for surveys per sector. The climate survey is anonymous: answered through a link, it becomes a report and a presentation. The identified survey, for customers, links each answer to the contact who received it, with the tax ID on the list and a 0 to 10 NPS; who answered what never goes to the public link or the AI, and in the HR sector everything stays anonymous.'
         + '\n\nThere are five areas: Surveys, Results, Presentation, Recipients and Settings. Exit interviews and the 30 and 90-day follow-up live in the People management system. In this public demo the Surveys list is the screen you can use: sector indicators, filter, invitation link and the activate, close, duplicate and delete actions, on fictitious data.',
-      finalidade: 'Before, the climate survey lived in an external form and a spreadsheet, the result was hard to read and the board presentation was assembled by hand. Customer surveys did not tell who had answered.'
-        + '\n\nNow the company measures with the same ruler every edition, sees the trend and takes a finished result to the meeting; with customers, it knows who answered what without exposing that outside the sector.'
+      finalidade: 'It lets you measure with the same yardstick every edition, compare the evolution and take the result ready to the meeting; with customers, it ties each answer to the contact without exposing it outside the sector.'
         + '\n\nDesigned and built by Ruan Siqueira. The question content came from the teams that use the module.',
       alcance: [
         'Surveys per sector, with a questionnaire in sections: scale (1 to 5, 1 to 10 or 0 to 10), matrix, multiple choice and open text.',
         'Invitation through the WhatsApp platform or a public link, with anonymous answers.',
         'Identified survey for customers: own link per contact, tax ID on the list and a 0 to 10 NPS, none of it on the public link or in the AI.',
         'Report with favorability, eNPS or NPS, comparison between editions and AI analysis.',
-        'Slide presentation built from the result, with a read-only public link. Size: 57 API routes for surveys.',
+        'Slide presentation built from the result, with a read-only public link.',
       ],
       tecnologias: ['Next.js', 'React', 'TypeScript', 'ASP.NET Core', 'SQL Server', 'ECharts', 'Generative AI', 'WhatsApp API'],
     },

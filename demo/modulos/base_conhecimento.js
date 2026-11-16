@@ -1,5 +1,5 @@
 /* Base de conhecimento (CoreEngine) · módulo do ProjectHub de demonstração (id base_conhecimento).
-   Réplica de ponta a ponta do sistema real: central de comando (relógio, busca, indicadores, distribuição por tipo, pilares,
+   Demonstração construída para o portfólio, com dados fictícios: central de comando (relógio, busca, indicadores, distribuição por tipo, pilares,
    mural e links rápidos), trilha de pilares, lista, leitor com tópicos, editor em Markdown com barra de ferramentas e modelos,
    anexos com lista de formatos permitidos, rascunho e publicação por quem gere, e o rastro do que o servidor faz em cada chamada.
    Visual único do hub (CONTRATO, seção 7; migrado em 06/10/2026): sem paleta, tema, fonte nem marca próprios. O nome do sistema
@@ -104,7 +104,7 @@
     { id: 6, nome: 'Carla Mendes', depto: 1 },
     { id: 7, nome: 'Diego Rocha', depto: 1 },
     { id: 8, nome: 'Elisa Prado', depto: 4 },
-    { id: 9, nome: 'Ana Souza', depto: 2 },
+    { id: 9, nome: 'Marina Souza', depto: 2 },
   ];
   const usuario = id => USUARIOS.find(u => u.id === id) || null;
   /* acesso: 'dono' = do departamento dono do projeto · 'vinculo' = vinculado direto ao projeto · 'super' = super_admin */
@@ -204,7 +204,7 @@
         '> If the API answers but the database does not, follow the runbook **Integration service stopped**.')));
 
     pg(1, 'arquitetura', 'publicado', false, 7, 95, 18, P('rede, segmentos, wifi', 'network, segments, wifi'),
-      P('Topologia da rede da matriz', 'Head office network topology'),
+      P('Topologia de rede (exemplo)', 'Network topology (example)'),
       P(md('## 1. Visão geral', 'A rede da matriz é dividida em segmentos para que um problema em uma área não derrube as outras e para que visitantes nunca alcancem os servidores.', '',
         '## 2. Segmentos', '| Segmento | Quem usa | Pode falar com |', '| --- | --- | --- |', '| Servidores | Aplicações e banco | Administrativo, por portas liberadas |', '| Administrativo | Computadores dos setores | Servidores e internet |', '| Fábrica | Coletores e painéis | Servidores, só a API |', '| Visitantes | Wi-Fi de visitantes | Somente internet |', '| Gerência de equipamentos | Switches e impressoras | Apenas a equipe de TI |', '',
         '## 3. Regras', '- Equipamento novo entra primeiro no inventário, depois na rede.', '- Nenhum servidor recebe conexão direta da rede de visitantes.', '- Mudança de regra entre segmentos passa pela janela de manutenção.', '',
